@@ -1,2 +1,2 @@
-# tiltcraft-site
-TiltCraft pinball webshop
+# TiltCraft
+Pinball webshop - tiltcraft.eu
