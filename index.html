@@ -216,6 +216,8 @@ footer a:hover { color: var(--gold); }
 </style>
 <!-- QR code generator for bank transfer -->
 <script src="https://cdn.jsdelivr.net/npm/qr-creator/dist/qr-creator.min.js"></script>
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -433,9 +435,16 @@ footer a:hover { color: var(--gold); }
 
 <script>
 const PAYPAL_EMAIL = "rvermeire@telenet.be";
-const BANK_IBAN    = "BE85 4442 6606 3106";   // ← vul hier je echte IBAN in
-const BANK_BIC     = "KREDBEBB";               // ← vul hier je echte BIC in
+const BANK_IBAN    = "BE85 4442 6606 3106";
+const BANK_BIC     = "KREDBEBB";
 const BANK_NAME    = "TiltCraft — Regis Vermeire";
+
+// EmailJS
+const EJS_PUBLIC_KEY = "7oDfDKHqXPoYKPA_r";
+const EJS_SERVICE_ID = "service_k0kokxl";
+const EJS_TPL_KLANT  = "template_uca8a7a";  // bevestiging naar klant
+const EJS_TPL_ADMIN  = "template_ce6ypur";  // melding naar jou
+emailjs.init(EJS_PUBLIC_KEY);
 
 // ================================================================
 //  PRODUCTENLIJST — bewerk dit om producten toe te voegen
@@ -3696,10 +3705,28 @@ function doCheckout() {
   const note = `${fn} ${ln} | ${addr}, ${zip} ${city}, ${country} | ${email} | ${phone}`;
   url += `&custom=${encodeURIComponent(note)}&currency_code=EUR`;
 
-  const subject = `TiltCraft bestelling — ${fn} ${ln}`;
-  const body = `Nieuwe bestelling van ${fn} ${ln}\n\nE-mail: ${email}\nTelefoon: ${phone}\nAdres: ${addr}, ${zip} ${city}, ${country}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${shippingLabel} — €${shippingCost}\nTotaal: €${grandTotal}`;
-  window.location.href = `mailto:tiltcraft@telenet.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  setTimeout(() => window.open(url, '_blank'), 800);
+  // Stuur admin melding via EmailJS
+  const ppRef = generateOrderRef(fn, ln);
+  emailjs.send(EJS_SERVICE_ID, EJS_TPL_ADMIN, {
+    to_email:       email,
+    firstname:      fn,
+    lastname:       ln,
+    ref:            ppRef,
+    order_lines:    cart.map(p => `• ${p.name} — €${Number(p.price).toFixed(2)}`).join('\n'),
+    shipping_label: shippingLabel || 'n.v.t.',
+    shipping_cost:  Number(shippingCost).toFixed(2),
+    total:          Number(grandTotal).toFixed(2),
+    iban:           '',
+    bic:            '',
+    phone:          phone,
+    address:        addr,
+    zip:            zip,
+    city:           city,
+    country:        country,
+    payment_method: 'PayPal'
+  }).catch(err => console.warn('EmailJS admin notify failed:', err));
+
+  window.open(url, '_blank');
   closeCheckout();
 }
 
@@ -3791,13 +3818,47 @@ function confirmTransfer() {
   if (!_qrOrderData) return;
   const d = _qrOrderData;
 
-  // Send confirmation email
-  const subject = `TiltCraft bestelling (overschrijving) — ${d.fn} ${d.ln} — ${d.ref}`;
-  const body = `Nieuwe bestelling via overschrijving\nRef: ${d.ref}\n\nKlant: ${d.fn} ${d.ln}\nE-mail: ${d.email}\nTelefoon: ${d.phone}\nAdres: ${d.addr}, ${d.zip} ${d.city}, ${d.country}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${d.shippingLabel} — €${d.shippingCost}\nTotaal: €${d.grandTotal}\n\nMededeling: ${d.ref}`;
-  window.location.href = `mailto:tiltcraft@telenet.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  // Bevestigingsknop disablen
+  const btn = document.querySelector('#qr-screen .co-pay-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Versturen...'; }
 
-  closeCheckout();
-  showToast(currentLang === 'fr' ? 'Commande confirmée !' : currentLang === 'en' ? 'Order confirmed!' : 'Bestelling bevestigd!');
+  const orderLines = cart.map(p => `• ${p.name} — €${Number(p.price).toFixed(2)}`).join('\n');
+
+  const params = {
+    to_email:      d.email,
+    firstname:     d.fn,
+    lastname:      d.ln,
+    ref:           d.ref,
+    order_lines:   orderLines,
+    shipping_label: d.shippingLabel || 'n.v.t.',
+    shipping_cost: Number(d.shippingCost).toFixed(2),
+    total:         Number(d.grandTotal).toFixed(2),
+    iban:          BANK_IBAN,
+    bic:           BANK_BIC,
+    phone:         d.phone,
+    address:       d.addr,
+    zip:           d.zip,
+    city:          d.city,
+    country:       d.country,
+    payment_method: 'Overschrijving'
+  };
+
+  // Stuur beide mails tegelijk
+  Promise.all([
+    emailjs.send(EJS_SERVICE_ID, EJS_TPL_KLANT, params),
+    emailjs.send(EJS_SERVICE_ID, EJS_TPL_ADMIN, params)
+  ])
+  .then(() => {
+    closeCheckout();
+    cart = [];
+    renderCart();
+    showToast(currentLang === 'fr' ? '✓ Commande confirmée — e-mail envoyé !' : currentLang === 'en' ? '✓ Order confirmed — email sent!' : '✓ Bestelling bevestigd — e-mail verstuurd!');
+  })
+  .catch(err => {
+    console.error('EmailJS error:', err);
+    if (btn) { btn.disabled = false; btn.textContent = '✓ Bestelling bevestigen'; }
+    alert('Mail versturen mislukt. Noteer je referentie ' + d.ref + ' en contacteer ons via tiltcraft@telenet.be');
+  });
 }
 
 function resetPaymentUI() {
