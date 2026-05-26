@@ -215,7 +215,7 @@ footer a:hover { color: var(--gold); }
 }
 </style>
 <!-- QR code generator for bank transfer -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qr-creator/dist/qr-creator.min.js"></script>
 </head>
 <body>
 
@@ -348,13 +348,15 @@ footer a:hover { color: var(--gold); }
         <div class="co-total-row"><span id="co-lbl-ship">Transport</span><span id="co-ship-amount">—</span></div>
         <div class="co-total-row grand"><span id="co-lbl-total">Totaal</span><span id="co-grand-total">€0</span></div>
       </div>
-      <button class="co-pay-btn" id="co-pay-btn" onclick="doCheckout()">Betalen via PayPal</button>
 
       <!-- PAYMENT METHOD CHOICE -->
       <div class="pay-method-row" id="pay-method-row">
         <button class="pay-method-btn active" id="pm-paypal" onclick="setPayMethod('paypal')">💳 PayPal</button>
         <button class="pay-method-btn" id="pm-transfer" onclick="setPayMethod('transfer')">🏦 Overschrijving</button>
       </div>
+
+      <!-- ACTION BUTTON -->
+      <button class="co-pay-btn" id="co-pay-btn" onclick="doCheckout()">Betalen via PayPal</button>
 
       <!-- QR / TRANSFER SCREEN -->
       <div class="qr-screen" id="qr-screen">
@@ -3707,12 +3709,13 @@ let _qrOrderData = null;
 function setPayMethod(method) {
   document.getElementById('pm-paypal').classList.toggle('active', method === 'paypal');
   document.getElementById('pm-transfer').classList.toggle('active', method === 'transfer');
-  // Update main pay button label
   const btn = document.getElementById('co-pay-btn');
   if (method === 'transfer') {
-    btn.textContent = currentLang === 'fr' ? 'Générer QR & confirmer' : currentLang === 'en' ? 'Generate QR & confirm' : 'QR genereren & bevestigen';
+    btn.textContent = currentLang === 'fr' ? '🏦 Générer QR & confirmer' : currentLang === 'en' ? '🏦 Generate QR & confirm' : '🏦 QR genereren & bevestigen';
+    btn.style.background = '#11BFFE';
   } else {
-    btn.textContent = currentLang === 'fr' ? 'Payer via PayPal' : currentLang === 'en' ? 'Pay with PayPal' : 'Betalen via PayPal';
+    btn.textContent = currentLang === 'fr' ? '💳 Payer via PayPal' : currentLang === 'en' ? '💳 Pay with PayPal' : '💳 Betalen via PayPal';
+    btn.style.background = '';
   }
 }
 
@@ -3726,76 +3729,60 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
   const ref = generateOrderRef(fn, ln);
   _qrOrderData = { fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal, ref };
 
-  // EPC QR code string (European Payment Council — works with all Belgian bank apps)
+  // EPC QR string (European Payment Council — alle Belgische bank-apps)
   const ibanClean = BANK_IBAN.replace(/\s/g, '');
   const epc = [
-    'BCD',          // Service Tag
-    '002',          // Version
-    '1',            // Character set (UTF-8)
-    'SCT',          // Identification (SEPA Credit Transfer)
-    BANK_BIC,       // BIC
-    BANK_NAME,      // Beneficiary name
-    ibanClean,      // IBAN
-    'EUR' + grandTotal.toFixed(2), // Amount
-    '',             // Purpose (empty)
-    ref,            // Remittance reference (structured)
-    '',             // Remittance info (unstructured — empty)
-    'TiltCraft bestelling'  // Beneficiary to originator info
+    'BCD',
+    '002',
+    '1',
+    'SCT',
+    BANK_BIC,
+    BANK_NAME,
+    ibanClean,
+    'EUR' + grandTotal.toFixed(2),
+    '',
+    ref,
+    '',
+    'TiltCraft bestelling'
   ].join('\n');
 
-  // Render QR on canvas
+  // Render QR direct op canvas
   const canvas = document.getElementById('qr-canvas');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, 200, 200);
-
-  // Use QRCode library if available, otherwise draw placeholder
-  if (typeof QRCode !== 'undefined') {
-    // Clear previous
-    canvas.getContext('2d').clearRect(0,0,200,200);
-    // QRCode renders to a new element — we copy to our canvas
-    const tmp = document.createElement('div');
-    tmp.style.display = 'none';
-    document.body.appendChild(tmp);
-    const qr = new QRCode(tmp, {
+  if (typeof QrCreator !== 'undefined') {
+    QrCreator.render({
       text: epc,
-      width: 200, height: 200,
-      correctLevel: QRCode.CorrectLevel.M
-    });
-    setTimeout(() => {
-      const img = tmp.querySelector('img') || tmp.querySelector('canvas');
-      if (img) {
-        const image = new Image();
-        image.onload = () => { ctx.drawImage(image, 0, 0, 200, 200); };
-        image.src = img.src || img.toDataURL();
-      }
-      document.body.removeChild(tmp);
-    }, 100);
+      radius: 0,
+      ecLevel: 'M',
+      fill: '#000000',
+      background: '#ffffff',
+      size: 200
+    }, canvas);
   } else {
-    // Fallback: draw text placeholder
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0,0,200,200);
-    ctx.fillStyle = '#000';
-    ctx.font = '12px sans-serif';
-    ctx.fillText('QR niet beschikbaar', 20, 100);
+    // Fallback tekst als library niet laadt
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0,0,200,200);
+    ctx.fillStyle = '#000'; ctx.font = '13px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Scan niet mogelijk', 100, 90);
+    ctx.fillText('Gebruik IBAN hieronder', 100, 110);
   }
 
-  // Fill in details
-  document.getElementById('qr-name').textContent    = BANK_NAME;
-  document.getElementById('qr-iban').textContent    = BANK_IBAN;
-  document.getElementById('qr-bic').textContent     = BANK_BIC;
-  document.getElementById('qr-amount').textContent  = '€' + grandTotal.toFixed(2);
-  document.getElementById('qr-ref').textContent     = ref;
+  // Gegevens invullen
+  document.getElementById('qr-name').textContent   = BANK_NAME;
+  document.getElementById('qr-iban').textContent   = BANK_IBAN;
+  document.getElementById('qr-bic').textContent    = BANK_BIC;
+  document.getElementById('qr-amount').textContent = '€' + grandTotal.toFixed(2);
+  document.getElementById('qr-ref').textContent    = ref;
 
-  // Instructions per language
+  // Instructies per taal
   const instr = {
-    nl: `📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)\nAlle betalingsgegevens worden automatisch ingevuld.\nVermeld de mededeling <strong>${ref}</strong> als je manueel overschrijft.\nNa betaling ontvang je een bevestiging per e-mail.`,
-    en: `📱 Scan the QR code with your banking app.\nAll payment details are pre-filled automatically.\nIf paying manually, use reference <strong>${ref}</strong>.\nYou will receive a confirmation email after payment.`,
-    fr: `📱 Scannez le QR code avec votre application bancaire.\nToutes les données de paiement sont pré-remplies.\nSi vous payez manuellement, indiquez la référence <strong>${ref}</strong>.\nVous recevrez un e-mail de confirmation après le paiement.`
+    nl: '📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)<br>Alle betalingsgegevens worden automatisch ingevuld.<br>Vermeld de mededeling <strong>' + ref + '</strong> als je manueel overschrijft.<br>Na betaling ontvang je een bevestiging per e-mail.',
+    en: '📱 Scan the QR code with your banking app.<br>All payment details are pre-filled automatically.<br>If paying manually, use reference <strong>' + ref + '</strong>.<br>You will receive a confirmation email after payment.',
+    fr: '📱 Scannez le QR code avec votre application bancaire.<br>Toutes les données de paiement sont pré-remplies.<br>Si vous payez manuellement, indiquez la référence <strong>' + ref + '</strong>.<br>Vous recevrez un e-mail de confirmation après le paiement.'
   };
-  document.getElementById('qr-instructions').innerHTML = (instr[currentLang] || instr.nl).replace(/\n/g, '<br>');
+  document.getElementById('qr-instructions').innerHTML = instr[currentLang] || instr.nl;
 
-  // Hide pay button, show QR screen
-  document.getElementById('co-pay-btn').style.display   = 'none';
+  // Knop en keuze verbergen, QR scherm tonen
+  document.getElementById('co-pay-btn').style.display    = 'none';
   document.getElementById('pay-method-row').style.display = 'none';
   document.getElementById('qr-screen').classList.add('visible');
 }
