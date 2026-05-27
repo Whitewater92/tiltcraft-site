@@ -50,7 +50,19 @@ header { position: relative; text-align: center; padding: 70px 20px 50px; border
 .cat-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
 
 .page { display: grid; grid-template-columns: 1fr 290px; max-width: 1280px; margin: 0 auto; padding: 0 24px 60px; position: relative; z-index: 1; }
+.page.has-submenu { grid-template-columns: 200px 1fr 290px; }
 .products-section { padding: 40px 40px 0 0; border-right: 1px solid var(--border); }
+.page.has-submenu .products-section { padding: 40px 40px 0 32px; }
+
+/* LEFT SUBMENU */
+.submenu-col { display: none; padding: 40px 0 0 0; }
+.page.has-submenu .submenu-col { display: block; }
+.submenu-box { position: sticky; top: 24px; }
+.submenu-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: var(--gold); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.submenu-item { display: block; width: 100%; text-align: left; background: none; border: none; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 7px 0 7px 10px; cursor: pointer; border-left: 2px solid transparent; transition: color 0.2s, border-color 0.2s; line-height: 1.4; }
+.submenu-item:hover { color: var(--white); border-left-color: var(--border); }
+.submenu-item.active { color: var(--gold); border-left-color: var(--gold); }
+.submenu-divider { height: 1px; background: var(--border); margin: 10px 0; }
 .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
 .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
 .empty-state { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--muted); font-size: 13px; letter-spacing: 2px; }
@@ -207,7 +219,10 @@ footer a:hover { color: var(--gold); }
 @media (max-width: 800px) {
   .cat-btn { padding: 14px 12px 12px; font-size: 10px; letter-spacing: 1px; }
   .page { grid-template-columns: 1fr; padding: 0 16px 40px; }
+  .page.has-submenu { grid-template-columns: 1fr; }
+  .submenu-col { display: none !important; }
   .products-section { padding: 28px 0 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
+  .page.has-submenu .products-section { padding: 28px 0 0; }
   .sidebar { padding: 28px 0 0; }
   .cart-box { position: static; }
   .lightbox-prev { left: 4px; } .lightbox-next { right: 4px; }
@@ -215,9 +230,7 @@ footer a:hover { color: var(--gold); }
 }
 </style>
 <!-- QR code generator for bank transfer -->
-<script src="https://cdn.jsdelivr.net/npm/qr-creator/dist/qr-creator.min.js"></script>
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -262,7 +275,48 @@ footer a:hover { color: var(--gold); }
   <button class="cat-btn" onclick="setCategory('mods')" id="nav-mods">Mods &amp; Extras</button>
 </nav>
 
-<main class="page">
+<main class="page" id="main-page">
+
+  <!-- LEFT SUBMENU (desktop only) -->
+  <div class="submenu-col" id="submenu-col">
+    <div class="submenu-box">
+
+      <!-- DECALS submenu -->
+      <div id="submenu-decals" style="display:none;">
+        <div class="submenu-title">Decals</div>
+        <button class="submenu-item" onclick="setSubFilter('decals','')">All Decals</button>
+        <div class="submenu-divider"></div>
+        <button class="submenu-item" onclick="setSubFilter('decals','target')">Target</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','flipper bat')">Flipper bat</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','shooter')">Shooter</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','above speaker')">Above speaker</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','action button')">Action button</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','coin door')">Coin door</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','warning sign')">Warning sign</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','in game')">In game</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','flipper button')">Flipper button</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','hinges')">Hinges</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','spinner')">Spinner</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','cabinet')">Cabinet</button>
+      </div>
+
+      <!-- PARTS submenu -->
+      <div id="submenu-parts" style="display:none;">
+        <div class="submenu-title">3D Parts</div>
+        <button class="submenu-item" onclick="setSubFilter('parts','')">All 3D Parts</button>
+        <div class="submenu-divider"></div>
+        <button class="submenu-item" onclick="setSubFilter('parts','hinges')">Hinges</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','flipper bat')">Flipper bats</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','coin door')">Coin door plaque</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','topper')">Topper</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','flipper button')">Flipper button protector</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','speaker')">Speaker inserts</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','in game')">In game parts</button>
+      </div>
+
+    </div>
+  </div>
+
   <section class="products-section">
     <div class="section-label" id="section-label">Pinball Machines</div>
     <div class="products-grid" id="products-grid"></div>
@@ -350,15 +404,13 @@ footer a:hover { color: var(--gold); }
         <div class="co-total-row"><span id="co-lbl-ship">Transport</span><span id="co-ship-amount">—</span></div>
         <div class="co-total-row grand"><span id="co-lbl-total">Totaal</span><span id="co-grand-total">€0</span></div>
       </div>
+      <button class="co-pay-btn" id="co-pay-btn" onclick="doCheckout()">Betalen via PayPal</button>
 
       <!-- PAYMENT METHOD CHOICE -->
       <div class="pay-method-row" id="pay-method-row">
         <button class="pay-method-btn active" id="pm-paypal" onclick="setPayMethod('paypal')">💳 PayPal</button>
         <button class="pay-method-btn" id="pm-transfer" onclick="setPayMethod('transfer')">🏦 Overschrijving</button>
       </div>
-
-      <!-- ACTION BUTTON -->
-      <button class="co-pay-btn" id="co-pay-btn" onclick="doCheckout()">Betalen via PayPal</button>
 
       <!-- QR / TRANSFER SCREEN -->
       <div class="qr-screen" id="qr-screen">
@@ -435,16 +487,9 @@ footer a:hover { color: var(--gold); }
 
 <script>
 const PAYPAL_EMAIL = "rvermeire@telenet.be";
-const BANK_IBAN    = "BE85 4442 6606 3106";
-const BANK_BIC     = "KREDBEBB";
+const BANK_IBAN    = "BE85 4442 6606 3106";   // ← vul hier je echte IBAN in
+const BANK_BIC     = "KREDBEBB";               // ← vul hier je echte BIC in
 const BANK_NAME    = "TiltCraft — Regis Vermeire";
-
-// EmailJS
-const EJS_PUBLIC_KEY = "7oDfDKHqXPoYKPA_r";
-const EJS_SERVICE_ID = "service_k0kokxl";
-const EJS_TPL_KLANT  = "template_uca8a7a";  // bevestiging naar klant
-const EJS_TPL_ADMIN  = "template_ce6ypur";  // melding naar jou
-emailjs.init(EJS_PUBLIC_KEY);
 
 // ================================================================
 //  PRODUCTENLIJST — bewerk dit om producten toe te voegen
@@ -3307,6 +3352,7 @@ const i18n = {
 let currentLang = 'nl';
 let activeCategory = 'machines';
 let searchQuery = '';
+let activeSubFilter = '';
 let cart = [];
 let lbImages = [], lbIndex = 0;
 const cardStates = {};
@@ -3368,9 +3414,37 @@ function applyTranslations() {
 
 function setCategory(cat) {
   activeCategory = cat;
+  activeSubFilter = '';
   ['machines','parts','decals','originals','displays','3dondemand','mods'].forEach(c =>
     document.getElementById('nav-'+c).classList.toggle('active', c === cat));
   document.getElementById('section-label').textContent = t('sectionLabel')[cat];
+
+  // Show/hide submenu
+  const page       = document.getElementById('main-page');
+  const subDecals  = document.getElementById('submenu-decals');
+  const subParts   = document.getElementById('submenu-parts');
+  const hasSubmenu = cat === 'decals' || cat === 'parts';
+  page.classList.toggle('has-submenu', hasSubmenu);
+  subDecals.style.display = cat === 'decals' ? 'block' : 'none';
+  subParts.style.display  = cat === 'parts'  ? 'block' : 'none';
+
+  // Reset all submenu active states
+  document.querySelectorAll('.submenu-item').forEach(b => b.classList.remove('active'));
+  // Set "All" button active
+  const allBtn = document.querySelector(`#submenu-${cat} .submenu-item`);
+  if (allBtn) allBtn.classList.add('active');
+
+  renderProducts();
+}
+
+function setSubFilter(cat, keyword) {
+  activeSubFilter = keyword;
+  // Update active state
+  document.querySelectorAll(`#submenu-${cat} .submenu-item`).forEach(b => {
+    const btnKeyword = b.getAttribute('onclick').match(/'([^']*)'(?:,\s*'([^']*)')?/);
+    const bKw = btnKeyword ? (btnKeyword[2] || '') : '';
+    b.classList.toggle('active', bKw === keyword);
+  });
   renderProducts();
 }
 
@@ -3417,6 +3491,15 @@ function renderProducts() {
         : t('noResults') + ` "${document.getElementById('search-input').value}"`;
   } else {
     filtered = products.filter(p => p.category === activeCategory);
+    // Apply submenu keyword filter
+    if (activeSubFilter) {
+      const kw = activeSubFilter.toLowerCase();
+      filtered = filtered.filter(p =>
+        p.name.toLowerCase().includes(kw) ||
+        getDesc(p, 'nl').toLowerCase().includes(kw) ||
+        getDesc(p, 'en').toLowerCase().includes(kw)
+      );
+    }
     document.getElementById('section-label').textContent = t('sectionLabel')[activeCategory];
   }
 
@@ -3705,28 +3788,10 @@ function doCheckout() {
   const note = `${fn} ${ln} | ${addr}, ${zip} ${city}, ${country} | ${email} | ${phone}`;
   url += `&custom=${encodeURIComponent(note)}&currency_code=EUR`;
 
-  // Stuur admin melding via EmailJS
-  const ppRef = generateOrderRef(fn, ln);
-  emailjs.send(EJS_SERVICE_ID, EJS_TPL_ADMIN, {
-    to_email:       email,
-    firstname:      fn,
-    lastname:       ln,
-    ref:            ppRef,
-    order_lines:    cart.map(p => `• ${p.name} — €${Number(p.price).toFixed(2)}`).join('\n'),
-    shipping_label: shippingLabel || 'n.v.t.',
-    shipping_cost:  Number(shippingCost).toFixed(2),
-    total:          Number(grandTotal).toFixed(2),
-    iban:           '',
-    bic:            '',
-    phone:          phone,
-    address:        addr,
-    zip:            zip,
-    city:           city,
-    country:        country,
-    payment_method: 'PayPal'
-  }).catch(err => console.warn('EmailJS admin notify failed:', err));
-
-  window.open(url, '_blank');
+  const subject = `TiltCraft bestelling — ${fn} ${ln}`;
+  const body = `Nieuwe bestelling van ${fn} ${ln}\n\nE-mail: ${email}\nTelefoon: ${phone}\nAdres: ${addr}, ${zip} ${city}, ${country}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${shippingLabel} — €${shippingCost}\nTotaal: €${grandTotal}`;
+  window.location.href = `mailto:tiltcraft@telenet.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  setTimeout(() => window.open(url, '_blank'), 800);
   closeCheckout();
 }
 
@@ -3736,13 +3801,12 @@ let _qrOrderData = null;
 function setPayMethod(method) {
   document.getElementById('pm-paypal').classList.toggle('active', method === 'paypal');
   document.getElementById('pm-transfer').classList.toggle('active', method === 'transfer');
+  // Update main pay button label
   const btn = document.getElementById('co-pay-btn');
   if (method === 'transfer') {
-    btn.textContent = currentLang === 'fr' ? '🏦 Générer QR & confirmer' : currentLang === 'en' ? '🏦 Generate QR & confirm' : '🏦 QR genereren & bevestigen';
-    btn.style.background = '#11BFFE';
+    btn.textContent = currentLang === 'fr' ? 'Générer QR & confirmer' : currentLang === 'en' ? 'Generate QR & confirm' : 'QR genereren & bevestigen';
   } else {
-    btn.textContent = currentLang === 'fr' ? '💳 Payer via PayPal' : currentLang === 'en' ? '💳 Pay with PayPal' : '💳 Betalen via PayPal';
-    btn.style.background = '';
+    btn.textContent = currentLang === 'fr' ? 'Payer via PayPal' : currentLang === 'en' ? 'Pay with PayPal' : 'Betalen via PayPal';
   }
 }
 
@@ -3756,60 +3820,76 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
   const ref = generateOrderRef(fn, ln);
   _qrOrderData = { fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal, ref };
 
-  // EPC QR string (European Payment Council — alle Belgische bank-apps)
+  // EPC QR code string (European Payment Council — works with all Belgian bank apps)
   const ibanClean = BANK_IBAN.replace(/\s/g, '');
   const epc = [
-    'BCD',
-    '002',
-    '1',
-    'SCT',
-    BANK_BIC,
-    BANK_NAME,
-    ibanClean,
-    'EUR' + grandTotal.toFixed(2),
-    '',
-    ref,
-    '',
-    'TiltCraft bestelling'
+    'BCD',          // Service Tag
+    '002',          // Version
+    '1',            // Character set (UTF-8)
+    'SCT',          // Identification (SEPA Credit Transfer)
+    BANK_BIC,       // BIC
+    BANK_NAME,      // Beneficiary name
+    ibanClean,      // IBAN
+    'EUR' + grandTotal.toFixed(2), // Amount
+    '',             // Purpose (empty)
+    ref,            // Remittance reference (structured)
+    '',             // Remittance info (unstructured — empty)
+    'TiltCraft bestelling'  // Beneficiary to originator info
   ].join('\n');
 
-  // Render QR direct op canvas
+  // Render QR on canvas
   const canvas = document.getElementById('qr-canvas');
-  if (typeof QrCreator !== 'undefined') {
-    QrCreator.render({
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 200, 200);
+
+  // Use QRCode library if available, otherwise draw placeholder
+  if (typeof QRCode !== 'undefined') {
+    // Clear previous
+    canvas.getContext('2d').clearRect(0,0,200,200);
+    // QRCode renders to a new element — we copy to our canvas
+    const tmp = document.createElement('div');
+    tmp.style.display = 'none';
+    document.body.appendChild(tmp);
+    const qr = new QRCode(tmp, {
       text: epc,
-      radius: 0,
-      ecLevel: 'M',
-      fill: '#000000',
-      background: '#ffffff',
-      size: 200
-    }, canvas);
+      width: 200, height: 200,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+    setTimeout(() => {
+      const img = tmp.querySelector('img') || tmp.querySelector('canvas');
+      if (img) {
+        const image = new Image();
+        image.onload = () => { ctx.drawImage(image, 0, 0, 200, 200); };
+        image.src = img.src || img.toDataURL();
+      }
+      document.body.removeChild(tmp);
+    }, 100);
   } else {
-    // Fallback tekst als library niet laadt
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#fff'; ctx.fillRect(0,0,200,200);
-    ctx.fillStyle = '#000'; ctx.font = '13px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('Scan niet mogelijk', 100, 90);
-    ctx.fillText('Gebruik IBAN hieronder', 100, 110);
+    // Fallback: draw text placeholder
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0,0,200,200);
+    ctx.fillStyle = '#000';
+    ctx.font = '12px sans-serif';
+    ctx.fillText('QR niet beschikbaar', 20, 100);
   }
 
-  // Gegevens invullen
-  document.getElementById('qr-name').textContent   = BANK_NAME;
-  document.getElementById('qr-iban').textContent   = BANK_IBAN;
-  document.getElementById('qr-bic').textContent    = BANK_BIC;
-  document.getElementById('qr-amount').textContent = '€' + grandTotal.toFixed(2);
-  document.getElementById('qr-ref').textContent    = ref;
+  // Fill in details
+  document.getElementById('qr-name').textContent    = BANK_NAME;
+  document.getElementById('qr-iban').textContent    = BANK_IBAN;
+  document.getElementById('qr-bic').textContent     = BANK_BIC;
+  document.getElementById('qr-amount').textContent  = '€' + grandTotal.toFixed(2);
+  document.getElementById('qr-ref').textContent     = ref;
 
-  // Instructies per taal
+  // Instructions per language
   const instr = {
-    nl: '📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)<br>Alle betalingsgegevens worden automatisch ingevuld.<br>Vermeld de mededeling <strong>' + ref + '</strong> als je manueel overschrijft.<br>Na betaling ontvang je een bevestiging per e-mail.',
-    en: '📱 Scan the QR code with your banking app.<br>All payment details are pre-filled automatically.<br>If paying manually, use reference <strong>' + ref + '</strong>.<br>You will receive a confirmation email after payment.',
-    fr: '📱 Scannez le QR code avec votre application bancaire.<br>Toutes les données de paiement sont pré-remplies.<br>Si vous payez manuellement, indiquez la référence <strong>' + ref + '</strong>.<br>Vous recevrez un e-mail de confirmation après le paiement.'
+    nl: `📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)\nAlle betalingsgegevens worden automatisch ingevuld.\nVermeld de mededeling <strong>${ref}</strong> als je manueel overschrijft.\nNa betaling ontvang je een bevestiging per e-mail.`,
+    en: `📱 Scan the QR code with your banking app.\nAll payment details are pre-filled automatically.\nIf paying manually, use reference <strong>${ref}</strong>.\nYou will receive a confirmation email after payment.`,
+    fr: `📱 Scannez le QR code avec votre application bancaire.\nToutes les données de paiement sont pré-remplies.\nSi vous payez manuellement, indiquez la référence <strong>${ref}</strong>.\nVous recevrez un e-mail de confirmation après le paiement.`
   };
-  document.getElementById('qr-instructions').innerHTML = instr[currentLang] || instr.nl;
+  document.getElementById('qr-instructions').innerHTML = (instr[currentLang] || instr.nl).replace(/\n/g, '<br>');
 
-  // Knop en keuze verbergen, QR scherm tonen
-  document.getElementById('co-pay-btn').style.display    = 'none';
+  // Hide pay button, show QR screen
+  document.getElementById('co-pay-btn').style.display   = 'none';
   document.getElementById('pay-method-row').style.display = 'none';
   document.getElementById('qr-screen').classList.add('visible');
 }
@@ -3818,47 +3898,13 @@ function confirmTransfer() {
   if (!_qrOrderData) return;
   const d = _qrOrderData;
 
-  // Bevestigingsknop disablen
-  const btn = document.querySelector('#qr-screen .co-pay-btn');
-  if (btn) { btn.disabled = true; btn.textContent = '⏳ Versturen...'; }
+  // Send confirmation email
+  const subject = `TiltCraft bestelling (overschrijving) — ${d.fn} ${d.ln} — ${d.ref}`;
+  const body = `Nieuwe bestelling via overschrijving\nRef: ${d.ref}\n\nKlant: ${d.fn} ${d.ln}\nE-mail: ${d.email}\nTelefoon: ${d.phone}\nAdres: ${d.addr}, ${d.zip} ${d.city}, ${d.country}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${d.shippingLabel} — €${d.shippingCost}\nTotaal: €${d.grandTotal}\n\nMededeling: ${d.ref}`;
+  window.location.href = `mailto:tiltcraft@telenet.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-  const orderLines = cart.map(p => `• ${p.name} — €${Number(p.price).toFixed(2)}`).join('\n');
-
-  const params = {
-    to_email:      d.email,
-    firstname:     d.fn,
-    lastname:      d.ln,
-    ref:           d.ref,
-    order_lines:   orderLines,
-    shipping_label: d.shippingLabel || 'n.v.t.',
-    shipping_cost: Number(d.shippingCost).toFixed(2),
-    total:         Number(d.grandTotal).toFixed(2),
-    iban:          BANK_IBAN,
-    bic:           BANK_BIC,
-    phone:         d.phone,
-    address:       d.addr,
-    zip:           d.zip,
-    city:          d.city,
-    country:       d.country,
-    payment_method: 'Overschrijving'
-  };
-
-  // Stuur beide mails tegelijk
-  Promise.all([
-    emailjs.send(EJS_SERVICE_ID, EJS_TPL_KLANT, params),
-    emailjs.send(EJS_SERVICE_ID, EJS_TPL_ADMIN, params)
-  ])
-  .then(() => {
-    closeCheckout();
-    cart = [];
-    renderCart();
-    showToast(currentLang === 'fr' ? '✓ Commande confirmée — e-mail envoyé !' : currentLang === 'en' ? '✓ Order confirmed — email sent!' : '✓ Bestelling bevestigd — e-mail verstuurd!');
-  })
-  .catch(err => {
-    console.error('EmailJS error:', err);
-    if (btn) { btn.disabled = false; btn.textContent = '✓ Bestelling bevestigen'; }
-    alert('Mail versturen mislukt. Noteer je referentie ' + d.ref + ' en contacteer ons via tiltcraft@telenet.be');
-  });
+  closeCheckout();
+  showToast(currentLang === 'fr' ? 'Commande confirmée !' : currentLang === 'en' ? 'Order confirmed!' : 'Bestelling bevestigd!');
 }
 
 function resetPaymentUI() {
