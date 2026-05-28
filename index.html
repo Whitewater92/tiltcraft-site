@@ -179,7 +179,8 @@ header { position: relative; text-align: center; padding: 70px 20px 50px; border
 /* QR / transfer screen */
 .qr-screen { display:none; text-align:center; padding:10px 0; }
 .qr-screen.visible { display:block; }
-.qr-screen canvas { border:6px solid #fff; border-radius:6px; margin:0 auto 16px; display:block; }
+.qr-screen #qr-canvas { width:200px; height:200px; border:6px solid #fff; border-radius:6px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.qr-screen #qr-canvas img, .qr-screen #qr-canvas canvas { width:200px !important; height:200px !important; display:block; }
 .qr-iban-box { background:#0d0d0d; border:1px solid var(--border); border-radius:4px; padding:14px 16px; margin-bottom:14px; text-align:left; }
 .qr-iban-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:12px; }
 .qr-iban-row:last-child { margin-bottom:0; }
@@ -414,7 +415,7 @@ footer a:hover { color: var(--gold); }
 
       <!-- QR / TRANSFER SCREEN -->
       <div class="qr-screen" id="qr-screen">
-        <canvas id="qr-canvas" width="200" height="200"></canvas>
+        <div id="qr-canvas"></div>
         <div class="qr-iban-box">
           <div class="qr-iban-row"><span class="qr-iban-label">Begunstigde</span><span class="qr-iban-value" id="qr-name"></span></div>
           <div class="qr-iban-row"><span class="qr-iban-label">IBAN</span><span class="qr-iban-value" id="qr-iban"></span></div>
@@ -4164,7 +4165,7 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
     document.getElementById('pay-method-row').style.display  = 'none';
     document.getElementById('qr-screen').classList.add('visible');
 
-    // 4. Try to generate QR code asynchronously (failure is non-fatal)
+    // 4. Try to generate QR code directly in the div (failure is non-fatal)
     setTimeout(function() {
       try {
         const ibanClean = BANK_IBAN.replace(/\s/g, '');
@@ -4178,26 +4179,11 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
           'TiltCraft'
         ].join('\n');
 
-        const canvas = document.getElementById('qr-canvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, 200, 200);
+        const container = document.getElementById('qr-canvas');
+        container.innerHTML = '';  // clear previous
 
         if (typeof QRCode !== 'undefined') {
-          const tmp = document.createElement('div');
-          tmp.style.display = 'none';
-          document.body.appendChild(tmp);
-          new QRCode(tmp, { text: epc, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
-          setTimeout(function() {
-            try {
-              const img = tmp.querySelector('img') || tmp.querySelector('canvas');
-              if (img) {
-                const image = new Image();
-                image.onload = function() { ctx.drawImage(image, 0, 0, 200, 200); };
-                image.src = img.src || img.toDataURL();
-              }
-            } catch(e2) {}
-            if (tmp.parentNode) document.body.removeChild(tmp);
-          }, 200);
+          new QRCode(container, { text: epc, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
         }
       } catch(qrErr) {
         // QR generation failed silently — IBAN details still visible
