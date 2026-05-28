@@ -4168,22 +4168,19 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
     setTimeout(function() {
       try {
         const ibanClean = BANK_IBAN.replace(/\s/g, '');
-        // EPC QR (SEPA Credit Transfer) — strict field order:
-        // BCD / version / charset / SCT / BIC / name / IBAN / amount /
-        // purpose(empty) / structured-ref(empty) / unstructured-ref / info(empty)
-        const epc = [
-          'BCD',                        // 1. Service Tag
-          '002',                        // 2. Version
-          '1',                          // 3. Character set (UTF-8)
-          'SCT',                        // 4. Identification
-          BANK_BIC,                     // 5. BIC
-          'TiltCraft Vermeire',         // 6. Beneficiary name (no accents for compatibility)
-          ibanClean,                    // 7. IBAN
-          'EUR' + grandTotal.toFixed(2),// 8. Amount
-          '',                           // 9. Purpose code (empty)
-          '',                           // 10. Structured remittance ref (empty — not RF format)
-          ref                           // 11. Unstructured remittance info (free text)
-        ].join('\n');
+        // EPC QR (SEPA Credit Transfer) — Febelfin/Belgian bank spec:
+        // Version 001, UTF-8, unstructured reference in field 11
+        const epc = 'BCD\n' +
+          '001\n' +
+          '1\n' +
+          'SCT\n' +
+          BANK_BIC + '\n' +
+          'TiltCraft Vermeire\n' +
+          ibanClean + '\n' +
+          'EUR' + grandTotal.toFixed(2) + '\n' +
+          '\n' +   // field 9: purpose (empty)
+          '\n' +   // field 10: structured ref (empty)
+          ref;     // field 11: unstructured ref (free text, max 140 chars)
 
         const container = document.getElementById('qr-canvas');
         container.innerHTML = '';
