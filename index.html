@@ -489,7 +489,7 @@ footer a:hover { color: var(--gold); }
 const PAYPAL_EMAIL = "rvermeire@telenet.be";
 const BANK_IBAN    = "BE85 4442 6606 3106";   // ← vul hier je echte IBAN in
 const BANK_BIC     = "KREDBEBB";               // ← vul hier je echte BIC in
-const BANK_NAME    = "TiltCraft — Regis Vermeire";
+const BANK_NAME    = "TiltCraft Régis Vermeire";
 
 // ================================================================
 //  PRODUCTENLIJST — bewerk dit om producten toe te voegen
@@ -4167,26 +4167,35 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
 
   // Use QRCode library if available, otherwise draw placeholder
   if (typeof QRCode !== 'undefined') {
-    // Clear previous
-    canvas.getContext('2d').clearRect(0,0,200,200);
-    // QRCode renders to a new element — we copy to our canvas
-    const tmp = document.createElement('div');
-    tmp.style.display = 'none';
-    document.body.appendChild(tmp);
-    const qr = new QRCode(tmp, {
-      text: epc,
-      width: 200, height: 200,
-      correctLevel: QRCode.CorrectLevel.M
-    });
-    setTimeout(() => {
-      const img = tmp.querySelector('img') || tmp.querySelector('canvas');
-      if (img) {
-        const image = new Image();
-        image.onload = () => { ctx.drawImage(image, 0, 0, 200, 200); };
-        image.src = img.src || img.toDataURL();
-      }
-      document.body.removeChild(tmp);
-    }, 100);
+    try {
+      // Clear previous
+      canvas.getContext('2d').clearRect(0,0,200,200);
+      // QRCode renders to a new element — we copy to our canvas
+      const tmp = document.createElement('div');
+      tmp.style.display = 'none';
+      document.body.appendChild(tmp);
+      const qr = new QRCode(tmp, {
+        text: epc,
+        width: 200, height: 200,
+        correctLevel: QRCode.CorrectLevel.M
+      });
+      setTimeout(() => {
+        const img = tmp.querySelector('img') || tmp.querySelector('canvas');
+        if (img) {
+          const image = new Image();
+          image.onload = () => { ctx.drawImage(image, 0, 0, 200, 200); };
+          image.src = img.src || img.toDataURL();
+        }
+        if (tmp.parentNode) document.body.removeChild(tmp);
+      }, 100);
+    } catch(e) {
+      // QR generation failed — show text fallback
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0,0,200,200);
+      ctx.fillStyle = '#000';
+      ctx.font = '12px sans-serif';
+      ctx.fillText('QR niet beschikbaar', 20, 100);
+    }
   } else {
     // Fallback: draw text placeholder
     ctx.fillStyle = '#fff';
