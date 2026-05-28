@@ -119,6 +119,7 @@ textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
 .cat-pill.displays { background: rgba(255,200,0,0.10); color: #ffc800; border: 1px solid rgba(255,200,0,0.25); }
 .cat-pill\.3dondemand { background: rgba(0,210,180,0.10); color: #00d2b4; border: 1px solid rgba(0,210,180,0.25); }
 .cat-pill.mods { background: rgba(255,165,0,0.10); color: #ffa500; border: 1px solid rgba(255,165,0,0.25); }
+.subcat-pill { display:inline-block;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:10px;white-space:nowrap;background:rgba(255,255,255,0.06);color:var(--muted);border:1px solid var(--border); }
 
 /* BUFFER PANEL */
 .buffer-panel { background: rgba(17,191,254,0.04); border: 1px solid var(--border); border-radius: 4px; padding: 20px 24px; margin-bottom: 28px; display: none; }
@@ -321,7 +322,7 @@ textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
           <thead>
             <tr>
               <th style="width:36px;"><input type="checkbox" id="ov-check-all" title="Alles selecteren" onchange="toggleAllDelete(this.checked)"></th>
-              <th>#</th><th>Naam</th><th>Categorie</th><th>Prijs</th><th>Foto's</th><th style="text-align:center;">Stock</th><th></th><th></th>
+              <th>#</th><th>Naam</th><th>Categorie</th><th>Rubriek</th><th>Prijs</th><th>Foto's</th><th style="text-align:center;">Stock</th><th></th><th></th>
             </tr>
           </thead>
           <tbody id="ov-tbody"></tbody>
@@ -557,7 +558,8 @@ textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
     <div class="card" id="new-buffer-output-card" style="display:none;margin-bottom:28px;">
       <div class="card-title">➕ Nieuwe-producten buffer — <span id="new-buffer-output-count"></span> nieuw product(en)</div>
       <p style="font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.8;">
-        Kopieer onderstaande array en vervang <code style="color:var(--gold);background:#1a1a1a;padding:1px 5px;border-radius:2px;">const products = [...];</code>
+        Kopieer onderstaande array en vervang <code style="color:var(--gold);background:#1a1a1a;padding:1px 5px;border-radius:2px;">const products = [
+  {;</code>
         in <strong style="color:var(--white);">index.html</strong> én <strong style="color:var(--white);">admin.html</strong>.
       </p>
       <div id="new-buffer-output-names" style="margin-bottom:12px;font-size:11px;"></div>
@@ -665,6 +667,14 @@ textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
         <option value="displays">Displays</option>
         <option value="3dondemand">3D on Demand</option>
         <option value="mods">Mods &amp; Extras</option>
+      </select>
+    </div>
+
+    <!-- SUBCATEGORY -->
+    <div class="field" id="edit-subcat-field" style="max-width:260px;display:none;">
+      <label>Rubriek</label>
+      <select id="edit-subcat">
+        <option value="">— Geen rubriek —</option>
       </select>
     </div>
   </div>
@@ -825,6 +835,7 @@ const products = [
   {
     name: "Jaws 3D 4 color speaker panel plate",
     category: "parts",
+    subcat: "speaker",
     price: 12,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -840,6 +851,7 @@ const products = [
   {
     name: "SEGA coin door 3D logo",
     category: "parts",
+    subcat: "coin door",
     price: 12,
     tptCode: "TPT1",
     subcat: "coin door",
@@ -855,6 +867,7 @@ const products = [
   {
     name: "Flipper bat drum sticks for Hurricane",
     category: "parts",
+    subcat: "flipper bat",
     price: 15,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -870,6 +883,7 @@ const products = [
   {
     name: "Hinges 3D Baywatch logo 2 colors",
     category: "parts",
+    subcat: "hinges",
     price: 20,
     tptCode: "TPT2",
     subcat: "hinges",
@@ -887,6 +901,7 @@ const products = [
   {
     name: "3D flipper bat with logo Baywatch",
     category: "parts",
+    subcat: "flipper bat",
     price: 15,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -902,6 +917,7 @@ const products = [
   {
     name: "Flipper button protection with Foo Fighters logo",
     category: "parts",
+    subcat: "flipper button",
     price: 20,
     tptCode: "TPT2",
     subcat: "flipper button",
@@ -918,6 +934,7 @@ const products = [
   {
     name: "3D Flipperbats Foo Fighters",
     category: "parts",
+    subcat: "flipper bat",
     price: 15,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -933,6 +950,7 @@ const products = [
   {
     name: "John Wick above speaker decal",
     category: "decals",
+    subcat: "above speaker",
     price: 6,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -948,6 +966,7 @@ const products = [
   {
     name: "Toy story logo Topper",
     category: "parts",
+    subcat: "topper",
     price: 25,
     tptCode: "TPT3",
     subcat: "topper",
@@ -964,6 +983,7 @@ const products = [
   {
     name: "Speaker Spectre logo set for 007",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -979,6 +999,7 @@ const products = [
   {
     name: "Godzilla speaker decal",
     category: "decals",
+    subcat: "above speaker",
     price: 6,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -995,6 +1016,7 @@ const products = [
   {
     name: "James bond speaker decal 007",
     category: "decals",
+    subcat: "above speaker",
     price: 6,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -1011,6 +1033,7 @@ const products = [
   {
     name: "Guns n Roses logo for Hinges",
     category: "parts",
+    subcat: "hinges",
     price: 20,
     tptCode: "TPT1",
     subcat: "hinges",
@@ -1027,6 +1050,7 @@ const products = [
   {
     name: "Walking Dead Topper",
     category: "parts",
+    subcat: "topper",
     price: 30,
     tptCode: "TPT3",
     subcat: "topper",
@@ -1042,6 +1066,7 @@ const products = [
   {
     name: "Hinges 3D walking dead",
     category: "parts",
+    subcat: "hinges",
     price: 20,
     tptCode: "TPT2",
     subcat: "hinges",
@@ -1058,6 +1083,7 @@ const products = [
   {
     name: "Walking dead dripping blood",
     category: "parts",
+    subcat: "in game",
     price: 12,
     tptCode: "TPT1",
     subcat: "coin door",
@@ -1073,6 +1099,7 @@ const products = [
   {
     name: "Walking dead speaker inserts",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -1089,6 +1116,7 @@ const products = [
   {
     name: "Doctor Who 3D Dalek Speaker inserts GOLD",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -1106,6 +1134,7 @@ const products = [
   {
     name: "Time expander cover for Doctor Who",
     category: "parts",
+    subcat: "in game",
     price: 25,
     tptCode: "TPT3",
     subcat: "in game",
@@ -1121,6 +1150,7 @@ const products = [
   {
     name: "Stark family 3D hinges logo for Game of Thrones",
     category: "parts",
+    subcat: "hinges",
     price: 15,
     tptCode: "TPT1",
     subcat: "hinges",
@@ -1136,6 +1166,7 @@ const products = [
   {
     name: "Hand of the king for Game of Thrones",
     category: "parts",
+    subcat: "in game",
     price: 10,
     tptCode: "TPT1",
     subcat: "in game",
@@ -1151,6 +1182,7 @@ const products = [
   {
     name: "Godzilla speaker add on",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT2",
     subcat: "speaker",
@@ -1166,6 +1198,7 @@ const products = [
   {
     name: "Speaker inserts Twilight Zone",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -1183,6 +1216,7 @@ const products = [
   {
     name: "Godzilla (Japanees) 3D logo for Hinges",
     category: "parts",
+    subcat: "hinges",
     price: 15,
     tptCode: "TPT1",
     subcat: "hinges",
@@ -1200,6 +1234,7 @@ const products = [
   {
     name: "Spectre logo for coin door 007",
     category: "parts",
+    subcat: "coin door",
     price: 12,
     tptCode: "TPT1",
     subcat: "coin door",
@@ -1215,6 +1250,7 @@ const products = [
   {
     name: "3D 007 topper",
     category: "parts",
+    subcat: "topper",
     price: 25,
     tptCode: "TPT3",
     subcat: "topper",
@@ -1230,6 +1266,7 @@ const products = [
   {
     name: "Jaws Hinges jaws mod",
     category: "parts",
+    subcat: "hinges",
     price: 20,
     tptCode: "TPT2",
     subcat: "hinges",
@@ -1245,6 +1282,7 @@ const products = [
   {
     name: "Sword flipper bat decals for Lord of The rings",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1262,6 +1300,7 @@ const products = [
   {
     name: "Flipper bats The Shadow v2",
     category: "decals",
+    subcat: "flipper bat",
     price: 8.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1279,6 +1318,7 @@ const products = [
   {
     name: "Flipper Bats The Shadow v1",
     category: "decals",
+    subcat: "flipper bat",
     price: 8.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1294,6 +1334,7 @@ const products = [
   {
     name: "Extra The Who topper for Tommy",
     category: "parts",
+    subcat: "topper",
     price: 30,
     tptCode: "TPT3",
     subcat: "topper",
@@ -1309,6 +1350,7 @@ const products = [
   {
     name: "Baywatch flipper topper decals 3x",
     category: "decals",
+    subcat: "flipper bat",
     price: 8.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1324,6 +1366,7 @@ const products = [
   {
     name: "Creature from the black lagoon flipper bat topper",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1339,6 +1382,7 @@ const products = [
   {
     name: "F14 Flipper bat topper",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1354,6 +1398,7 @@ const products = [
   {
     name: "Shooter rod decal 007",
     category: "decals",
+    subcat: "shooter",
     price: 7,
     tptCode: "TPT1",
     subcat: "shooter",
@@ -1369,6 +1414,7 @@ const products = [
   {
     name: "Shooter rod decal Foo Fighters",
     category: "decals",
+    subcat: "shooter",
     price: 7,
     tptCode: "TPT1",
     subcat: "shooter",
@@ -1386,6 +1432,7 @@ const products = [
   {
     name: "Foo fighters above speaker decal 4",
     category: "decals",
+    subcat: "above speaker",
     price: 6,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -1401,6 +1448,7 @@ const products = [
   {
     name: "Foo fighters above speaker decal 3",
     category: "decals",
+    subcat: "above speaker",
     price: 6,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -1416,6 +1464,7 @@ const products = [
   {
     name: "Foo fighters above speaker decal 2",
     category: "decals",
+    subcat: "above speaker",
     price: 6,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -1431,6 +1480,7 @@ const products = [
   {
     name: "Foo fighters above speaker decal 1",
     category: "decals",
+    subcat: "above speaker",
     price: 6,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -1446,6 +1496,7 @@ const products = [
   {
     name: "Warning cover decal John Wick",
     category: "decals",
+    subcat: "warning sign",
     price: 6,
     tptCode: "TPT1",
     subcat: "warning sign",
@@ -1462,6 +1513,7 @@ const products = [
   {
     name: "Car decal creature from the black lagoon WITH text",
     category: "decals",
+    subcat: "in game",
     price: 24.5,
     tptCode: "TPT2",
     subcat: "in game",
@@ -1477,6 +1529,7 @@ const products = [
   {
     name: "Jurassic park action button decal",
     category: "decals",
+    subcat: "action button",
     price: 20,
     tptCode: "TPT2",
     subcat: "action button",
@@ -1492,6 +1545,7 @@ const products = [
   {
     name: "Flipper bat decals Frankenstein",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1508,6 +1562,7 @@ const products = [
   {
     name: "Target Decals Labyrinth",
     category: "decals",
+    subcat: "target",
     price: 18,
     tptCode: "TPT1",
     subcat: "target",
@@ -1525,6 +1580,7 @@ const products = [
   {
     name: "Beware of walkers for Walking Dead",
     category: "decals",
+    subcat: "warning sign",
     price: 8,
     tptCode: "TPT1",
     subcat: "coin door",
@@ -1541,6 +1597,7 @@ const products = [
   {
     name: "Time expander decal for Doctor Who",
     category: "decals",
+    subcat: "in game",
     price: 10,
     tptCode: "TPT2",
     subcat: "in game",
@@ -1556,6 +1613,7 @@ const products = [
   {
     name: "Decal targets Shadow",
     category: "decals",
+    subcat: "in game",
     price: 20,
     tptCode: "TPT1",
     subcat: "target",
@@ -1571,6 +1629,7 @@ const products = [
   {
     name: "Flipper bats John Wick car and babayaga",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1586,6 +1645,7 @@ const products = [
   {
     name: "Baba Yaga decals John Wick",
     category: "decals",
+    subcat: "in game",
     price: 10,
     tptCode: "TPT1",
     subcat: "flipper button",
@@ -1601,6 +1661,7 @@ const products = [
   {
     name: "Spinner decals Game of Thrones",
     category: "decals",
+    subcat: "spinner",
     price: 10.5,
     tptCode: "TPT1",
     subcat: "spinner",
@@ -1617,6 +1678,7 @@ const products = [
   {
     name: "Target decals Spider-man",
     category: "decals",
+    subcat: "target",
     price: 20,
     tptCode: "TPT1",
     subcat: "target",
@@ -1635,6 +1697,7 @@ const products = [
   {
     name: "Flipper bat decals Stern Spiderman",
     category: "decals",
+    subcat: "flipper bat",
     price: 8.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1651,6 +1714,7 @@ const products = [
   {
     name: "3 target decals Lord of the Rings",
     category: "decals",
+    subcat: "target",
     price: 8,
     tptCode: "TPT1",
     subcat: "target",
@@ -1668,6 +1732,7 @@ const products = [
   {
     name: "Elvis Hinge & front decal GOLD",
     category: "decals",
+    subcat: "hinges",
     price: 18,
     tptCode: "TPT1",
     subcat: "hinges",
@@ -1686,6 +1751,7 @@ const products = [
   {
     name: "Elvis Target Decal kit",
     category: "decals",
+    subcat: "target",
     price: 18,
     tptCode: "TPT1",
     subcat: "target",
@@ -1704,6 +1770,7 @@ const products = [
   {
     name: "Skull decals Pirates of the Caribbean stern",
     category: "decals",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT1",
     subcat: "flipper button",
@@ -1719,6 +1786,7 @@ const products = [
   {
     name: "Target Decals Pirates of the Caribbean Stern",
     category: "decals",
+    subcat: "target",
     price: 18,
     tptCode: "TPT1",
     subcat: "target",
@@ -1738,6 +1806,7 @@ const products = [
   {
     name: "Union Jack Target and flipper topper decals for TOMMY",
     category: "decals",
+    subcat: "flipper bat",
     price: 25,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1756,6 +1825,7 @@ const products = [
   {
     name: "Car decal Creature from the Black Lagoon NO Text",
     category: "decals",
+    subcat: "in game",
     price: 24.5,
     tptCode: "TPT2",
     subcat: "in game",
@@ -1771,6 +1841,7 @@ const products = [
   {
     name: "3 part Cabinet decal kit for Johnny Mnemonic",
     category: "decals",
+    subcat: "cabinet",
     price: 150,
     tptCode: "TPT3",
     subcat: "cabinet",
@@ -1840,6 +1911,7 @@ const products = [
   {
     name: "Leg / cabinet protection 3D",
     category: "parts",
+    subcat: "in game",
     price: 20,
     tptCode: "TPT3",
     subcat: "in game",
@@ -1855,6 +1927,7 @@ const products = [
   {
     name: "ACDC Flipperbat covers 3D",
     category: "parts",
+    subcat: "flipper bat",
     price: 15,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1870,6 +1943,7 @@ const products = [
   {
     name: "Flipper bats decal  'finish'  for Corvette",
     category: "decals",
+    subcat: "flipper bat",
     price: 8.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1902,6 +1976,7 @@ const products = [
   {
     name: "Flipperbat cover Elvis 3D (2x)",
     category: "parts",
+    subcat: "flipper bat",
     price: 15,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -1917,6 +1992,7 @@ const products = [
   {
     name: "Topper Surfing girls Baywatch",
     category: "parts",
+    subcat: "topper",
     price: 30,
     tptCode: "TPT3",
     subcat: "topper",
@@ -1933,6 +2009,7 @@ const products = [
   {
     name: "Speaker Inserts 3D Tolkien logo Lord of the rings",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -1948,6 +2025,7 @@ const products = [
   {
     name: "Stern The Simpsons speaker insert Bart",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -1966,6 +2044,7 @@ const products = [
   {
     name: "Stern Elvis speaker insert Elvis",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -1982,6 +2061,7 @@ const products = [
   {
     name: "JJP GnR Marshall logo speaker insert",
     category: "parts",
+    subcat: "speaker",
     price: 12,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -1997,6 +2077,7 @@ const products = [
   {
     name: "JJP GnR Topper with logo",
     category: "parts",
+    subcat: "topper",
     price: 60,
     tptCode: "TPT3",
     subcat: "topper",
@@ -2013,6 +2094,7 @@ const products = [
   {
     name: "JJP Godfather topper logo",
     category: "parts",
+    subcat: "topper",
     price: 30,
     tptCode: "TPT3",
     subcat: "topper",
@@ -2029,6 +2111,7 @@ const products = [
   {
     name: "JJP Godfather Topper Buste Godfather",
     category: "parts",
+    subcat: "topper",
     price: 45,
     tptCode: "TPT3",
     subcat: "topper",
@@ -2044,6 +2127,7 @@ const products = [
   {
     name: "Gottlieb Stargate Topper logo",
     category: "parts",
+    subcat: "topper",
     price: 45,
     tptCode: "TPT3",
     subcat: "topper",
@@ -2060,6 +2144,7 @@ const products = [
   {
     name: "Flipperbat decals Babayaga John Wick",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -2075,6 +2160,7 @@ const products = [
   {
     name: "Tales of the arabian nights 3D Alladin logo coin door (color: gold)",
     category: "parts",
+    subcat: "coin door",
     price: 12,
     tptCode: "TPT1",
     subcat: "coin door",
@@ -2090,6 +2176,7 @@ const products = [
   {
     name: "Keyhanger the Walking dead",
     category: "parts",
+    subcat: "in game",
     price: 6,
     tptCode: "TPT1",
     subcat: "coin door",
@@ -2105,6 +2192,7 @@ const products = [
   {
     name: "Keyhanger Lord of the rings (Tolkien logo)",
     category: "parts",
+    subcat: "in game",
     price: 6,
     tptCode: "TPT1",
     subcat: "coin door",
@@ -2120,6 +2208,7 @@ const products = [
   {
     name: "Sega Batman Topper",
     category: "parts",
+    subcat: "topper",
     price: 25,
     tptCode: "TPT3",
     subcat: "topper",
@@ -2135,6 +2224,7 @@ const products = [
   {
     name: "Terminator 2 Skynet Topper with Red LED strip 12V",
     category: "parts",
+    subcat: "topper",
     price: 60,
     tptCode: "TPT3",
     subcat: "topper",
@@ -2151,6 +2241,7 @@ const products = [
   {
     name: "Congo Gorilla Topper",
     category: "parts",
+    subcat: "topper",
     price: 105,
     tptCode: "TPT3",
     subcat: "topper",
@@ -2167,6 +2258,7 @@ const products = [
   {
     name: "Stern ACDC Topper logo",
     category: "parts",
+    subcat: "topper",
     price: 50,
     tptCode: "TPT3",
     subcat: "topper",
@@ -2183,6 +2275,7 @@ const products = [
   {
     name: "Stern ACDC Topper 2x Horns red",
     category: "parts",
+    subcat: "topper",
     price: 20,
     tptCode: "TPT3",
     subcat: "topper",
@@ -2199,6 +2292,7 @@ const products = [
   {
     name: "Lethal Weapon 3 Toilet (shooter area)",
     category: "parts",
+    subcat: "topper",
     price: 12,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2215,6 +2309,7 @@ const products = [
   {
     name: "Indiana Jones White Zeppelin (left inlane)",
     category: "parts",
+    subcat: "topper",
     price: 20,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2231,6 +2326,7 @@ const products = [
   {
     name: "JJP GnR Mini Marshall speaker topper",
     category: "parts",
+    subcat: "topper",
     price: 45,
     tptCode: "TPT3",
     subcat: "topper",
@@ -2247,6 +2343,7 @@ const products = [
   {
     name: "6 Lethal Weapon 3 target decals",
     category: "decals",
+    subcat: "target",
     price: 12,
     tptCode: "TPT1",
     subcat: "target",
@@ -2265,6 +2362,7 @@ const products = [
   {
     name: "9 Getaway Red light target decals",
     category: "decals",
+    subcat: "target",
     price: 12,
     tptCode: "TPT1",
     subcat: "target",
@@ -2280,6 +2378,7 @@ const products = [
   {
     name: "Creature from the Black lagoon start button cover",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "coin door",
@@ -2296,6 +2395,7 @@ const products = [
   {
     name: "Getaway Super Charger sign 3 color",
     category: "parts",
+    subcat: "in game",
     price: 25,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2311,6 +2411,7 @@ const products = [
   {
     name: "Ghostbuster storage facility",
     category: "parts",
+    subcat: "in game",
     price: 25,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2326,6 +2427,7 @@ const products = [
   {
     name: "Ghostbuster Library",
     category: "parts",
+    subcat: "in game",
     price: 30,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2341,6 +2443,7 @@ const products = [
   {
     name: "JJP Godfather briefcase with gold bars",
     category: "parts",
+    subcat: "in game",
     price: 20,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2356,6 +2459,7 @@ const products = [
   {
     name: "Doctor Who Confession dial disc",
     category: "parts",
+    subcat: "in game",
     price: 10,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2371,6 +2475,7 @@ const products = [
   {
     name: "Data East Jurassic Park East Dock sign",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2386,6 +2491,7 @@ const products = [
   {
     name: "Doctor Who The name of the Doctor plate",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "coin door",
@@ -2401,6 +2507,7 @@ const products = [
   {
     name: "Speaker inserts football Worldcup soccer 94",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -2418,6 +2525,7 @@ const products = [
   {
     name: "Who Dunnit Speaker inserts 'fingerprints'",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -2434,6 +2542,7 @@ const products = [
   {
     name: "Topper 'speak my friend' Lord of the rings",
     category: "parts",
+    subcat: "topper",
     price: 25,
     tptCode: "TPT3",
     subcat: "topper",
@@ -2449,6 +2558,7 @@ const products = [
   {
     name: "Xenon target decals",
     category: "decals",
+    subcat: "target",
     price: 7,
     tptCode: "TPT1",
     subcat: "target",
@@ -2464,6 +2574,7 @@ const products = [
   {
     name: "Street lamp for Twilight Zone",
     category: "parts",
+    subcat: "in game",
     price: 12,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2480,6 +2591,7 @@ const products = [
   {
     name: "Robot for Twilightzone",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2495,6 +2607,7 @@ const products = [
   {
     name: "Robot 2 for Twilight Zone",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2510,6 +2623,7 @@ const products = [
   {
     name: "Lord of the rings Elf text left inlane",
     category: "decals",
+    subcat: "in game",
     price: 8,
     tptCode: "TPT1",
     subcat: "in game",
@@ -2527,6 +2641,7 @@ const products = [
   {
     name: "Game of thrones Coin door tag 'Winter is coming'",
     category: "parts",
+    subcat: "coin door",
     price: 8,
     tptCode: "TPT3",
     subcat: "coin door",
@@ -2542,6 +2657,7 @@ const products = [
   {
     name: "Rocket Twilight zone",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2558,6 +2674,7 @@ const products = [
   {
     name: "Yellow spiral arrow Twilight Zone",
     category: "parts",
+    subcat: "in game",
     price: 7,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2573,6 +2690,7 @@ const products = [
   {
     name: "Marshall upper inlane speaker JJP GnR",
     category: "parts",
+    subcat: "speaker",
     price: 8,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2588,6 +2706,7 @@ const products = [
   {
     name: "JJP GnR Drumset for pop bumpers",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2604,6 +2723,7 @@ const products = [
   {
     name: "Barbasol can for Jurassic park DE or Stern",
     category: "parts",
+    subcat: "in game",
     price: 12,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2652,6 +2772,7 @@ const products = [
   {
     name: "JJP Godfather Tommygun speaker inserts gold",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT3",
     subcat: "speaker",
@@ -2667,6 +2788,7 @@ const products = [
   {
     name: "Stern avatar Speaker insert water",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -2761,6 +2883,7 @@ const products = [
   {
     name: "Gold kit John wick (coins, bullets, hamer)",
     category: "parts",
+    subcat: "in game",
     price: 30,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2778,6 +2901,7 @@ const products = [
   {
     name: "3D radio active sign for Hinges Stern Simpsons PP",
     category: "parts",
+    subcat: "hinges",
     price: 20,
     tptCode: "TPT1",
     subcat: "hinges",
@@ -2821,6 +2945,7 @@ const products = [
   {
     name: "Flipperbat decals Game of thrones 'winter is coming'",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -2836,6 +2961,7 @@ const products = [
   {
     name: "Flipperbat decals Jurassic Park DE or Stern",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -2851,6 +2977,7 @@ const products = [
   {
     name: "Flipperbat decals Jurassic Park DE or Stern v2",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -2866,6 +2993,7 @@ const products = [
   {
     name: "Flipperbat decals whirlwind",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -2881,6 +3009,7 @@ const products = [
   {
     name: "Flipperbat decals whirlwind V2",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -2896,6 +3025,7 @@ const products = [
   {
     name: "Flipperbat decals whirlwind V3",
     category: "decals",
+    subcat: "flipper bat",
     price: 7.5,
     tptCode: "TPT1",
     subcat: "flipper bat",
@@ -2911,6 +3041,7 @@ const products = [
   {
     name: "Jaws Amity Island golden frame",
     category: "parts",
+    subcat: "in game",
     price: 10,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2926,6 +3057,7 @@ const products = [
   {
     name: "King Kong hand Cuffs",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -2941,6 +3073,7 @@ const products = [
   {
     name: "Stern 3D model info plaque colored",
     category: "decals",
+    subcat: "in game",
     price: 8,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -2960,6 +3093,7 @@ const products = [
   {
     name: "Creature black lagoon Universal studios black background",
     category: "decals",
+    subcat: "in game",
     price: 6,
     tptCode: "TPT1",
     subcat: "in game",
@@ -2975,6 +3109,7 @@ const products = [
   {
     name: "Creature black lagoon Universal studios white background",
     category: "decals",
+    subcat: "in game",
     price: 6,
     tptCode: "TPT1",
     subcat: "in game",
@@ -2990,6 +3125,7 @@ const products = [
   {
     name: "Game of thrones golden 3D slingshots",
     category: "decals",
+    subcat: "in game",
     price: 25,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3006,6 +3142,7 @@ const products = [
   {
     name: "King Kong bananas",
     category: "parts",
+    subcat: "in game",
     price: 12,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3021,6 +3158,7 @@ const products = [
   {
     name: "John Wick Akira logo",
     category: "parts",
+    subcat: "in game",
     price: 8,
     tptCode: "TPT1",
     subcat: "in game",
@@ -3036,6 +3174,7 @@ const products = [
   {
     name: "Jaws Beach closed sign",
     category: "parts",
+    subcat: "in game",
     price: 10,
     tptCode: "TPT1",
     subcat: "in game",
@@ -3051,6 +3190,7 @@ const products = [
   {
     name: "Jaws red buoy",
     category: "parts",
+    subcat: "in game",
     price: 8,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3066,6 +3206,7 @@ const products = [
   {
     name: "5 red buoy for flashers Baywatch",
     category: "parts",
+    subcat: "in game",
     price: 25,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3082,6 +3223,7 @@ const products = [
   {
     name: "Mini marshall speaker Foo FIghters",
     category: "parts",
+    subcat: "speaker",
     price: 8,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3097,6 +3239,7 @@ const products = [
   {
     name: "Pterosaur for King Kong",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3112,6 +3255,7 @@ const products = [
   {
     name: "Jaws yellow warning decal replacement V1",
     category: "decals",
+    subcat: "warning sign",
     price: 6,
     tptCode: "TPT1",
     subcat: "warning sign",
@@ -3127,6 +3271,7 @@ const products = [
   {
     name: "Jaws yellow warning decal replacement V2",
     category: "decals",
+    subcat: "warning sign",
     price: 6,
     tptCode: "TPT1",
     subcat: "warning sign",
@@ -3142,6 +3287,7 @@ const products = [
   {
     name: "Godzilla Xilien",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3157,6 +3303,7 @@ const products = [
   {
     name: "Red Spider topper for Spiderman",
     category: "parts",
+    subcat: "topper",
     price: 20,
     tptCode: "TPT3",
     subcat: "topper",
@@ -3172,6 +3319,7 @@ const products = [
   {
     name: "Spider speaker inserts Spiderman",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -3188,6 +3336,7 @@ const products = [
   {
     name: "keyhanger jaws",
     category: "parts",
+    subcat: "in game",
     price: 5,
     tptCode: "TPT3",
     subcat: "coin door",
@@ -3203,6 +3352,7 @@ const products = [
   {
     name: "Above speaker decal Godzilla v2",
     category: "decals",
+    subcat: "above speaker",
     price: 6,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -3218,6 +3368,7 @@ const products = [
   {
     name: "Target decals green Indiana jones",
     category: "decals",
+    subcat: "target",
     price: 18,
     tptCode: "TPT1",
     subcat: "target",
@@ -3233,6 +3384,7 @@ const products = [
   {
     name: "Target decals yellow Indiana jones",
     category: "decals",
+    subcat: "target",
     price: 18,
     tptCode: "TPT1",
     subcat: "target",
@@ -3248,6 +3400,7 @@ const products = [
   {
     name: "Shark bitten Surfboard Baywatch",
     category: "parts",
+    subcat: "in game",
     price: 12,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3263,6 +3416,7 @@ const products = [
   {
     name: "Surfboard Tower Baywatch",
     category: "parts",
+    subcat: "in game",
     price: 12,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3278,6 +3432,7 @@ const products = [
   {
     name: "Hinges decals Indianapolis 500",
     category: "decals",
+    subcat: "hinges",
     price: 10,
     tptCode: "TPT1",
     subcat: "hinges",
@@ -3293,6 +3448,7 @@ const products = [
   {
     name: "Switch playfield protector",
     category: "parts",
+    subcat: "in game",
     price: 3,
     tptCode: "TPT1",
     subcat: "in game",
@@ -3308,6 +3464,7 @@ const products = [
   {
     name: "Replacement for decal 'warning' in japanese",
     category: "parts",
+    subcat: "in game",
     price: 10,
     tptCode: "TPT1",
     subcat: "in game",
@@ -3369,6 +3526,7 @@ const products = [
   {
     name: "King Kong speaker decal v1",
     category: "decals",
+    subcat: "above speaker",
     price: 6,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -3384,6 +3542,7 @@ const products = [
   {
     name: "King Kong speaker decal v2",
     category: "decals",
+    subcat: "above speaker",
     price: 6,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -3399,6 +3558,7 @@ const products = [
   {
     name: "King Kong speaker decal v3",
     category: "decals",
+    subcat: "above speaker",
     price: 6,
     tptCode: "TPT1",
     subcat: "above speaker",
@@ -3428,6 +3588,7 @@ const products = [
   {
     name: "Wolf Game of thrones",
     category: "parts",
+    subcat: "in game",
     price: 12,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3444,6 +3605,7 @@ const products = [
   {
     name: "3D shark for Jaws",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3459,6 +3621,7 @@ const products = [
   {
     name: "Mechagodzilla covers for ramp",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3474,6 +3637,7 @@ const products = [
   {
     name: "Baywatch target decals",
     category: "decals",
+    subcat: "target",
     price: 12,
     tptCode: "TPT1",
     subcat: "target",
@@ -3492,6 +3656,7 @@ const products = [
   {
     name: "Target decals Whirlwind",
     category: "decals",
+    subcat: "target",
     price: 8,
     tptCode: "TPT3",
     subcat: "target",
@@ -3507,6 +3672,7 @@ const products = [
   {
     name: "Target decals Flintstones",
     category: "decals",
+    subcat: "target",
     price: 8,
     tptCode: "TPT1",
     subcat: "target",
@@ -3536,6 +3702,7 @@ const products = [
   {
     name: "Speaker inserts Game of Thrones Stark",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -3551,6 +3718,7 @@ const products = [
   {
     name: "Speaker inserts Game of Thrones Thargaryen",
     category: "parts",
+    subcat: "speaker",
     price: 15,
     tptCode: "TPT1",
     subcat: "speaker",
@@ -3567,6 +3735,7 @@ const products = [
   {
     name: "Harry Potter Hogwarts Topper",
     category: "parts",
+    subcat: "topper",
     price: 125,
     tptCode: "TPT3",
     subcat: "topper",
@@ -3586,6 +3755,7 @@ const products = [
   {
     name: "F-86 Sabre plane for Godzilla",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3601,6 +3771,7 @@ const products = [
   {
     name: "Dolphin for Baywatch",
     category: "parts",
+    subcat: "in game",
     price: 15,
     tptCode: "TPT3",
     subcat: "in game",
@@ -3747,11 +3918,12 @@ function addToBuffer() {
   const en = document.getElementById('edit-desc-en').value.trim();
   const fr = document.getElementById('edit-desc-fr').value.trim();
   const videoUrl = document.getElementById('edit-videourl').value.trim();
-  const inStock = document.getElementById('edit-instock-yes').checked;
+  const inStock  = document.getElementById('edit-instock-yes').checked;
+  const subcat   = document.getElementById('edit-subcat').value || '';
   if (!name || !price || !nl) { alert('Vul minstens naam, prijs en NL-beschrijving in.'); return; }
   const images = Array.from(document.querySelectorAll('#edit-photo-slots input')).map(i => i.value.trim()).filter(Boolean);
 
-  editBuffer.set(idx, { name, category, price, tptCode, nl, en, fr, images, videoUrl, inStock });
+  editBuffer.set(idx, { name, category, price, tptCode, nl, en, fr, images, videoUrl, inStock, subcat });
   renderBuffer();
   renderOverview();
 
@@ -3773,13 +3945,13 @@ function generateBufferCode() {
   const allCode = products.map((p, idx) => {
     if (editBuffer.has(idx)) {
       const d = editBuffer.get(idx);
-      return buildCode(d.name, d.category, d.price, d.nl, d.en, d.fr, d.images, d.tptCode || 'none', d.videoUrl || '', d.inStock !== false);
+      return buildCode(d.name, d.category, d.price, d.nl, d.en, d.fr, d.images, d.tptCode || 'none', d.videoUrl || '', d.inStock !== false, d.subcat || '');
     } else {
       // Reconstruct original product code
       const nl = getDesc(p, 'nl');
       const en = getDesc(p, 'en');
       const fr = getDesc(p, 'fr');
-      return buildCode(p.name, p.category, p.price, nl, en, fr, p.images || [], p.tptCode || 'none', p.videoUrl || '', p.inStock !== false);
+      return buildCode(p.name, p.category, p.price, nl, en, fr, p.images || [], p.tptCode || 'none', p.videoUrl || '', p.inStock !== false, p.subcat || '');
     }
   }).join(',\n') + ',\n  // Nieuwe producten worden hieronder toegevoegd via admin.html';
 
@@ -3843,6 +4015,7 @@ function renderOverview() {
       <td class="p-num">${p._i+1}</td>
       <td class="p-name">${markedDel ? '<s style="color:var(--red);">' : ''}${esc(p.name)}${markedDel ? '</s>' : ''}${nameBadge}</td>
       <td><span class="cat-pill ${p.category}">${catLabels[p.category]||p.category}</span></td>
+      <td>${(() => { const s = editBuffer.has(p._i) ? editBuffer.get(p._i) : p; return s.subcat ? `<span class="subcat-pill">${esc(s.subcat)}</span>` : '<span style="color:var(--muted);font-size:11px;">—</span>'; })()}</td>
       <td class="p-price">€${Number(p.price).toFixed(2)}</td>
       <td style="color:var(--muted);font-size:12px;">${(p.images||[]).length}</td>
       <td style="text-align:center;"><span title="${stockOn ? 'Op voorraad' : 'Niet op voorraad'}" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${stockOn ? '#27ae60' : '#e74c3c'};box-shadow:0 0 6px ${stockOn ? '#27ae60aa' : '#e74c3caa'};cursor:pointer;" onclick="toggleStock(${p._i})"></span></td>
@@ -3890,6 +4063,9 @@ function openDrawer(idx) {
   const stockVal = src ? src.inStock : p.inStock;
   document.getElementById('edit-instock-yes').checked = stockVal !== false;
   document.getElementById('edit-instock-no').checked = stockVal === false;
+  // Subcategory
+  const subcatVal = src ? (src.subcat || '') : (p.subcat || '');
+  updateSubcatField(document.getElementById('edit-category').value, subcatVal);
   document.getElementById('edit-desc-nl').value = src ? src.nl : getDesc(p,'nl');
   document.getElementById('edit-desc-en').value = src ? src.en : getDesc(p,'en');
   document.getElementById('edit-desc-fr').value = src ? src.fr : getDesc(p,'fr');
@@ -3923,12 +4099,29 @@ function closeDrawer() {
   document.body.style.overflow = '';
 }
 
+// Subcategory options per main category
+const SUBCAT_OPTIONS = {
+  decals: ['target','flipper bat','shooter','above speaker','action button','coin door','warning sign','in game','flipper button','hinges','spinner','cabinet'],
+  parts:  ['hinges','flipper bat','coin door','topper','flipper button','speaker','in game']
+};
+
+function updateSubcatField(cat, currentVal) {
+  const field  = document.getElementById('edit-subcat-field');
+  const select = document.getElementById('edit-subcat');
+  const opts   = SUBCAT_OPTIONS[cat];
+  if (!opts) { field.style.display = 'none'; select.value = ''; return; }
+  field.style.display = 'block';
+  select.innerHTML = '<option value="">— Geen rubriek —</option>'
+    + opts.map(o => `<option value="${o}"${currentVal===o?' selected':''}>${o.charAt(0).toUpperCase()+o.slice(1)}</option>`).join('');
+}
+
 function onEditCategoryChange() {
   const cat = document.getElementById('edit-category').value;
   editMaxPhotos = cat === 'machines' ? 20 : 5;
   document.getElementById('edit-photo-limit').textContent = `— max ${editMaxPhotos} foto's`;
   const existing = Array.from(document.querySelectorAll('#edit-photo-slots input')).map(i => i.value);
   buildEditPhotoSlots(existing);
+  updateSubcatField(cat, '');
 }
 
 function buildEditPhotoSlots(existing) {
@@ -4087,7 +4280,7 @@ function generateNewBufferCode() {
   // Append new products to existing products array
   const existing = products.map(p => {
     const nl = getDesc(p,'nl'), en = getDesc(p,'en'), fr = getDesc(p,'fr');
-    return buildCode(p.name, p.category, p.price, nl, en, fr, p.images||[], p.tptCode||'none', p.videoUrl||'', p.inStock !== false);
+    return buildCode(p.name, p.category, p.price, nl, en, fr, p.images||[], p.tptCode||'none', p.videoUrl||'', p.inStock !== false, p.subcat||'');
   });
   const added = newProductBuffer.map(p =>
     buildCode(p.name, p.category, p.price, p.nl, p.en, p.fr, p.images, p.tptCode||'none', p.videoUrl||'', true)
@@ -4108,18 +4301,19 @@ function generateNewBufferCode() {
   }).catch(() => {});
   card.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-function buildCode(name, category, price, nl, en, fr, images, tptCode, videoUrl, inStock) {
+function buildCode(name, category, price, nl, en, fr, images, tptCode, videoUrl, inStock, subcat) {
   const q = s => String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,'\\n');
   const imgs = images.length
     ? images.map(s => `      "images/${s.replace(/^images\//,'')}"` ).join(',\n')
     : `      // Nog geen foto's toegevoegd`;
-  const tptLine = (tptCode && tptCode !== 'none') ? `\n    tptCode: "${tptCode}",` : '';
+  const tptLine   = (tptCode && tptCode !== 'none') ? `\n    tptCode: "${tptCode}",` : '';
   const videoLine = (videoUrl && category === 'machines') ? `\n    videoUrl: "${q(videoUrl)}",` : '';
   const stockLine = inStock === false ? `\n    inStock: false,` : '';
+  const subcatLine = (subcat && subcat !== '') ? `\n    subcat: "${q(subcat)}",` : '';
   return `  {
     name: "${q(name)}",
     category: "${category}",
-    price: ${price},${tptLine}${videoLine}${stockLine}
+    price: ${price},${tptLine}${videoLine}${stockLine}${subcatLine}
     desc: {
       nl: "${q(nl)}",
       en: "${q(en || nl)}",
@@ -4415,7 +4609,7 @@ function generateDeleteStagingCode() {
   const remaining = products.filter((_, i) => !deleteStagingBuffer.has(i));
   const allCode = remaining.map(p => {
     const nl = getDesc(p, 'nl'), en = getDesc(p, 'en'), fr = getDesc(p, 'fr');
-    return buildCode(p.name, p.category, p.price, nl, en, fr, p.images || [], p.tptCode || 'none', p.videoUrl || '', p.inStock !== false);
+    return buildCode(p.name, p.category, p.price, nl, en, fr, p.images || [], p.tptCode || 'none', p.videoUrl || '', p.inStock !== false, p.subcat || '');
   }).join(',\n') + ',\n  // Nieuwe producten worden hieronder toegevoegd via admin.html';
   const fullArray = `const products = [\n${allCode}\n];`;
 
@@ -4437,7 +4631,7 @@ function finalizeMultiDelete() {
   const remaining = products.filter((_, i) => !deleteBuffer.has(i));
   const allCode = remaining.map(p => {
     const nl = getDesc(p, 'nl'), en = getDesc(p, 'en'), fr = getDesc(p, 'fr');
-    return buildCode(p.name, p.category, p.price, nl, en, fr, p.images || [], p.tptCode || 'none', p.videoUrl || '', p.inStock !== false);
+    return buildCode(p.name, p.category, p.price, nl, en, fr, p.images || [], p.tptCode || 'none', p.videoUrl || '', p.inStock !== false, p.subcat || '');
   }).join(',\n') + ',\n  // Nieuwe producten worden hieronder toegevoegd via admin.html';
   const fullArray = `const products = [\n${allCode}\n];`;
 
@@ -4488,7 +4682,7 @@ function deleteProduct(idx) {
   const remaining = products.filter((_, i) => i !== idx);
   const allCode = remaining.map(p => {
     const nl = getDesc(p, 'nl'), en = getDesc(p, 'en'), fr = getDesc(p, 'fr');
-    return buildCode(p.name, p.category, p.price, nl, en, fr, p.images || [], p.tptCode || 'none', p.videoUrl || '', p.inStock !== false);
+    return buildCode(p.name, p.category, p.price, nl, en, fr, p.images || [], p.tptCode || 'none', p.videoUrl || '', p.inStock !== false, p.subcat || '');
   }).join(',\n') + ',\n  // Nieuwe producten worden hieronder toegevoegd via admin.html';
   const fullArray = `const products = [\n${allCode}\n];`;
 
@@ -4739,7 +4933,7 @@ function publishSelectedDrafts() {
   // Build full products array: existing + selected drafts
   const existing = products.map(p => {
     const nl = getDesc(p,'nl'), en = getDesc(p,'en'), fr = getDesc(p,'fr');
-    return buildCode(p.name, p.category, p.price, nl, en, fr, p.images||[], p.tptCode||'none', p.videoUrl||'', p.inStock !== false);
+    return buildCode(p.name, p.category, p.price, nl, en, fr, p.images||[], p.tptCode||'none', p.videoUrl||'', p.inStock !== false, p.subcat||'');
   });
   const added = toPublish.map(d =>
     buildCode(d.name, d.category, d.price, d.nl, d.en||d.nl, d.fr||d.nl, d.images||[], d.tptCode||'none', d.videoUrl||'', true)
