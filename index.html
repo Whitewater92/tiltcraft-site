@@ -4140,90 +4140,73 @@ function generateOrderRef(fn, ln) {
 }
 
 function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal) {
-  const ref = generateOrderRef(fn, ln);
-  _qrOrderData = { fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal, ref };
+  try {
+    const ref = generateOrderRef(fn, ln);
+    _qrOrderData = { fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal, ref };
 
-  // EPC QR code string (European Payment Council — works with all Belgian bank apps)
-  const ibanClean = BANK_IBAN.replace(/\s/g, '');
-  const epc = [
-    'BCD',          // Service Tag
-    '002',          // Version
-    '1',            // Character set (UTF-8)
-    'SCT',          // Identification (SEPA Credit Transfer)
-    BANK_BIC,       // BIC
-    BANK_NAME,      // Beneficiary name
-    ibanClean,      // IBAN
-    'EUR' + grandTotal.toFixed(2), // Amount
-    '',             // Purpose (empty)
-    ref,            // Remittance reference (structured)
-    '',             // Remittance info (unstructured — empty)
-    'TiltCraft bestelling'  // Beneficiary to originator info
-  ].join('\n');
+    // 1. Fill in IBAN details immediately
+    document.getElementById('qr-name').textContent   = BANK_NAME;
+    document.getElementById('qr-iban').textContent   = BANK_IBAN;
+    document.getElementById('qr-bic').textContent    = BANK_BIC;
+    document.getElementById('qr-amount').textContent = '€' + grandTotal.toFixed(2);
+    document.getElementById('qr-ref').textContent    = ref;
 
-  // Render QR on canvas
-  const canvas = document.getElementById('qr-canvas');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, 200, 200);
+    // 2. Instructions per language
+    const instr = {
+      nl: `📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)\nAlle betalingsgegevens worden automatisch ingevuld.\nVermeld de mededeling <strong>${ref}</strong> als je manueel overschrijft.\nNa betaling ontvang je een bevestiging per e-mail.`,
+      en: `📱 Scan the QR code with your banking app.\nAll payment details are pre-filled automatically.\nIf paying manually, use reference <strong>${ref}</strong>.\nYou will receive a confirmation email after payment.`,
+      fr: `📱 Scannez le QR code avec votre application bancaire.\nToutes les données de paiement sont pré-remplies.\nSi vous payez manuellement, indiquez la référence <strong>${ref}</strong>.\nVous recevrez un e-mail de confirmation après le paiement.`
+    };
+    document.getElementById('qr-instructions').innerHTML = (instr[currentLang] || instr.nl).replace(/\n/g, '<br>');
 
-  // Use QRCode library if available, otherwise draw placeholder
-  if (typeof QRCode !== 'undefined') {
-    try {
-      // Clear previous
-      canvas.getContext('2d').clearRect(0,0,200,200);
-      // QRCode renders to a new element — we copy to our canvas
-      const tmp = document.createElement('div');
-      tmp.style.display = 'none';
-      document.body.appendChild(tmp);
-      const qr = new QRCode(tmp, {
-        text: epc,
-        width: 200, height: 200,
-        correctLevel: QRCode.CorrectLevel.M
-      });
-      setTimeout(() => {
-        const img = tmp.querySelector('img') || tmp.querySelector('canvas');
-        if (img) {
-          const image = new Image();
-          image.onload = () => { ctx.drawImage(image, 0, 0, 200, 200); };
-          image.src = img.src || img.toDataURL();
+    // 3. Show the screen immediately — IBAN details are already visible
+    document.getElementById('co-pay-btn').style.display      = 'none';
+    document.getElementById('pay-method-row').style.display  = 'none';
+    document.getElementById('qr-screen').classList.add('visible');
+
+    // 4. Try to generate QR code asynchronously (failure is non-fatal)
+    setTimeout(function() {
+      try {
+        const ibanClean = BANK_IBAN.replace(/\s/g, '');
+        const epc = [
+          'BCD', '002', '1', 'SCT',
+          BANK_BIC,
+          BANK_NAME,
+          ibanClean,
+          'EUR' + grandTotal.toFixed(2),
+          '', ref, '',
+          'TiltCraft'
+        ].join('\n');
+
+        const canvas = document.getElementById('qr-canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, 200, 200);
+
+        if (typeof QRCode !== 'undefined') {
+          const tmp = document.createElement('div');
+          tmp.style.display = 'none';
+          document.body.appendChild(tmp);
+          new QRCode(tmp, { text: epc, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
+          setTimeout(function() {
+            try {
+              const img = tmp.querySelector('img') || tmp.querySelector('canvas');
+              if (img) {
+                const image = new Image();
+                image.onload = function() { ctx.drawImage(image, 0, 0, 200, 200); };
+                image.src = img.src || img.toDataURL();
+              }
+            } catch(e2) {}
+            if (tmp.parentNode) document.body.removeChild(tmp);
+          }, 200);
         }
-        if (tmp.parentNode) document.body.removeChild(tmp);
-      }, 100);
-    } catch(e) {
-      // QR generation failed — show text fallback
-      ctx.fillStyle = '#fff';
-      ctx.fillRect(0,0,200,200);
-      ctx.fillStyle = '#000';
-      ctx.font = '12px sans-serif';
-      ctx.fillText('QR niet beschikbaar', 20, 100);
-    }
-  } else {
-    // Fallback: draw text placeholder
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0,0,200,200);
-    ctx.fillStyle = '#000';
-    ctx.font = '12px sans-serif';
-    ctx.fillText('QR niet beschikbaar', 20, 100);
+      } catch(qrErr) {
+        // QR generation failed silently — IBAN details still visible
+      }
+    }, 50);
+
+  } catch(err) {
+    alert('Fout bij openen betalingsscherm: ' + err.message);
   }
-
-  // Fill in details
-  document.getElementById('qr-name').textContent    = BANK_NAME;
-  document.getElementById('qr-iban').textContent    = BANK_IBAN;
-  document.getElementById('qr-bic').textContent     = BANK_BIC;
-  document.getElementById('qr-amount').textContent  = '€' + grandTotal.toFixed(2);
-  document.getElementById('qr-ref').textContent     = ref;
-
-  // Instructions per language
-  const instr = {
-    nl: `📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)\nAlle betalingsgegevens worden automatisch ingevuld.\nVermeld de mededeling <strong>${ref}</strong> als je manueel overschrijft.\nNa betaling ontvang je een bevestiging per e-mail.`,
-    en: `📱 Scan the QR code with your banking app.\nAll payment details are pre-filled automatically.\nIf paying manually, use reference <strong>${ref}</strong>.\nYou will receive a confirmation email after payment.`,
-    fr: `📱 Scannez le QR code avec votre application bancaire.\nToutes les données de paiement sont pré-remplies.\nSi vous payez manuellement, indiquez la référence <strong>${ref}</strong>.\nVous recevrez un e-mail de confirmation après le paiement.`
-  };
-  document.getElementById('qr-instructions').innerHTML = (instr[currentLang] || instr.nl).replace(/\n/g, '<br>');
-
-  // Hide pay button, show QR screen
-  document.getElementById('co-pay-btn').style.display   = 'none';
-  document.getElementById('pay-method-row').style.display = 'none';
-  document.getElementById('qr-screen').classList.add('visible');
 }
 
 function confirmTransfer() {
