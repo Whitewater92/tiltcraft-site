@@ -179,8 +179,8 @@ header { position: relative; text-align: center; padding: 70px 20px 50px; border
 /* QR / transfer screen */
 .qr-screen { display:none; text-align:center; padding:10px 0; }
 .qr-screen.visible { display:block; }
-.qr-screen #qr-canvas { width:200px; height:200px; border:6px solid #fff; border-radius:6px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-.qr-screen #qr-canvas img, .qr-screen #qr-canvas canvas { width:200px !important; height:200px !important; display:block; }
+.qr-screen #qr-canvas { width:200px; height:200px; background:#fff; border:6px solid #fff; border-radius:6px; margin:0 auto 16px; display:block; overflow:hidden; }
+.qr-screen #qr-canvas img, .qr-screen #qr-canvas canvas { width:200px !important; height:200px !important; display:block !important; }
 .qr-iban-box { background:#0d0d0d; border:1px solid var(--border); border-radius:4px; padding:14px 16px; margin-bottom:14px; text-align:left; }
 .qr-iban-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:12px; }
 .qr-iban-row:last-child { margin-bottom:0; }
@@ -230,7 +230,7 @@ footer a:hover { color: var(--gold); }
   .lang-btn .flag { width: 28px; height: 20px; }
 }
 </style>
-<!-- QR code generator for bank transfer -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -4180,14 +4180,18 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
 
         const container = document.getElementById('qr-canvas');
         container.innerHTML = '';
-        // Generate QR via external API — no library needed, always works
-        const img = document.createElement('img');
-        img.style.width = '200px';
-        img.style.height = '200px';
-        img.style.display = 'block';
-        img.alt = 'QR code betaling';
-        img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&ecc=M&data=' + encodeURIComponent(epc);
-        container.appendChild(img);
+        if (typeof QRCode !== 'undefined') {
+          new QRCode(container, {
+            text: epc,
+            width: 200,
+            height: 200,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+          });
+        } else {
+          container.innerHTML = '<p style="color:#000;font-size:11px;padding:10px;">QR niet beschikbaar</p>';
+        }
       } catch(qrErr) {
         // QR generation failed silently — IBAN details still visible
       }
