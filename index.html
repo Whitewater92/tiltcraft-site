@@ -3817,6 +3817,7 @@ function renderProducts() {
     if (activeSubFilter) {
       const kw = activeSubFilter.toLowerCase();
       filtered = filtered.filter(p =>
+        (p.subcat && p.subcat.toLowerCase().includes(kw)) ||
         p.name.toLowerCase().includes(kw) ||
         getDesc(p, 'nl').toLowerCase().includes(kw) ||
         getDesc(p, 'en').toLowerCase().includes(kw)
