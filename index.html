@@ -231,7 +231,7 @@ footer a:hover { color: var(--gold); }
 }
 </style>
 <!-- QR code generator for bank transfer -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -4182,8 +4182,26 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
         const container = document.getElementById('qr-canvas');
         container.innerHTML = '';  // clear previous
 
+        // Use qrcode library (npm/jsdelivr build) — QRCode.toCanvas or QRCode.toDataURL
         if (typeof QRCode !== 'undefined') {
-          new QRCode(container, { text: epc, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
+          // Create a canvas to render into
+          const cvs = document.createElement('canvas');
+          container.appendChild(cvs);
+          QRCode.toCanvas(cvs, epc, { width: 200, margin: 1, color: { dark: '#000000', light: '#ffffff' } }, function(err) {
+            if (err) {
+              // fallback: try toDataURL → img
+              QRCode.toDataURL(epc, { width: 200, margin: 1 }, function(err2, url) {
+                if (!err2 && url) {
+                  container.innerHTML = '';
+                  const img = document.createElement('img');
+                  img.src = url;
+                  img.style.width = '200px';
+                  img.style.height = '200px';
+                  container.appendChild(img);
+                }
+              });
+            }
+          });
         }
       } catch(qrErr) {
         // QR generation failed silently — IBAN details still visible
