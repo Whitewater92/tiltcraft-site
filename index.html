@@ -434,6 +434,10 @@ footer a:hover { color: var(--gold); }
       <!-- QR / TRANSFER SCREEN -->
       <div class="qr-screen" id="qr-screen">
         <div id="qr-canvas"></div>
+        <!-- Mobile: bank app deep link instead of QR -->
+        <div id="mobile-pay-btn-wrap" style="display:none; margin-bottom:14px;">
+          <a id="mobile-pay-link" href="#" style="display:block; width:100%; padding:14px; background:var(--gold); color:var(--black); text-align:center; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase; border-radius:2px; text-decoration:none;">📲 Openen in bank-app</a>
+        </div>
         <div class="qr-iban-box">
           <div class="qr-iban-row"><span class="qr-iban-label">Begunstigde</span><span class="qr-iban-value" id="qr-name"></span></div>
           <div class="qr-iban-row"><span class="qr-iban-label">IBAN</span><span class="qr-iban-value" id="qr-iban"></span></div>
@@ -4360,15 +4364,39 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
     document.getElementById('qr-amount').textContent = '€' + grandTotal.toFixed(2);
     document.getElementById('qr-ref').textContent    = ref;
 
-    // 2. Instructions per language
+    // 2. Mobile detection
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
+    // 3. Instructions per language (mobile-aware)
     const instr = {
-      nl: `📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)\nAlle betalingsgegevens worden automatisch ingevuld.\nVermeld de mededeling <strong>${ref}</strong> als je manueel overschrijft.\nNa betaling ontvang je een bevestiging per e-mail.`,
-      en: `📱 Scan the QR code with your banking app.\nAll payment details are pre-filled automatically.\nIf paying manually, use reference <strong>${ref}</strong>.\nYou will receive a confirmation email after payment.`,
-      fr: `📱 Scannez le QR code avec votre application bancaire.\nToutes les données de paiement sont pré-remplies.\nSi vous payez manuellement, indiquez la référence <strong>${ref}</strong>.\nVous recevrez un e-mail de confirmation après le paiement.`
+      nl: isMobile
+        ? `📲 Tik op de knop hierboven om je bank-app te openen (KBC, BNP, ING, Belfius…)\nAlle betalingsgegevens worden automatisch ingevuld.\nVermeld de mededeling <strong>${ref}</strong> als je manueel overschrijft.\nNa betaling ontvang je een bevestiging per e-mail.`
+        : `📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)\nAlle betalingsgegevens worden automatisch ingevuld.\nVermeld de mededeling <strong>${ref}</strong> als je manueel overschrijft.\nNa betaling ontvang je een bevestiging per e-mail.`,
+      en: isMobile
+        ? `📲 Tap the button above to open your banking app.\nAll payment details are pre-filled automatically.\nIf paying manually, use reference <strong>${ref}</strong>.\nYou will receive a confirmation email after payment.`
+        : `📱 Scan the QR code with your banking app.\nAll payment details are pre-filled automatically.\nIf paying manually, use reference <strong>${ref}</strong>.\nYou will receive a confirmation email after payment.`,
+      fr: isMobile
+        ? `📲 Appuyez sur le bouton pour ouvrir votre app bancaire.\nToutes les données de paiement sont pré-remplies.\nSi vous payez manuellement, indiquez la référence <strong>${ref}</strong>.\nVous recevrez un e-mail de confirmation après le paiement.`
+        : `📱 Scannez le QR code avec votre application bancaire.\nToutes les données de paiement sont pré-remplies.\nSi vous payez manuellement, indiquez la référence <strong>${ref}</strong>.\nVous recevrez un e-mail de confirmation après le paiement.`
     };
     document.getElementById('qr-instructions').innerHTML = (instr[currentLang] || instr.nl).replace(/\n/g, '<br>');
+    const mobileWrap = document.getElementById('mobile-pay-btn-wrap');
+    const qrCanvas   = document.getElementById('qr-canvas');
+    if (isMobile) {
+      // Build SEPA deep link (works with KBC, BNP Paribas Fortis, ING, Belfius)
+      const ibanClean = BANK_IBAN.replace(/\s/g, '');
+      const sepaLink  = `payto://${ibanClean}?amount=EUR:${grandTotal.toFixed(2)}&message=${encodeURIComponent(ref)}&receiver-name=${encodeURIComponent(BANK_NAME)}`;
+      const mobileLink = document.getElementById('mobile-pay-link');
+      mobileLink.href = sepaLink;
+      mobileLink.textContent = currentLang === 'fr' ? '📲 Ouvrir dans l\'app bancaire' : currentLang === 'en' ? '📲 Open in banking app' : '📲 Openen in bank-app';
+      mobileWrap.style.display = 'block';
+      qrCanvas.style.display   = 'none'; // hide QR on mobile
+    } else {
+      mobileWrap.style.display = 'none';
+      qrCanvas.style.display   = '';
+    }
 
-    // 3. Show the screen immediately — IBAN details are already visible
+    // 4. Show the screen immediately — IBAN details are already visible
     document.getElementById('co-pay-btn').style.display      = 'none';
     document.getElementById('pay-method-row').style.display  = 'none';
     document.getElementById('qr-screen').classList.add('visible');
