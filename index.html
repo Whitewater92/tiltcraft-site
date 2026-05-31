@@ -1,22 +1,4566 @@
-<!doctype html><html data-build-id="83c1aec1cb" data-git-hash="83c1aec1cb050992c25b50e441034abbdcdfff5b" data-build-timestamp="1780191616" data-version="1.0.0" data-env="" data-color-version="v2" lang="en" data-theme="claude" data-mode="light" class="h-screen antialiased scroll-smooth"><head data-ion-ip-country="BE"><link rel="preconnect" href="https://assets-proxy.anthropic.com" crossorigin><link rel="dns-prefetch" href="https://assets-proxy.anthropic.com"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title data-react-fallback>Claude</title><meta data-react-fallback name="description" content="Claude is Anthropic's AI, built for problem solvers. Tackle complex challenges, analyze data, write code, and think through your hardest work."><meta name="apple-itunes-app" content="app-id=6473753684"><meta property="og:type" content="website"><meta property="og:site_name" content="Claude"><meta property="og:image" content="https://claude.ai/images/claude_ogimage.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/svg+xml" href="https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cd02a42d9-Vq_H3mgS.svg"><link rel="icon" type="image/png" sizes="32x32" href="https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ce67964e7-CAX1bqSh.png"><link rel="icon" type="image/png" sizes="16x16" href="https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c03e51811-DebilQLI.png"><link rel="shortcut icon" href="/favicon.ico"><link rel="apple-touch-icon" href="https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c129d018a-jJjJELY8.png"><link rel="apple-touch-startup-image" href="/images/claude_app_icon.png"><link rel="manifest" href="/manifest.json"><meta name="mobile-web-app-capable" content="yes"><link rel="preload" href="https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc27851ad-CFxw3nG7.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c66fc489e-C-BHYa_K.woff2" as="font" type="font/woff2" crossorigin><script nonce="/1F78Mczf3h74bRYV5y8+A==">void 0===globalThis.process&&(globalThis.process={env:{},cwd:function(){return"/"}}),void 0===globalThis.global&&(globalThis.global=globalThis)</script><script type="application/ld+json" nonce="/1F78Mczf3h74bRYV5y8+A==">{
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "WebSite",
-            "name": "Claude",
-            "alternateName": ["Claude.ai", "Claude by Anthropic"],
-            "url": "https://claude.com"
-          },
-          {
-            "@type": "Organization",
-            "name": "Anthropic",
-            "url": "https://www.anthropic.com",
-            "logo": "https://claude.ai/images/claude_ogimage.png",
-            "sameAs": [
-              "https://x.com/AnthropicAI",
-              "https://www.linkedin.com/company/anthropic",
-              "https://www.youtube.com/@anthropic-ai"
-            ]
-          }
-        ]
-      }</script><script nonce="/1F78Mczf3h74bRYV5y8+A==">!function(){try{performance.mark?.("rq_cache:preload_start");const e="keyval-store",o="keyval",r="react-query-cache",t=new Promise(t=>{if(!window.indexedDB)return void t(void 0);const c=indexedDB.open(e);c.onupgradeneeded=()=>{c.transaction?.abort()},c.onerror=()=>t(void 0),c.onsuccess=()=>{const a=c.result;if(!a.objectStoreNames.contains(o))return a.close(),indexedDB.deleteDatabase(e),void t(void 0);try{const e=a.transaction(o,"readonly").objectStore(o).get(r);e.onerror=()=>{a.close(),t(void 0)},e.onsuccess=()=>{a.close(),window.__PRELOADED_IDB_CACHE_RESULT__=e.result,t(e.result)}}catch{a.close(),t(void 0)}}});window.__PRELOADED_IDB_CACHE__=t,performance.measure?.("rq_cache:preload_exec",{start:"rq_cache:preload_start"})}catch{}}()</script><link rel="preconnect" href="https://js.stripe.com"><link rel="preconnect" href="https://m.stripe.network"><script type="module" crossorigin src="https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-jeZyCqHR.js" nonce="/1F78Mczf3h74bRYV5y8+A=="></script><link rel="stylesheet" crossorigin href="https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2591c98b-yIeMwlTz.css"><link rel="stylesheet" crossorigin href="https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6a992d55-BT_FX7PY.css"></head><body class="bg-bg-100 text-text-100 font-ui min-h-screen"><div id="root"></div><script nonce="/1F78Mczf3h74bRYV5y8+A==">(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.nonce='/1F78Mczf3h74bRYV5y8+A==';d.innerHTML="window.__CF$cv$params={r:'a0454d0bdd97b741',t:'MTc4MDIyMzQwMg=='};var a=document.createElement('script');a.nonce='/1F78Mczf3h74bRYV5y8+A==';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>
+<!DOCTYPE html>
+<html lang="nl"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TiltCraft — Precision in Play</title>
+<meta name="description" content="TiltCraft maakt custom 3D-geprinte onderdelen, decals en accessoires voor flipperkastfanaten. Toppers, speaker inserts, flipperbalken, in-game gadgets en meer — op maat of uit stock.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tiltcraft.eu/">
+<link rel="sitemap" type="application/xml" href="https://tiltcraft.eu/sitemap.xml">
+<!-- OpenGraph / social sharing -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://tiltcraft.eu/">
+<meta property="og:site_name"   content="TiltCraft">
+<meta property="og:title"       content="TiltCraft — Custom 3D parts & decals voor flipperkastfanaten">
+<meta property="og:description" content="Custom 3D-geprinte onderdelen, decals en accessoires voor je flipperkast. Toppers, speaker inserts, flipperbalken, in-game gadgets en meer.">
+<meta property="og:image"       content="https://tiltcraft.eu/images/tiltcraft-logo.png">
+<meta property="og:locale"      content="nl_BE">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fr_BE">
+<!-- Twitter/X card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="TiltCraft — Custom 3D parts & decals voor flipperkastfanaten">
+<meta name="twitter:description" content="Custom 3D-geprinte onderdelen, decals en accessoires voor je flipperkast.">
+<meta name="twitter:image"       content="https://tiltcraft.eu/images/tiltcraft-logo.png">
+<link href="https://fonts.bunny.net/css2?family=bebas-neue:400|dm-sans:300,400,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #000000; --white: #f5f2ed; --gold: #11BFFE; --gold-light: #55CFFF;
+  --red: #c0392b; --gray: #2a2a2a; --muted: #888; --card-bg: #0d0d0d;
+  --border: rgba(17,191,254,0.22);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; }
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
+
+/* HEADER */
+header { position: relative; text-align: center; padding: 70px 20px 50px; border-bottom: 1px solid var(--border); z-index: 1; }
+.brand-logo { width: clamp(200px, 30vw, 360px); height: auto; display: block; margin: 0 auto; }
+
+/* LANGUAGE SWITCHER — flags below logo */
+.lang-bar { display: flex; justify-content: center; gap: 14px; margin-top: 16px; z-index: 10; }
+.lang-btn { background: transparent; border: none; padding: 4px 6px; border-radius: 4px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s; opacity: 0.45; line-height: 1; font-size: 0; }
+.lang-btn .flag { width: 34px; height: 24px; border-radius: 3px; display: block; box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+.lang-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+.lang-btn.active { opacity: 1; box-shadow: 0 0 0 2px var(--gold); border-radius: 5px; transform: none; }
+
+/* SEARCH BAR */
+.search-wrap { position: relative; max-width: 480px; margin: 28px auto 0; }
+.search-wrap input {
+  width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300;
+  padding: 11px 40px 11px 16px; border-radius: 3px; outline: none; letter-spacing: 1px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.search-wrap input::placeholder { color: var(--muted); }
+.search-wrap input:focus { border-color: var(--gold); background: rgba(17,191,254,0.05); }
+.search-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; pointer-events: none; }
+.search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); font-size: 18px; cursor: pointer; line-height: 1; display: none; padding: 0; transition: color 0.2s; }
+.search-clear:hover { color: var(--gold); }
+.search-clear.visible { display: block; }
+.search-icon.hidden { display: none; }
+
+/* CAT NAV */
+.cat-nav { position: relative; z-index: 1; display: flex; justify-content: center; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.cat-pill.mods { background: rgba(255,165,0,0.10); color: #ffa500; border: 1px solid rgba(255,165,0,0.25); }
+.cat-btn { background: none; border: none; border-bottom: 2px solid transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; padding: 20px 28px 18px; cursor: pointer; transition: color 0.2s, border-color 0.2s; position: relative; top: 1px; white-space: nowrap; }
+.cat-btn:hover { color: var(--white); }
+.cat-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+.page { display: grid; grid-template-columns: 1fr 290px; max-width: 1280px; margin: 0 auto; padding: 0 24px 60px; position: relative; z-index: 1; }
+.page.has-submenu { grid-template-columns: 200px 1fr 290px; }
+.products-section { padding: 40px 40px 0 0; border-right: 1px solid var(--border); }
+.page.has-submenu .products-section { padding: 40px 40px 0 32px; }
+
+/* LEFT SUBMENU */
+.submenu-col { display: none; padding: 40px 0 0 0; }
+.page.has-submenu .submenu-col { display: block; }
+.submenu-box { position: sticky; top: 24px; }
+.submenu-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: var(--gold); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.submenu-item { display: block; width: 100%; text-align: left; background: none; border: none; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 7px 0 7px 10px; cursor: pointer; border-left: 2px solid transparent; transition: color 0.2s, border-color 0.2s; line-height: 1.4; }
+.submenu-item:hover { color: var(--white); border-left-color: var(--border); }
+.submenu-item.active { color: var(--gold); border-left-color: var(--gold); }
+.submenu-divider { height: 1px; background: var(--border); margin: 10px 0; }
+.section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+.empty-state { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--muted); font-size: 13px; letter-spacing: 2px; }
+
+/* 3D ON DEMAND INFO PANEL */
+.ondemand-panel { grid-column: 1 / -1; background: rgba(17,191,254,0.04); border: 1px solid var(--border); border-radius: 5px; padding: 36px 40px; max-width: 680px; }
+.ondemand-panel h3 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 4px; color: var(--gold); margin-bottom: 18px; }
+.ondemand-panel p { font-size: 14px; color: #ccc; line-height: 1.8; white-space: pre-line; margin-bottom: 28px; }
+.ondemand-cta { display: inline-block; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; padding: 12px 28px; border-radius: 2px; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.ondemand-cta:hover { background: var(--gold); color: var(--black); }
+
+.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; animation: fadeIn 0.3s ease both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.card:hover { border-color: var(--gold); transform: translateY(-4px); }
+
+.card-gallery { position: relative; width: 100%; height: 190px; overflow: hidden; background: var(--gray); cursor: pointer; }
+.card-gallery img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.35s ease; pointer-events: none; }
+.card-gallery img.active { opacity: 1; }
+.card-gallery-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+.gallery-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.55); border: none; color: var(--gold); font-size: 20px; width: 28px; height: 44px; cursor: pointer; z-index: 2; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.gallery-nav:hover { background: rgba(0,0,0,0.85); }
+.gallery-prev { left: 0; border-radius: 0 2px 2px 0; }
+.gallery-next { right: 0; border-radius: 2px 0 0 2px; }
+.gallery-dots { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px; z-index: 2; }
+.gallery-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.35); transition: background 0.2s; cursor: pointer; }
+.gallery-dot.active { background: var(--gold); }
+.gallery-count { position: absolute; top: 6px; right: 8px; font-size: 10px; letter-spacing: 1px; color: var(--white); background: rgba(0,0,0,0.6); padding: 2px 7px; border-radius: 10px; z-index: 2; }
+
+.card-body { padding: 14px 16px 16px; }
+.card-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--white); margin-bottom: 4px; }
+.card-desc { font-size: 12px; color: var(--muted); margin-bottom: 14px; line-height: 1.5; white-space: pre-line; }
+.card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.card-shipping { font-size: 10px; color: var(--muted); letter-spacing: 0.5px; margin-top: 6px; margin-bottom: 10px; }
+.card-shipping span { color: var(--gold); font-weight: 500; }
+.price { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--gold); letter-spacing: 1px; }
+.price sup { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 400; vertical-align: top; margin-top: 4px; display: inline-block; }
+.add-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 7px 14px; border-radius: 2px; cursor: pointer; transition: background 0.2s, color 0.2s; white-space: nowrap; }
+.add-btn:hover { background: var(--gold); color: var(--black); }
+
+/* LIGHTBOX */
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.94); z-index: 1000; flex-direction: column; align-items: center; justify-content: center; }
+.lightbox.open { display: flex; }
+.lightbox-close { position: fixed; top: 18px; right: 24px; background: none; border: none; color: var(--gold); font-size: 36px; cursor: pointer; z-index: 1001; line-height: 1; }
+.lightbox-close:hover { color: var(--white); }
+.lightbox-img-wrap { display: flex; align-items: center; justify-content: center; max-width: 90vw; max-height: 75vh; }
+.lightbox-img-wrap img { max-width: 88vw; max-height: 73vh; object-fit: contain; border: 1px solid var(--border); border-radius: 3px; }
+.lightbox-prev, .lightbox-next { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: var(--gold); font-size: 26px; width: 46px; height: 64px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 3px; transition: background 0.2s; }
+.lightbox-prev { left: 14px; }
+.lightbox-next { right: 14px; }
+.lightbox-prev:hover, .lightbox-next:hover { background: rgba(17,191,254,0.18); }
+.lightbox-counter { color: var(--muted); font-size: 11px; letter-spacing: 3px; margin-top: 12px; text-transform: uppercase; }
+.lightbox-thumbs { display: flex; gap: 7px; margin-top: 10px; flex-wrap: wrap; justify-content: center; max-width: 90vw; }
+.lightbox-thumb { width: 54px; height: 42px; object-fit: cover; border: 1px solid transparent; border-radius: 2px; cursor: pointer; opacity: 0.45; transition: opacity 0.2s, border-color 0.2s; }
+.lightbox-thumb:hover { opacity: 0.75; }
+.lightbox-thumb.active { opacity: 1; border-color: var(--gold); }
+.video-play-btn { position: absolute; bottom: 10px; right: 10px; background: rgba(17,191,254,0.85); color: #000; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: background 0.2s; }
+.video-play-btn:hover { background: var(--gold-light); }
+
+/* SIDEBAR */
+.sidebar { padding: 40px 0 0 28px; }
+.cart-box { position: sticky; top: 24px; }
+.cart-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 20px; }
+.cart-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 3px; font-weight: 400; }
+.cart-count { font-size: 11px; letter-spacing: 2px; color: var(--gold); border: 1px solid var(--border); padding: 2px 8px; border-radius: 20px; }
+.cart-items { min-height: 80px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 12px 0; margin-bottom: 16px; }
+.cart-empty { font-size: 12px; color: var(--muted); padding: 16px 0; letter-spacing: 1px; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12px; gap: 8px; }
+.cart-item:last-child { border-bottom: none; }
+.cart-item-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cart-item-price { color: var(--gold); white-space: nowrap; }
+.cart-item-remove { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0 2px; transition: color 0.2s; }
+.cart-item-remove:hover { color: var(--red); }
+.cart-total-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
+.cart-total-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.cart-total-amount { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--gold-light); letter-spacing: 2px; }
+.checkout-btn { width: 100%; padding: 13px; background: var(--gold); color: var(--black); border: none; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: background 0.2s; }
+.checkout-btn:hover { background: var(--gold-light); }
+.checkout-btn:disabled { background: var(--gray); color: var(--muted); cursor: not-allowed; }
+.paypal-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; }
+.shipping-info { background: rgba(17,191,254,0.06); border: 1px solid var(--border); border-radius: 3px; padding: 12px 14px; margin-bottom: 12px; font-size: 11px; color: var(--muted); line-height: 1.65; }
+.shipping-info strong { color: var(--gold); font-weight: 500; display: block; letter-spacing: 1px; margin-bottom: 5px; font-size: 10px; text-transform: uppercase; }
+.shipping-info p { margin-bottom: 6px; }
+.shipping-info p:last-child { margin-bottom: 0; }
+/* CHECKOUT MODAL */
+.co-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 900; align-items: center; justify-content: center; overflow-y: auto; padding: 20px; }
+.co-modal-overlay.open { display: flex; }
+.co-modal-box { background: #0d0d0d; border: 1px solid var(--border); border-radius: 5px; padding: 36px 32px 32px; width: min(520px, 96vw); position: relative; max-height: 92vh; overflow-y: auto; }
+.co-modal-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; color: var(--gold); margin-bottom: 4px; }
+.co-modal-box p.co-sub { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-bottom: 22px; }
+.co-modal-close { position: absolute; top: 14px; right: 18px; background: none; border: none; color: var(--muted); font-size: 26px; cursor: pointer; line-height: 1; }
+.co-modal-close:hover { color: var(--gold); }
+.co-field { margin-bottom: 14px; }
+.co-field label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.co-field input, .co-field select { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; padding: 10px 13px; border-radius: 3px; outline: none; transition: border-color 0.2s; }
+.co-field input:focus, .co-field select:focus { border-color: var(--gold); }
+.co-field select option { background: #111; }
+.co-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.co-shipping-line { background: rgba(17,191,254,0.08); border: 1px solid var(--border); border-radius: 3px; padding: 10px 14px; margin: 14px 0; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+.co-shipping-line .co-carrier { color: var(--muted); }
+.co-shipping-line .co-cost { color: var(--gold); font-weight: 500; font-size: 14px; }
+.co-total-summary { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px; margin-bottom: 18px; }
+.co-total-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.co-total-row.grand { font-size: 15px; color: var(--white); font-weight: 500; }
+.co-total-row.grand span:last-child { color: var(--gold); }
+.co-pay-btn { width: 100%; padding: 14px; background: var(--gold); color: var(--black); border: none; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: background 0.2s; }
+.co-pay-btn:hover { background: var(--gold-light); }
+
+/* payment method toggle */
+.pay-method-row { display:flex; gap:10px; margin-bottom:18px; }
+.pay-method-btn { flex:1; padding:12px 8px; border:1px solid var(--border); border-radius:4px; background:transparent; color:var(--muted); font-size:12px; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:all 0.2s; text-align:center; }
+.pay-method-btn.active { border-color:var(--gold); color:var(--gold); background:rgba(240,180,41,0.07); }
+.pay-method-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+/* QR / transfer screen */
+.qr-screen { display:none; text-align:center; padding:10px 0; }
+.qr-screen.visible { display:block; }
+.qr-screen #qr-canvas { background:#fff; border:6px solid #fff; border-radius:6px; margin:0 auto 16px; display:inline-block; line-height:0; }
+.qr-screen #qr-canvas img { display:block; }
+.qr-iban-box { background:#0d0d0d; border:1px solid var(--border); border-radius:4px; padding:14px 16px; margin-bottom:14px; text-align:left; }
+.qr-iban-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:12px; }
+.qr-iban-row:last-child { margin-bottom:0; }
+.qr-iban-label { color:var(--muted); }
+.qr-iban-value { color:var(--white); font-weight:600; letter-spacing:1px; }
+.qr-ref { color:var(--gold); font-weight:700; letter-spacing:2px; }
+.qr-instructions { font-size:11px; color:var(--muted); line-height:1.7; text-align:left; margin-top:10px; padding:12px 14px; background:rgba(240,180,41,0.05); border-left:2px solid var(--gold); border-radius:2px; }
+
+.contact-strip { border-top: 1px solid var(--border); text-align: center; padding: 40px 20px; position: relative; z-index: 1; }
+.contact-strip p { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.contact-strip a { color: var(--gold); text-decoration: none; font-size: 15px; letter-spacing: 1px; }
+footer { text-align: center; padding: 20px; font-size: 11px; color: #444; letter-spacing: 2px; text-transform: uppercase; position: relative; z-index: 1; }
+footer a { color: #555; text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--gold); }
+
+/* CONTACT MODAL */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 800; align-items: center; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal-box { background: #0d0d0d; border: 1px solid var(--border); border-radius: 5px; padding: 36px 32px 32px; width: min(480px, 92vw); position: relative; }
+.modal-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; color: var(--gold); margin-bottom: 6px; }
+.modal-box p.modal-sub { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-bottom: 22px; }
+.modal-close { position: absolute; top: 14px; right: 18px; background: none; border: none; color: var(--muted); font-size: 26px; cursor: pointer; line-height: 1; }
+.modal-close:hover { color: var(--gold); }
+.modal-field { margin-bottom: 14px; }
+.modal-field label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.modal-field input, .modal-field select, .modal-field textarea { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; padding: 10px 13px; border-radius: 3px; outline: none; transition: border-color 0.2s; }
+.modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus { border-color: var(--gold); }
+.modal-field select option { background: #111; }
+.modal-field textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
+.modal-send-btn { width: 100%; padding: 13px; background: var(--gold); color: var(--black); border: none; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: background 0.2s; margin-top: 4px; }
+.modal-send-btn:hover { background: var(--gold-light); }
+.modal-success { display: none; text-align: center; padding: 20px 0 4px; }
+.modal-success p { color: var(--gold); font-size: 13px; letter-spacing: 1px; }
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--gold); color: var(--black); padding: 10px 22px; border-radius: 2px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; transition: transform 0.3s ease; z-index: 999; pointer-events: none; white-space: nowrap; }
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 800px) {
+  .cat-btn { padding: 14px 12px 12px; font-size: 10px; letter-spacing: 1px; }
+  .page { grid-template-columns: 1fr; padding: 0 16px 40px; }
+  .page.has-submenu { grid-template-columns: 1fr; }
+  .submenu-col { display: none !important; }
+  .products-section { padding: 28px 0 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
+  .page.has-submenu .products-section { padding: 28px 0 0; }
+  .sidebar { padding: 28px 0 0; }
+  .cart-box { position: static; }
+  .lightbox-prev { left: 4px; } .lightbox-next { right: 4px; }
+  .lang-btn .flag { width: 28px; height: 20px; }
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+</head>
+<body>
+
+<header>
+  <img class="brand-logo" src="images/tiltcraft-logo.png" alt="TiltCraft logo">
+
+  <div class="lang-bar">
+    <!-- Dutch / Belgian flag -->
+    <button class="lang-btn active" onclick="setLang('nl')" title="Nederlands">
+      <svg class="flag" viewBox="0 0 34 24" xmlns="http://www.w3.org/2000/svg"><rect width="11.33" height="24" fill="#000000"/><rect x="11.33" width="11.34" height="24" fill="#FAE042"/><rect x="22.67" width="11.33" height="24" fill="#EF3340"/></svg>
+    </button>
+    <!-- English flag -->
+    <button class="lang-btn" onclick="setLang('en')" title="English">
+      <svg class="flag" viewBox="0 0 34 24" xmlns="http://www.w3.org/2000/svg">
+        <rect width="34" height="24" fill="#012169"/>
+        <path d="M0,0 L34,24 M34,0 L0,24" stroke="#fff" stroke-width="4"/>
+        <path d="M0,0 L34,24 M34,0 L0,24" stroke="#C8102E" stroke-width="2.4"/>
+        <path d="M17,0 V24 M0,12 H34" stroke="#fff" stroke-width="6"/>
+        <path d="M17,0 V24 M0,12 H34" stroke="#C8102E" stroke-width="3.6"/>
+      </svg>
+    </button>
+    <!-- French flag -->
+    <button class="lang-btn" onclick="setLang('fr')" title="Français">
+      <svg class="flag" viewBox="0 0 34 24" xmlns="http://www.w3.org/2000/svg"><rect width="34" height="24" fill="#ED2939"/><rect width="22.7" height="24" fill="#FFFFFF"/><rect width="11.3" height="24" fill="#002395"/></svg>
+    </button>
+  </div>
+
+  <div class="search-wrap">
+    <input type="text" id="search-input" placeholder="Zoek een product…" oninput="onSearch(this.value)">
+    <span class="search-icon" id="search-icon">🔍</span>
+    <button class="search-clear" id="search-clear" onclick="clearSearch()" title="Wissen">×</button>
+  </div>
+</header>
+
+<nav class="cat-nav">
+  <button class="cat-btn active" onclick="setCategory('machines')" id="nav-machines">Pinball Machines</button>
+  <button class="cat-btn" onclick="setCategory('parts')" id="nav-parts">3D Pinball Parts</button>
+  <button class="cat-btn" onclick="setCategory('decals')" id="nav-decals">In-Game Decals</button>
+  <button class="cat-btn" onclick="setCategory('originals')" id="nav-originals">Original Parts</button>
+  <button class="cat-btn" onclick="setCategory('displays')" id="nav-displays">Displays</button>
+  <button class="cat-btn" onclick="setCategory('3dondemand')" id="nav-3dondemand">On demand</button>
+  <button class="cat-btn" onclick="setCategory('mods')" id="nav-mods">Mods &amp; Extras</button>
+</nav>
+
+<main class="page" id="main-page">
+
+  <!-- LEFT SUBMENU (desktop only) -->
+  <div class="submenu-col" id="submenu-col">
+    <div class="submenu-box">
+
+      <!-- DECALS submenu -->
+      <div id="submenu-decals" style="display:none;">
+        <div class="submenu-title">Decals</div>
+        <button class="submenu-item" onclick="setSubFilter('decals','')">All Decals</button>
+        <div class="submenu-divider"></div>
+        <button class="submenu-item" onclick="setSubFilter('decals','target')">Target</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','flipper bat')">Flipper bat</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','shooter')">Shooter</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','above speaker')">Above speaker</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','action button')">Action button</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','coin door')">Coin door</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','warning sign')">Warning sign</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','in game')">In game</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','flipper button')">Flipper button</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','hinges')">Hinges</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','spinner')">Spinner</button>
+        <button class="submenu-item" onclick="setSubFilter('decals','cabinet')">Cabinet</button>
+      </div>
+
+      <!-- PARTS submenu -->
+      <div id="submenu-parts" style="display:none;">
+        <div class="submenu-title">3D Parts</div>
+        <button class="submenu-item" onclick="setSubFilter('parts','')">All 3D Parts</button>
+        <div class="submenu-divider"></div>
+        <button class="submenu-item" onclick="setSubFilter('parts','hinges')">Hinges</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','flipper bat')">Flipper bats</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','coin door')">Coin door plaque</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','topper')">Topper</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','flipper button')">Flipper button protector</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','speaker')">Speaker inserts</button>
+        <button class="submenu-item" onclick="setSubFilter('parts','in game')">In game parts</button>
+      </div>
+
+    </div>
+  </div>
+
+  <section class="products-section">
+    <div class="section-label" id="section-label">Pinball Machines</div>
+    <div class="products-grid" id="products-grid"></div>
+  </section>
+  <aside class="sidebar">
+    <div class="cart-box">
+      <div class="cart-header">
+        <h2 id="cart-title">Winkelwagen</h2>
+        <span class="cart-count" id="cart-count">0 artikelen</span>
+      </div>
+      <div class="cart-items" id="cart-items"><div class="cart-empty">Je winkelwagen is leeg.</div></div>
+      <div class="cart-total-row">
+        <span class="cart-total-label" id="total-label">Totaal</span>
+        <span class="cart-total-amount" id="cart-total">€0</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn" onclick="openCheckout()" disabled>Betalen via PayPal</button>
+      <div class="shipping-info" id="shipping-info-block">
+        <strong id="si-title">🚚 Transport</strong>
+        <p id="si-text-1"></p>
+        <p id="si-text-2"></p>
+        <p id="si-text-3"></p>
+      </div>
+      <p class="paypal-note" id="paypal-note">Veilig afrekenen via PayPal</p>
+    </div>
+  </aside>
+</main>
+
+<div class="contact-strip">
+  <p id="contact-q">Vragen over een product? Neem contact op.</p>
+  <a href="mailto:tiltcraft@telenet.be">tiltcraft@telenet.be</a>
+</div>
+<footer>
+  © TiltCraft — Belgium<br><br>
+  <a href="privacy.html">Privacy Policy</a> |
+  <a href="terms.html">Terms &amp; Security</a> |
+  <a href="#" onclick="openContactModal();return false;" id="footer-contact">Contact</a>
+</footer>
+<div class="toast" id="toast"></div>
+
+<!-- CHECKOUT MODAL -->
+<div class="co-modal-overlay" id="co-modal" onclick="if(event.target===this)closeCheckout()">
+  <div class="co-modal-box">
+    <button class="co-modal-close" onclick="closeCheckout()">×</button>
+    <h2 id="co-title">Bestelling afronden</h2>
+    <p class="co-sub" id="co-sub">Vul je gegevens in zodat we je bestelling correct kunnen verwerken.</p>
+    <div id="co-form">
+      <div class="co-row">
+        <div class="co-field"><label id="co-lbl-fn">Voornaam</label><input type="text" id="co-firstname" autocomplete="given-name"></div>
+        <div class="co-field"><label id="co-lbl-ln">Achternaam</label><input type="text" id="co-lastname" autocomplete="family-name"></div>
+      </div>
+      <div class="co-field"><label id="co-lbl-email">E-mailadres</label><input type="email" id="co-email" autocomplete="email"></div>
+      <div class="co-field"><label id="co-lbl-phone">Telefoon</label><input type="tel" id="co-phone" autocomplete="tel"></div>
+      <div class="co-field"><label id="co-lbl-addr">Straat + nr</label><input type="text" id="co-address" autocomplete="street-address"></div>
+      <div class="co-row">
+        <div class="co-field"><label id="co-lbl-zip">Postcode</label><input type="text" id="co-zip" autocomplete="postal-code"></div>
+        <div class="co-field"><label id="co-lbl-city">Stad</label><input type="text" id="co-city" autocomplete="address-level2"></div>
+      </div>
+      <div class="co-field">
+        <label id="co-lbl-country">Land</label>
+        <select id="co-country" onchange="updateShippingCost()" autocomplete="country">
+          <option value="">— Selecteer land —</option>
+          <option value="BE">België / Belgium</option>
+          <option value="FR">France</option>
+          <option value="NL">Nederland</option>
+          <option value="LU">Luxembourg</option>
+          <option value="DE">Deutschland</option>
+          <option value="ES">España</option>
+          <option value="PT">Portugal</option>
+          <option value="IT">Italia</option>
+          <option value="AT">Österreich</option>
+          <option value="GB">United Kingdom</option>
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="AU">Australia</option>
+          <option value="JP">Japan</option>
+          <option value="OTHER">Other country</option>
+        </select>
+      </div>
+      <!-- FACTUUR OPTIE -->
+      <div style="margin-bottom:14px;">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:12px;color:var(--muted);letter-spacing:1px;">
+          <input type="checkbox" id="co-invoice-check" onchange="toggleInvoice()" style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer;">
+          <span id="co-invoice-label">Ik wil een factuur</span>
+        </label>
+      </div>
+      <div id="co-invoice-fields" style="display:none;background:rgba(240,180,41,0.05);border:1px solid var(--border);border-radius:4px;padding:14px;margin-bottom:14px;">
+        <div class="co-field" style="margin-bottom:10px;"><label>Bedrijfsnaam</label><input type="text" id="co-company" placeholder="Bedrijfsnaam" autocomplete="organization"></div>
+        <div class="co-field" style="margin-bottom:0;"><label>BTW-nummer</label><input type="text" id="co-vat" placeholder="BE 0123.456.789" autocomplete="off"></div>
+      </div>
+      <!-- EINDE FACTUUR OPTIE -->
+      <div class="co-shipping-line" id="co-shipping-line" style="display:none">
+        <span class="co-carrier" id="co-carrier-label">Transport</span>
+        <span class="co-cost" id="co-shipping-cost">€0</span>
+      </div>
+      <div class="co-total-summary" id="co-total-summary">
+        <div class="co-total-row"><span id="co-lbl-products">Producten</span><span id="co-products-amount">€0</span></div>
+        <div class="co-total-row"><span id="co-lbl-ship">Transport</span><span id="co-ship-amount">—</span></div>
+        <div class="co-total-row grand"><span id="co-lbl-total">Totaal</span><span id="co-grand-total">€0</span></div>
+      </div>
+      <button class="co-pay-btn" id="co-pay-btn" onclick="doCheckout()">Betalen via PayPal</button>
+
+      <!-- PAYMENT METHOD CHOICE -->
+      <div class="pay-method-row" id="pay-method-row">
+        <button class="pay-method-btn active" id="pm-paypal" onclick="setPayMethod('paypal')">💳 PayPal</button>
+        <button class="pay-method-btn" id="pm-transfer" onclick="setPayMethod('transfer')">🏦 Overschrijving</button>
+      </div>
+
+      <!-- QR / TRANSFER SCREEN -->
+      <div class="qr-screen" id="qr-screen">
+        <div id="qr-canvas"></div>
+        <div class="qr-iban-box">
+          <div class="qr-iban-row"><span class="qr-iban-label">Begunstigde</span><span class="qr-iban-value" id="qr-name"></span></div>
+          <div class="qr-iban-row">
+            <span class="qr-iban-label">IBAN</span>
+            <span style="display:flex;align-items:center;gap:8px;">
+              <span class="qr-iban-value" id="qr-iban"></span>
+              <button onclick="copyToClipboard('qr-iban','copy-iban-btn')" id="copy-iban-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;padding:3px 8px;border-radius:3px;cursor:pointer;letter-spacing:1px;white-space:nowrap;">kopieer</button>
+            </span>
+          </div>
+          <div class="qr-iban-row"><span class="qr-iban-label">BIC</span><span class="qr-iban-value" id="qr-bic"></span></div>
+          <div class="qr-iban-row"><span class="qr-iban-label">Bedrag</span><span class="qr-iban-value" id="qr-amount"></span></div>
+          <div class="qr-iban-row">
+            <span class="qr-iban-label">Mededeling</span>
+            <span style="display:flex;align-items:center;gap:8px;">
+              <span class="qr-iban-value qr-ref" id="qr-ref"></span>
+              <button onclick="copyToClipboard('qr-ref','copy-ref-btn')" id="copy-ref-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;padding:3px 8px;border-radius:3px;cursor:pointer;letter-spacing:1px;white-space:nowrap;">kopieer</button>
+            </span>
+          </div>
+        </div>
+        <div class="qr-instructions" id="qr-instructions">
+          📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)<br>
+          Alle betalingsgegevens worden automatisch ingevuld.<br>
+          Vermeld de mededeling als je manueel overschrijft.
+        </div>
+        <button class="co-pay-btn" style="margin-top:16px;" onclick="confirmTransfer()">✓ Bestelling bevestigen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contact-modal" onclick="if(event.target===this)closeContactModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeContactModal()">×</button>
+    <h2 id="cm-title">Contact</h2>
+    <p class="modal-sub" id="cm-sub">Stuur ons een bericht — we antwoorden zo snel mogelijk.</p>
+    <div id="cm-form">
+      <div class="modal-field">
+        <label id="cm-lbl-email">Jouw e-mailadres</label>
+        <input type="email" id="cm-email" placeholder="jouw@email.be">
+      </div>
+      <div class="modal-field">
+        <label id="cm-lbl-topic">Onderwerp</label>
+        <input type="text" id="cm-topic" placeholder="bv. vraag over een product">
+      </div>
+      <div class="modal-field">
+        <label id="cm-lbl-msg">Bericht</label>
+        <textarea id="cm-message" placeholder="Schrijf hier je bericht…"></textarea>
+      </div>
+      <button class="modal-send-btn" id="cm-send-btn" onclick="sendContact()">Verstuur bericht</button>
+    </div>
+    <div class="modal-success" id="cm-success">
+      <p id="cm-success-msg">✓ Bericht verstuurd! We nemen snel contact op.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<!-- VIDEO MODAL -->
+<div id="video-modal" onclick="if(event.target===this)closeVideoModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.94);z-index:1100;align-items:center;justify-content:center;">
+  <div style="position:relative;width:min(900px,96vw);background:#0d0d0d;border:1px solid var(--border);border-radius:4px;overflow:hidden;">
+    <button onclick="closeVideoModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--gold);font-size:28px;cursor:pointer;z-index:10;line-height:1;">×</button>
+    <!-- YouTube/Vimeo iframe -->
+    <div id="video-iframe-wrap" style="display:none;position:relative;padding-bottom:56.25%;height:0;">
+      <iframe id="video-iframe" src="" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+    </div>
+    <!-- Local file <video> player -->
+    <div id="video-local-wrap" style="display:none;padding:0;">
+      <video id="video-local" controls autoplay playsinline style="width:100%;max-height:80vh;display:block;background:#000;"></video>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+  <div class="lightbox-img-wrap"><img id="lightbox-img" src="" alt=""></div>
+  <button class="lightbox-next" onclick="lightboxNav(1)">›</button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+  <div class="lightbox-thumbs" id="lightbox-thumbs"></div>
+</div>
+
+<script>
+const PAYPAL_EMAIL = "rvermeire@telenet.be";
+const BANK_IBAN    = "BE85 4442 6606 3106";   // ← vul hier je echte IBAN in
+const BANK_BIC     = "KREDBEBB";               // ← vul hier je echte BIC in
+const BANK_NAME    = "TiltCraft Régis Vermeire";
+
+// ================================================================
+//  PRODUCTENLIJST — bewerk dit om producten toe te voegen
+//  images: array van bestandsnamen in de images/ map
+//  Machines: max 20 foto's  |  Parts, Decals, Originals: max 5 foto's
+//  category: "machines" | "parts" | "decals" | "originals"
+// ================================================================
+const products = [
+  {
+    name: "Stern Spiderman",
+    category: "machines",
+    price: 6250,
+    desc: {
+      nl: "Stern Spiderman uit 2007 in perfecte staat. \nKleur Pin2DMD display \nFull LED \nSpeaker panel \nmirror side arts \n3D opties subway, spider \nflipper en target bat decals \n Spider topper",
+      en: "Stern Spiderman uit 2007 in perfecte staat. \ncolor Pin2DMD display \nFull LED \nspeaker panel \nmirror side arts \n3D options subway, spider \nflipper en target bat decals \nSpider topper.",
+      fr: "Stern Spiderman de 2007 en parfait état. Ecran couleur Pin2DMD \n Full LED \nSpeaker panel \nmirror side arts \noptions 3D metro, arraignée \ndecals batteurs flips et targets \nTopper arraignée ."
+    },
+    images: [
+      "images/spiderman.jpg",
+      "images/spider1.jpeg",
+      "images/spider2jpeg.jpg",
+      "images/spider3.jpeg",
+      "images/spider4.jpeg",
+      "images/spider5.jpeg",
+      "images/spider6.jpeg",
+      "images/spider7.jpeg",
+      "images/spider8.jpeg",
+      "images/spider9.jpeg",
+      "images/spider10.jpeg",
+      "images/spider11.jpeg",
+      "images/spider12.jpeg.jpg",
+      "images/spider13.jpeg"
+    ]
+  },
+  {
+    name: "Stern Game of Thrones Pro",
+    category: "machines",
+    price: 6550,
+    desc: {
+      nl: "Schitterende Game of Thrones flipperkast Designed door de master of speed : Steve Ritchie. \nStern system Spike van 2015 met 7 full spectrum color-changing RGB LED's 4 mode multiballs en draak die de bal met hoge snelheid uitspuwt. \nStevige IPDB score van 8.4/10 en 7.6/10 op Pinside \nOpties : Super Colordmd !! (colorisatie voor Pin2dmd bestaat niet) \nPlayfield protector \nAlternatieve Translite \nGrote Topper 3D met 3 draken \n2de Draak in het spel \nDirewolf op einde van playfield \nSide art blades \nCover Slingshot 3D goudkleurig \nDecal spinner Logo \nTargaryen goudkleurig op de speakers \nTandwielen op de inlanes \nHand of the king 3D \nshooter Throne panel rond de shooter \nrod Stark direwolf op de hinges \nFlipperbat decals (winter is coming) \nWinter is coming sign op de coindoor \nLaatste Game code v1.37 (2019) Winter is coming !!",
+      en: "Stunning Game of Thrones pinball machine designed by the master of speed: Steve Ritchie.\nStern Spike system from 2015 with 7 full spectrum color-changing RGB LEDs, 4 mode multiballs and a dragon that spits the ball out at high speed.\nStrong IPDB score of 8.4/10 and 7.6/10 on Pinside.\nOptions: Super Colordmd!! (colorization for Pin2dmd does not exist)\nPlayfield protector\nAlternative Translite\nLarge 3D Topper with 3 dragons\n2nd Dragon in the game\nDirewolf at the end of the playfield\nSide art blades\n3D gold-colored Slingshot cover\nSpinner Logo decal\nTargaryen gold-colored on the speakers\nGears on the inlanes\nHand of the King 3D\nShooter Throne panel around the shooter\nRod Stark direwolf on the hinges\nFlipperbat decals (winter is coming)\nWinter is coming sign on the coindoor\nLatest game code v1.37 (2019) Winter is coming!!",
+      fr: "Superbe flipper Game of Thrones conçu par le maître de la vitesse : Steve Ritchie.\nSystème Stern Spike de 2015 avec 7 LED RGB à spectre complet changeant de couleur, 4 multiballs et un dragon qui crache la balle à grande vitesse.\nExcellent score IPDB de 8.4/10 et 7.6/10 sur Pinside.\nOptions : Super Colordmd !! (la colorisation pour Pin2dmd n'existe pas)\nProtecteur de playfield\nTranslite alternative\nGrand Topper 3D avec 3 dragons\n2ème dragon dans le jeu\nDirewolf en fin de playfield\nSide art blades\nCoque Slingshot 3D dorée\nDécal spinner Logo\nTargaryen doré sur les haut-parleurs\nEngrenages sur les inlanes\nHand of the King 3D\nPanneau Throne autour du shooter\nRod Stark direwolf sur les charnières\nDécals flipperbat (winter is coming)\nPanneau Winter is coming sur la coindoor\nDernier code v1.37 (2019) Winter is coming !!"
+    },
+    images: [
+      "images/got1.jpg",
+      "images/got2.jpg",
+      "images/got3.jpg",
+      "images/got4.jpg",
+      "images/got5.jpg",
+      "images/got6.jpg",
+      "images/got7.jpg",
+      "images/got8.jpg",
+      "images/got9.jpg",
+      "images/got10.jpg",
+      "images/got11.jpg",
+      "images/got12.jpg",
+      "images/got13.jpg",
+      "images/got14.jpg",
+      "images/got15.jpg",
+      "images/got16.jpg",
+      "images/got17.jpg",
+      "images/got18.jpg",
+      "images/got19.jpg",
+      "images/got20.jpg"
+    ]
+  },
+  {
+    name: "Bally Dr Who",
+    category: "machines",
+    price: 3650,
+    desc: {
+      nl: "Onverkleurde Dr Who met mooi speelveld.\nWit DMD scherm (ipv oranje) - Pin2DMD Serum RPI kleur verkrijgbaar (extra € 220,-) \n GI in LED, front in incadescent lampjes voor behoud ambiance translite",
+      en: "Dr Who with nice looking playfield, cabinet colors ok.\nWhite DMD display (instead of orange) - Pin2DMD Serum RPI available as an option (extra € 220,-) \n GI in LED, front in incadescent lamps to keep translite atmosphere",
+      fr: "Dr Who avec plateau en bon état, couleurs caisse ok .\n DMD blanc (au lieu d'orange) - Pin2DMD Serum RPI kleur verkrijgbaar (extra € 220,-) \n GI in LED, front en lampes incadescentes afin de garder l'ambiance du translite"
+    },
+    images: [
+      "images/doctor-who.jpg"
+    ]
+  },
+  {
+    name: "Jaws 3D 4 color speaker panel plate",
+    category: "parts",
+    subcat: "speaker",
+    price: 12,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Jaws 3D 4 color speaker panel plate",
+      en: "Jaws 3D 4 color speaker panel plate",
+      fr: "Jaws 3D 4 color speaker panel plate"
+    },
+    images: [
+      "images/speakertopjaws.jpg"
+    ]
+  },
+  {
+    name: "SEGA coin door 3D logo",
+    category: "parts",
+    subcat: "coin door",
+    price: 12,
+    tptCode: "TPT1",
+    subcat: "coin door",
+    desc: {
+      nl: "SEGA coin door 3D logo",
+      en: "SEGA coin door 3D logo",
+      fr: "SEGA coin door 3D logo"
+    },
+    images: [
+      "https://imgproxy.pinside.com/fVsDxVJo9sZ4MhbrO0kqaJvKPsG1rlsoApXcWyfZEZs/rs:fill:300:300/fn:pinside_1d8f959fdaaa/enc/fjGk3k2ed0k9ggobKMR2vLb3K5gVpm0Ad0adfjEChY70EX-WLFud-htq0gmXLpq5Udt5sNJYYr-n6bWifSlT13zhkLSYZYXUevseSZ2XGY2PLk_bat5Xk4R7xy3LsF8b.jpeg"
+    ]
+  },
+  {
+    name: "Flipper bat drum sticks for Hurricane",
+    category: "parts",
+    subcat: "flipper bat",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipper bat drum sticks",
+      en: "Flipper bat drum sticks",
+      fr: "Flipper bat drum sticks"
+    },
+    images: [
+      "https://imgproxy.pinside.com/9jftJwfUNc310_lmhoF32xYpH1UA10HIC_7_cvZwFzg/rs:fill:300:300/fn:pinside_72275a0d93a2/enc/yOqK_E38jFM9SXBpXLrMSFcK5y0WDosI392s739iemBdj3ASch_rPlYC0GcfjN12Fznp3Sgn9QesAvJRkB2XGdV-Om1B5Y-KMYIAVAsgcNucJJYSr4QjSg_tC87QQLbu.jpeg"
+    ]
+  },
+  {
+    name: "Hinges 3D Baywatch logo 2 colors",
+    category: "parts",
+    subcat: "hinges",
+    price: 20,
+    tptCode: "TPT2",
+    subcat: "hinges",
+    desc: {
+      nl: "Hinges 3D Baywatch logo 2 colors",
+      en: "Hinges 3D Baywatch logo 2 colors",
+      fr: "Hinges 3D Baywatch logo 2 colors"
+    },
+    images: [
+      "images/hingesbw1.jpg",
+      "images/hingesbw2.jpg",
+      "images/hingesbw3.jpg"
+    ]
+  },
+  {
+    name: "3D flipper bat with logo Baywatch",
+    category: "parts",
+    subcat: "flipper bat",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "3D flipper bat with logo Baywatch",
+      en: "3D flipper bat with logo Baywatch",
+      fr: "3D flipper bat with logo Baywatch"
+    },
+    images: [
+      "https://imgproxy.pinside.com/Q04f3ifXMsIwcbGOGcwMCon-gFnkdvoldighW1QfuxQ/rs:fill:300:300/fn:pinside_9e0f1195b03a/enc/BfRh-c9gJun15mVTd4_EemxqXTm3-Oe0D8Nd4M8Ml9hXckn1zXXYrl2RTtN5mMGLFfYmLXqWWev8x18whkYt1aK0XOPLpUHmew80uElDiHeXXVkvU07KDlE2FNeGmPM1.jpeg"
+    ]
+  },
+  {
+    name: "Flipper button protection with Foo Fighters logo",
+    category: "parts",
+    subcat: "flipper button",
+    price: 20,
+    tptCode: "TPT2",
+    subcat: "flipper button",
+    desc: {
+      nl: "Flipper button protection with FF logo",
+      en: "Flipper button protection with FF logo",
+      fr: "Flipper button protection with FF logo"
+    },
+    images: [
+      "images/buttonprotff1.jpg",
+      "images/buttonprotff2.jpg"
+    ]
+  },
+  {
+    name: "3D Flipperbats Foo Fighters",
+    category: "parts",
+    subcat: "flipper bat",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "3D Flipperbats FF",
+      en: "3D Flipperbats FF",
+      fr: "3D Flipperbats FF"
+    },
+    images: [
+      "https://imgproxy.pinside.com/59S5BJRNtqwnTp8qbqi56EPRbguBky4Szu6qEXnqhz4/rs:fill:300:300/fn:pinside_dee972a80bf7/enc/Mx9Zb8jaKumU1_uWoiitYsIb_mGJCUQ12WXDZr4PedpbV6UNcznc4MqCs_T7gQcmqEeXtQj7eQWrstbDiigxzHTOvnn29BhDosa0qQiO_aYou08go5uSExTZ_G8BuYju.jpeg"
+    ]
+  },
+  {
+    name: "John Wick above speaker decal",
+    category: "decals",
+    subcat: "above speaker",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "John Wick above speaker decal",
+      en: "John Wick above speaker decal",
+      fr: "John Wick above speaker decal"
+    },
+    images: [
+      "https://imgproxy.pinside.com/YP8OskX4FNqyjA20_nxB3a3BRRoXgxod0zwnc3caueY/rs:fill:300:300/fn:pinside_03120c2ecb60/enc/ij280nhm4AQRTMLMj-vMEu6P4UjRe87dQg4Zru7qyT96QTA52g_g2cRqvKs9i9dgrfnYAwrkU11GFuZr7JkxuNezyxVDKhGSvTDbWnS1t64-RP7eotHdF49Yr-FzIubc.jpeg"
+    ]
+  },
+  {
+    name: "Toy story logo Topper",
+    category: "parts",
+    subcat: "topper",
+    price: 25,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Toy story logo Topper",
+      en: "Toy story logo Topper",
+      fr: "Toy story logo Topper"
+    },
+    images: [
+      "images/topperTS42.jpg",
+      "images/topperTS4.jpg"
+    ]
+  },
+  {
+    name: "Speaker Spectre logo set for 007",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Spectre logo set",
+      en: "Spectre logo set",
+      fr: "Spectre logo set"
+    },
+    images: [
+      "https://imgproxy.pinside.com/6FgxSwM3v3tH_789WGKSpQNfv27jxuTI-ZiB6nwvMhA/rs:fill:300:300/fn:pinside_8ccaff2f8bf6/enc/8So72dYFPS4M9AC4CYUeqKv6nlyNv-qLu1KzEQa7UCXoW5T7LiTo7an8Gu2YmgMU454DQYx7r8EQbHmr0OSUhKyw3Ysq4clfrmEJtnQvOC73JDOTeUuzgEREB1YXCoR6.jpg"
+    ]
+  },
+  {
+    name: "Godzilla speaker decal",
+    category: "decals",
+    subcat: "above speaker",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "Godzilla speaker decal",
+      en: "Godzilla speaker decal",
+      fr: "Godzilla speaker decal"
+    },
+    images: [
+      "images/speakergz.jpg",
+      "https://imgproxy.pinside.com/Y8nyH3LtXp1maVZ4CTNDxQxDOSMoKH7D8UP7yYL3XFI/rs:fill:300:300/fn:pinside_e3a4786d73df/enc/HdxrXToKNx0JMzv_rCVu2wmiznaXz7f6gQnNo7X0_LUPkcjumA2R3bnnnn1JRZRbKYOjUAd3YnuL2ydohWY0aj0NFqZ6nkqIKlYhSzRFdUTFfyT8gm3ymb-Hhive1I-y.jpg"
+    ]
+  },
+  {
+    name: "James bond speaker decal 007",
+    category: "decals",
+    subcat: "above speaker",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "James bond speaker decal",
+      en: "James bond speaker decal",
+      fr: "James bond speaker decal"
+    },
+    images: [
+      "images/speaker007.jpg",
+      "images/speaker007top1.jpg"
+    ]
+  },
+  {
+    name: "Guns n Roses logo for Hinges",
+    category: "parts",
+    subcat: "hinges",
+    price: 20,
+    tptCode: "TPT1",
+    subcat: "hinges",
+    desc: {
+      nl: "GnR logo for Hinges",
+      en: "GnR logo for Hinges",
+      fr: "GnR logo for Hinges"
+    },
+    images: [
+      "images/hingesgnr1.jpg",
+      "images/hingesgnr2.jpg"
+    ]
+  },
+  {
+    name: "Walking Dead Topper",
+    category: "parts",
+    subcat: "topper",
+    price: 30,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Walking Dead Topper",
+      en: "Walking Dead Topper",
+      fr: "Walking Dead Topper"
+    },
+    images: [
+      "https://imgproxy.pinside.com/33HOYBT42O5kuu_SE6ra5JXbIXgLyWJhI6kFmWnmmCw/rs:fill:300:300/fn:pinside_7ffa4d8366f8/enc/sktq3VrtZgOshRpyDKR8V8eiw1z9XrS3x-CmrgF6nXlzXRLNmM4fPpDfLo118HgAyA_gNe_OTAO2OxO9jXGwoheb4kTrf3reBf30ndSsRbJ6vpmvqaHVzRHlIHrur1ny.jpg"
+    ]
+  },
+  {
+    name: "Hinges 3D walking dead",
+    category: "parts",
+    subcat: "hinges",
+    price: 20,
+    tptCode: "TPT2",
+    subcat: "hinges",
+    desc: {
+      nl: "Hinges 3D walking dead",
+      en: "Hinges 3D walking dead",
+      fr: "Hinges 3D walking dead"
+    },
+    images: [
+      "images/hingestwd.jpg",
+      "images/hingestwd1.jpg"
+    ]
+  },
+  {
+    name: "Walking dead dripping blood",
+    category: "parts",
+    subcat: "in game",
+    price: 12,
+    tptCode: "TPT1",
+    subcat: "coin door",
+    desc: {
+      nl: "Walking dead dripping blood",
+      en: "Walking dead dripping blood",
+      fr: "Walking dead dripping blood"
+    },
+    images: [
+      "https://imgproxy.pinside.com/BHntwvv8MpfUj7ExJRJW-VrVT_w61yVJu8L7jiT90D4/rs:fill:300:300/fn:pinside_b859d96df23d/enc/Hr4Ygz87hkJhFAx4Mehf3BI3xGT38V6-SmfnWw_VFionqk4sRLzjmItBfsJAK-CqSCfJQgvio38Ib9EHNzcp_USIvFe71xlsQnfu-ksvFqSumUs1zznXjuTRXxLlk4x4.jpg"
+    ]
+  },
+  {
+    name: "Walking dead speaker inserts",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Walking dead speaker inserts",
+      en: "Walking dead speaker inserts",
+      fr: "Walking dead speaker inserts"
+    },
+    images: [
+      "images/speakertwd1.jpg",
+      "images/speakertwd2.jpg"
+    ]
+  },
+  {
+    name: "Doctor Who 3D Dalek Speaker inserts GOLD",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "3D Dalek Speaker inserts GOLD",
+      en: "3D Dalek Speaker inserts GOLD",
+      fr: "3D Dalek Speaker inserts GOLD"
+    },
+    images: [
+      "images/speakerdrwho1.jpg",
+      "images/speakerdrwho2.jpg",
+      "images/speakerdrwho3.jpg"
+    ]
+  },
+  {
+    name: "Time expander cover for Doctor Who",
+    category: "parts",
+    subcat: "in game",
+    price: 25,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Time expander cover",
+      en: "Time expander cover",
+      fr: "Time expander cover"
+    },
+    images: [
+      "images/coverdrwho1.jpg"
+    ]
+  },
+  {
+    name: "Stark family 3D hinges logo for Game of Thrones",
+    category: "parts",
+    subcat: "hinges",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "hinges",
+    desc: {
+      nl: "Stark family 3D hinges logo",
+      en: "Stark family 3D hinges logo",
+      fr: "Stark family 3D hinges logo"
+    },
+    images: [
+      "https://imgproxy.pinside.com/EwXwFViHqox_9-mN4V5xeIhCWEByPEY-3588UVJd9gs/rs:fill:300:300/fn:pinside_c88b49d0458b/enc/BblAS1E-HIZvPoZbt5wu6cKkvf4TxYlqQdX-fZ9Ww40aHa8Sp9aPjrFK4vT2YtL3anHqVOqsLWoIJzzt7eQmxeK8jaLX9894gjUnK0IxVGiY4KcKl9t01tTDvVDGzEQe.jpg"
+    ]
+  },
+  {
+    name: "Hand of the king for Game of Thrones",
+    category: "parts",
+    subcat: "in game",
+    price: 10,
+    tptCode: "TPT1",
+    subcat: "in game",
+    desc: {
+      nl: "Hand of the king",
+      en: "Hand of the king",
+      fr: "Hand of the king"
+    },
+    images: [
+      "https://imgproxy.pinside.com/-cqDpNPTo03VHn7_TY7Q9JavkFc2rvbYDIar8TWnDXY/rs:fill:300:300/fn:pinside_c0e56567fc37/enc/_cGZIqQ2DOnuH8Va6Pp8TJv3AkYDNyibNXGUIs0MtsbUQtRX4BBtvm8BytcAfwcAsc_CpnHUjQL-RZQckIqEpmMk8pCrXIzW4ft-HMMA_C0ee_gO7ndv4_bxFZb97VEm.jpg"
+    ]
+  },
+  {
+    name: "Godzilla speaker add on",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT2",
+    subcat: "speaker",
+    desc: {
+      nl: "Godzilla speaker add on",
+      en: "Godzilla speaker add on",
+      fr: "Godzilla speaker add on"
+    },
+    images: [
+      "https://imgproxy.pinside.com/CkGWxPugb3vnkpdd7-Onsn4Q9hvv1KJYxyRsCYikYcs/rs:fill:300:300/fn:pinside_0307451f5eec/enc/XpQ0KEbj7rh1wzB9JYrmn-YJwPcPGXaUN2Kc2iooUyaYN5D-KExXoYZcU7yetaNGytFhUvHNJoiCDFEjs0EhPTN5oitEEI8HJJtXftwfVye0gasJSlsLNtR1_aqR2h7d.jpg"
+    ]
+  },
+  {
+    name: "Speaker inserts Twilight Zone",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Speaker inserts Twilight Zone",
+      en: "Speaker inserts Twilight Zone",
+      fr: "Speaker inserts Twilight Zone"
+    },
+    images: [
+      "images/speakertz1.jpg",
+      "images/speakertz2.jpg",
+      "images/speakertz3.jpg"
+    ]
+  },
+  {
+    name: "Godzilla (Japanees) 3D logo for Hinges",
+    category: "parts",
+    subcat: "hinges",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "hinges",
+    desc: {
+      nl: "Godzilla (Japanees) 3D logo for Hinges",
+      en: "Godzilla (Japanees) 3D logo for Hinges",
+      fr: "Godzilla (Japanees) 3D logo for Hinges"
+    },
+    images: [
+      "images/hingesgz1.jpg",
+      "images/hingesgz2.jpg",
+      "images/hingesgz3.jpg"
+    ]
+  },
+  {
+    name: "Spectre logo for coin door 007",
+    category: "parts",
+    subcat: "coin door",
+    price: 12,
+    tptCode: "TPT1",
+    subcat: "coin door",
+    desc: {
+      nl: "Spectre logo for coin door 007",
+      en: "Spectre logo for coin door 007",
+      fr: "Spectre logo for coin door 007"
+    },
+    images: [
+      "https://imgproxy.pinside.com/pBwZn-4ZWl9dHd6F3NlxxvB0rFYHj8JqhJf6ZwmbPLk/rs:fill:300:300/fn:pinside_0f889f232419/enc/JEYs20Su3RbBdzDnb3xT7Jc8eiPvzxSHpX9YgXKSppCMZ359CDsKewbxVN_PJrkovHUuI5lcIohK98zrZZSohzOCQDwie5l4lzXEqb0akgqzrcL44KcyDuyidzqr0Pap.jpg"
+    ]
+  },
+  {
+    name: "3D 007 topper",
+    category: "parts",
+    subcat: "topper",
+    price: 25,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "3D 007 topper",
+      en: "3D 007 topper",
+      fr: "3D 007 topper"
+    },
+    images: [
+      "https://imgproxy.pinside.com/OltaZXS1OMurqA3YPuTExIqmx3YpPxgnY1GYbkU5aMk/rs:fill:300:300/fn:pinside_1f2fbbb1afe6/enc/RggM2Ydf7JCsjhY2MqALFIuHAFle59dly2Y_7F3Bp-7kvltxgDJAUufsv1s3f1dbZBM0ap7xE-cagV9vnCwFUYJYUD5JY2PdeU_-QG-m-sPINg6HhPehcii6FlywZCEF.jpg"
+    ]
+  },
+  {
+    name: "Jaws Hinges jaws mod",
+    category: "parts",
+    subcat: "hinges",
+    price: 20,
+    tptCode: "TPT2",
+    subcat: "hinges",
+    desc: {
+      nl: "Jaws Hinges jaws mod",
+      en: "Jaws Hinges jaws mod",
+      fr: "Jaws Hinges jaws mod"
+    },
+    images: [
+      "https://imgproxy.pinside.com/AoAPQ8BrrBMkXWmW16sV4EiBmFj8PCSAPZ0IRdmORUo/rs:fill:300:300/fn:pinside_dd83f14ac776/enc/Wrl51JXgxkPCCtqXCOqnK8jUSzJvCXuZVqP15UYTX7VEvp49AHiW0av64AT6-okIUJR6xYt2YXJPDiqDZWwWZQCBFsrPEZMoVO0SKq6rYifhzA_0MX70XsL7ib93B_zr.jpg"
+    ]
+  },
+  {
+    name: "Sword flipper bat decals for Lord of The rings",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Sword flipper bat decals for Lord of The rings",
+      en: "Sword flipper bat decals for Lord of The rings",
+      fr: "Sword flipper bat decals for Lord of The rings"
+    },
+    images: [
+      "images/batlotr1.jpg",
+      "images/batlotr2.jpg",
+      "images/batlotr3.jpg"
+    ]
+  },
+  {
+    name: "Flipper bats The Shadow v2",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 8.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipper bats The Shadow v2",
+      en: "Flipper bats The Shadow v2",
+      fr: "Flipper bats The Shadow v2"
+    },
+    images: [
+      "images/batshadow.jpg",
+      "images/batshadowv2.jpg",
+      "images/batshadow2.jpg"
+    ]
+  },
+  {
+    name: "Flipper Bats The Shadow v1",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 8.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipper Bats The Shadow v1",
+      en: "Flipper Bats The Shadow v1",
+      fr: "Flipper Bats The Shadow v1"
+    },
+    images: [
+      "https://imgproxy.pinside.com/KQQPVqtgK45GTdPGvfQoxDm4r513Jmy3Lt7ArvtOY8o/rs:fill:300:300/fn:pinside_c4ce8ad3de53/enc/iPYyfMba-yxY0UDFORbjO4WqqgygvmywK5h9fcTQOLrjVrGxUZIs19rE292UNTnjp480y_-2Z4d6Qcbwm6dhccZGStYRwo3p25_FTD-8a0uyyz7EOUckX_KFSI-oFh-V.jpg"
+    ]
+  },
+  {
+    name: "Extra The Who topper for Tommy",
+    category: "parts",
+    subcat: "topper",
+    price: 30,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Extra The Who topper for Tommy",
+      en: "Extra The Who topper for Tommy",
+      fr: "Extra The Who topper for Tommy"
+    },
+    images: [
+      "images/toppertommy.jpg"
+    ]
+  },
+  {
+    name: "Baywatch flipper topper decals 3x",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 8.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Baywatch flipper topper decals 3x",
+      en: "Baywatch flipper topper decals 3x",
+      fr: "Baywatch flipper topper decals 3x"
+    },
+    images: [
+      "https://imgproxy.pinside.com/TKx5A5fnq_577pK5UY58-KBUsZjVQH4f_J5za74qSUU/rs:fill:300:300/fn:pinside_0c9035d00912/enc/4_Na-h7zXyb-1fCCZ7uGnqtJSkxoBNRlV-sfCyzlCxFey8o__aB6xXGivyTuOwgEZM2ruECVQ4XZbV0Z_l2eVq-4qiVszFm-8yDJqKJ-mAfWvE1WUXWxxBUGwMu63IyI.jpeg"
+    ]
+  },
+  {
+    name: "Creature from the black lagoon flipper bat topper",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Creature from the black lagoon flipper bat topper",
+      en: "Creature from the black lagoon flipper bat topper",
+      fr: "Creature from the black lagoon flipper bat topper"
+    },
+    images: [
+      "https://imgproxy.pinside.com/5-5sP_O1ypVySiGnF1OoHH7Prj5D4Siq0d4KAEjbkr4/rs:fill:300:300/fn:pinside_4617f69e73c6/enc/hLl7UYQuUBguoPE3DMhFBUSx7PosN6LONzNTHJ328HPLQV9wFiJe9Cy8IU1D68hMW6QemdRHkKvi0o8lKii5w8ydbATmbCQvDXwrCfOL-mGgGKx7ty953eyD-8wbWyBy.jpeg"
+    ]
+  },
+  {
+    name: "F14 Flipper bat topper",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "F14 Flipper bat topper",
+      en: "F14 Flipper bat topper",
+      fr: "F14 Flipper bat topper"
+    },
+    images: [
+      "https://imgproxy.pinside.com/5vjj8Xhs166v14vkWPjiNvx9fPckc6EgIWP1q21HESQ/rs:fill:300:300/fn:pinside_4153b3754cb0/enc/gOJMC2VxnhP0n3uczUP_AEH5-7A8Z55fVj1Y3C-b9Au6_JPCMoe5G_RXJ-Ap4VaNdNxihKFfDjr3aqv__R-sHyX04jBNFHhkr2eJyIYhZNv7ywEhwuXo818yl4-OmFZN.jpeg"
+    ]
+  },
+  {
+    name: "Shooter rod decal 007",
+    category: "decals",
+    subcat: "shooter",
+    price: 7,
+    tptCode: "TPT1",
+    subcat: "shooter",
+    desc: {
+      nl: "Shooter rod decal 007",
+      en: "Shooter rod decal 007",
+      fr: "Shooter rod decal 007"
+    },
+    images: [
+      "https://imgproxy.pinside.com/Rgr5ksv460-XQ5SDs4rC3MX8dAt4efVmyyrtzNt9bGQ/rs:fill:300:300/fn:pinside_172975dc8fef/enc/zk3kaOzdFqouzQlwFcn25st5S4kGYDoVjAipaie2hoIVk5m2whVepPG87fJqy5LQOLEOxniS_c6Neh9k7dnia1P1n9sO413fp3Gi-u06h-Jb5BGjTapuZvRE48d8Nla6.jpeg"
+    ]
+  },
+  {
+    name: "Shooter rod decal Foo Fighters",
+    category: "decals",
+    subcat: "shooter",
+    price: 7,
+    tptCode: "TPT1",
+    subcat: "shooter",
+    desc: {
+      nl: "Shooter rod decal Foo Fighters",
+      en: "Shooter rod decal Foo Fighters",
+      fr: "Shooter rod decal Foo Fighters"
+    },
+    images: [
+      "images/shooterff1.jpg",
+      "images/shooterff2.jpg",
+      "images/shooterff3.jpg"
+    ]
+  },
+  {
+    name: "Foo fighters above speaker decal 4",
+    category: "decals",
+    subcat: "above speaker",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "Foo fighters above speaker decal 4",
+      en: "Foo fighters above speaker decal 4",
+      fr: "Foo fighters above speaker decal 4"
+    },
+    images: [
+      "https://imgproxy.pinside.com/GJbiU0-fi07ebGPV5V0aF18-QreHlkd1KOLDg0yWZdk/rs:fill:300:300/fn:pinside_63fabf6be813/enc/O8ew_hkTY2UeWDON4JlgB3MqhDUGxzloem3KSTMs38n42Ibkh4dqvebgr5CVTRICnt1RGDqBMff25jo75v7bYnqZdFPIYlWPyepG_gTXXge_Pakn-cWmUplFssMm50WP.jpeg"
+    ]
+  },
+  {
+    name: "Foo fighters above speaker decal 3",
+    category: "decals",
+    subcat: "above speaker",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "Foo fighters above speaker decal 3",
+      en: "Foo fighters above speaker decal 3",
+      fr: "Foo fighters above speaker decal 3"
+    },
+    images: [
+      "https://imgproxy.pinside.com/7wgTVp7nBsvYIzsD8uNnJf8roDRYy5qDAryfSJAOWgU/rs:fill:300:300/fn:pinside_f4ab35135209/enc/tzbBZFR2uo4KMjLrd0aWtZFn8GQPw7o_9hN1PUVAyT8tY6hPFwCAlCpupwUAtdvPqLa61j0paumXM0T-cQ9ngB5vP8TwqtaZwuQE2W1DApJf6yyTBm7cZiAkXGQoVN62.jpeg"
+    ]
+  },
+  {
+    name: "Foo fighters above speaker decal 2",
+    category: "decals",
+    subcat: "above speaker",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "Foo fighters above speaker decal 2",
+      en: "Foo fighters above speaker decal 2",
+      fr: "Foo fighters above speaker decal 2"
+    },
+    images: [
+      "https://imgproxy.pinside.com/7uoPfs36PyFDS9si_7WEoqSmn7qalkzsYLqgBNWxqJs/rs:fill:300:300/fn:pinside_52747b40d4d5/enc/rjnzfNW7WUTzdgU2j6oXC1sHFqLpt3G15vyTXebNxmPwYcwO433M0ahXg7AF68ujy7TVdq23153PhInFFgXvGjuZgo-J1OEPNb-pn3L30sMeKe7qnsXh8q6Cg8P3H5zo.jpeg"
+    ]
+  },
+  {
+    name: "Foo fighters above speaker decal 1",
+    category: "decals",
+    subcat: "above speaker",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "Foo fighters above speaker decal 1",
+      en: "Foo fighters above speaker decal 1",
+      fr: "Foo fighters above speaker decal 1"
+    },
+    images: [
+      "https://imgproxy.pinside.com/H_gB4rU-AmUHjh3ss4Kf--8LIVzJgtiXKY7whK74fTY/rs:fill:300:300/fn:pinside_13d16aabb934/enc/UvTXqASvEPKRUFJ5U8g8BwQJLp_9TB4EfjLf_7FcW-Qh_ag6Fz-g0XdZ8BjVRGzpIBzUSEDN-IIlFHAahvN8Zz0AJqc9r1Cfej_SxntwdRQK7AxQ9gvw2LJ7shCvQibR.jpeg"
+    ]
+  },
+  {
+    name: "Warning cover decal John Wick",
+    category: "decals",
+    subcat: "warning sign",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "warning sign",
+    desc: {
+      nl: "Warning cover decal",
+      en: "Warning cover decal",
+      fr: "Warning cover decal"
+    },
+    images: [
+      "images/actionjw1.jpg",
+      "images/actionjw.jpg"
+    ]
+  },
+  {
+    name: "Car decal creature from the black lagoon WITH text",
+    category: "decals",
+    subcat: "in game",
+    price: 24.5,
+    tptCode: "TPT2",
+    subcat: "in game",
+    desc: {
+      nl: "Car decal creature from the black lagoon WITH text",
+      en: "Car decal creature from the black lagoon WITH text",
+      fr: "Car decal creature from the black lagoon WITH text"
+    },
+    images: [
+      "https://imgproxy.pinside.com/88JQ3ENQqZhZTZD9G11UuKv8e93wqKzrGNboIdVoaOg/rs:fill:300:300/fn:pinside_09e85fa291ff/enc/dzUGnoclSdr45p4vm016Zpg6V_z6PwJ32DEP97fi4rdiG467AmYpiOLqsUKWSs05CaaPcVm2cC3Vtg-oshOfhTkMKaDpNFxS3mDut_sT22WxNXT7CQ9_6HtH6igPMEm3.jpeg"
+    ]
+  },
+  {
+    name: "Jurassic park action button decal",
+    category: "decals",
+    subcat: "action button",
+    price: 20,
+    tptCode: "TPT2",
+    subcat: "action button",
+    desc: {
+      nl: "Jurassic park action button decal",
+      en: "Jurassic park action button decal",
+      fr: "Jurassic park action button decal"
+    },
+    images: [
+      "https://imgproxy.pinside.com/k1K5i_p8VEA0aqNIVY9eACNuXSgpdKDqGhS-Y4tDGNc/rs:fill:300:300/fn:pinside_5ebc49452e86/enc/9K_B7uhnAarqcj5dmFezR_O_Dn6qr1gN1OjeoRkuQdSfGT7IF4EYLpFWVnwyZ3WssVUAqN4BhhuyoTfp75tJmo7D4d9ZgyezbO9Szd5PPb3hRh3eZNQn8LPxiPcCVVCB.jpg"
+    ]
+  },
+  {
+    name: "Flipper bat decals Frankenstein",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipper bat decals Frankenstein",
+      en: "Flipper bat decals Frankenstein",
+      fr: "Flipper bat decals Frankenstein"
+    },
+    images: [
+      "images/batfs1.jpg",
+      "images/batfs2.jpg"
+    ]
+  },
+  {
+    name: "Target Decals Labyrinth",
+    category: "decals",
+    subcat: "target",
+    price: 18,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "Target Decals Labyrinth",
+      en: "Target Decals Labyrinth",
+      fr: "Target Decals Labyrinth"
+    },
+    images: [
+      "images/targetlab3.jpg",
+      "images/targetlab1.jpg",
+      "images/targetlab2.jpg"
+    ]
+  },
+  {
+    name: "Beware of walkers for Walking Dead",
+    category: "decals",
+    subcat: "warning sign",
+    price: 8,
+    tptCode: "TPT1",
+    subcat: "coin door",
+    desc: {
+      nl: "Beware of walkers",
+      en: "Beware of walkers",
+      fr: "Beware of walkers"
+    },
+    images: [
+      "images/doortwd2.jpg",
+      "images/doortwd1.jpg"
+    ]
+  },
+  {
+    name: "Time expander decal for Doctor Who",
+    category: "decals",
+    subcat: "in game",
+    price: 10,
+    tptCode: "TPT2",
+    subcat: "in game",
+    desc: {
+      nl: "Time expander decal for Doctor Who",
+      en: "Time expander decal for Doctor Who",
+      fr: "Time expander decal for Doctor Who"
+    },
+    images: [
+      "https://imgproxy.pinside.com/iZPGbJTvTJrcLopJOgPiYhraoTJtAVcDXyu49eq7-vw/rs:fill:300:300/fn:pinside_9c2467a5e2b6/enc/XsW_6VCMIhSqZxj8J-ghSkvtfcKFCQA-va8VEgxcDWS-mfIbFyG2-SXNKBJvxNjIM4T0rTBljcipBJm-juYS6hybo9eYO4Q7QeJgKwi9-PI1cT9q9yrUVUPDnxIE5W2f.jpg"
+    ]
+  },
+  {
+    name: "Decal targets Shadow",
+    category: "decals",
+    subcat: "in game",
+    price: 20,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "Decal targets Shadow",
+      en: "Decal targets Shadow",
+      fr: "Decal targets Shadow"
+    },
+    images: [
+      "https://imgproxy.pinside.com/t7ZEqBeQ_4MFxM-qyu1IPr2BzU3KMpdQOBv44M9Sps4/rs:fill:300:300/fn:pinside_93c22515f1e4/enc/PIIBkTdSOmKYH1myXvLs4qvEr55gZeR7ofSv26TOCbSBinY7daVwQNN57-HGGOaA9ycSL3MnyUfPd4zqJ1syLR7gdnVhH9vHVvN84kADDpjZ5q7-GdoLBbTIAUyYKhbB.jpg"
+    ]
+  },
+  {
+    name: "Flipper bats John Wick car and babayaga",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipper bats John Wick",
+      en: "Flipper bats John Wick",
+      fr: "Flipper bats John Wick"
+    },
+    images: [
+      "https://imgproxy.pinside.com/ubMqyLgpDRMAN3v0NAiTyy3FxBq7mLaIhj5t2HiKwqM/rs:fill:300:300/fn:pinside_8caeae161015/enc/PIEeFMouNWwq9gPSb78Li7sLabAT6U4lBpGMLo3099__GxL7AV52CrdRgJIs-CkgmmBtxh8YzbGu7Gc9-Z2NJRnFNlp9zrBX1JnXJr2L-9u5ndEHbXGofFZl7v6t_FJc.jpg"
+    ]
+  },
+  {
+    name: "Baba Yaga decals John Wick",
+    category: "decals",
+    subcat: "in game",
+    price: 10,
+    tptCode: "TPT1",
+    subcat: "flipper button",
+    desc: {
+      nl: "Baba Yaga decals",
+      en: "Baba Yaga decals",
+      fr: "Baba Yaga decals"
+    },
+    images: [
+      "https://imgproxy.pinside.com/ITjgOblLCvEI1VyeB1NXh7Vtgbfc9tCoDn79jwAeeBo/rs:fill:300:300/fn:pinside_fd2b561fc21f/enc/PIPmejjpiRMyLG2Do-gmWwgKlXeHECOND3A7tgniZ4fvEwtyOfpSnCNcYZpwmp-fUqJkEMh_m7uJEWOKk9YkCs6O5aU4W5EKNB8IDOK_Wn8accPKjGbTUBhmwlG25chf.jpg"
+    ]
+  },
+  {
+    name: "Spinner decals Game of Thrones",
+    category: "decals",
+    subcat: "spinner",
+    price: 10.5,
+    tptCode: "TPT1",
+    subcat: "spinner",
+    desc: {
+      nl: "Spinner decals",
+      en: "Spinner decals",
+      fr: "Spinner decals"
+    },
+    images: [
+      "images/spinnergot1.jpg",
+      "images/spinnergot.jpg"
+    ]
+  },
+  {
+    name: "Target decals Spider-man",
+    category: "decals",
+    subcat: "target",
+    price: 20,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "Target decals Spider-man",
+      en: "Target decals Spider-man",
+      fr: "Target decals Spider-man"
+    },
+    images: [
+      "images/targetsm1.jpg",
+      "images/targetsm2.jpg",
+      "images/targetsm3.jpg",
+      "images/targetsm4.jpg"
+    ]
+  },
+  {
+    name: "Flipper bat decals Stern Spiderman",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 8.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipper bat decals Stern Spiderman",
+      en: "Flipper bat decals Stern Spiderman",
+      fr: "Flipper bat decals Stern Spiderman"
+    },
+    images: [
+      "images/batsm1.jpg",
+      "images/batsm2.jpg"
+    ]
+  },
+  {
+    name: "3 target decals Lord of the Rings",
+    category: "decals",
+    subcat: "target",
+    price: 8,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "3 target decals Lord of the Rings",
+      en: "3 target decals Lord of the Rings",
+      fr: "3 target decals Lord of the Rings"
+    },
+    images: [
+      "images/targetlotr1.jpg",
+      "images/targetlotr2.jpg",
+      "images/targetlotr3.jpg"
+    ]
+  },
+  {
+    name: "Elvis Hinge & front decal GOLD",
+    category: "decals",
+    subcat: "hinges",
+    price: 18,
+    tptCode: "TPT1",
+    subcat: "hinges",
+    desc: {
+      nl: "Elvis Hinge & front decal GOLD",
+      en: "Elvis Hinge & front decal GOLD",
+      fr: "Elvis Hinge & front decal GOLD"
+    },
+    images: [
+      "images/hingeselvis1.jpg",
+      "images/hingeselvis2.jpg",
+      "images/hingeselvis3.jpg",
+      "images/hingeselvis4.jpg"
+    ]
+  },
+  {
+    name: "Elvis Target Decal kit",
+    category: "decals",
+    subcat: "target",
+    price: 18,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "Elvis Target Decal kit",
+      en: "Elvis Target Decal kit",
+      fr: "Elvis Target Decal kit"
+    },
+    images: [
+      "images/targetelvis4.jpg",
+      "images/targetelvis2.jpg",
+      "images/targetelvis3.jpg",
+      "images/targetelvis1.jpg"
+    ]
+  },
+  {
+    name: "Skull decals Pirates of the Caribbean stern",
+    category: "decals",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "flipper button",
+    desc: {
+      nl: "Skull decals POTC stern",
+      en: "Skull decals POTC stern",
+      fr: "Skull decals POTC stern"
+    },
+    images: [
+      "https://imgproxy.pinside.com/mbXlRfOc5t58NHqdKtjL0bXZpQI2I2ubc4A0Mft49gs/rs:fill:300:300/fn:pinside_1c591e17524f/enc/B_zNYQ0YAVOFBtNCfxFRDQ9oxe1l6YWLLC4E_S-Cu_Eu8N_zI95f8Q1wP-40s1QhBHQiwJzsF9pAQwkHQclB915W7_wgpD5pUHJeFaFcnHAixP8wRd78EOdMuBRyZpSw.jpg"
+    ]
+  },
+  {
+    name: "Target Decals Pirates of the Caribbean Stern",
+    category: "decals",
+    subcat: "target",
+    price: 18,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "Target Decals POTC Stern",
+      en: "Target Decals POTC Stern",
+      fr: "Target Decals POTC Stern"
+    },
+    images: [
+      "images/targetpotc1.jpg",
+      "images/targetpotc2.jpg",
+      "images/targetpotc3.jpg",
+      "images/targetpotc4.jpg",
+      "images/targetpotc5.jpg"
+    ]
+  },
+  {
+    name: "Union Jack Target and flipper topper decals for TOMMY",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 25,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Union Jack Target and flipper topper decals",
+      en: "Union Jack Target and flipper topper decals",
+      fr: "Union Jack Target and flipper topper decals"
+    },
+    images: [
+      "images/targettommy1.jpg",
+      "images/targettommy.jpg",
+      "images/targettommy2.jpg",
+      "images/targettommy3.jpg"
+    ]
+  },
+  {
+    name: "Car decal Creature from the Black Lagoon NO Text",
+    category: "decals",
+    subcat: "in game",
+    price: 24.5,
+    tptCode: "TPT2",
+    subcat: "in game",
+    desc: {
+      nl: "Car decal Creature from the Black Lagoon",
+      en: "Car decal Creature from the Black Lagoon",
+      fr: "Car decal Creature from the Black Lagoon"
+    },
+    images: [
+      "images/carcftbl2notext.jpg"
+    ]
+  },
+  {
+    name: "3 part Cabinet decal kit for Johnny Mnemonic",
+    category: "decals",
+    subcat: "cabinet",
+    price: 150,
+    tptCode: "TPT3",
+    subcat: "cabinet",
+    desc: {
+      nl: "3 part Cabinet decal kit for Johnny Mnemonic",
+      en: "3 part Cabinet decal kit for Johnny Mnemonic",
+      fr: "3 part Cabinet decal kit for Johnny Mnemonic"
+    },
+    images: [
+      "images/cabjm2.jpg",
+      "images/cabjm3.jpg",
+      "images/cabjm4.jpg",
+      "images/cabjm5.jpg",
+      "images/cabjm1.jpg"
+    ]
+  },
+  {
+    name: "Slingshot plastics Who Dunnit",
+    category: "originals",
+    price: 17,
+    tptCode: "TPT1",
+    desc: {
+      nl: "Slingshot plastics Who Dunnit",
+      en: "Slingshot plastics Who Dunnit",
+      fr: "Plastics sligshot Who Dunnit"
+    },
+    images: [
+      "images/slingshotswhodunnit.jpg"
+    ]
+  },
+  {
+    name: "Pin2DMD color display",
+    category: "displays",
+    price: 205,
+    tptCode: "TPT3",
+    desc: {
+      nl: "128x32 kleurdisplay gebouwd rond de Pin2dmd technologie.\n\nKan gebruikt worden in Bally/Willams WPC flipperkasten zoals Getaway, Fishtales, Totan, Str Trek, Dirty Harry....\nKan ook gebruikt worden in Data East flipperkasten zoals Lethal weapon 3, Jurassic park, Tommy, Tales from the crypt.....\nWerkt eveneens in Stern kasten uit de jaren 2000 zoals Spiderman, Lord of the rings, Batman dark knight,....\n\nIeder scherm wordt geactiveerd geleverd inclusief de 2 benodigde kleurfiles (.fsq en . pal files) indien deze gratis zijn. Betalende files worden als extra bijgeteld, meestal tussen de €15,-en €25,-",
+      en: "128x32 color display based on Pin2DMD technology.\n\nCan be used in Bally/Williams WPC pinball machines such as Getaway, Fish Tales, Tales of the Arabian Nights (TOTAN), Star Trek, Dirty Harry, etc.\nAlso compatible with Data East pinball machines such as Lethal Weapon 3, Jurassic Park, Tommy, Tales from the Crypt, etc.\nWorks as well with Stern machines from the 2000s such as Spider-Man, Lord of the Rings, Batman: The Dark Knight, etc.\n\nEach display is delivered activated and includes the two required color files (.fsq and .pal) if they are available for free.\nPaid files are charged separately, usually between €15 and €25.",
+      fr: "Écran couleur 128x32 basé sur la technologie Pin2DMD.\n\nPeut être utilisé dans les flippers Bally/Williams WPC tels que Getaway, Fish Tales, Tales of the Arabian Nights (TOTAN), Star Trek, Dirty Harry, etc.\nÉgalement compatible avec les flippers Data East tels que Lethal Weapon 3, Jurassic Park, Tommy, Tales from the Crypt, etc.\nFonctionne aussi avec les flippers Stern des années 2000 comme Spider-Man, Lord of the Rings, Batman: The Dark Knight, etc.\n\nChaque écran est livré activé et inclut les deux fichiers couleur nécessaires (.fsq et .pal) lorsqu’ils sont disponibles gratuitement.\nLes fichiers payants sont facturés en supplément, généralement entre 15 € et 25 €."
+    },
+    images: [
+      "images/pin2dmd.jpg",
+      "images/pin2dmd2.jpg",
+      "images/pin2dmd3.jpg",
+      "images/pin2dmd4.jpg",
+      "images/pin2dmd5.jpg"
+    ]
+  },
+  {
+    name: "Pin2DMD XL color display",
+    category: "displays",
+    price: 250,
+    tptCode: "TPT3",
+    desc: {
+      nl: "192x64 kleurdisplay in XL-formaat gebaseerd op Pin2DMD-technologie.\n\nKan gebruikt worden in SEGA-flipperkasten met groot display zoals: Baywatch, Batman en Frankenstein.\n\nElk scherm wordt geactiveerd geleverd en bevat de twee benodigde kleurfiles (.fsq en .pal) indien deze gratis beschikbaar zijn.\nBetalende files worden apart aangerekend, meestal tussen €15 en €25.",
+      en: "192x64 XL color display based on Pin2DMD technology.\n\nCan be used in SEGA pinball machines with a large display such as: Baywatch, Batman, and Frankenstein.\n\nEach display is delivered activated and includes the two required color files (.fsq and .pal) if they are available for free.\nPaid files are charged separately, usually between €15 and €25.",
+      fr: "Écran couleur 192x64 taille XL basé sur la technologie Pin2DMD.\n\nPeut être utilisé dans les flippers SEGA à grand écran tel que : Baywatch, Batman et Frankenstein\n\nChaque écran est livré activé et inclut les deux fichiers couleur nécessaires (.fsq et .pal) lorsqu’ils sont disponibles gratuitement.\nLes fichiers payants sont facturés en supplément, généralement entre 15 € et 25 €."
+    },
+    images: [
+      "images/pin2dmdxl.jpg",
+      "images/pin2dmdxl0.jpg",
+      "images/pin2dmdxl2.jpg",
+      "images/pin2dmdxl3.jpg",
+      "images/pin2dmdxl5.jpg"
+    ]
+  },
+  {
+    name: "Leg / cabinet protection 3D",
+    category: "parts",
+    subcat: "in game",
+    price: 20,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "3D bescherming voor flipperkast decals aan de poten. Kleur naar eigen keuze",
+      en: "3D protection for cabinet decals at legs. different colors available",
+      fr: "Protection 3D pour les decals caisse à hauteur des pieds. Couleur au choix."
+    },
+    images: [
+      "images/legprotectorblue.jpg"
+    ]
+  },
+  {
+    name: "ACDC Flipperbat covers 3D",
+    category: "parts",
+    subcat: "flipper bat",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "ACDC Flipperbat covers 3D",
+      en: "ACDC Flipperbat covers 3D",
+      fr: "ACDC Flipperbat covers 3D"
+    },
+    images: [
+      "images/batacdc3d.jpg"
+    ]
+  },
+  {
+    name: "Flipper bats decal  'finish'  for Corvette",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 8.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipper bats decal  'finish'  for Corvette",
+      en: "Flipper bats decal  'finish'  for Corvette",
+      fr: "Flipper bats decal  'finish'  for Corvette"
+    },
+    images: [
+      "images/batcorv1.jpg",
+      "images/batcorv2.jpg"
+    ]
+  },
+  {
+    name: "Flipper bat decals 'finish' Getaway",
+    category: "decals",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipperbat decals 'finish' Getaway",
+      en: "Flipperbat decals 'finish' Getaway",
+      fr: "Flipperbat decals 'finish' Getaway"
+    },
+    images: [
+      "images/batgw2.jpg",
+      "images/batgw1.jpg"
+    ]
+  },
+  {
+    name: "Flipperbat cover Elvis 3D (2x)",
+    category: "parts",
+    subcat: "flipper bat",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipperbat cover Elvis 3D",
+      en: "Flipperbat cover Elvis 3D",
+      fr: "Flipperbat cover Elvis 3D"
+    },
+    images: [
+      "images/batelvis3d1.jpg"
+    ]
+  },
+  {
+    name: "Topper Surfing girls Baywatch",
+    category: "parts",
+    subcat: "topper",
+    price: 30,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Topper Surfing girls Baywatch",
+      en: "Topper Surfing girls Baywatch",
+      fr: "Topper Surfing girls Baywatch"
+    },
+    images: [
+      "images/topperbw1.jpg",
+      "images/topperbw2.jpg"
+    ]
+  },
+  {
+    name: "Speaker Inserts 3D Tolkien logo Lord of the rings",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Speaker Inserts 3D Tolkien logo Lord of the rings",
+      en: "Speaker Inserts 3D Tolkien logo Lord of the rings",
+      fr: "Speaker Inserts 3D Tolkien logo Lord of the rings"
+    },
+    images: [
+      "images/speakerlotr1.jpg"
+    ]
+  },
+  {
+    name: "Stern The Simpsons speaker insert Bart",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Stern The Simpsons speaker insert Bart",
+      en: "Stern The Simpsons speaker insert Bart",
+      fr: "Stern The Simpsons speaker insert Bart"
+    },
+    images: [
+      "images/speakersimpson1.jpg",
+      "images/speakersimpson2.jpg",
+      "images/speakersimpsons3.jpg",
+      "images/speakersimpson3.jpg"
+    ]
+  },
+  {
+    name: "Stern Elvis speaker insert Elvis",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Stern Elvis speaker insert Elvis",
+      en: "Stern Elvis speaker insert Elvis",
+      fr: "Stern Elvis speaker insert Elvis"
+    },
+    images: [
+      "images/speakerelvis2.jpg",
+      "images/speakerelvis1.jpg"
+    ]
+  },
+  {
+    name: "JJP GnR Marshall logo speaker insert",
+    category: "parts",
+    subcat: "speaker",
+    price: 12,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "JJP GnR Marshall logo speaker insert",
+      en: "JJP GnR Marshall logo speaker insert",
+      fr: "JJP GnR Marshall logo speaker insert"
+    },
+    images: [
+      "images/speakergnr.jpg"
+    ]
+  },
+  {
+    name: "JJP GnR Topper with logo",
+    category: "parts",
+    subcat: "topper",
+    price: 60,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "JJP GnR Topper with logo",
+      en: "JJP GnR Topper with logo",
+      fr: "JJP GnR Topper with logo"
+    },
+    images: [
+      "images/toppergnrlogo.jpg",
+      "images/toppergnr2logo.jpg"
+    ]
+  },
+  {
+    name: "JJP Godfather topper logo",
+    category: "parts",
+    subcat: "topper",
+    price: 30,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "JJP Godfather topper logo",
+      en: "JJP Godfather topper logo",
+      fr: "JJP Godfather topper logo"
+    },
+    images: [
+      "images/toppergf.jpg",
+      "images/toppergf1.jpg"
+    ]
+  },
+  {
+    name: "JJP Godfather Topper Buste Godfather",
+    category: "parts",
+    subcat: "topper",
+    price: 45,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "JJP Godfather Topper Buste Godfather",
+      en: "JJP Godfather Topper Buste Godfather",
+      fr: "JJP Godfather Topper Buste Godfather"
+    },
+    images: [
+      "images/toppergfbuste.jpg"
+    ]
+  },
+  {
+    name: "Gottlieb Stargate Topper logo",
+    category: "parts",
+    subcat: "topper",
+    price: 45,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Gottlieb Stargate Topper logo",
+      en: "Gottlieb Stargate Topper logo",
+      fr: "Gottlieb Stargate Topper logo"
+    },
+    images: [
+      "images/toppersg1.jpg",
+      "images/toppersg.jpg"
+    ]
+  },
+  {
+    name: "Flipperbat decals Babayaga John Wick",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipperbat decals Babayaga John Wick",
+      en: "Flipperbat decals Babayaga John Wick",
+      fr: "Flipperbat decals Babayaga John Wick"
+    },
+    images: [
+      "images/batjwv2.jpg"
+    ]
+  },
+  {
+    name: "Tales of the arabian nights 3D Alladin logo coin door (color: gold)",
+    category: "parts",
+    subcat: "coin door",
+    price: 12,
+    tptCode: "TPT1",
+    subcat: "coin door",
+    desc: {
+      nl: "Totan 3D Alladin logo coin door (color: gold)",
+      en: "Totan 3D Alladin logo coin door (couleur: dorée)",
+      fr: "Totan 3D Alladin logo coin door (color: gold)"
+    },
+    images: [
+      "images/doortotan1.jpg"
+    ]
+  },
+  {
+    name: "Keyhanger the Walking dead",
+    category: "parts",
+    subcat: "in game",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "coin door",
+    desc: {
+      nl: "sleutelhanger the Walking dead",
+      en: "Keyhanger the Walking dead",
+      fr: "Porte clés the Walking dead"
+    },
+    images: [
+      "images/doortwd2.jpg"
+    ]
+  },
+  {
+    name: "Keyhanger Lord of the rings (Tolkien logo)",
+    category: "parts",
+    subcat: "in game",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "coin door",
+    desc: {
+      nl: "Sleutelhanger Lord of the rings (Tolkien logo)",
+      en: "Keyhanger Lord of the rings (Tolkien logo)",
+      fr: "Porte clés Lord of the rings (Tolkien logo)"
+    },
+    images: [
+      "images/lotrkeyhanger.jpg"
+    ]
+  },
+  {
+    name: "Sega Batman Topper",
+    category: "parts",
+    subcat: "topper",
+    price: 25,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Sega Batman Topper",
+      en: "Sega Batman Topper",
+      fr: "Sega Batman Topper"
+    },
+    images: [
+      "images/topperbatman1.jpg"
+    ]
+  },
+  {
+    name: "Terminator 2 Skynet Topper with Red LED strip 12V",
+    category: "parts",
+    subcat: "topper",
+    price: 60,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Terminator 2 Skynet Topper with Red LED strip 12V",
+      en: "Terminator 2 Skynet Topper with Red LED strip 12V",
+      fr: "Terminator 2 Skynet Topper with Red LED strip 12V"
+    },
+    images: [
+      "images/toppert2.jpg",
+      "images/toppert21.jpg"
+    ]
+  },
+  {
+    name: "Congo Gorilla Topper",
+    category: "parts",
+    subcat: "topper",
+    price: 105,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Congo Gorilla Topper",
+      en: "Congo Gorilla Topper",
+      fr: "Congo Gorilla Topper"
+    },
+    images: [
+      "images/toppercongo1.jpg",
+      "images/toppercongo2.jpg"
+    ]
+  },
+  {
+    name: "Stern ACDC Topper logo",
+    category: "parts",
+    subcat: "topper",
+    price: 50,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Stern ACDC Topper logo",
+      en: "Stern ACDC Topper logo",
+      fr: "Stern ACDC Topper logo"
+    },
+    images: [
+      "images/topperacdc.jpg",
+      "images/iimages/topperacdc2.jpg"
+    ]
+  },
+  {
+    name: "Stern ACDC Topper 2x Horns red",
+    category: "parts",
+    subcat: "topper",
+    price: 20,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Stern ACDC Topper 2x Hoorns rood",
+      en: "Stern ACDC Topper 2x Horns red",
+      fr: "Stern ACDC Topper 2 cornes rouge"
+    },
+    images: [
+      "images/topperacdc.jpg",
+      "images/iimages/topperacdc2.jpg"
+    ]
+  },
+  {
+    name: "Lethal Weapon 3 Toilet (shooter area)",
+    category: "parts",
+    subcat: "topper",
+    price: 12,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Lethal Weapon 3 Toilet",
+      en: "Lethal Weapon 3 Toilet",
+      fr: "Lethal Weapon 3 Toilette"
+    },
+    images: [
+      "images/toiletlh31.jpg",
+      "images/iimages/topperacdc2.jpg"
+    ]
+  },
+  {
+    name: "Indiana Jones White Zeppelin (left inlane)",
+    category: "parts",
+    subcat: "topper",
+    price: 20,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Indiana Jones Zeppelin (geen bevestigingsbeugel meegeleverd)",
+      en: "Indiana Jones White Zeppelin (shipped without fixations)",
+      fr: "Indiana Jones Zeppelin (livré sans fixation)"
+    },
+    images: [
+      "images/zeppelin.jpg",
+      "images/iimages/topperacdc2.jpg"
+    ]
+  },
+  {
+    name: "JJP GnR Mini Marshall speaker topper",
+    category: "parts",
+    subcat: "topper",
+    price: 45,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "JJP GnR Mini Marshall speaker topper",
+      en: "JJP GnR Mini Marshall speaker topper",
+      fr: "JJP GnR Mini Marshall speaker topper"
+    },
+    images: [
+      "images/toppergnr1marshall.jpg",
+      "images/iimages/topperacdc2.jpg"
+    ]
+  },
+  {
+    name: "6 Lethal Weapon 3 target decals",
+    category: "decals",
+    subcat: "target",
+    price: 12,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "6 Lethal Weapon 3 target decals",
+      en: "6 Lethal Weapon 3 target decals",
+      fr: "6 Lethal Weapon 3 target decals"
+    },
+    images: [
+      "images/targetlh31.jpg",
+      "images/targetlh32.jpg",
+      "images/targetlh33.jpg",
+      "images/targetlh34.jpg"
+    ]
+  },
+  {
+    name: "9 Getaway Red light target decals",
+    category: "decals",
+    subcat: "target",
+    price: 12,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "9 Getaway Red light decals",
+      en: "9 Getaway Red light decals",
+      fr: "9 Getaway Red light decals"
+    },
+    images: [
+      "images/targetgw.jpg"
+    ]
+  },
+  {
+    name: "Creature from the Black lagoon start button cover",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "coin door",
+    desc: {
+      nl: "Creature from the Black lagoon start button cover",
+      en: "Creature from the Black lagoon start button cover",
+      fr: "Creature from the Black lagoon start button cover"
+    },
+    images: [
+      "images/startbutton.jpg",
+      "images/startbutton2.jpg"
+    ]
+  },
+  {
+    name: "Getaway Super Charger sign 3 color",
+    category: "parts",
+    subcat: "in game",
+    price: 25,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Getaway Super Charger sign 3 color",
+      en: "Getaway Super Charger sign 3 color",
+      fr: "Getaway Super Charger sign 3 color"
+    },
+    images: [
+      "images/supercharger4.jpg"
+    ]
+  },
+  {
+    name: "Ghostbuster storage facility",
+    category: "parts",
+    subcat: "in game",
+    price: 25,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Ghostbuster storage facility",
+      en: "Ghostbuster storage facility",
+      fr: "Ghostbuster storage facility"
+    },
+    images: [
+      "images/storagegb.jpg"
+    ]
+  },
+  {
+    name: "Ghostbuster Library",
+    category: "parts",
+    subcat: "in game",
+    price: 30,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Ghostbuster bibliotheek",
+      en: "Ghostbuster Library",
+      fr: "Bibliotheque Ghostbuster"
+    },
+    images: [
+      "images/library.jpg"
+    ]
+  },
+  {
+    name: "JJP Godfather briefcase with gold bars",
+    category: "parts",
+    subcat: "in game",
+    price: 20,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "JJP Godfather business case met goud staven",
+      en: "JJP Godfather briefcase with gold bars",
+      fr: "JJP Godfather valise avec des lingots d'or"
+    },
+    images: [
+      "images/suitcasegoldgf.jpg"
+    ]
+  },
+  {
+    name: "Doctor Who Confession dial disc",
+    category: "parts",
+    subcat: "in game",
+    price: 10,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Doctor Who Confession dial disc",
+      en: "Doctor Who Confession dial disc",
+      fr: "Doctor who Confession Dial disc"
+    },
+    images: [
+      "images/confdial.jpg"
+    ]
+  },
+  {
+    name: "Data East Jurassic Park East Dock sign",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Data East Jurassic Park East Dock sign",
+      en: "Data East Jurassic Park East Dock sign",
+      fr: "Data East Jurassic Park East Dock sign"
+    },
+    images: [
+      "images/eastdocksign.jpg"
+    ]
+  },
+  {
+    name: "Doctor Who The name of the Doctor plate",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "coin door",
+    desc: {
+      nl: "Doctor Who The name of the Doctor plate",
+      en: "Doctor Who The name of the Doctor plate",
+      fr: "Doctor Who The name of the Doctor plate"
+    },
+    images: [
+      "images/thename.jpg"
+    ]
+  },
+  {
+    name: "Speaker inserts football Worldcup soccer 94",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Speaker inserts football Worldcup soccer 94",
+      en: "Speaker inserts football Worldcup soccer 94",
+      fr: "Speaker inserts football Worldcup soccer 94"
+    },
+    images: [
+      "images/speakerwcs941.jpg",
+      "images/speakerwcs943.jpg",
+      "images/speakerwcs944.jpg"
+    ]
+  },
+  {
+    name: "Who Dunnit Speaker inserts 'fingerprints'",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Who Dunnit Speaker inserts 'fingerprints'",
+      en: "Who Dunnit Speaker inserts 'fingerprints'",
+      fr: "Who Dunnit Speaker inserts 'fingerprints'"
+    },
+    images: [
+      "images/speakerwhodunnit1.jpg",
+      "images/speakerwhodunnit2.jpg"
+    ]
+  },
+  {
+    name: "Topper 'speak my friend' Lord of the rings",
+    category: "parts",
+    subcat: "topper",
+    price: 25,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Topper 'speak my friend' Lord of the rings",
+      en: "Topper 'speak my friend' Lord of the rings",
+      fr: "Topper 'speak my friend' Lord of the rings"
+    },
+    images: [
+      "images/topperlotr1.jpg"
+    ]
+  },
+  {
+    name: "Xenon target decals",
+    category: "decals",
+    subcat: "target",
+    price: 7,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "Xenon target decals",
+      en: "Xenon target decals",
+      fr: "Xenon target decals"
+    },
+    images: [
+      "images/targetxenon.jpg"
+    ]
+  },
+  {
+    name: "Street lamp for Twilight Zone",
+    category: "parts",
+    subcat: "in game",
+    price: 12,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Straat lamp voor Twilight Zone",
+      en: "Street lamp for Twilight Zone",
+      fr: "lampe de rue pour Twilight Zone"
+    },
+    images: [
+      "images/streettz1.jpg",
+      "images/streettz2.jpg"
+    ]
+  },
+  {
+    name: "Robot for Twilightzone",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Robot voor Twilightzone",
+      en: "Robot for Twilightzone",
+      fr: "Robot pour Twilightzone"
+    },
+    images: [
+      "images/robottz.jpg"
+    ]
+  },
+  {
+    name: "Robot 2 for Twilight Zone",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Robot 2 voor Twilight Zone, achter racket",
+      en: "Robot 2 for Twilight Zone, behind rocket",
+      fr: "Robot 2 pour Twilight Zone"
+    },
+    images: [
+      "images/robot.jpg"
+    ]
+  },
+  {
+    name: "Lord of the rings Elf text left inlane",
+    category: "decals",
+    subcat: "in game",
+    price: 8,
+    tptCode: "TPT1",
+    subcat: "in game",
+    desc: {
+      nl: "Lord of the rings Elf text left inlane",
+      en: "Lord of the rings Elf text left inlane",
+      fr: "Lord of the rings Elf text left inlane"
+    },
+    images: [
+      "images/lotrelftext.jpg",
+      "images/lotrelftext1.jpg",
+      "images/lotrelftext2.jpg"
+    ]
+  },
+  {
+    name: "Game of thrones Coin door tag 'Winter is coming'",
+    category: "parts",
+    subcat: "coin door",
+    price: 8,
+    tptCode: "TPT3",
+    subcat: "coin door",
+    desc: {
+      nl: "Game of thrones Coin door tag 'Winter is coming'",
+      en: "Game of thrones Coin door tag 'Winter is coming'",
+      fr: "Game of thrones Coin door tag 'Winter is coming'"
+    },
+    images: [
+      "images/got17.jpg"
+    ]
+  },
+  {
+    name: "Rocket Twilight zone",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Rakket Twilight zone",
+      en: "Rocket Twilight zone",
+      fr: "Fusée Twilight zone"
+    },
+    images: [
+      "images/rocket.jpg",
+      "images/rocket2.jpg"
+    ]
+  },
+  {
+    name: "Yellow spiral arrow Twilight Zone",
+    category: "parts",
+    subcat: "in game",
+    price: 7,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Gele pijl Twilight Zone",
+      en: "Yellow spiral arrow Twilight Zone",
+      fr: "Flêche jaune Twilight Zone"
+    },
+    images: [
+      "images/arrowtz.jpg"
+    ]
+  },
+  {
+    name: "Marshall upper inlane speaker JJP GnR",
+    category: "parts",
+    subcat: "speaker",
+    price: 8,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Marshall upper inlane speaker JJP GnR",
+      en: "Marshall upper inlane speaker JJP GnR",
+      fr: "Marshall upper inlane speaker JJP GnR"
+    },
+    images: [
+      "images/drumset.jpg"
+    ]
+  },
+  {
+    name: "JJP GnR Drumset for pop bumpers",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "JJP GnR Drumset for pop bumpers",
+      en: "JJP GnR Drumset for pop bumpers",
+      fr: "JJP GnR Drumset for pop bumpers"
+    },
+    images: [
+      "images/drumset1.jpg",
+      "images/drumset.jpg"
+    ]
+  },
+  {
+    name: "Barbasol can for Jurassic park DE or Stern",
+    category: "parts",
+    subcat: "in game",
+    price: 12,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "3D Barbasol blikje or Jurassic park DE or Stern",
+      en: "3D Barbasol can for Jurassic park DE or Stern",
+      fr: "Canette Barbasol pour Jurassic park DE or Stern"
+    },
+    images: [
+      "images/barbasol.jpg",
+      "images/barbasol1.jpg"
+    ]
+  },
+  {
+    name: "Right plastic ramp Road show",
+    category: "originals",
+    price: 90,
+    tptCode: "TPT3",
+    desc: {
+      nl: "Right plastic ramp Road show (priijs nieuwe : 199,-)",
+      en: "Right plastic ramp Road show (new price : 199,-)",
+      fr: "Right plastic ramp Road show (prix neuf : 199,-)"
+    },
+    images: [
+      "images/ramprs1.jpg",
+      "images/ramprs2.jpg",
+      "images/ramprs3.jpg"
+    ]
+  },
+  {
+    name: "Left wire ramp Road Show",
+    category: "originals",
+    price: 70,
+    tptCode: "TPT3",
+    desc: {
+      nl: "Left wire ramp Road Show, including plastics, switches and lamp holders",
+      en: "Left wire ramp Road Show, including plastics, switches and lamp holders",
+      fr: "ramp metal de gauche Road Show, inclus plastics, switches et support lampes"
+    },
+    images: [
+      "images/habirs1.jpg",
+      "images/habirs2.jpg",
+      "images/habirs3.jpg"
+    ]
+  },
+  {
+    name: "JJP Godfather Tommygun speaker inserts gold",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "speaker",
+    desc: {
+      nl: "JJP Godfather Tommygun speaker inserts goudkleurig",
+      en: "JJP Godfather Tommygun speaker inserts gold",
+      fr: "JJP Godfather Tommygun speaker inserts doré"
+    },
+    images: [
+      "images/speakergf1.jpg"
+    ]
+  },
+  {
+    name: "Stern avatar Speaker insert water",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Stern avatar Speaker insert water",
+      en: "Stern avatar Speaker insert water",
+      fr: "Stern avatar Speaker insert water"
+    },
+    images: [
+      "images/speakerav3.jpg",
+      "images/speakerav1.jpg",
+      "images/speakerav2.jpg"
+    ]
+  },
+  {
+    name: "Congo / Creature black lagoon playfield window GREEN (used)",
+    category: "originals",
+    price: 35,
+    tptCode: "TPT3",
+    desc: {
+      nl: "Congo / Creature black lagoon playfield window GREEN (gebruikt)",
+      en: "Congo / Creature black lagoon playfield window GREEN (used)",
+      fr: "Congo / Creature black lagoon playfield window GREEN (usagé)"
+    },
+    images: [
+      "images/congopl1.jpg",
+      "images/congopl12.jpg"
+    ]
+  },
+  {
+    name: "Topper with LED ring Stargate",
+    category: "mods",
+    price: 35,
+    tptCode: "TPT3",
+    desc: {
+      nl: "Topper met LED Stargate",
+      en: "Topper with LED Stargate",
+      fr: "Topper avec LED Stargate"
+    },
+    images: [
+      "images/topperv2sg.jpg",
+      "images/topperv2sg1.jpg",
+      "images/topperv2sg2.jpg"
+    ]
+  },
+  {
+    name: "Slotmachine for Twilight zone",
+    category: "mods",
+    price: 20,
+    tptCode: "TPT3",
+    desc: {
+      nl: "Slotmachine voor Twilight zone",
+      en: "Slotmachine for Twilight zone",
+      fr: "Slotmachine pour Twilight zone"
+    },
+    images: [
+      "images/slottz1.jpg",
+      "images/slottz2.jpg"
+    ]
+  },
+  {
+    name: "Slingshot right plastic Dirty Harry (used)",
+    category: "originals",
+    price: 8,
+    tptCode: "TPT1",
+    desc: {
+      nl: "Slingshot rechts plastic Dirty Harry (gebruikt)",
+      en: "Slingshot right plastic Dirty Harry (used)",
+      fr: "Slingshot droite plastic Dirty Harry (usagé)"
+    },
+    images: [
+      "images/slingshotrightdh.jpg"
+    ]
+  },
+  {
+    name: "Helicopter for Stern Jurassic park",
+    category: "mods",
+    price: 25,
+    tptCode: "TPT3",
+    desc: {
+      nl: "Helicopter for Stern Jurassic park. Verschillende installatie methodes op pinside in forum jurassic park",
+      en: "Helicopter for Stern Jurassic park. Different installation methodes on pinside in forum jurassic park",
+      fr: "Helicopter for Stern Jurassic park. Différentes methodes d'installation sur pinside dans le forum jurassic park"
+    },
+    images: [
+      "images/helico1.jpg",
+      "images/helico2.jpg",
+      "images/helico3.jpg",
+      "images/helico4.jpg"
+    ]
+  },
+  {
+    name: "Gold kit John wick (coins, bullets, hamer)",
+    category: "parts",
+    subcat: "in game",
+    price: 30,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "John Wick kit with : anti ball lock bullets, coin, pile of coins, hamer",
+      en: "John Wick kit with : anti ball lock bullets, coin, pile of coins, hamer",
+      fr: "John Wick kit avec : anti ball lock bullets, coin, pile of coins, hamer"
+    },
+    images: [
+      "images/goldpackjw1.jpg",
+      "images/goldpackjw2.jpg",
+      "images/goldpackjw3.jpg"
+    ]
+  },
+  {
+    name: "3D radio active sign for Hinges Stern Simpsons PP",
+    category: "parts",
+    subcat: "hinges",
+    price: 20,
+    tptCode: "TPT1",
+    subcat: "hinges",
+    desc: {
+      nl: "3D radio active sign for Hinges Stern Simpsons Pinball Party",
+      en: "3D radio active sign for Hinges Stern Simpsons Pinball Party",
+      fr: "3D radio active sign for Hinges Stern Simpsons Pinball Party"
+    },
+    images: [
+      "images/hingessimpsons1.jpg"
+    ]
+  },
+  {
+    name: "Magnify glass plastic Who Dunnit",
+    category: "originals",
+    price: 10,
+    tptCode: "TPT1",
+    desc: {
+      nl: "vergrootglas plastic Who Dunnit",
+      en: "Magnify glass plastic Who Dunnit",
+      fr: "Loupe plastic Who Dunnit"
+    },
+    images: [
+      "images/glasswd.jpg"
+    ]
+  },
+  {
+    name: "Plastic Getaway \"mountain'",
+    category: "originals",
+    price: 8,
+    tptCode: "TPT1",
+    desc: {
+      nl: "Plastic Getaway \"mountain'",
+      en: "Plastic Getaway \"mountain'",
+      fr: "Plastic Getaway \"mountain'"
+    },
+    images: [
+      "images/mountainplastic.jpg"
+    ]
+  },
+  {
+    name: "Flipperbat decals Game of thrones 'winter is coming'",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipperbat decals Game of thrones 'winter is coming'",
+      en: "Flipperbat decals Game of thrones 'winter is coming'",
+      fr: "Flipperbat decals Game of thrones 'winter is coming'"
+    },
+    images: [
+      "images/batgot2.jpg"
+    ]
+  },
+  {
+    name: "Flipperbat decals Jurassic Park DE or Stern",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipperbat decals Jurassic Park DE or Stern",
+      en: "Flipperbat decals Jurassic Park DE or Stern",
+      fr: "Flipperbat decals Jurassic Park DE or Stern"
+    },
+    images: [
+      "images/batjp1.jpg"
+    ]
+  },
+  {
+    name: "Flipperbat decals Jurassic Park DE or Stern v2",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipperbat decals Jurassic Park DE or Stern V2",
+      en: "Flipperbat decals Jurassic Park DE or Stern V2",
+      fr: "Flipperbat decals Jurassic Park DE or Stern V2"
+    },
+    images: [
+      "images/batjp2.jpg"
+    ]
+  },
+  {
+    name: "Flipperbat decals whirlwind",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipperbat decals whirlwind",
+      en: "Flipperbat decals whirlwind",
+      fr: "Flipperbat decals whirlwind"
+    },
+    images: [
+      "images/batww1.jpg"
+    ]
+  },
+  {
+    name: "Flipperbat decals whirlwind V2",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipperbat decals whirlwind V2",
+      en: "Flipperbat decals whirlwind v2",
+      fr: "Flipperbat decals whirlwind V2"
+    },
+    images: [
+      "images/batww2.jpg"
+    ]
+  },
+  {
+    name: "Flipperbat decals whirlwind V3",
+    category: "decals",
+    subcat: "flipper bat",
+    price: 7.5,
+    tptCode: "TPT1",
+    subcat: "flipper bat",
+    desc: {
+      nl: "Flipperbat decals whirlwind V3",
+      en: "Flipperbat decals whirlwind v3",
+      fr: "Flipperbat decals whirlwind V3"
+    },
+    images: [
+      "images/batww3.jpg"
+    ]
+  },
+  {
+    name: "Jaws Amity Island golden frame",
+    category: "parts",
+    subcat: "in game",
+    price: 10,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Jaws Amity Island goude kader",
+      en: "Jaws Amity Island golden frame",
+      fr: "Jaws Amity Island cadre doré"
+    },
+    images: [
+      "images/frame.jpg"
+    ]
+  },
+  {
+    name: "King Kong hand Cuffs",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "King Kong handboeien",
+      en: "King Kong hand Cuffs",
+      fr: "Menottes pour King Kong"
+    },
+    images: [
+      "images/godzillacufs.jpg"
+    ]
+  },
+  {
+    name: "Stern 3D model info plaque colored",
+    category: "decals",
+    subcat: "in game",
+    price: 8,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "Stern 3D model plaatje gekleurd in best passende kleur model (naar keuze)",
+      en: "Stern 3D model info plaque colored (model by color at your choice)",
+      fr: "Stern 3D model info plaque colorée (selon le flip à votre choix)"
+    },
+    images: [
+      "images/plaque1.jpg",
+      "images/plaque2.jpg",
+      "images/plaque3.jpg",
+      "images/plaque4.jpg",
+      "images/plaque5.jpg"
+    ]
+  },
+  {
+    name: "Creature black lagoon Universal studios black background",
+    category: "decals",
+    subcat: "in game",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "in game",
+    desc: {
+      nl: "Creature black lagoon Universal studios black background",
+      en: "Creature black lagoon Universal studios black background",
+      fr: "Creature black lagoon Universal studios black background"
+    },
+    images: [
+      "images/monsters2.jpg"
+    ]
+  },
+  {
+    name: "Creature black lagoon Universal studios white background",
+    category: "decals",
+    subcat: "in game",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "in game",
+    desc: {
+      nl: "Creature black lagoon Universal studios witte achtergrond",
+      en: "Creature black lagoon Universal studios white background",
+      fr: "Creature black lagoon Universal studios fond blanc"
+    },
+    images: [
+      "images/monsters1.jpg"
+    ]
+  },
+  {
+    name: "Game of thrones golden 3D slingshots",
+    category: "parts",
+    subcat: "in game",
+    price: 25,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Game of thrones golden 3D slingshots",
+      en: "Game of thrones golden 3D slingshots",
+      fr: "Game of thrones golden 3D slingshots"
+    },
+    images: [
+      "images/slingshotgot1.jpg",
+      "images/slingshotgot2.jpg"
+    ]
+  },
+  {
+    name: "King Kong bananas",
+    category: "parts",
+    subcat: "in game",
+    price: 12,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "King Kong bananas boven linker flasher",
+      en: "King Kong bananas above left flasher",
+      fr: "King Kong bananas au dessus du flasher gauche"
+    },
+    images: [
+      "images/bananas.jpg"
+    ]
+  },
+  {
+    name: "John Wick Akira logo",
+    category: "parts",
+    subcat: "in game",
+    price: 8,
+    tptCode: "TPT1",
+    subcat: "in game",
+    desc: {
+      nl: "John Wick Akira logo",
+      en: "John Wick Akira logo",
+      fr: "John Wick Akira logo"
+    },
+    images: [
+      "images/akiralogo.jpg"
+    ]
+  },
+  {
+    name: "Jaws Beach closed sign",
+    category: "parts",
+    subcat: "in game",
+    price: 10,
+    tptCode: "TPT1",
+    subcat: "in game",
+    desc: {
+      nl: "Jaws Beach closed sign (inclusief metalen draad te bevestiging, niet vastgemaakt)",
+      en: "Jaws Beach closed sign (including metal wire for fixation, not attached to sign yet)",
+      fr: "Jaws Beach closed sign (inclus fil de fer pour la fixation mais pas encore attaché au signe)"
+    },
+    images: [
+      "images/beachclosed.jpg"
+    ]
+  },
+  {
+    name: "Jaws red buoy",
+    category: "parts",
+    subcat: "in game",
+    price: 8,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Rode boei voor Jaws",
+      en: "Jaws red buoy",
+      fr: "Boué rouge pour Jaws"
+    },
+    images: [
+      "images/boei.jpg"
+    ]
+  },
+  {
+    name: "5 red buoy for flashers Baywatch",
+    category: "parts",
+    subcat: "in game",
+    price: 25,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Rode boeien voor flashers Baywatch",
+      en: "red buoys for Baywatch flashers",
+      fr: "Boués rouge pour  Baywatch"
+    },
+    images: [
+      "images/boeien.jpg",
+      "images/boeien2.jpg"
+    ]
+  },
+  {
+    name: "Mini marshall speaker Foo FIghters",
+    category: "parts",
+    subcat: "speaker",
+    price: 8,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Mini marshall speaker Foo FIghters",
+      en: "Mini marshall speaker Foo FIghters",
+      fr: "Mini marshall speaker Foo FIghters"
+    },
+    images: [
+      "images/mashallfoo.jpg"
+    ]
+  },
+  {
+    name: "Pterosaur for King Kong",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Pterosaur voor King Kong",
+      en: "Pterosaur for King Kong",
+      fr: "Pterosaur pour King Kong"
+    },
+    images: [
+      "images/pterosaur.jpg"
+    ]
+  },
+  {
+    name: "Jaws yellow warning decal replacement V1",
+    category: "decals",
+    subcat: "warning sign",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "warning sign",
+    desc: {
+      nl: "Jaws yellow warning decal vervanging",
+      en: "Jaws yellow warning decal replacement",
+      fr: "Decal Jaws pour la decal jaune/text  'warning' existante"
+    },
+    images: [
+      "images/warningjaws1.jpg"
+    ]
+  },
+  {
+    name: "Jaws yellow warning decal replacement V2",
+    category: "decals",
+    subcat: "warning sign",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "warning sign",
+    desc: {
+      nl: "Jaws yellow warning decal vervanging",
+      en: "Jaws yellow warning decal replacement",
+      fr: "Decal Jaws pour la decal jaune/text  'warning' existante"
+    },
+    images: [
+      "images/warningjaws2.jpg"
+    ]
+  },
+  {
+    name: "Godzilla Xilien",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Godzilla Xilien",
+      en: "Godzilla Xilien",
+      fr: "Godzilla Xilien"
+    },
+    images: [
+      "images/xilian.jpg"
+    ]
+  },
+  {
+    name: "Red Spider topper for Spiderman",
+    category: "parts",
+    subcat: "topper",
+    price: 20,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Red Spider topper voor Spiderman",
+      en: "Red Spider topper for Spiderman",
+      fr: "Topper araignée rouge pour  for Spiderman"
+    },
+    images: [
+      "images/topperspider.jpg"
+    ]
+  },
+  {
+    name: "Spider speaker inserts Spiderman",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Spider speaker inserts Spiderman",
+      en: "Spider speaker inserts Spiderman",
+      fr: "Spider speaker inserts Spiderman"
+    },
+    images: [
+      "images/speakersm2.jpg",
+      "images/speakersm1.jpg"
+    ]
+  },
+  {
+    name: "keyhanger jaws",
+    category: "parts",
+    subcat: "in game",
+    price: 5,
+    tptCode: "TPT3",
+    subcat: "coin door",
+    desc: {
+      nl: "sleutelhanger Jaws",
+      en: "keyhanger jaws",
+      fr: "porte clés jaws"
+    },
+    images: [
+      "images/keyhangerjaws.jpg"
+    ]
+  },
+  {
+    name: "Above speaker decal Godzilla v2",
+    category: "decals",
+    subcat: "above speaker",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "Decal boven luidspreker rechts Godzilla",
+      en: "Above speaker decal Godzilla v2",
+      fr: "Decal au dessus de l'haut parleur droite Godzilla"
+    },
+    images: [
+      "images/speakergz4.jpg"
+    ]
+  },
+  {
+    name: "Target decals green Indiana jones",
+    category: "decals",
+    subcat: "target",
+    price: 18,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "Target decals green Indiana jones",
+      en: "Target decals green Indiana jones",
+      fr: "Target decals green Indiana jones"
+    },
+    images: [
+      "images/targetij3.jpg"
+    ]
+  },
+  {
+    name: "Target decals yellow Indiana jones",
+    category: "decals",
+    subcat: "target",
+    price: 18,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "Target decals geel Indiana jones",
+      en: "Target decals yellow Indiana jones",
+      fr: "Target decals jaune Indiana jones"
+    },
+    images: [
+      "images/targetij2.jpg"
+    ]
+  },
+  {
+    name: "Shark bitten Surfboard Baywatch",
+    category: "parts",
+    subcat: "in game",
+    price: 12,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Haai gebeten Surfboard Baywatch",
+      en: "Shark bitten Surfboard Baywatch",
+      fr: "Surfboard Baywatch mordu par un requin"
+    },
+    images: [
+      "images/surfboard2.jpg"
+    ]
+  },
+  {
+    name: "Surfboard Tower Baywatch",
+    category: "parts",
+    subcat: "in game",
+    price: 12,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Surfboard Tower Baywatch",
+      en: "Surfboard Tower Baywatch",
+      fr: "Surfboard Tower Baywatch"
+    },
+    images: [
+      "images/surfboard.jpg"
+    ]
+  },
+  {
+    name: "Hinges decals Indianapolis 500",
+    category: "decals",
+    subcat: "hinges",
+    price: 10,
+    tptCode: "TPT1",
+    subcat: "hinges",
+    desc: {
+      nl: "Hinges decals Indianapolis 500",
+      en: "Hinges decals Indianapolis 500",
+      fr: "Hinges decals Indianapolis 500"
+    },
+    images: [
+      "images/hingesi500.jpg"
+    ]
+  },
+  {
+    name: "Switch playfield protector",
+    category: "parts",
+    subcat: "in game",
+    price: 3,
+    tptCode: "TPT1",
+    subcat: "in game",
+    desc: {
+      nl: "Switch playfield protector waar ball droppen vd ramps (goedkoper dan cliffys, zelfde effect, kleur naar keuze)",
+      en: "Switch playfield protector where ball drops in from ramps (cheaper than cliffys same effect, color choice)",
+      fr: "Switch playfield protector où les billes tombent des ramps (pareil que cliffy niveau effet mais moins cher, couleur au choix)"
+    },
+    images: [
+      "images/switchprot.jpg"
+    ]
+  },
+  {
+    name: "Replacement for decal 'warning' in japanese",
+    category: "parts",
+    subcat: "in game",
+    price: 10,
+    tptCode: "TPT1",
+    subcat: "in game",
+    desc: {
+      nl: "Replacement for decal 'warning' in japanese voor Godzilla",
+      en: "Replacement for decal 'warning' in japanes for Godzilla",
+      fr: "Replacement pour decal 'warning' en japonais pour Godzilla"
+    },
+    images: [
+      "images/warninggz.jpg"
+    ]
+  },
+  {
+    name: "Baywatch Sega",
+    category: "machines",
+    price: 4350,
+    desc: {
+      nl: "schitterende Flipperkast Baywatch van Sega. Leuke en familiale flipper.\nDuik terug in de ambiance vd jaren 80,90 met Pamela Anderson en David Hasselhoff en bescherm de stranden van Californië.\nFlipperkast met 4 flippers !!! en Multiball tot 5 ballen \nIdeale flipper voor met vrienden, tot 6 spelers !\nKast, playfield electronica in goede staat ! \nScore IPDB 7.9/10 en pinside : 7.74/10\nProductie beperkt tot 2000st (addams family bijv : 20200 st !), dus redelijk exclusief !\n\nOptiess :\n-	Super groot Pin2DMD XL kleurenscherm !! 192x64 pixels – waarde €250,- en Pamela in kleur  dat is veel beter 😊\n-	Nieuwe translite\n-	Topper girls en surfboards\n-	Nvram : gedaan met batterijen en mogelijke uitklopende alkaline zorgen\n-	Nieuw !! Game code van Pinballcode v 4.02 (dec 2025 !)\n-	Deels in LED\n-	3D flipper toppers met logo Baywatch\n-	Palmbomen in spel\n-	Decals targets\n-	Reddingsboeien rond de flashers\n-	Baywatch sleutelhanger\n-	3D Haai boven shark attack\n-	3D dolfijn\n-	Grote reddingsboei Baywatch 3D\n-	Surfboard in de tower\n-	Mini verrekijkers\n-	Kleien rode Zodiac\n-	Surfboard door haai gebeten\n-	Inlanes bescherming tegen ball drops\n-	Baywatch ogo op de hinges\n-	Logo Sega 3D op de deur\n-	3D beschering kast poten rood\n-	Muntprover in gulden (NL), 10tal gulden aanwezig (ideaal voor beperkt spelen voor d kinderen)",
+      en: "Great pinball Baywatch from Sega. Fun and family pinball\nGet back to the 80ties and 90tie swith Pamela Anderson and David Hasselhoff and protect the Californian beaches.\nPinball with 4 flippers ! and multiball up to 5 balls\nIdeal pinball to play with friends, up to 6 can play together !\nCabinet, playfield and electronics in god condition \nScore IPDB 7.9/10 en pinside : 7.74/10\nProduction limited to 2000pcs (addams family eg: 20200 pcs !), so it’s rather exclusif to have one !\n\nOptions :\n-	Big Pin2DMD XL color display!! 192x64 pixels – value €250,- and Pamela in color is much nicer 😊\n-	New translite\n-	Topper girls and surfboards\n-	Nvram : no battery issues anymore\n-	New !! Game code from Pinballcode v 4.02 (dec 2025 !)\n-	Partially in LED\n-	3D flipper toppers with logo Baywatch\n-	Palmtrees in game\n-	Decals targets\n-	Buoys around the 5 flashers\n-	Baywatch keyhanger\n-	3D shark above shark attack targets\n-	3D dolphin\n-	Big buoy Baywatch 3D\n-	Surfboard in tower\n-	Mini \n-	Small red Zodiac\n-	Surfboard bitten by shark\n-	Inlanes proetction against ball drops\n-	Baywatch logo on the hinges\n-	Logo Sega 3D on coindoor\n-	3D bescherming cabinet/legs\n-	Coinsystem for Gilders (NL), 10tal gilders includedn (ideal to control number of games kids)",
+      fr: "Flipper Sega Baywatch. Flipper très fun et familiale.\nMettez-vous dans l’ambiance des fins des années 80, 90 avec Pamela Anderson et David Hasselhoff et protegez les plages de la Californie.\nFlipper avec 4 batteurs !!! et Multibilles à 5 billes \nLe flips pour les copains : 6 joueurs possible.\nCaisse et playfield, electronique en super état ! \nScore IPDB 7.9/10 et pinside : 7.74/10\nProduction limitée à 2000pcs (comme exemple : addams family 20200pcs !), donc assez exclusif !\n\nOptions :\n-	Super Ecran neuf Pin2DMD XL !! 192x64 pixels – valeur €250,- et Pamela en couleur c’est beaucoup mieux 😊\n-	Nouveau translite\n-	Topper nageuses et surfboards\n-	Partiellement en LED\n-	Nvram : fini les batteries et soucis possible alkaline\n-	Nouveau !! Game code de Pinballcode v 4.02 (dec 2025 !)\n-	Topper batteurs flip logo baywatch\n-	Palmiers\n-	Decals targets\n-	Boués de sauvetages traditionelles autour des flasher\n-	Porte clés Baywatch\n-	Requin au dessus du shark attack\n-	Dauphin 3D\n-	Boué Baywatch 3D\n-	Planche de surf dans la tour\n-	Jumelles miniature\n-	Petit Zodiac rouge 3D\n-	Surfboard attaqué par un requin\n-	Protection des inlanes\n-	Logo Baywatch sur les hinges\n-	Logo Sega 3D sur la porte\n-	Protection 3d rouge pied/caisse\n-	Monnayeur en florin (NL), 10aine de florins présent (pratique pour limite de jeux enfants)"
+    },
+    images: [
+      "images/b1.jpeg",
+      "images/b2.jpeg",
+      "images/b2a.jpeg",
+      "images/b2c.jpeg",
+      "images/b2d.jpeg",
+      "images/b3.jpeg",
+      "images/b2f.jpeg",
+      "images/b2g.jpeg",
+      "images/b4.jpeg",
+      "images/b4a.jpeg",
+      "images/b8.jpeg",
+      "images/b8a.jpeg",
+      "images/b8b.jpeg",
+      "images/9.jpeg",
+      "images/10.jpeg",
+      "images/.11.jpeg",
+      "images/12.jpeg",
+      "images/14.jpeg",
+      "images/imapges/14a.jpeg",
+      "images/imapges/14b.jpeg"
+    ]
+  },
+  {
+    name: "Cliffy protector shooter lane Tommy",
+    category: "mods",
+    price: 15,
+    tptCode: "TPT1",
+    desc: {
+      nl: "Cliffy protector shooter lane Tommy",
+      en: "Cliffy protector shooter lane Tommy",
+      fr: "Cliffy protector shooter lane Tommy"
+    },
+    images: [
+      "images/cliffytommy.jpeg"
+    ]
+  },
+  {
+    name: "King Kong speaker decal v1",
+    category: "decals",
+    subcat: "above speaker",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "King Kong speaker decal v1",
+      en: "King Kong speaker decal v1",
+      fr: "King Kong speaker decal v1"
+    },
+    images: [
+      "images/speakerkk1.jpeg"
+    ]
+  },
+  {
+    name: "King Kong speaker decal v2",
+    category: "decals",
+    subcat: "above speaker",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "King Kong speaker decal v2",
+      en: "King Kong speaker decal v2",
+      fr: "King Kong speaker decal v2"
+    },
+    images: [
+      "images/speakerkk2.jpeg"
+    ]
+  },
+  {
+    name: "King Kong speaker decal v3",
+    category: "decals",
+    subcat: "above speaker",
+    price: 6,
+    tptCode: "TPT1",
+    subcat: "above speaker",
+    desc: {
+      nl: "King Kong speaker decal v3",
+      en: "King Kong speaker decal v3",
+      fr: "King Kong speaker decal v3"
+    },
+    images: [
+      "images/speakerkk3.jpeg"
+    ]
+  },
+  {
+    name: "Tony's palace decal Who Dunnit",
+    category: "originals",
+    price: 6,
+    tptCode: "TPT1",
+    desc: {
+      nl: "Tony's palace decal Who Dunnit",
+      en: "Tony's palace decal Who Dunnit",
+      fr: "Tony's palace decal Who Dunnit"
+    },
+    images: [
+      "images/tonys.jpeg"
+    ]
+  },
+  {
+    name: "Wolf Game of thrones",
+    category: "parts",
+    subcat: "in game",
+    price: 12,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "witte playfield Wolf voor Game of thrones",
+      en: "white playfield Wolf for Game of thrones",
+      fr: "Loup blanc pour le playfield de Game of thrones"
+    },
+    images: [
+      "images/wolf.jpg",
+      "images/wolf1.jpg"
+    ]
+  },
+  {
+    name: "3D shark for Jaws",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "3D haai voor Jaws",
+      en: "3D shark for Jaws",
+      fr: "Requin 3D pour jaws"
+    },
+    images: [
+      "images/sharkjaws.jpg"
+    ]
+  },
+  {
+    name: "Mechagodzilla covers for ramp",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Godzilla, Mechagodzilla covers for ramp",
+      en: "Godzilla, Mechagodzilla covers for ramp",
+      fr: "Godzilla, Mechagodzilla covers pour la rampe de lancement"
+    },
+    images: [
+      "images/coversgz.jpg"
+    ]
+  },
+  {
+    name: "Baywatch target decals",
+    category: "decals",
+    subcat: "target",
+    price: 12,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "Baywatch target decals",
+      en: "Baywatch target decals",
+      fr: "Baywatch target decals"
+    },
+    images: [
+      "images/shark.jpg",
+      "images/targetbw1.jpg",
+      "images/targetbw2.jpg",
+      "images/targetbw3.jpg"
+    ]
+  },
+  {
+    name: "Target decals Whirlwind",
+    category: "decals",
+    subcat: "target",
+    price: 8,
+    tptCode: "TPT3",
+    subcat: "target",
+    desc: {
+      nl: "Target decals Whirlwind",
+      en: "Target decals Whirlwind",
+      fr: "Target decals Whirlwind"
+    },
+    images: [
+      "images/targetww1.jpg"
+    ]
+  },
+  {
+    name: "Target decals Flintstones",
+    category: "decals",
+    subcat: "target",
+    price: 8,
+    tptCode: "TPT1",
+    subcat: "target",
+    desc: {
+      nl: "Target decals Flintstones",
+      en: "Target decals Flintstones",
+      fr: "Target decals Flintstones"
+    },
+    images: [
+      "images/targetflint.jpg"
+    ]
+  },
+  {
+    name: "Pin2dmd Serum RPI color display",
+    category: "displays",
+    price: 225,
+    tptCode: "TPT3",
+    desc: {
+      nl: "Pin2dmd Serum RPI color display. Rasberry PI module voor serum ondersteuning. Betere kleuren dan standaard Pin2DMD. Check vpuniverse.com voor beschikbare modellen.",
+      en: "Pin2dmd Serum RPI color display. Rasberry PI module for serum support. Beter colors than standard Pin2DMD. Check vpuniverse.com for available pinball models.",
+      fr: "Ecran Pin2dmd Serum RPI . Rasberry PI module pour support fichier serum. meilleurs coleurs et design que les pin2dd standard. Vérifier vpuniverse.com pour le flips existantes avec support serum."
+    },
+    images: [
+      "images/pin2dmdSerum.jpeg"
+    ]
+  },
+  {
+    name: "Speaker inserts Game of Thrones Stark",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Speaker inserts Game of Thrones Stark",
+      en: "Speaker inserts Game of Thrones Stark",
+      fr: "Speaker inserts Game of Thrones Stark"
+    },
+    images: [
+      "images/speakergot3.jpg"
+    ]
+  },
+  {
+    name: "Speaker inserts Game of Thrones Thargaryen",
+    category: "parts",
+    subcat: "speaker",
+    price: 15,
+    tptCode: "TPT1",
+    subcat: "speaker",
+    desc: {
+      nl: "Speaker inserts Game of Thrones Thargaryen",
+      en: "Speaker inserts Game of Thrones Thargaryen",
+      fr: "Speaker inserts Game of Thrones Thargaryen"
+    },
+    images: [
+      "images/speakergot1.jpg",
+      "images/speakergot2.jpg"
+    ]
+  },
+  {
+    name: "Harry Potter Hogwarts Topper",
+    category: "parts",
+    subcat: "topper",
+    price: 125,
+    tptCode: "TPT3",
+    subcat: "topper",
+    desc: {
+      nl: "Harry Potter Topper Hogwarts (+/- 40cm x25cm)",
+      en: "Harry Potter Topper Hogwarts (+/- 40cm x25cm)",
+      fr: "Harry Potter Topper Hogwarts (+/- 40cm x25cm)"
+    },
+    images: [
+      "images/topperhp.jpeg",
+      "images/topperhp1.jpeg",
+      "images/topperhp2.jpeg",
+      "images/topperhp3.jpeg",
+      "images/topperhp4.jpeg"
+    ]
+  },
+  {
+    name: "F-86 Sabre plane for Godzilla",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "F-86 Sabre gevechtsvliegtuig voor Godzilla",
+      en: "F-86 Sabre plane for Godzilla",
+      fr: "Avion de chasse F-86 Sabre pour Godzilla"
+    },
+    images: [
+      "images/plane.jpg"
+    ]
+  },
+  {
+    name: "Dolphin for Baywatch",
+    category: "parts",
+    subcat: "in game",
+    price: 15,
+    tptCode: "TPT3",
+    subcat: "in game",
+    desc: {
+      nl: "Dolfijn voor Baywatch",
+      en: "Dolphin for Baywatch",
+      fr: "Dauphin pour Baywatch"
+    },
+    images: [
+      "images/dolph1.jpeg",
+      "images/dolph2.jpeg",
+      "images/dolph3.jpeg"
+    ]
+  },
+
+  // Nieuwe producten worden hieronder toegevoegd via admin.html
+
+  // === FLIPPER BAT DECALS ===
+  { name: "Flipper bat decal Avatar", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Avatar", en: "Flipper bat decals for Avatar", fr: "Flipper bat decals for Avatar" },
+    images: ["images/batava.jpg"] },
+  { name: "Flipper bat decal Back to the Future", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Back to the Future", en: "Flipper bat decals for Back to the Future", fr: "Flipper bat decals for Back to the Future" },
+    images: ["images/batbttf.jpg"] },
+  { name: "Flipper bat decal Bride of Pinbot", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Bride of Pinbot", en: "Flipper bat decals for Bride of Pinbot", fr: "Flipper bat decals for Bride of Pinbot" },
+    images: ["images/batbop.jpg"] },
+  { name: "Flipper bat decal Congo", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Congo", en: "Flipper bat decals for Congo", fr: "Flipper bat decals for Congo" },
+    images: ["images/batcongo.jpg"] },
+  { name: "Flipper bat decal Fish Tales", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Fish Tales", en: "Flipper bat decals for Fish Tales", fr: "Flipper bat decals for Fish Tales" },
+    images: ["images/batfs1.jpg"] },
+  { name: "Flipper bat decal Flintstones", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Flintstones", en: "Flipper bat decals for Flintstones", fr: "Flipper bat decals for Flintstones" },
+    images: ["images/batflint.jpg"] },
+  { name: "Flipper bat decal Ghostbusters", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Ghostbusters", en: "Flipper bat decals for Ghostbusters", fr: "Flipper bat decals for Ghostbusters" },
+    images: ["images/batgb.jpg"] },
+  { name: "Flipper bat decal Ghostbusters (v2)", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Ghostbusters (v2)", en: "Flipper bat decals for Ghostbusters (v2)", fr: "Flipper bat decals for Ghostbusters (v2)" },
+    images: ["images/batgb1.jpg"] },
+  { name: "Flipper bat decal Guns N' Roses", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Guns N' Roses", en: "Flipper bat decals for Guns N' Roses", fr: "Flipper bat decals for Guns N' Roses" },
+    images: ["images/batgnr4.jpg"] },
+  { name: "Flipper bat decal Godzilla", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Godzilla", en: "Flipper bat decals for Godzilla", fr: "Flipper bat decals for Godzilla" },
+    images: ["images/batgz1.jpg"] },
+  { name: "Flipper bat decal Judge Dredd", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Judge Dredd", en: "Flipper bat decals for Judge Dredd", fr: "Flipper bat decals for Judge Dredd" },
+    images: ["images/batjd.jpg"] },
+  { name: "Flipper bat decal Junkyard", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Junkyard", en: "Flipper bat decals for Junkyard", fr: "Flipper bat decals for Junkyard" },
+    images: ["images/batjy.jpg"] },
+  { name: "Flipper bat decal Lord of the Rings", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Lord of the Rings", en: "Flipper bat decals for Lord of the Rings", fr: "Flipper bat decals for Lord of the Rings" },
+    images: ["images/batlotr1.jpg"] },
+  { name: "Flipper bat decal Pirates of the Caribbean", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Pirates of the Caribbean", en: "Flipper bat decals for Pirates of the Caribbean", fr: "Flipper bat decals for Pirates of the Caribbean" },
+    images: ["images/batpotc.jpg"] },
+  { name: "Flipper bat decal Pirates of the Caribbean (v2)", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Pirates of the Caribbean (v2)", en: "Flipper bat decals for Pirates of the Caribbean (v2)", fr: "Flipper bat decals for Pirates of the Caribbean (v2)" },
+    images: ["images/batpotc.jpg"] },
+  { name: "Flipper bat decal Rollergames", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Rollergames", en: "Flipper bat decals for Rollergames", fr: "Flipper bat decals for Rollergames" },
+    images: ["images/batrg.jpg"] },
+  { name: "Flipper bat decal Safe Cracker", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Safe Cracker", en: "Flipper bat decals for Safe Cracker", fr: "Flipper bat decals for Safe Cracker" },
+    images: ["images/batsc.jpg"] },
+  { name: "Flipper bat decal Star Trek 25th Anniversary", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Star Trek 25th Anniversary", en: "Flipper bat decals for Star Trek 25th Anniversary", fr: "Flipper bat decals for Star Trek 25th Anniversary" },
+    images: ["images/batst25th.jpg"] },
+  { name: "Flipper bat decal World Cup Soccer '94", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor World Cup Soccer '94", en: "Flipper bat decals for World Cup Soccer '94", fr: "Flipper bat decals for World Cup Soccer '94" },
+    images: ["images/batwcs94.jpg"] },
+
+  { name: "Flipper bat decal Dungeons & Dragons", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor Dungeons & Dragons", en: "Flipper bat decals for Dungeons & Dragons", fr: "Flipper bat decals pour Dungeons & Dragons" },
+    images: ["images/batdd.jpg"] },
+  { name: "Flipper bat decal The Godfather", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Flipper bat decals voor The Godfather", en: "Flipper bat decals for The Godfather", fr: "Flipper bat decals pour The Godfather" },
+    images: ["images/batgf.jpg"] },
+  // === SHOOTER DECALS ===
+  { name: "Shooter decal Avatar", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Avatar", en: "Shooter decal for Avatar", fr: "Shooter decal for Avatar" },
+    images: ["images/shooteravatar.png"] },
+  { name: "Shooter decal Champion Pub", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Champion Pub", en: "Shooter decal for Champion Pub", fr: "Shooter decal for Champion Pub" },
+    images: ["images/shootercp.png"] },
+  { name: "Shooter decal Black Knight 2000", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Black Knight 2000", en: "Shooter decal for Black Knight 2000", fr: "Shooter decal for Black Knight 2000" },
+    images: ["images/shooterbk2000.png"] },
+  { name: "Shooter decal Black Knight", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Black Knight", en: "Shooter decal for Black Knight", fr: "Shooter decal for Black Knight" },
+    images: ["images/shooterbk.png"] },
+  { name: "Shooter decal Cactus Canyon", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Cactus Canyon", en: "Shooter decal for Cactus Canyon", fr: "Shooter decal for Cactus Canyon" },
+    images: ["images/shootercactusc.png"] },
+  { name: "Shooter decal Indianapolis 500", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Indianapolis 500", en: "Shooter decal for Indianapolis 500", fr: "Shooter decal for Indianapolis 500" },
+    images: ["images/shooteri500.png"] },
+  { name: "Shooter decal Jaws", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Jaws", en: "Shooter decal for Jaws", fr: "Shooter decal for Jaws" },
+    images: ["images/shooterjaws.png"] },
+  { name: "Shooter decal James Bond Dr. No", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor James Bond Dr. No", en: "Shooter decal for James Bond Dr. No", fr: "Shooter decal for James Bond Dr. No" },
+    images: ["images/shooterDrNO2.png"] },
+  { name: "Shooter decal Fish Tales (v2)", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Fish Tales (v2)", en: "Shooter decal for Fish Tales (v2)", fr: "Shooter decal for Fish Tales (v2)" },
+    images: ["images/shootfish2.png"] },
+  { name: "Shooter decal Addams Family", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Addams Family", en: "Shooter decal for Addams Family", fr: "Shooter decal for Addams Family" },
+    images: ["images/shootaddams1.png"] },
+  { name: "Shooter decal Attack from Mars", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Attack from Mars", en: "Shooter decal for Attack from Mars", fr: "Shooter decal for Attack from Mars" },
+    images: ["images/shootafm2.png"] },
+  { name: "Shooter decal Congo", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Congo", en: "Shooter decal for Congo", fr: "Shooter decal for Congo" },
+    images: ["images/shootcongo1.png"] },
+  { name: "Shooter decal Corvette", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Corvette", en: "Shooter decal for Corvette", fr: "Shooter decal for Corvette" },
+    images: ["images/shootcorvette.png"] },
+  { name: "Shooter decal Winchester House", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Winchester House", en: "Shooter decal for Winchester House", fr: "Shooter decal for Winchester House" },
+    images: ["images/shootwinch.png"] },
+  { name: "Shooter decal Monster Bash", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Monster Bash", en: "Shooter decal for Monster Bash", fr: "Shooter decal for Monster Bash" },
+    images: ["images/shootermb.png"] },
+  { name: "Shooter decal Creature from the Black Lagoon", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Creature from the Black Lagoon", en: "Shooter decal for Creature from the Black Lagoon", fr: "Shooter decal for Creature from the Black Lagoon" },
+    images: ["images/shootcftbl.png"] },
+  { name: "Shooter decal Twilight Zone", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Twilight Zone", en: "Shooter decal for Twilight Zone", fr: "Shooter decal for Twilight Zone" },
+    images: ["images/shootertz.png"] },
+  { name: "Shooter decal Lord of the Rings", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Lord of the Rings", en: "Shooter decal for Lord of the Rings", fr: "Shooter decal for Lord of the Rings" },
+    images: ["images/shooterlotr.png"] },
+  { name: "Shooter decal Xenon", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Xenon", en: "Shooter decal for Xenon", fr: "Shooter decal for Xenon" },
+    images: ["images/shooterxenon.png"] },
+  { name: "Shooter decal X-Files", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor X-Files", en: "Shooter decal for X-Files", fr: "Shooter decal for X-Files" },
+    images: ["images/shooterxfiles.png"] },
+  { name: "Shooter decal Theatre of Magic", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Theatre of Magic", en: "Shooter decal for Theatre of Magic", fr: "Shooter decal for Theatre of Magic" },
+    images: ["images/shootertom.png"] },
+  { name: "Shooter decal Theatre of Magic (v2)", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Theatre of Magic (v2)", en: "Shooter decal for Theatre of Magic (v2)", fr: "Shooter decal for Theatre of Magic (v2)" },
+    images: ["images/shootertom2.png"] },
+  { name: "Shooter decal Whirlwind", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Whirlwind", en: "Shooter decal for Whirlwind", fr: "Shooter decal for Whirlwind" },
+    images: ["images/shooterww.png"] },
+  { name: "Shooter decal World Cup Soccer '94", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor World Cup Soccer '94", en: "Shooter decal for World Cup Soccer '94", fr: "Shooter decal for World Cup Soccer '94" },
+    images: ["images/shooterwcs94.png"] },
+  { name: "Shooter decal Winchester House (v2)", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Winchester House (v2)", en: "Shooter decal for Winchester House (v2)", fr: "Shooter decal for Winchester House (v2)" },
+    images: ["images/shooterwhd.png"] },
+  { name: "Shooter decal The Shadow", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor The Shadow", en: "Shooter decal for The Shadow", fr: "Shooter decal for The Shadow" },
+    images: ["images/shootershadow.png"] },
+  { name: "Shooter decal Tommy", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Tommy", en: "Shooter decal for Tommy", fr: "Shooter decal for Tommy" },
+    images: ["images/shootertommy.png"] },
+  { name: "Shooter decal Cirqus Voltaire", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Cirqus Voltaire", en: "Shooter decal for Cirqus Voltaire", fr: "Shooter decal for Cirqus Voltaire" },
+    images: ["images/shootercv.png"] },
+  { name: "Shooter decal Road Show", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Road Show", en: "Shooter decal for Road Show", fr: "Shooter decal for Road Show" },
+    images: ["images/shooterrs1.png"] },
+  { name: "Shooter decal Road Show (v2)", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Road Show (v2)", en: "Shooter decal for Road Show (v2)", fr: "Shooter decal for Road Show (v2)" },
+    images: ["images/shooterrs2.png"] },
+  { name: "Shooter decal Medieval Madness", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Medieval Madness", en: "Shooter decal for Medieval Madness", fr: "Shooter decal for Medieval Madness" },
+    images: ["images/shootermm.png"] },
+  { name: "Shooter decal Funhouse", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Funhouse", en: "Shooter decal for Funhouse", fr: "Shooter decal for Funhouse" },
+    images: ["images/shooterfh.png"] },
+  { name: "Shooter decal Back to the Future", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Back to the Future", en: "Shooter decal for Back to the Future", fr: "Shooter decal for Back to the Future" },
+    images: ["images/shooterbttf.png"] },
+  { name: "Shooter decal Scared Stiff", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Scared Stiff", en: "Shooter decal for Scared Stiff", fr: "Shooter decal for Scared Stiff" },
+    images: ["images/shooterss.png"] },
+  { name: "Shooter decal John Wick", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor John Wick", en: "Shooter decal for John Wick", fr: "Shooter decal for John Wick" },
+    images: ["images/shooterjw.png"] },
+  { name: "Shooter decal White Water", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor White Water", en: "Shooter decal for White Water", fr: "Shooter decal for White Water" },
+    images: ["images/shooterwh2o.png"] },
+  { name: "Shooter decal Rush", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Rush", en: "Shooter decal for Rush", fr: "Shooter decal for Rush" },
+    images: ["images/shooterrush.png"] },
+  { name: "Shooter decal Rush (v2)", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Rush (v2)", en: "Shooter decal for Rush (v2)", fr: "Shooter decal for Rush (v2)" },
+    images: ["images/shooterrush.png"] },
+  { name: "Shooter decal Diner", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Shooter decal voor Diner", en: "Shooter decal for Diner", fr: "Shooter decal for Diner" },
+    images: ["images/shooterdiner.png"] },
+
+  // === SPEAKER DECALS ===
+  { name: "Speaker decal James Bond Dr. No", category: "decals", subcat: "above speaker", price: 7, tptCode: "TPT1", inStock: false,
+    desc: { nl: "Speaker decal voor James Bond Dr. No", en: "Speaker decal for James Bond Dr. No", fr: "Speaker decal for James Bond Dr. No" },
+    images: ["images/speakderdrno.png"] },
+
+];
+// ================================================================
+
+// ================================================================
+//  DESC HELPER — ondersteunt zowel string (oud) als {nl,en,fr} (nieuw)
+// ================================================================
+function getDesc(p, lang) {
+  if (!p.desc) return '';
+  if (typeof p.desc === 'string') return p.desc;
+  return p.desc[lang] || p.desc.nl || '';
+}
+
+// ================================================================
+//  VERTALINGEN
+// ================================================================
+const i18n = {
+  nl: {
+    searchPlaceholder: "Zoek een product…",
+    catMachines: "Pinball Machines",
+    catParts: "3D Pinball Parts",
+    catDecals: "In-Game Decals",
+    catOriginals: "Original Parts",
+    catDisplays: "Displays",
+    cat3dondemand: "On demand",
+    catmods: "Mods & Extras",
+    sectionLabel: { machines: "Pinball Machines", parts: "3D Pinball Parts", decals: "In-Game Decals", originals: "Original Parts", displays: "Displays", "3dondemand": "On demand", mods: "Mods & Extras" },
+    cartTitle: "Winkelwagen",
+    cartEmpty: "Je winkelwagen is leeg.",
+    totalLabel: "Totaal",
+    payBtn: "Bestelling afronden",
+    paypalNote: "Veilig afrekenen via PayPal",
+    siTitle: "🚚 Transport",
+    siText1: "Decals & speaker inserts: Bpost wereldwijd — €3 standaard / €6 grote enveloppe (code 1-2)",
+    siText2: "Grotere items Europa: Mondial Relay €6–€10 afhankelijk van land (code 3-4-5)",
+    siText3: "Overige landen / niet gedekt: Bpost pakket €20 (code 6)",
+    coTitle: "Bestelling afronden",
+    coSub: "Vul je gegevens in zodat we je bestelling correct kunnen verwerken.",
+    coLblFn: "Voornaam", coLblLn: "Achternaam", coLblEmail: "E-mailadres", coLblPhone: "Telefoon",
+    coLblAddr: "Straat + nr", coLblZip: "Postcode", coLblCity: "Stad", coLblCountry: "Land",
+    coLblProducts: "Producten", coLblShip: "Transport", coLblTotal: "Totaal",
+    coPayBtn: "Betalen via PayPal",
+    contactQ: "Vragen over een product? Neem contact op.",
+    addBtn: "Toevoegen",
+    noProducts: "Geen producten in deze categorie.",
+    noResults: "Geen resultaten voor",
+    added: "toegevoegd",
+    items: "artikelen",
+    item: "artikel",
+    footerContact: "Contact",
+    cmTitle: "Contact",
+    cmSub: "Stuur ons een bericht — we antwoorden zo snel mogelijk.",
+    cmLblEmail: "Jouw e-mailadres",
+    cmLblTopic: "Onderwerp",
+    cmLblMsg: "Bericht",
+    cmSendBtn: "Verstuur bericht",
+    cmSuccess: "✓ Bericht verstuurd! We nemen snel contact op.",
+    onDemandText: "Op zoek naar een 3D item om toe te voegen aan je flipperkast? Topper, in game gadget, hinge logos, 3D flipperbat, plates op coindoor, speaker inserts — vertel ons wat je graag zou hebben en we kijken wat mogelijk is en maken een kostschatting.\n\nEen ander 3D item los van flipperkasten kan ook natuurlijk, zeg maar wat je in gedachte hebt. De items die je zou vinden op bijvoorbeeld thingiverse, makerworld of printables moeten wel licentie vrij zijn!\n\nEn als je een in-game decal zoekt voor targets, flipperbats of iets anders kunnen we allicht eveneens een oplossing bedenken.\n\nBezoek regelmatig de site want er volgen nog een pak nieuwe decals !",
+    onDemandBtn: "Stuur ons je idee",
+  },
+  en: {
+    searchPlaceholder: "Search a product…",
+    catMachines: "Pinball Machines",
+    catParts: "3D Pinball Parts",
+    catDecals: "In-Game Decals",
+    catOriginals: "Original Parts",
+    catDisplays: "Displays",
+    cat3dondemand: "On demand",
+    sectionLabel: { machines: "Pinball Machines", parts: "3D Pinball Parts", decals: "In-Game Decals", originals: "Original Parts", displays: "Displays", "3dondemand": "On demand" },
+    cartTitle: "Cart",
+    cartEmpty: "Your cart is empty.",
+    totalLabel: "Total",
+    payBtn: "Proceed to checkout",
+    paypalNote: "Secure checkout via PayPal",
+    siTitle: "🚚 Shipping",
+    siText1: "Decals & speaker inserts: Bpost worldwide — €3 standard / €6 large envelope (code 1-2)",
+    siText2: "Larger items in Europe: Mondial Relay €6–€10 depending on country (code 3-4-5)",
+    siText3: "Other countries / not covered: Bpost package €20 (code 6)",
+    coTitle: "Complete your order",
+    coSub: "Please fill in your details so we can process your order correctly.",
+    coLblFn: "First name", coLblLn: "Last name", coLblEmail: "Email address", coLblPhone: "Phone",
+    coLblAddr: "Street + number", coLblZip: "Postal code", coLblCity: "City", coLblCountry: "Country",
+    coLblProducts: "Products", coLblShip: "Shipping", coLblTotal: "Total",
+    coPayBtn: "Pay with PayPal",
+    contactQ: "Questions about a product? Get in touch.",
+    addBtn: "Add",
+    noProducts: "No products in this category.",
+    noResults: "No results for",
+    added: "added",
+    items: "items",
+    item: "item",
+    footerContact: "Contact",
+    cmTitle: "Contact",
+    cmSub: "Send us a message — we'll get back to you shortly.",
+    cmLblEmail: "Your email address",
+    cmLblTopic: "Subject",
+    cmLblMsg: "Message",
+    cmSendBtn: "Send message",
+    cmSuccess: "✓ Message sent! We'll be in touch soon.",
+    onDemandText: "Looking for a 3D item to enhance your pinball machine? Whether it's a topper, in-game gadget, hinge logos, 3D flipper bats, coin door plates, or speaker inserts — let us know what you have in mind.\n\nWe'll explore the possibilities and provide a cost estimate. Custom 3D items beyond pinball are also possible, of course. Just tell us your idea. Just keep in mind that the items you would find on printables, thingiverse or makerworld need to be licensefree !\n\nAnd if you're looking for an in game decal like flipperbats, targets or other we might be able to help as well.\n\nKeep track on the site as we will be adding any more decals in the future",
+    onDemandBtn: "Send us your idea",
+  },
+  fr: {
+    searchPlaceholder: "Rechercher un produit…",
+    catMachines: "Flippers",
+    catParts: "Pièces 3D",
+    catDecals: "Décals",
+    catOriginals: "Pièces Originales",
+    catDisplays: "Ecrans",
+    cat3dondemand: "Sur demande",
+    catmods: "Mods & Extras",
+    sectionLabel: { machines: "Flippers", parts: "Pièces 3D", decals: "Décals", originals: "Pièces Originales", displays: "Ecrans", "3dondemand": "Sur demande", mods: "Mods & Extras" },
+    cartTitle: "Panier",
+    cartEmpty: "Votre panier est vide.",
+    totalLabel: "Total",
+    payBtn: "Finaliser la commande",
+    paypalNote: "Paiement sécurisé via PayPal",
+    siTitle: "🚚 Livraison",
+    siText1: "Décals & inserts haut-parleurs : Bpost mondial — 3€ standard / 6€ grande enveloppe (code 1-2)",
+    siText2: "Articles plus grands en Europe : Mondial Relay 6€–10€ selon le pays (code 3-4-5)",
+    siText3: "Autres pays / non couverts : Bpost colis 20€ (code 6)",
+    coTitle: "Finaliser la commande",
+    coSub: "Veuillez remplir vos coordonnées pour que nous puissions traiter votre commande.",
+    coLblFn: "Prénom", coLblLn: "Nom", coLblEmail: "Adresse e-mail", coLblPhone: "Téléphone",
+    coLblAddr: "Rue + numéro", coLblZip: "Code postal", coLblCity: "Ville", coLblCountry: "Pays",
+    coLblProducts: "Produits", coLblShip: "Livraison", coLblTotal: "Total",
+    coPayBtn: "Payer via PayPal",
+    contactQ: "Des questions sur un produit ? Contactez-nous.",
+    addBtn: "Ajouter",
+    noProducts: "Aucun produit dans cette catégorie.",
+    noResults: "Aucun résultat pour",
+    added: "ajouté",
+    items: "articles",
+    item: "article",
+    footerContact: "Contact",
+    cmTitle: "Contact",
+    cmSub: "Envoyez-nous un message — nous vous répondrons rapidement.",
+    cmLblEmail: "Votre adresse e-mail",
+    cmLblTopic: "Sujet",
+    cmLblMsg: "Message",
+    cmSendBtn: "Envoyer le message",
+    cmSuccess: "✓ Message envoyé ! Nous vous contacterons bientôt.",
+    onDemandText: "Vous recherchez un élément 3D pour améliorer votre flipper ? Qu'il s'agisse d'un topper, d'un gadget in-game, de logos de charnières, de batteurs 3D, de plaques pour coin door ou d'inserts pour haut-parleurs — dites-nous ce que vous souhaitez.\n\nNous étudierons les possibilités et vous fournirons une estimation du coût. La création d'objets 3D personnalisés en dehors du flipper est également possible.\n\nN'hésitez pas à partager votre idée. Mais regardez bien que les articles que vous trouveriez sur makerworld, printables ou thingiverse soient libre de license.\n\nEt si vous cherchez des decals batteurs, targets ou autre n'hesitez pas !\n\nGarder l'œil sur le site car nous ajouterons régulièrement des nouvelles decals dans le future proche.",
+    onDemandBtn: "Envoyez-nous votre idée",
+  }
+};
+
+let currentLang = 'nl';
+let activeCategory = 'machines';
+let searchQuery = '';
+let activeSubFilter = '';
+let cart = [];
+let lbImages = [], lbIndex = 0;
+const cardStates = {};
+
+function t(key) { return i18n[currentLang][key] || key; }
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));
+  applyTranslations();
+  renderProducts();
+  renderCart();
+}
+
+function applyTranslations() {
+  document.getElementById('search-input').placeholder = t('searchPlaceholder');
+  document.getElementById('nav-machines').textContent = t('catMachines');
+  document.getElementById('nav-parts').textContent = t('catParts');
+  document.getElementById('nav-decals').textContent = t('catDecals');
+  document.getElementById('nav-originals').textContent = t('catOriginals');
+  document.getElementById('nav-displays').textContent = t('catDisplays');
+  document.getElementById('nav-3dondemand').textContent = t('cat3dondemand');
+  document.getElementById('nav-mods').textContent = t('catmods');
+  document.getElementById('cart-title').textContent = t('cartTitle');
+  document.getElementById('total-label').textContent = t('totalLabel');
+  document.getElementById('checkout-btn').textContent = t('payBtn');
+  document.getElementById('paypal-note').textContent = t('paypalNote');
+  document.getElementById('contact-q').textContent = t('contactQ');
+  document.getElementById('section-label').textContent = t('sectionLabel')[activeCategory];
+  document.getElementById('footer-contact').textContent = t('footerContact');
+  document.getElementById('cm-title').textContent = t('cmTitle');
+  document.getElementById('cm-sub').textContent = t('cmSub');
+  document.getElementById('cm-lbl-email').textContent = t('cmLblEmail');
+  document.getElementById('cm-lbl-topic').textContent = t('cmLblTopic');
+  document.getElementById('cm-lbl-msg').textContent = t('cmLblMsg');
+  document.getElementById('cm-send-btn').textContent = t('cmSendBtn');
+  // Shipping info block
+  document.getElementById('si-title').textContent = t('siTitle');
+  document.getElementById('si-text-1').textContent = t('siText1');
+  document.getElementById('si-text-2').textContent = t('siText2');
+  document.getElementById('si-text-3').textContent = t('siText3');
+  // Checkout modal labels
+  document.getElementById('co-title').textContent = t('coTitle');
+  document.getElementById('co-sub').textContent = t('coSub');
+  document.getElementById('co-lbl-fn').textContent = t('coLblFn');
+  document.getElementById('co-lbl-ln').textContent = t('coLblLn');
+  document.getElementById('co-lbl-email').textContent = t('coLblEmail');
+  document.getElementById('co-lbl-phone').textContent = t('coLblPhone');
+  document.getElementById('co-lbl-addr').textContent = t('coLblAddr');
+  document.getElementById('co-lbl-zip').textContent = t('coLblZip');
+  document.getElementById('co-lbl-city').textContent = t('coLblCity');
+  document.getElementById('co-lbl-country').textContent = t('coLblCountry');
+  document.getElementById('co-lbl-products').textContent = t('coLblProducts');
+  document.getElementById('co-lbl-ship').textContent = t('coLblShip');
+  document.getElementById('co-lbl-total').textContent = t('coLblTotal');
+  document.getElementById('co-pay-btn').textContent = t('coPayBtn');
+}
+
+function setCategory(cat) {
+  activeCategory = cat;
+  activeSubFilter = '';
+  ['machines','parts','decals','originals','displays','3dondemand','mods'].forEach(c =>
+    document.getElementById('nav-'+c).classList.toggle('active', c === cat));
+  document.getElementById('section-label').textContent = t('sectionLabel')[cat];
+
+  // Show/hide submenu
+  const page       = document.getElementById('main-page');
+  const subDecals  = document.getElementById('submenu-decals');
+  const subParts   = document.getElementById('submenu-parts');
+  const hasSubmenu = cat === 'decals' || cat === 'parts';
+  page.classList.toggle('has-submenu', hasSubmenu);
+  subDecals.style.display = cat === 'decals' ? 'block' : 'none';
+  subParts.style.display  = cat === 'parts'  ? 'block' : 'none';
+
+  // Reset all submenu active states
+  document.querySelectorAll('.submenu-item').forEach(b => b.classList.remove('active'));
+  // Set "All" button active
+  const allBtn = document.querySelector(`#submenu-${cat} .submenu-item`);
+  if (allBtn) allBtn.classList.add('active');
+
+  renderProducts();
+}
+
+function setSubFilter(cat, keyword) {
+  activeSubFilter = keyword;
+  // Update active state
+  document.querySelectorAll(`#submenu-${cat} .submenu-item`).forEach(b => {
+    const btnKeyword = b.getAttribute('onclick').match(/'([^']*)'(?:,\s*'([^']*)')?/);
+    const bKw = btnKeyword ? (btnKeyword[2] || '') : '';
+    b.classList.toggle('active', bKw === keyword);
+  });
+  renderProducts();
+}
+
+function onSearch(val) {
+  searchQuery = val.trim().toLowerCase();
+  const clearBtn = document.getElementById('search-clear');
+  const icon = document.getElementById('search-icon');
+  clearBtn.classList.toggle('visible', !!searchQuery);
+  icon.classList.toggle('hidden', !!searchQuery);
+  renderProducts();
+}
+
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  onSearch('');
+}
+
+function getShippingLabel(p) {
+  if (p.category === 'machines') return '';
+  const tpt = (p.tptCode && p.tptCode !== 'none') ? p.tptCode : (CAT_DEFAULT_TPT[p.category] || 'none');
+  if (!tpt || tpt === 'none') return '';
+  if (['TPT3','TPT4','TPT5'].includes(tpt)) {
+    const txt = { nl: '+ verzending v.a. €6 (Mondial Relay)', en: '+ shipping from €6 (Mondial Relay)', fr: '+ livraison dès 6€ (Mondial Relay)' };
+    return `<div class="card-shipping">📦 <span>${txt[currentLang] || txt.nl}</span></div>`;
+  }
+  const info = TPT_CODES[tpt];
+  if (!info) return '';
+  const txt = { nl: `+ verzending €${info.cost}`, en: `+ shipping €${info.cost}`, fr: `+ livraison €${info.cost}` };
+  return `<div class="card-shipping">📦 <span>${txt[currentLang] || txt.nl}</span></div>`;
+}
+
+function renderProducts() {
+  const grid = document.getElementById('products-grid');
+  let filtered;
+
+  if (searchQuery) {
+    filtered = products.filter(p =>
+      p.name.toLowerCase().includes(searchQuery) ||
+      getDesc(p, currentLang).toLowerCase().includes(searchQuery)
+    );
+    document.getElementById('section-label').textContent =
+      filtered.length
+        ? `"${document.getElementById('search-input').value}" — ${filtered.length}`
+        : t('noResults') + ` "${document.getElementById('search-input').value}"`;
+  } else {
+    filtered = products.filter(p => p.category === activeCategory);
+    // Apply submenu keyword filter
+    if (activeSubFilter) {
+      const kw = activeSubFilter.toLowerCase();
+      filtered = filtered.filter(p =>
+        (p.subcat && p.subcat.toLowerCase().includes(kw)) ||
+        p.name.toLowerCase().includes(kw) ||
+        getDesc(p, 'nl').toLowerCase().includes(kw) ||
+        getDesc(p, 'en').toLowerCase().includes(kw)
+      );
+    }
+    document.getElementById('section-label').textContent = t('sectionLabel')[activeCategory];
+  }
+
+  // Special info panel for 3D on demand (no products needed)
+  if (!searchQuery && activeCategory === '3dondemand') {
+    grid.innerHTML = `<div class="ondemand-panel">
+      <h3>${t('sectionLabel')['3dondemand']}</h3>
+      <p>${t('onDemandText')}</p>
+      <button class="ondemand-cta" onclick="openContactModal()">${t('onDemandBtn')}</button>
+    </div>`;
+    return;
+  }
+
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="empty-state">${searchQuery ? t('noResults') + ' "' + document.getElementById('search-input').value + '"' : t('noProducts')}</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(p => {
+    const pi = products.indexOf(p);
+    const imgs = p.images || [];
+    if (cardStates[pi] === undefined) cardStates[pi] = 0;
+    return `
+      <div class="card">
+        <div class="card-gallery" onclick="openLightbox(${pi})">
+          ${imgs.length ? imgs.map((s,i) => `<img src="${s}" class="${i===0?'active':''}" alt="" onerror="this.style.display='none'">`).join('') : '<div class="card-gallery-placeholder">🎰</div>'}
+          ${imgs.length > 1 ? `
+            <button class="gallery-nav gallery-prev" onclick="event.stopPropagation();cardNav(${pi},-1)">‹</button>
+            <button class="gallery-nav gallery-next" onclick="event.stopPropagation();cardNav(${pi},1)">›</button>
+            <div class="gallery-dots">${imgs.map((_,i)=>`<div class="gallery-dot${i===0?' active':''}" id="dot-${pi}-${i}"></div>`).join('')}</div>
+            <div class="gallery-count" id="gcount-${pi}">1 / ${imgs.length}</div>` : ''}
+          ${p.videoUrl ? `<button class="video-play-btn" onclick="event.stopPropagation();openVideoModal('${p.videoUrl}')" title="Bekijk video">▶</button>` : ''}
+        </div>
+        <div class="card-body">
+          <div class="card-title" style="display:flex;align-items:center;gap:8px;">${p.name}<span title="${p.inStock !== false ? 'Op voorraad' : 'Niet op voorraad'}" style="display:inline-block;flex-shrink:0;width:10px;height:10px;border-radius:50%;background:${p.inStock !== false ? '#27ae60' : '#e74c3c'};box-shadow:0 0 5px ${p.inStock !== false ? '#27ae6099' : '#e74c3c99'};"></span></div>
+          <div class="card-desc">${getDesc(p, currentLang)}</div>
+          ${getShippingLabel(p)}
+          <div class="card-footer">
+            <div class="price"><sup>€</sup>${p.price.toLocaleString('nl-BE')}</div>
+            <button class="add-btn" onclick="addToCart(${pi})">${t('addBtn')}</button>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function cardNav(pi, dir) {
+  const imgs = products[pi].images || [];
+  if (imgs.length <= 1) return;
+  const n = (cardStates[pi] + dir + imgs.length) % imgs.length;
+  cardStates[pi] = n;
+  const filtered = searchQuery
+    ? products.filter(p => p.name.toLowerCase().includes(searchQuery) || getDesc(p, currentLang).toLowerCase().includes(searchQuery))
+    : products.filter(p => p.category === activeCategory);
+  const visIdx = filtered.indexOf(products[pi]);
+  const galleries = document.querySelectorAll('.card-gallery');
+  if (!galleries[visIdx]) return;
+  galleries[visIdx].querySelectorAll('img').forEach((img, i) => img.classList.toggle('active', i === n));
+  galleries[visIdx].querySelectorAll('.gallery-dot').forEach((d, i) => d.classList.toggle('active', i === n));
+  const c = document.getElementById(`gcount-${pi}`);
+  if (c) c.textContent = `${n+1} / ${imgs.length}`;
+}
+
+function openLightbox(pi) {
+  const imgs = products[pi].images || [];
+  if (!imgs.length) return;
+  lbImages = imgs; lbIndex = cardStates[pi] || 0;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function lightboxNav(dir) { lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length; updateLightbox(); }
+function updateLightbox() {
+  document.getElementById('lightbox-img').src = lbImages[lbIndex];
+  document.getElementById('lightbox-counter').textContent = `${lbIndex+1} / ${lbImages.length}`;
+  document.getElementById('lightbox-thumbs').innerHTML = lbImages.map((s,i) =>
+    `<img class="lightbox-thumb${i===lbIndex?' active':''}" src="${s}" onclick="lbIndex=${i};updateLightbox()">`).join('');
+}
+document.getElementById('lightbox').addEventListener('click', e => { if (e.target === e.currentTarget) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'ArrowRight') lightboxNav(1);
+  if (e.key === 'Escape') closeLightbox();
+});
+
+function openVideoModal(url) {
+  const isYouTube = /youtube\.com|youtu\.be/.test(url);
+  const isVimeo   = /vimeo\.com/.test(url);
+  const iframeWrap = document.getElementById('video-iframe-wrap');
+  const localWrap  = document.getElementById('video-local-wrap');
+
+  if (isYouTube) {
+    const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]+)/);
+    const embedUrl = ytMatch ? 'https://www.youtube.com/embed/' + ytMatch[1] + '?autoplay=1' : url;
+    document.getElementById('video-iframe').src = embedUrl;
+    iframeWrap.style.display = 'block';
+    localWrap.style.display  = 'none';
+  } else if (isVimeo) {
+    const vmMatch = url.match(/vimeo\.com\/(\d+)/);
+    const embedUrl = vmMatch ? 'https://player.vimeo.com/video/' + vmMatch[1] + '?autoplay=1' : url;
+    document.getElementById('video-iframe').src = embedUrl;
+    iframeWrap.style.display = 'block';
+    localWrap.style.display  = 'none';
+  } else {
+    // Local file: mp4, mov, webm, etc.
+    const vid = document.getElementById('video-local');
+    vid.src = url;
+    vid.load();
+    vid.play().catch(() => {});
+    iframeWrap.style.display = 'none';
+    localWrap.style.display  = 'block';
+  }
+
+  const modal = document.getElementById('video-modal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+  document.getElementById('video-iframe').src = '';
+  const vid = document.getElementById('video-local');
+  vid.pause(); vid.src = '';
+  document.getElementById('video-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('video-modal').style.display === 'flex') closeVideoModal();
+});
+
+function addToCart(i) {
+  cart.push(products[i]);
+  renderCart();
+  showCartPopup(products[i].name);
+}
+
+function showCartPopup(productName) {
+  const existing = document.getElementById('cart-popup');
+  if (existing) existing.remove();
+  const popup = document.createElement('div');
+  popup.id = 'cart-popup';
+  popup.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1a1a1a;border:1px solid var(--gold);border-radius:6px;padding:16px 20px;z-index:998;text-align:center;min-width:280px;box-shadow:0 4px 20px rgba(0,0,0,0.6);';
+  popup.innerHTML = `
+    <div style="font-size:12px;color:var(--muted);letter-spacing:1px;margin-bottom:10px;">✓ <strong style="color:var(--white);">${productName}</strong> toegevoegd</div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="document.getElementById('cart-popup').remove()" style="flex:1;padding:10px;background:none;border:1px solid var(--border);color:var(--white);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;">Verder shoppen</button>
+      <button onclick="document.getElementById('cart-popup').remove();openCheckout();" style="flex:1;padding:10px;background:var(--gold);border:none;color:var(--black);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;font-weight:600;">Afrekenen</button>
+    </div>`;
+  document.body.appendChild(popup);
+  setTimeout(function() { const p = document.getElementById('cart-popup'); if(p) p.remove(); }, 6000);
+}
+function removeFromCart(i) { cart.splice(i,1); renderCart(); }
+
+function renderCart() {
+  const ie = document.getElementById('cart-items'), te = document.getElementById('cart-total'),
+        ce = document.getElementById('cart-count'), btn = document.getElementById('checkout-btn');
+  const itemWord = cart.length === 1 ? t('item') : t('items');
+  ce.textContent = cart.length + ' ' + itemWord;
+  btn.textContent = t('payBtn');
+  if (!cart.length) {
+    ie.innerHTML = `<div class="cart-empty">${t('cartEmpty')}</div>`;
+    te.textContent = '€0'; btn.disabled = true; return;
+  }
+  const total = cart.reduce((s,p) => s + Number(p.price), 0);
+  ie.innerHTML = cart.map((p,i) => `<div class="cart-item"><span class="cart-item-name">${p.name}</span><span class="cart-item-price">€${p.price.toLocaleString('nl-BE')}</span><button class="cart-item-remove" onclick="removeFromCart(${i})">×</button></div>`).join('');
+  te.textContent = '€' + total.toLocaleString('nl-BE'); btn.disabled = false;
+}
+
+// ================================================================
+//  TRANSPORT CODES
+// ================================================================
+const TPT_CODES = {
+  TPT1: { cost: 3,  carrier: 'bpost', label: 'bpost standard envelope' },
+  TPT2: { cost: 6,  carrier: 'bpost', label: 'bpost large envelope' },
+  TPT3: { cost: 6,  carrier: 'Mondial Relay', label: 'Mondial Relay BE/FR/LU' },
+  TPT4: { cost: 7,  carrier: 'Mondial Relay', label: 'Mondial Relay NL' },
+  TPT5: { cost: 10, carrier: 'Mondial Relay', label: 'Mondial Relay ES/PT/DE/IT/AT' },
+  TPT6: { cost: 20, carrier: 'bpost', label: 'bpost package worldwide' },
+};
+
+// Mondial Relay supported countries and their codes
+const MR_COUNTRY_MAP = {
+  BE: 'TPT3', FR: 'TPT3', LU: 'TPT3',
+  NL: 'TPT4',
+  ES: 'TPT5', PT: 'TPT5', DE: 'TPT5', IT: 'TPT5', AT: 'TPT5'
+};
+
+// Category-based default transport code for products without an explicit tptCode
+const CAT_DEFAULT_TPT = {
+  machines:   'none',   // pickup / local delivery, no postal shipping
+  parts:      'TPT3',   // Mondial Relay for 3D parts (auto-country)
+  decals:     'TPT1',   // bpost standard envelope
+  originals:  'TPT1',   // bpost standard envelope
+  displays:   'TPT3',   // Mondial Relay (auto-country)
+  '3dondemand': 'TPT3', // Mondial Relay (auto-country)
+  'mods': 'TPT3',
+};
+
+function resolveShippingCode(tptCode, category, country) {
+  // Use explicit code if set, otherwise fall back to category default
+  const code = (tptCode && tptCode !== 'none') ? tptCode : (CAT_DEFAULT_TPT[category] || 'none');
+  if (!code || code === 'none') return null;
+  // Mondial Relay: auto-select by country
+  if (['TPT3','TPT4','TPT5'].includes(code)) {
+    if (!country) return code; // country not yet selected
+    return MR_COUNTRY_MAP[country] || 'TPT6'; // fallback to bpost package
+  }
+  return code;
+}
+
+function calcShipping(cartItems, country) {
+  // Find the highest-priority shipping code across all cart items
+  // Priority: TPT6 > TPT5 > TPT4 > TPT3 > TPT2 > TPT1 > none
+  const priority = { TPT6:6, TPT5:5, TPT4:4, TPT3:3, TPT2:2, TPT1:1 };
+  let bestCode = null, bestPriority = 0;
+  cartItems.forEach(p => {
+    const code = resolveShippingCode(p.tptCode, p.category, country);
+    if (code && (priority[code] || 0) > bestPriority) {
+      bestCode = code;
+      bestPriority = priority[code];
+    }
+  });
+  return bestCode;
+}
+
+function updateShippingCost() {
+  const country = document.getElementById('co-country').value;
+  const shippingCode = calcShipping(cart, country);
+  const productsTotal = cart.reduce((s,p) => s + Number(p.price), 0);
+  const sl = document.getElementById('co-shipping-line');
+  if (shippingCode) {
+    const tpt = TPT_CODES[shippingCode];
+    document.getElementById('co-carrier-label').textContent = tpt.label;
+    document.getElementById('co-shipping-cost').textContent = '€' + tpt.cost;
+    document.getElementById('co-ship-amount').textContent = '€' + tpt.cost;
+    document.getElementById('co-grand-total').textContent = '€' + (productsTotal + tpt.cost).toLocaleString('nl-BE');
+    sl.style.display = 'flex';
+  } else {
+    document.getElementById('co-ship-amount').textContent = '—';
+    document.getElementById('co-grand-total').textContent = '€' + productsTotal.toLocaleString('nl-BE');
+    sl.style.display = 'none';
+  }
+  document.getElementById('co-products-amount').textContent = '€' + productsTotal.toLocaleString('nl-BE');
+}
+
+function openCheckout() {
+  if (!cart.length) return;
+  document.getElementById('co-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  updateShippingCost();
+}
+
+function closeCheckout() {
+  document.getElementById('co-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  resetPaymentUI();
+}
+
+function doCheckout() {
+  const fn = document.getElementById('co-firstname').value.trim();
+  const ln = document.getElementById('co-lastname').value.trim();
+  const email = document.getElementById('co-email').value.trim();
+  const phone = document.getElementById('co-phone').value.trim();
+  const addr = document.getElementById('co-address').value.trim();
+  const zip = document.getElementById('co-zip').value.trim();
+  const city = document.getElementById('co-city').value.trim();
+  const country = document.getElementById('co-country').value;
+  if (!fn || !ln || !email || !addr || !zip || !city || !country) {
+    alert(currentLang === 'fr' ? 'Veuillez remplir tous les champs obligatoires.' : currentLang === 'en' ? 'Please fill in all required fields.' : 'Vul alle verplichte velden in.');
+    return;
+  }
+  const shippingCode = calcShipping(cart, country);
+  const shippingCost = shippingCode ? TPT_CODES[shippingCode].cost : 0;
+  const shippingLabel = shippingCode ? TPT_CODES[shippingCode].label : '';
+  const productsTotal = cart.reduce((s,p) => s + Number(p.price), 0);
+  const grandTotal    = productsTotal + shippingCost;
+
+  // Check which payment method is selected
+  const method = document.getElementById('pm-transfer').classList.contains('active') ? 'transfer' : 'paypal';
+
+  if (method === 'transfer') {
+    showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal);
+    return;
+  }
+
+  // PayPal flow (unchanged)
+  let url = `https://www.paypal.com/cgi-bin/webscr?cmd=_cart&upload=1&business=${encodeURIComponent(PAYPAL_EMAIL)}`;
+  let i = 1;
+  cart.forEach(p => {
+    url += `&item_name_${i}=${encodeURIComponent(p.name)}&amount_${i}=${p.price}&quantity_${i}=1`;
+    i++;
+  });
+  if (shippingCost > 0) {
+    url += `&item_name_${i}=${encodeURIComponent('Transport: ' + shippingLabel)}&amount_${i}=${shippingCost}&quantity_${i}=1`;
+    i++;
+  }
+  const note = `${fn} ${ln} | ${addr}, ${zip} ${city}, ${country} | ${email} | ${phone}`;
+  url += `&custom=${encodeURIComponent(note)}&currency_code=EUR`;
+
+  const subject = `TiltCraft bestelling — ${fn} ${ln}`;
+  const body = `Nieuwe bestelling van ${fn} ${ln}\n\nE-mail: ${email}\nTelefoon: ${phone}\nAdres: ${addr}, ${zip} ${city}, ${country}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${shippingLabel} — €${shippingCost}\nTotaal: €${grandTotal}`;
+  window.location.href = `mailto:tiltcraft@telenet.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  setTimeout(() => window.open(url, '_blank'), 800);
+  closeCheckout();
+}
+
+// ── PAYMENT METHOD ───────────────────────────────────────────────
+let _qrOrderData = null;
+
+function setPayMethod(method) {
+  document.getElementById('pm-paypal').classList.toggle('active', method === 'paypal');
+  document.getElementById('pm-transfer').classList.toggle('active', method === 'transfer');
+  // Update main pay button label
+  const btn = document.getElementById('co-pay-btn');
+  if (method === 'transfer') {
+    btn.textContent = currentLang === 'fr' ? 'Générer QR & confirmer' : currentLang === 'en' ? 'Generate QR & confirm' : 'QR genereren & bevestigen';
+  } else {
+    btn.textContent = currentLang === 'fr' ? 'Payer via PayPal' : currentLang === 'en' ? 'Pay with PayPal' : 'Betalen via PayPal';
+  }
+}
+
+function generateOrderRef(fn, ln) {
+  const d = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  return 'TC' + d.getFullYear().toString().slice(2) + pad(d.getMonth()+1) + pad(d.getDate()) + '-' + fn.slice(0,2).toUpperCase() + ln.slice(0,2).toUpperCase() + pad(d.getHours()) + pad(d.getMinutes());
+}
+
+function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal) {
+  try {
+    const ref = generateOrderRef(fn, ln);
+    _qrOrderData = { fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal, ref };
+
+    // 1. Fill in IBAN details immediately
+    document.getElementById('qr-name').textContent   = BANK_NAME;
+    document.getElementById('qr-iban').textContent   = BANK_IBAN;
+    document.getElementById('qr-bic').textContent    = BANK_BIC;
+    document.getElementById('qr-amount').textContent = '€' + grandTotal.toFixed(2);
+    document.getElementById('qr-ref').textContent    = ref;
+
+    // 2. Mobile detection — hide QR on mobile, show copy buttons instead
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    document.getElementById('qr-canvas').style.display = isMobile ? 'none' : '';
+
+    // 3. Instructions per language
+    const instr = {
+      nl: isMobile
+        ? `📲 Gebruik de <strong>kopieer</strong>-knoppen naast IBAN en Mededeling om ze te plakken in je bank-app (KBC, BNP, ING, Belfius…)\nNa betaling ontvang je een bevestiging per e-mail.`
+        : `📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)\nAlle betalingsgegevens worden automatisch ingevuld.\nVermeld de mededeling <strong>${ref}</strong> als je manueel overschrijft.\nNa betaling ontvang je een bevestiging per e-mail.`,
+      en: isMobile
+        ? `📲 Use the <strong>copy</strong> buttons next to IBAN and Reference to paste them in your banking app.\nYou will receive a confirmation email after payment.`
+        : `📱 Scan the QR code with your banking app.\nAll payment details are pre-filled automatically.\nIf paying manually, use reference <strong>${ref}</strong>.\nYou will receive a confirmation email after payment.`,
+      fr: isMobile
+        ? `📲 Utilisez les boutons <strong>copier</strong> pour coller l'IBAN et la communication dans votre app bancaire.\nVous recevrez un e-mail de confirmation après le paiement.`
+        : `📱 Scannez le QR code avec votre application bancaire.\nToutes les données de paiement sont pré-remplies.\nSi vous payez manuellement, indiquez la référence <strong>${ref}</strong>.\nVous recevrez un e-mail de confirmation après le paiement.`
+    };
+    document.getElementById('qr-instructions').innerHTML = (instr[currentLang] || instr.nl).replace(/\n/g, '<br>');
+
+    // 4. Show the screen immediately — IBAN details are already visible
+    document.getElementById('co-pay-btn').style.display      = 'none';
+    document.getElementById('pay-method-row').style.display  = 'none';
+    document.getElementById('qr-screen').classList.add('visible');
+
+    // 4. Try to generate QR code directly in the div (failure is non-fatal)
+    setTimeout(function() {
+      try {
+        const ibanClean = BANK_IBAN.replace(/\s/g, '');
+        // EPC QR (SEPA Credit Transfer) — Febelfin/Belgian bank spec:
+        // Version 001, UTF-8, unstructured reference in field 11
+        const epc = 'BCD\n' +
+          '001\n' +
+          '1\n' +
+          'SCT\n' +
+          BANK_BIC + '\n' +
+          'TiltCraft Vermeire\n' +
+          ibanClean + '\n' +
+          'EUR' + grandTotal.toFixed(2) + '\n' +
+          '\n' +   // field 9: purpose (empty)
+          '\n' +   // field 10: structured ref (empty)
+          ref;     // field 11: unstructured ref (free text, max 140 chars)
+
+        const container = document.getElementById('qr-canvas');
+        container.innerHTML = '';
+        // qrcode-generator library: qrcode(typeNumber, errorCorrectionLevel)
+        // typeNumber 0 = auto-detect size
+        var qr = qrcode(0, 'M');
+        qr.addData(epc);
+        qr.make();
+        // createImgTag(cellSize, margin) — cellSize=3 gives ~200px for typical EPC
+        container.innerHTML = qr.createImgTag(3, 2);
+      } catch(qrErr) {
+        // QR generation failed silently — IBAN details still visible
+      }
+    }, 50);
+
+  } catch(err) {
+    alert('Fout bij openen betalingsscherm: ' + err.message);
+  }
+}
+
+function copyToClipboard(elementId, btnId) {
+  const val = document.getElementById(elementId).textContent.trim();
+  navigator.clipboard.writeText(val).then(function() {
+    const btn = document.getElementById(btnId);
+    const orig = btn.textContent;
+    btn.textContent = '✓ gekopieerd';
+    btn.style.color = 'var(--gold)';
+    btn.style.borderColor = 'var(--gold)';
+    setTimeout(function() {
+      btn.textContent = orig;
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 2000);
+  }).catch(function() {
+    // Fallback for older browsers
+    const range = document.createRange();
+    const el = document.getElementById(elementId);
+    range.selectNode(el);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+  });
+}
+
+function copyToClipboard(elementId, btnId) {
+  const val = document.getElementById(elementId).textContent.trim();
+  navigator.clipboard.writeText(val).then(function() {
+    const btn = document.getElementById(btnId);
+    const orig = btn.textContent;
+    btn.textContent = '✓ gekopieerd';
+    btn.style.color = 'var(--gold)';
+    btn.style.borderColor = 'var(--gold)';
+    setTimeout(function() { btn.textContent = orig; btn.style.color = ''; btn.style.borderColor = ''; }, 2000);
+  });
+}
+function toggleInvoice() {
+  const checked = document.getElementById('co-invoice-check').checked;
+  document.getElementById('co-invoice-fields').style.display = checked ? 'block' : 'none';
+}
+
+function confirmTransfer() {
+  if (!_qrOrderData) return;
+  const d = _qrOrderData;
+
+  // Send confirmation email
+  const subject = `TiltCraft bestelling (overschrijving) — ${d.fn} ${d.ln} — ${d.ref}`;
+  const invoiceCheck = document.getElementById('co-invoice-check');
+  const wantsInvoice = invoiceCheck && invoiceCheck.checked;
+  const company = wantsInvoice ? (document.getElementById('co-company').value || '—') : null;
+  const vat = wantsInvoice ? (document.getElementById('co-vat').value || '—') : null;
+  const invoiceLine = wantsInvoice ? `\n\nFACTUUR GEVRAAGD\nBedrijf: ${company}\nBTW: ${vat}` : '';
+  const body = `Nieuwe bestelling via overschrijving\nRef: ${d.ref}\n\nKlant: ${d.fn} ${d.ln}\nE-mail: ${d.email}\nTelefoon: ${d.phone}\nAdres: ${d.addr}, ${d.zip} ${d.city}, ${d.country}${invoiceLine}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${d.shippingLabel} — €${d.shippingCost}\nTotaal: €${d.grandTotal}\n\nMededeling: ${d.ref}`;
+  window.location.href = `mailto:tiltcraft@telenet.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  closeCheckout();
+  showToast(currentLang === 'fr' ? 'Commande confirmée !' : currentLang === 'en' ? 'Order confirmed!' : 'Bestelling bevestigd!');
+}
+
+function resetPaymentUI() {
+  document.getElementById('co-pay-btn').style.display    = 'block';
+  document.getElementById('pay-method-row').style.display = 'flex';
+  document.getElementById('qr-screen').classList.remove('visible');
+  _qrOrderData = null;
+  // Reset to paypal by default
+  setPayMethod('paypal');
+}
+
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+// CONTACT MODAL
+function openContactModal() {
+  document.getElementById('cm-form').style.display = 'block';
+  document.getElementById('cm-success').style.display = 'none';
+  document.getElementById('contact-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeContactModal() {
+  document.getElementById('contact-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function sendContact() {
+  const email = document.getElementById('cm-email').value.trim();
+  const topic = document.getElementById('cm-topic').value.trim();
+  const msg = document.getElementById('cm-message').value.trim();
+  if (!email || !topic || !msg) { alert('Vul alle velden in / Please fill all fields.'); return; }
+  const mailtoUrl = `mailto:tiltcraft@telenet.be?subject=${encodeURIComponent(topic)}&body=${encodeURIComponent('Van / From: ' + email + '\n\n' + msg)}`;
+  window.location.href = mailtoUrl;
+  document.getElementById('cm-form').style.display = 'none';
+  document.getElementById('cm-success').style.display = 'block';
+  document.getElementById('cm-success-msg').textContent = i18n[currentLang].cmSuccess;
+  setTimeout(closeContactModal, 3000);
+}
+
+// Init
+applyTranslations();
+renderProducts();
+renderCart();
+</script>
+</body></html>
