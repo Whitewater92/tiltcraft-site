@@ -435,7 +435,13 @@ footer a:hover { color: var(--gold); }
       <div class="qr-screen" id="qr-screen">
         <div id="qr-canvas"></div>
         <div class="qr-iban-box">
-          <div class="qr-iban-row"><span class="qr-iban-label">Begunstigde</span><span class="qr-iban-value" id="qr-name"></span></div>
+         <div class="qr-iban-row">
+  <span class="qr-iban-label">IBAN</span>
+  <span style="display:flex;align-items:center;gap:8px;">
+    <span class="qr-iban-value" id="qr-iban"></span>
+    <button onclick="copyToClipboard('qr-iban','copy-iban-btn')" id="copy-iban-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;padding:3px 8px;border-radius:3px;cursor:pointer;letter-spacing:1px;white-space:nowrap;">kopieer</button>
+  </span>
+</div>
           <div class="qr-iban-row">
             <span class="qr-iban-label">IBAN</span>
             <span style="display:flex;align-items:center;gap:8px;">
@@ -4457,6 +4463,28 @@ function copyToClipboard(elementId, btnId) {
   });
 }
 
+function copyToClipboard(elementId, btnId) {
+  const val = document.getElementById(elementId).textContent.trim();
+  navigator.clipboard.writeText(val).then(function() {
+    const btn = document.getElementById(btnId);
+    const orig = btn.textContent;
+    btn.textContent = '✓ gekopieerd';
+    btn.style.color = 'var(--gold)';
+    btn.style.borderColor = 'var(--gold)';
+    setTimeout(function() { btn.textContent = orig; btn.style.color = ''; btn.style.borderColor = ''; }, 2000);
+  });
+}
+function copyToClipboard(elementId, btnId) {
+  const val = document.getElementById(elementId).textContent.trim();
+  navigator.clipboard.writeText(val).then(function() {
+    const btn = document.getElementById(btnId);
+    const orig = btn.textContent;
+    btn.textContent = '✓ gekopieerd';
+    btn.style.color = 'var(--gold)';
+    btn.style.borderColor = 'var(--gold)';
+    setTimeout(function() { btn.textContent = orig; btn.style.color = ''; btn.style.borderColor = ''; }, 2000);
+  });
+}
 function confirmTransfer() {
   if (!_qrOrderData) return;
   const d = _qrOrderData;
