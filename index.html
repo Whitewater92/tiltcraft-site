@@ -250,6 +250,10 @@ footer a:hover { color: var(--gold); }
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){ emailjs.init({ publicKey: "7oDfDKHqXPoYKPA_r" }); })();
+  </script>
 </head>
 <body>
 
@@ -365,7 +369,7 @@ footer a:hover { color: var(--gold); }
 
 <div class="contact-strip">
   <p id="contact-q">Vragen over een product? Neem contact op.</p>
-  <a href="mailto:tiltcraft@telenet.be">tiltcraft@telenet.be</a>
+  <a href="mailto:info@tiltcraft.eu">info@tiltcraft.eu</a>
 </div>
 <footer>
   © TiltCraft — Belgium<br><br>
@@ -4362,7 +4366,7 @@ function doCheckout() {
 
   const subject = `TiltCraft bestelling — ${fn} ${ln}`;
   const body = `Nieuwe bestelling van ${fn} ${ln}\n\nE-mail: ${email}\nTelefoon: ${phone}\nAdres: ${addr}, ${zip} ${city}, ${country}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${shippingLabel} — €${shippingCost}\nTotaal: €${grandTotal}`;
-  window.location.href = `mailto:tiltcraft@telenet.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = `mailto:info@tiltcraft.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   setTimeout(() => window.open(url, '_blank'), 800);
   closeCheckout();
 }
@@ -4501,6 +4505,37 @@ function toggleInvoice() {
   document.getElementById('co-invoice-fields').style.display = checked ? 'block' : 'none';
 }
 
+function sendOrderEmails(orderData) {
+  // Mail naar klant
+  emailjs.send("service_k0kokxl", "template_uca8a7a", {
+    to_email: orderData.email,
+    to_name: orderData.fn + ' ' + orderData.ln,
+    order_ref: orderData.ref,
+    products: orderData.products,
+    shipping: orderData.shippingLabel,
+    shipping_cost: '€' + orderData.shippingCost,
+    total: '€' + orderData.grandTotal,
+    address: orderData.addr + ', ' + orderData.zip + ' ' + orderData.city + ', ' + orderData.country,
+    invoice_info: orderData.invoiceLine || ''
+  }).catch(function(err) { console.warn('Klant mail fout:', err); });
+
+  // Mail naar TiltCraft
+  emailjs.send("service_k0kokxl", "template_ce6ypur", {
+    to_email: "info@tiltcraft.eu",
+    to_name: "TiltCraft",
+    order_ref: orderData.ref,
+    customer: orderData.fn + ' ' + orderData.ln,
+    customer_email: orderData.email,
+    customer_phone: orderData.phone,
+    products: orderData.products,
+    shipping: orderData.shippingLabel,
+    shipping_cost: '€' + orderData.shippingCost,
+    total: '€' + orderData.grandTotal,
+    address: orderData.addr + ', ' + orderData.zip + ' ' + orderData.city + ', ' + orderData.country,
+    invoice_info: orderData.invoiceLine || ''
+  }).catch(function(err) { console.warn('Admin mail fout:', err); });
+}
+
 function confirmTransfer() {
   if (!_qrOrderData) return;
   const d = _qrOrderData;
@@ -4513,7 +4548,16 @@ function confirmTransfer() {
   const vat = wantsInvoice ? (document.getElementById('co-vat').value || '—') : null;
   const invoiceLine = wantsInvoice ? `\n\nFACTUUR GEVRAAGD\nBedrijf: ${company}\nBTW: ${vat}` : '';
   const body = `Nieuwe bestelling via overschrijving\nRef: ${d.ref}\n\nKlant: ${d.fn} ${d.ln}\nE-mail: ${d.email}\nTelefoon: ${d.phone}\nAdres: ${d.addr}, ${d.zip} ${d.city}, ${d.country}${invoiceLine}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${d.shippingLabel} — €${d.shippingCost}\nTotaal: €${d.grandTotal}\n\nMededeling: ${d.ref}`;
-  window.location.href = `mailto:tiltcraft@telenet.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = `mailto:info@tiltcraft.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  // EmailJS bevestigingsmails
+  sendOrderEmails({
+    fn: d.fn, ln: d.ln, email: d.email, phone: d.phone,
+    ref: d.ref, addr: d.addr, zip: d.zip, city: d.city, country: d.country,
+    shippingLabel: d.shippingLabel, shippingCost: d.shippingCost, grandTotal: d.grandTotal,
+    products: cart.map(p => p.name + ' €' + p.price).join(', '),
+    invoiceLine: wantsInvoice ? 'Factuur: ' + company + ' | BTW: ' + vat : ''
+  });
 
   closeCheckout();
   showToast(currentLang === 'fr' ? 'Commande confirmée !' : currentLang === 'en' ? 'Order confirmed!' : 'Bestelling bevestigd!');
@@ -4550,7 +4594,7 @@ function sendContact() {
   const topic = document.getElementById('cm-topic').value.trim();
   const msg = document.getElementById('cm-message').value.trim();
   if (!email || !topic || !msg) { alert('Vul alle velden in / Please fill all fields.'); return; }
-  const mailtoUrl = `mailto:tiltcraft@telenet.be?subject=${encodeURIComponent(topic)}&body=${encodeURIComponent('Van / From: ' + email + '\n\n' + msg)}`;
+  const mailtoUrl = `mailto:info@tiltcraft.eu?subject=${encodeURIComponent(topic)}&body=${encodeURIComponent('Van / From: ' + email + '\n\n' + msg)}`;
   window.location.href = mailtoUrl;
   document.getElementById('cm-form').style.display = 'none';
   document.getElementById('cm-success').style.display = 'block';
