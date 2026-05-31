@@ -436,13 +436,6 @@ footer a:hover { color: var(--gold); }
         <div id="qr-canvas"></div>
         <div class="qr-iban-box">
           <div class="qr-iban-row"><span class="qr-iban-label">Begunstigde</span><span class="qr-iban-value" id="qr-name"></span></div>
-         <div class="qr-iban-row">
-  <span class="qr-iban-label">IBAN</span>
-  <span style="display:flex;align-items:center;gap:8px;">
-    <span class="qr-iban-value" id="qr-iban"></span>
-    <button onclick="copyToClipboard('qr-iban','copy-iban-btn')" id="copy-iban-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;padding:3px 8px;border-radius:3px;cursor:pointer;letter-spacing:1px;white-space:nowrap;">kopieer</button>
-  </span>
-</div>
           <div class="qr-iban-row">
             <span class="qr-iban-label">IBAN</span>
             <span style="display:flex;align-items:center;gap:8px;">
@@ -4189,7 +4182,23 @@ document.addEventListener('keydown', function(e) {
 function addToCart(i) {
   cart.push(products[i]);
   renderCart();
-  showToast(products[i].name + ' ' + t('added'));
+  showCartPopup(products[i].name);
+}
+
+function showCartPopup(productName) {
+  const existing = document.getElementById('cart-popup');
+  if (existing) existing.remove();
+  const popup = document.createElement('div');
+  popup.id = 'cart-popup';
+  popup.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1a1a1a;border:1px solid var(--gold);border-radius:6px;padding:16px 20px;z-index:998;text-align:center;min-width:280px;box-shadow:0 4px 20px rgba(0,0,0,0.6);';
+  popup.innerHTML = `
+    <div style="font-size:12px;color:var(--muted);letter-spacing:1px;margin-bottom:10px;">✓ <strong style="color:var(--white);">${productName}</strong> toegevoegd</div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="document.getElementById('cart-popup').remove()" style="flex:1;padding:10px;background:none;border:1px solid var(--border);color:var(--white);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;">Verder shoppen</button>
+      <button onclick="document.getElementById('cart-popup').remove();openCheckout();" style="flex:1;padding:10px;background:var(--gold);border:none;color:var(--black);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;font-weight:600;">Afrekenen</button>
+    </div>`;
+  document.body.appendChild(popup);
+  setTimeout(function() { const p = document.getElementById('cart-popup'); if(p) p.remove(); }, 6000);
 }
 function removeFromCart(i) { cart.splice(i,1); renderCart(); }
 
