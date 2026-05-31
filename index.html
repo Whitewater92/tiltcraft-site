@@ -434,16 +434,24 @@ footer a:hover { color: var(--gold); }
       <!-- QR / TRANSFER SCREEN -->
       <div class="qr-screen" id="qr-screen">
         <div id="qr-canvas"></div>
-        <!-- Mobile: bank app deep link instead of QR -->
-        <div id="mobile-pay-btn-wrap" style="display:none; margin-bottom:14px;">
-          <a id="mobile-pay-link" href="#" style="display:block; width:100%; padding:14px; background:var(--gold); color:var(--black); text-align:center; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase; border-radius:2px; text-decoration:none;">📲 Openen in bank-app</a>
-        </div>
         <div class="qr-iban-box">
           <div class="qr-iban-row"><span class="qr-iban-label">Begunstigde</span><span class="qr-iban-value" id="qr-name"></span></div>
-          <div class="qr-iban-row"><span class="qr-iban-label">IBAN</span><span class="qr-iban-value" id="qr-iban"></span></div>
+          <div class="qr-iban-row">
+            <span class="qr-iban-label">IBAN</span>
+            <span style="display:flex;align-items:center;gap:8px;">
+              <span class="qr-iban-value" id="qr-iban"></span>
+              <button onclick="copyToClipboard('qr-iban','copy-iban-btn')" id="copy-iban-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;padding:3px 8px;border-radius:3px;cursor:pointer;letter-spacing:1px;white-space:nowrap;">kopieer</button>
+            </span>
+          </div>
           <div class="qr-iban-row"><span class="qr-iban-label">BIC</span><span class="qr-iban-value" id="qr-bic"></span></div>
           <div class="qr-iban-row"><span class="qr-iban-label">Bedrag</span><span class="qr-iban-value" id="qr-amount"></span></div>
-          <div class="qr-iban-row"><span class="qr-iban-label">Mededeling</span><span class="qr-iban-value qr-ref" id="qr-ref"></span></div>
+          <div class="qr-iban-row">
+            <span class="qr-iban-label">Mededeling</span>
+            <span style="display:flex;align-items:center;gap:8px;">
+              <span class="qr-iban-value qr-ref" id="qr-ref"></span>
+              <button onclick="copyToClipboard('qr-ref','copy-ref-btn')" id="copy-ref-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;padding:3px 8px;border-radius:3px;cursor:pointer;letter-spacing:1px;white-space:nowrap;">kopieer</button>
+            </span>
+          </div>
         </div>
         <div class="qr-instructions" id="qr-instructions">
           📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)<br>
@@ -4364,37 +4372,23 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
     document.getElementById('qr-amount').textContent = '€' + grandTotal.toFixed(2);
     document.getElementById('qr-ref').textContent    = ref;
 
-    // 2. Mobile detection
+    // 2. Mobile detection — hide QR on mobile, show copy buttons instead
     const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    document.getElementById('qr-canvas').style.display = isMobile ? 'none' : '';
 
-    // 3. Instructions per language (mobile-aware)
+    // 3. Instructions per language
     const instr = {
       nl: isMobile
-        ? `📲 Tik op de knop hierboven om je bank-app te openen (KBC, BNP, ING, Belfius…)\nAlle betalingsgegevens worden automatisch ingevuld.\nVermeld de mededeling <strong>${ref}</strong> als je manueel overschrijft.\nNa betaling ontvang je een bevestiging per e-mail.`
+        ? `📲 Gebruik de <strong>kopieer</strong>-knoppen naast IBAN en Mededeling om ze te plakken in je bank-app (KBC, BNP, ING, Belfius…)\nNa betaling ontvang je een bevestiging per e-mail.`
         : `📱 Scan de QR-code met je bank-app (KBC, BNP, ING, Belfius…)\nAlle betalingsgegevens worden automatisch ingevuld.\nVermeld de mededeling <strong>${ref}</strong> als je manueel overschrijft.\nNa betaling ontvang je een bevestiging per e-mail.`,
       en: isMobile
-        ? `📲 Tap the button above to open your banking app.\nAll payment details are pre-filled automatically.\nIf paying manually, use reference <strong>${ref}</strong>.\nYou will receive a confirmation email after payment.`
+        ? `📲 Use the <strong>copy</strong> buttons next to IBAN and Reference to paste them in your banking app.\nYou will receive a confirmation email after payment.`
         : `📱 Scan the QR code with your banking app.\nAll payment details are pre-filled automatically.\nIf paying manually, use reference <strong>${ref}</strong>.\nYou will receive a confirmation email after payment.`,
       fr: isMobile
-        ? `📲 Appuyez sur le bouton pour ouvrir votre app bancaire.\nToutes les données de paiement sont pré-remplies.\nSi vous payez manuellement, indiquez la référence <strong>${ref}</strong>.\nVous recevrez un e-mail de confirmation après le paiement.`
+        ? `📲 Utilisez les boutons <strong>copier</strong> pour coller l'IBAN et la communication dans votre app bancaire.\nVous recevrez un e-mail de confirmation après le paiement.`
         : `📱 Scannez le QR code avec votre application bancaire.\nToutes les données de paiement sont pré-remplies.\nSi vous payez manuellement, indiquez la référence <strong>${ref}</strong>.\nVous recevrez un e-mail de confirmation après le paiement.`
     };
     document.getElementById('qr-instructions').innerHTML = (instr[currentLang] || instr.nl).replace(/\n/g, '<br>');
-    const mobileWrap = document.getElementById('mobile-pay-btn-wrap');
-    const qrCanvas   = document.getElementById('qr-canvas');
-    if (isMobile) {
-      // Build SEPA deep link (works with KBC, BNP Paribas Fortis, ING, Belfius)
-      const ibanClean = BANK_IBAN.replace(/\s/g, '');
-      const sepaLink  = `payto://${ibanClean}?amount=EUR:${grandTotal.toFixed(2)}&message=${encodeURIComponent(ref)}&receiver-name=${encodeURIComponent(BANK_NAME)}`;
-      const mobileLink = document.getElementById('mobile-pay-link');
-      mobileLink.href = sepaLink;
-      mobileLink.textContent = currentLang === 'fr' ? '📲 Ouvrir dans l\'app bancaire' : currentLang === 'en' ? '📲 Open in banking app' : '📲 Openen in bank-app';
-      mobileWrap.style.display = 'block';
-      qrCanvas.style.display   = 'none'; // hide QR on mobile
-    } else {
-      mobileWrap.style.display = 'none';
-      qrCanvas.style.display   = '';
-    }
 
     // 4. Show the screen immediately — IBAN details are already visible
     document.getElementById('co-pay-btn').style.display      = 'none';
@@ -4436,6 +4430,31 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
   } catch(err) {
     alert('Fout bij openen betalingsscherm: ' + err.message);
   }
+}
+
+function copyToClipboard(elementId, btnId) {
+  const val = document.getElementById(elementId).textContent.trim();
+  navigator.clipboard.writeText(val).then(function() {
+    const btn = document.getElementById(btnId);
+    const orig = btn.textContent;
+    btn.textContent = '✓ gekopieerd';
+    btn.style.color = 'var(--gold)';
+    btn.style.borderColor = 'var(--gold)';
+    setTimeout(function() {
+      btn.textContent = orig;
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 2000);
+  }).catch(function() {
+    // Fallback for older browsers
+    const range = document.createRange();
+    const el = document.getElementById(elementId);
+    range.selectNode(el);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+  });
 }
 
 function confirmTransfer() {
