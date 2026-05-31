@@ -4506,33 +4506,43 @@ function toggleInvoice() {
 }
 
 function sendOrderEmails(orderData) {
-  // Mail naar klant
+  const ibanClean = BANK_IBAN;
+  const bicClean  = BANK_BIC;
+
+  // Mail naar klant (3-talig template)
   emailjs.send("service_k0kokxl", "template_uca8a7a", {
-    to_email: orderData.email,
-    to_name: orderData.fn + ' ' + orderData.ln,
-    order_ref: orderData.ref,
-    products: orderData.products,
-    shipping: orderData.shippingLabel,
-    shipping_cost: '€' + orderData.shippingCost,
-    total: '€' + orderData.grandTotal,
-    address: orderData.addr + ', ' + orderData.zip + ' ' + orderData.city + ', ' + orderData.country,
+    to_email:     orderData.email,
+    firstname:    orderData.fn,
+    ref:          orderData.ref,
+    order_lines:  orderData.products,
+    shipping_label: orderData.shippingLabel,
+    shipping_cost:  orderData.shippingCost,
+    total:        orderData.grandTotal,
+    iban:         ibanClean,
+    bic:          bicClean,
     invoice_info: orderData.invoiceLine || ''
+  }).then(function() {
+    console.log('Klant mail verzonden');
   }).catch(function(err) { console.warn('Klant mail fout:', err); });
 
-  // Mail naar TiltCraft
+  // Mail naar TiltCraft (admin notificatie)
   emailjs.send("service_k0kokxl", "template_ce6ypur", {
-    to_email: "info@tiltcraft.eu",
-    to_name: "TiltCraft",
-    order_ref: orderData.ref,
-    customer: orderData.fn + ' ' + orderData.ln,
+    to_email:       "info@tiltcraft.eu",
+    firstname:      "TiltCraft",
+    ref:            orderData.ref,
+    order_lines:    orderData.products,
+    shipping_label: orderData.shippingLabel,
+    shipping_cost:  orderData.shippingCost,
+    total:          orderData.grandTotal,
+    iban:           ibanClean,
+    bic:            bicClean,
+    customer:       orderData.fn + ' ' + orderData.ln,
     customer_email: orderData.email,
     customer_phone: orderData.phone,
-    products: orderData.products,
-    shipping: orderData.shippingLabel,
-    shipping_cost: '€' + orderData.shippingCost,
-    total: '€' + orderData.grandTotal,
-    address: orderData.addr + ', ' + orderData.zip + ' ' + orderData.city + ', ' + orderData.country,
-    invoice_info: orderData.invoiceLine || ''
+    address:        orderData.addr + ', ' + orderData.zip + ' ' + orderData.city + ', ' + orderData.country,
+    invoice_info:   orderData.invoiceLine || ''
+  }).then(function() {
+    console.log('Admin mail verzonden');
   }).catch(function(err) { console.warn('Admin mail fout:', err); });
 }
 
