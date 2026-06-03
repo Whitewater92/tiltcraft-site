@@ -5128,9 +5128,6 @@ function doCheckout() {
   const note = `${fn} ${ln} | ${addr}, ${zip} ${city}, ${country} | ${email} | ${phone}`;
   url += `&custom=${encodeURIComponent(note)}&currency_code=EUR`;
 
-  const subject = `TiltCraft bestelling — ${fn} ${ln}`;
-  const body = `Nieuwe bestelling van ${fn} ${ln}\n\nE-mail: ${email}\nTelefoon: ${phone}\nAdres: ${addr}, ${zip} ${city}, ${country}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${shippingLabel} — €${shippingCost}\nTotaal: €${grandTotal}`;
-  window.location.href = `mailto:info@tiltcraft.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   setTimeout(() => window.open(url, '_blank'), 800);
   closeCheckout();
 }
@@ -5315,13 +5312,11 @@ function confirmTransfer() {
   const d = _qrOrderData;
 
   // Send confirmation email
-  const subject = `TiltCraft bestelling (overschrijving) — ${d.fn} ${d.ln} — ${d.ref}`;
   const invoiceCheck = document.getElementById('co-invoice-check');
   const wantsInvoice = invoiceCheck && invoiceCheck.checked;
   const company = wantsInvoice ? (document.getElementById('co-company').value || '—') : null;
   const vat = wantsInvoice ? (document.getElementById('co-vat').value || '—') : null;
-  const invoiceLine = wantsInvoice ? `\n\nFACTUUR GEVRAAGD\nBedrijf: ${company}\nBTW: ${vat}` : '';
-  const body = `Nieuwe bestelling via overschrijving\nRef: ${d.ref}\n\nKlant: ${d.fn} ${d.ln}\nE-mail: ${d.email}\nTelefoon: ${d.phone}\nAdres: ${d.addr}, ${d.zip} ${d.city}, ${d.country}${invoiceLine}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${d.shippingLabel} — €${d.shippingCost}\nTotaal: €${d.grandTotal}\n\nMededeling: ${d.ref}`;
+
   // EmailJS bevestigingsmails
   sendOrderEmails({
     fn: d.fn, ln: d.ln, email: d.email, phone: d.phone,
