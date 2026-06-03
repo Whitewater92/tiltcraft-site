@@ -38,7 +38,7 @@ exports.handler = async (event) => {
     }
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['bancontact', 'card'],
+      payment_method_types: ['bancontact', 'ideal', 'card'],
       line_items,
       mode: 'payment',
       success_url: 'https://tiltcraft.eu/?payment=success',
