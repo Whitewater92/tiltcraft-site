@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl"><head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" href="/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TiltCraft — Precision in Play</title>
 <meta name="description" content="TiltCraft maakt custom 3D-geprinte onderdelen, decals en accessoires voor flipperkastfanaten. Toppers, speaker inserts, flipperbalken, in-game gadgets en meer — op maat of uit stock.">
@@ -446,7 +444,6 @@ footer a:hover { color: var(--gold); }
       <!-- PAYMENT METHOD CHOICE -->
       <div class="pay-method-row" id="pay-method-row">
         <button class="pay-method-btn active" id="pm-paypal" onclick="setPayMethod('paypal')">💳 PayPal</button>
-        <button class="pay-method-btn" id="pm-bancontact" onclick="setPayMethod('bancontact')">🏧 Bancontact</button>
         <button class="pay-method-btn" id="pm-transfer" onclick="setPayMethod('transfer')">🏦 Overschrijving</button>
       </div>
 
@@ -5110,44 +5107,10 @@ function doCheckout() {
   const grandTotal    = productsTotal + shippingCost;
 
   // Check which payment method is selected
-  const method = document.getElementById('pm-transfer').classList.contains('active') ? 'transfer'
-    : document.getElementById('pm-bancontact').classList.contains('active') ? 'bancontact'
-    : 'paypal';
+  const method = document.getElementById('pm-transfer').classList.contains('active') ? 'transfer' : 'paypal';
 
   if (method === 'transfer') {
     showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal);
-    return;
-  }
-
-  if (method === 'bancontact') {
-    const btn = document.getElementById('co-pay-btn');
-    btn.textContent = '⏳ Even geduld...';
-    btn.disabled = true;
-    fetch('/.netlify/functions/create-checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        cart,
-        shipping: shippingLabel,
-        shippingCost,
-        customer: { firstName: fn, lastName: ln, email, phone, address: addr, zip, city, country }
-      })
-    })
-    .then(r => r.json())
-    .then(data => {
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert('Stripe fout: ' + (data.error || 'onbekend'));
-        btn.textContent = currentLang === 'fr' ? 'Payer via Bancontact' : currentLang === 'en' ? 'Pay via Bancontact' : 'Betalen via Bancontact';
-        btn.disabled = false;
-      }
-    })
-    .catch(err => {
-      alert('Verbindingsfout: ' + err.message);
-      btn.textContent = currentLang === 'fr' ? 'Payer via Bancontact' : currentLang === 'en' ? 'Pay via Bancontact' : 'Betalen via Bancontact';
-      btn.disabled = false;
-    });
     return;
   }
 
@@ -5178,12 +5141,10 @@ let _qrOrderData = null;
 function setPayMethod(method) {
   document.getElementById('pm-paypal').classList.toggle('active', method === 'paypal');
   document.getElementById('pm-transfer').classList.toggle('active', method === 'transfer');
-  document.getElementById('pm-bancontact').classList.toggle('active', method === 'bancontact');
+  // Update main pay button label
   const btn = document.getElementById('co-pay-btn');
   if (method === 'transfer') {
     btn.textContent = currentLang === 'fr' ? 'Générer QR & confirmer' : currentLang === 'en' ? 'Generate QR & confirm' : 'QR genereren & bevestigen';
-  } else if (method === 'bancontact') {
-    btn.textContent = currentLang === 'fr' ? 'Payer via Bancontact' : currentLang === 'en' ? 'Pay via Bancontact' : 'Betalen via Bancontact';
   } else {
     btn.textContent = currentLang === 'fr' ? 'Payer via PayPal' : currentLang === 'en' ? 'Pay with PayPal' : 'Betalen via PayPal';
   }
@@ -5361,8 +5322,6 @@ function confirmTransfer() {
   const vat = wantsInvoice ? (document.getElementById('co-vat').value || '—') : null;
   const invoiceLine = wantsInvoice ? `\n\nFACTUUR GEVRAAGD\nBedrijf: ${company}\nBTW: ${vat}` : '';
   const body = `Nieuwe bestelling via overschrijving\nRef: ${d.ref}\n\nKlant: ${d.fn} ${d.ln}\nE-mail: ${d.email}\nTelefoon: ${d.phone}\nAdres: ${d.addr}, ${d.zip} ${d.city}, ${d.country}${invoiceLine}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${d.shippingLabel} — €${d.shippingCost}\nTotaal: €${d.grandTotal}\n\nMededeling: ${d.ref}`;
-  window.location.href = `mailto:info@tiltcraft.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
   // EmailJS bevestigingsmails
   sendOrderEmails({
     fn: d.fn, ln: d.ln, email: d.email, phone: d.phone,
@@ -5419,17 +5378,5 @@ function sendContact() {
 applyTranslations();
 renderProducts();
 renderCart();
-
-// Handle Stripe return
-(function() {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('payment') === 'success') {
-    setTimeout(() => showToast(currentLang === 'fr' ? 'Paiement réussi ! Merci pour votre commande.' : currentLang === 'en' ? 'Payment successful! Thank you for your order.' : 'Betaling geslaagd! Bedankt voor je bestelling.'), 500);
-    history.replaceState({}, '', '/');
-  } else if (params.get('payment') === 'cancelled') {
-    setTimeout(() => showToast(currentLang === 'fr' ? 'Paiement annulé.' : currentLang === 'en' ? 'Payment cancelled.' : 'Betaling geannuleerd.'), 500);
-    history.replaceState({}, '', '/');
-  }
-})();
 </script>
 </body></html>
