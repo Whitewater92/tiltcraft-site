@@ -5081,6 +5081,12 @@ function openCheckout() {
   updateShippingCost();
 }
 
+function clearCart() {
+  cart = [];
+  localStorage.removeItem('tiltcraft_cart');
+  renderCart();
+}
+
 function closeCheckout() {
   document.getElementById('co-modal').classList.remove('open');
   document.body.style.overflow = '';
@@ -5129,6 +5135,7 @@ function doCheckout() {
   url += `&custom=${encodeURIComponent(note)}&currency_code=EUR`;
 
   setTimeout(() => window.open(url, '_blank'), 800);
+  clearCart();
   closeCheckout();
 }
 
@@ -5326,6 +5333,7 @@ function confirmTransfer() {
     invoiceLine: wantsInvoice ? 'Factuur: ' + company + ' | BTW: ' + vat : ''
   });
 
+  clearCart();
   closeCheckout();
   showToast(currentLang === 'fr' ? 'Commande confirmée !' : currentLang === 'en' ? 'Order confirmed!' : 'Bestelling bevestigd!');
 }
