@@ -536,7 +536,7 @@ footer a:hover { color: var(--gold); }
 const PAYPAL_EMAIL = "rvermeire@telenet.be";
 const BANK_IBAN    = "BE85 4442 6606 3106";   // ← vul hier je echte IBAN in
 const BANK_BIC     = "KREDBEBB";               // ← vul hier je echte BIC in
-const BANK_NAME    = "TiltCraft Régis Vermeire";
+const BANK_NAME    = "V&R Consultancy bv";
 
 // ================================================================
 //  PRODUCTENLIJST — bewerk dit om producten toe te voegen
@@ -5081,12 +5081,6 @@ function openCheckout() {
   updateShippingCost();
 }
 
-function clearCart() {
-  cart = [];
-  localStorage.removeItem('tiltcraft_cart');
-  renderCart();
-}
-
 function closeCheckout() {
   document.getElementById('co-modal').classList.remove('open');
   document.body.style.overflow = '';
@@ -5134,8 +5128,10 @@ function doCheckout() {
   const note = `${fn} ${ln} | ${addr}, ${zip} ${city}, ${country} | ${email} | ${phone}`;
   url += `&custom=${encodeURIComponent(note)}&currency_code=EUR`;
 
+  const subject = `TiltCraft bestelling — ${fn} ${ln}`;
+  const body = `Nieuwe bestelling van ${fn} ${ln}\n\nE-mail: ${email}\nTelefoon: ${phone}\nAdres: ${addr}, ${zip} ${city}, ${country}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${shippingLabel} — €${shippingCost}\nTotaal: €${grandTotal}`;
+  window.location.href = `mailto:info@tiltcraft.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   setTimeout(() => window.open(url, '_blank'), 800);
-  clearCart();
   closeCheckout();
 }
 
@@ -5206,7 +5202,7 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
           '1\n' +
           'SCT\n' +
           BANK_BIC + '\n' +
-          'TiltCraft Vermeire\n' +
+          'V&R Consultancy bv\n' +
           ibanClean + '\n' +
           'EUR' + grandTotal.toFixed(2) + '\n' +
           '\n' +   // field 9: purpose (empty)
@@ -5319,10 +5315,14 @@ function confirmTransfer() {
   const d = _qrOrderData;
 
   // Send confirmation email
+  const subject = `TiltCraft bestelling (overschrijving) — ${d.fn} ${d.ln} — ${d.ref}`;
   const invoiceCheck = document.getElementById('co-invoice-check');
   const wantsInvoice = invoiceCheck && invoiceCheck.checked;
   const company = wantsInvoice ? (document.getElementById('co-company').value || '—') : null;
   const vat = wantsInvoice ? (document.getElementById('co-vat').value || '—') : null;
+  const invoiceLine = wantsInvoice ? `\n\nFACTUUR GEVRAAGD\nBedrijf: ${company}\nBTW: ${vat}` : '';
+  const body = `Nieuwe bestelling via overschrijving\nRef: ${d.ref}\n\nKlant: ${d.fn} ${d.ln}\nE-mail: ${d.email}\nTelefoon: ${d.phone}\nAdres: ${d.addr}, ${d.zip} ${d.city}, ${d.country}${invoiceLine}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${d.shippingLabel} — €${d.shippingCost}\nTotaal: €${d.grandTotal}\n\nMededeling: ${d.ref}`;
+  window.location.href = `mailto:info@tiltcraft.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   // EmailJS bevestigingsmails
   sendOrderEmails({
@@ -5333,7 +5333,6 @@ function confirmTransfer() {
     invoiceLine: wantsInvoice ? 'Factuur: ' + company + ' | BTW: ' + vat : ''
   });
 
-  clearCart();
   closeCheckout();
   showToast(currentLang === 'fr' ? 'Commande confirmée !' : currentLang === 'en' ? 'Order confirmed!' : 'Bestelling bevestigd!');
 }
