@@ -5195,7 +5195,10 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
     document.getElementById('pay-method-row').style.display  = 'none';
     document.getElementById('qr-screen').classList.add('visible');
 
-    // 4b. Send merchant notification immediately when QR is shown
+    // 4b. Clear cart immediately when QR is shown
+    clearCart();
+
+    // 4c. Send merchant notification immediately when QR is shown
     // so order data is never lost even if customer doesn't click confirm
     emailjs.send("service_k0kokxl", "template_ce6ypur", {
       firstname: fn,
