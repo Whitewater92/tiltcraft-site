@@ -5195,6 +5195,27 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
     document.getElementById('pay-method-row').style.display  = 'none';
     document.getElementById('qr-screen').classList.add('visible');
 
+    // 4b. Send merchant notification immediately when QR is shown
+    // so order data is never lost even if customer doesn't click confirm
+    emailjs.send("service_k0kokxl", "template_ce6ypur", {
+      firstname: fn,
+      lastname: ln,
+      to_email: email,
+      phone: phone,
+      address: addr,
+      zip: zip,
+      city: city,
+      country: country,
+      order_lines: cart.map(p => `- ${p.name}: €${p.price}`).join('\n'),
+      shipping_label: shippingLabel,
+      shipping_cost: shippingCost,
+      total: grandTotal.toFixed(2),
+      payment_method: 'Overschrijving/QR (betaling verwacht)',
+      ref: ref
+    }).catch(function(err) {
+      console.warn('EmailJS merchant notify failed:', err);
+    });
+
     // 4. Try to generate QR code directly in the div (failure is non-fatal)
     setTimeout(function() {
       try {
