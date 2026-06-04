@@ -5163,7 +5163,8 @@ function generateOrderRef(fn, ln) {
 function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal) {
   try {
     const ref = generateOrderRef(fn, ln);
-    _qrOrderData = { fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal, ref };
+    const orderLinesSnapshot = cart.map(p => p.name + ': €' + p.price).join('\n');
+    _qrOrderData = { fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal, ref, orderLinesSnapshot };
 
     // 1. Fill in IBAN details immediately
     document.getElementById('qr-name').textContent   = BANK_NAME;
@@ -5212,7 +5213,7 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
       zip: zip,
       city: city,
       country: country,
-      order_lines: cartSnapshot,
+      order_lines: orderLinesSnapshot,
       shipping_label: shippingLabel,
       shipping_cost: shippingCost,
       total: grandTotal.toFixed(2),
@@ -5359,7 +5360,7 @@ function confirmTransfer() {
     fn: d.fn, ln: d.ln, email: d.email, phone: d.phone,
     ref: d.ref, addr: d.addr, zip: d.zip, city: d.city, country: d.country,
     shippingLabel: d.shippingLabel, shippingCost: d.shippingCost, grandTotal: d.grandTotal,
-    products: cart.map(p => p.name + ' €' + p.price).join(', '),
+    products: d.orderLinesSnapshot || cart.map(p => p.name + ': €' + p.price).join('\n'),
     invoiceLine: wantsInvoice ? 'Factuur: ' + company + ' | BTW: ' + vat : ''
   });
 
