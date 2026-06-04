@@ -5128,7 +5128,8 @@ function doCheckout() {
   const note = `${fn} ${ln} | ${addr}, ${zip} ${city}, ${country} | ${email} | ${phone}`;
   url += `&custom=${encodeURIComponent(note)}&currency_code=EUR`;
 
-  setTimeout(() => window.open(url, '_blank'), 800);
+  window.location.href = url;
+  clearCart();
   closeCheckout();
 }
 
