@@ -5253,7 +5253,8 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
       shipping_cost: shippingCost,
       total: grandTotal.toFixed(2),
       payment_method: 'Overschrijving/QR (betaling verwacht)',
-      ref: ref
+      ref: ref,
+      delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '\n' + di.fr + '\n' + di.en; })()
     }).catch(function(err) {
       console.warn('EmailJS merchant notify failed:', err);
     });
