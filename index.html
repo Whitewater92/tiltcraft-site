@@ -248,26 +248,6 @@ footer a:hover { color: var(--gold); }
   .lightbox-prev { left: 4px; } .lightbox-next { right: 4px; }
   .lang-btn .flag { width: 28px; height: 20px; }
 }
-
-/* Mobile readability improvements */
-@media (max-width: 800px) {
-  :root { --muted: #b0b0b0; --card-bg: #111111; }
-  body { font-size: 15px; }
-  .card-name { font-size: 13px !important; color: #e8e8e8 !important; }
-  .card-price { font-size: 15px !important; color: #ffffff !important; }
-  .card-desc { font-size: 12px !important; color: #b0b0b0 !important; line-height: 1.6 !important; }
-  .cart-item-name { font-size: 13px !important; color: #e8e8e8 !important; }
-  .cart-item-price { font-size: 13px !important; color: #ffffff !important; }
-  .co-field label { color: #d0d0d0 !important; font-size: 12px !important; }
-  .co-field input, .co-field select { font-size: 15px !important; color: #ffffff !important; background: rgba(255,255,255,0.08) !important; }
-  .pay-method-btn { font-size: 13px !important; color: #c0c0c0 !important; padding: 14px 8px !important; }
-  .qr-iban-label { color: #b0b0b0 !important; font-size: 12px !important; }
-  .qr-iban-value { color: #ffffff !important; font-size: 14px !important; }
-  .qr-instructions { font-size: 13px !important; color: #c0c0c0 !important; line-height: 1.8 !important; }
-  .cat-btn { color: #b0b0b0 !important; }
-  .cat-btn.active { color: var(--gold) !important; }
-  .shipping-info { color: #c0c0c0 !important; font-size: 12px !important; }
-}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -5148,9 +5128,6 @@ function doCheckout() {
   const note = `${fn} ${ln} | ${addr}, ${zip} ${city}, ${country} | ${email} | ${phone}`;
   url += `&custom=${encodeURIComponent(note)}&currency_code=EUR`;
 
-  const subject = `TiltCraft bestelling — ${fn} ${ln}`;
-  const body = `Nieuwe bestelling van ${fn} ${ln}\n\nE-mail: ${email}\nTelefoon: ${phone}\nAdres: ${addr}, ${zip} ${city}, ${country}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${shippingLabel} — €${shippingCost}\nTotaal: €${grandTotal}`;
-  window.location.href = `mailto:info@tiltcraft.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   setTimeout(() => window.open(url, '_blank'), 800);
   closeCheckout();
 }
@@ -5342,7 +5319,6 @@ function confirmTransfer() {
   const vat = wantsInvoice ? (document.getElementById('co-vat').value || '—') : null;
   const invoiceLine = wantsInvoice ? `\n\nFACTUUR GEVRAAGD\nBedrijf: ${company}\nBTW: ${vat}` : '';
   const body = `Nieuwe bestelling via overschrijving\nRef: ${d.ref}\n\nKlant: ${d.fn} ${d.ln}\nE-mail: ${d.email}\nTelefoon: ${d.phone}\nAdres: ${d.addr}, ${d.zip} ${d.city}, ${d.country}${invoiceLine}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${d.shippingLabel} — €${d.shippingCost}\nTotaal: €${d.grandTotal}\n\nMededeling: ${d.ref}`;
-  window.location.href = `mailto:info@tiltcraft.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   // EmailJS bevestigingsmails
   sendOrderEmails({
