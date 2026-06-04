@@ -248,6 +248,26 @@ footer a:hover { color: var(--gold); }
   .lightbox-prev { left: 4px; } .lightbox-next { right: 4px; }
   .lang-btn .flag { width: 28px; height: 20px; }
 }
+
+/* Mobile readability improvements */
+@media (max-width: 800px) {
+  :root { --muted: #b0b0b0; --card-bg: #111111; }
+  body { font-size: 15px; }
+  .card-name { font-size: 13px !important; color: #e8e8e8 !important; }
+  .card-price { font-size: 15px !important; color: #ffffff !important; }
+  .card-desc { font-size: 12px !important; color: #b0b0b0 !important; line-height: 1.6 !important; }
+  .cart-item-name { font-size: 13px !important; color: #e8e8e8 !important; }
+  .cart-item-price { font-size: 13px !important; color: #ffffff !important; }
+  .co-field label { color: #d0d0d0 !important; font-size: 12px !important; }
+  .co-field input, .co-field select { font-size: 15px !important; color: #ffffff !important; background: rgba(255,255,255,0.08) !important; }
+  .pay-method-btn { font-size: 13px !important; color: #c0c0c0 !important; padding: 14px 8px !important; }
+  .qr-iban-label { color: #b0b0b0 !important; font-size: 12px !important; }
+  .qr-iban-value { color: #ffffff !important; font-size: 14px !important; }
+  .qr-instructions { font-size: 13px !important; color: #c0c0c0 !important; line-height: 1.8 !important; }
+  .cat-btn { color: #b0b0b0 !important; }
+  .cat-btn.active { color: var(--gold) !important; }
+  .shipping-info { color: #c0c0c0 !important; font-size: 12px !important; }
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -536,7 +556,7 @@ footer a:hover { color: var(--gold); }
 const PAYPAL_EMAIL = "rvermeire@telenet.be";
 const BANK_IBAN    = "BE85 4442 6606 3106";   // ← vul hier je echte IBAN in
 const BANK_BIC     = "KREDBEBB";               // ← vul hier je echte BIC in
-const BANK_NAME    = "V&R Consultancy bv";
+const BANK_NAME    = "TiltCraft Régis Vermeire";
 
 // ================================================================
 //  PRODUCTENLIJST — bewerk dit om producten toe te voegen
@@ -5202,7 +5222,7 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
           '1\n' +
           'SCT\n' +
           BANK_BIC + '\n' +
-          'V&R Consultancy bv\n' +
+          'TiltCraft Vermeire\n' +
           ibanClean + '\n' +
           'EUR' + grandTotal.toFixed(2) + '\n' +
           '\n' +   // field 9: purpose (empty)
