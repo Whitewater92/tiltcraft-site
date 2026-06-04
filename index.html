@@ -5134,9 +5134,43 @@ function doCheckout() {
   const note = `${fn} ${ln} | ${addr}, ${zip} ${city}, ${country} | ${email} | ${phone}`;
   url += `&custom=${encodeURIComponent(note)}&currency_code=EUR`;
 
-  window.location.href = url;
+  // Send emails before redirect
+  const paypalCartSnapshot = cart.map(p => p.name + ': €' + p.price).join('\n');
+  const paypalRef = generateOrderRef(fn, ln);
+
+  emailjs.send("service_k0kokxl", "template_uca8a7a", {
+    to_email: email,
+    firstname: fn,
+    ref: paypalRef,
+    order_lines: paypalCartSnapshot,
+    shipping_label: shippingLabel,
+    shipping_cost: shippingCost,
+    total: grandTotal,
+    iban: BANK_IBAN,
+    bic: BANK_BIC,
+    invoice_info: ''
+  }).catch(function(err) { console.warn('Klant mail fout:', err); });
+
+  emailjs.send("service_k0kokxl", "template_ce6ypur", {
+    firstname: fn,
+    lastname: ln,
+    to_email: email,
+    phone: phone,
+    address: addr,
+    zip: zip,
+    city: city,
+    country: country,
+    order_lines: paypalCartSnapshot,
+    shipping_label: shippingLabel,
+    shipping_cost: shippingCost,
+    total: grandTotal,
+    payment_method: 'PayPal',
+    ref: paypalRef
+  }).catch(function(err) { console.warn('Merchant mail fout:', err); });
+
   clearCart();
   closeCheckout();
+  setTimeout(() => { window.location.href = url; }, 800);
 }
 
 // ── PAYMENT METHOD ───────────────────────────────────────────────
