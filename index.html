@@ -5148,7 +5148,8 @@ function doCheckout() {
     total: grandTotal,
     iban: BANK_IBAN,
     bic: BANK_BIC,
-    invoice_info: ''
+    invoice_info: '',
+    delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '\n' + di.fr + '\n' + di.en; })()
   }).catch(function(err) { console.warn('Klant mail fout:', err); });
 
   emailjs.send("service_k0kokxl", "template_ce6ypur", {
@@ -5335,6 +5336,35 @@ function toggleInvoice() {
   document.getElementById('co-invoice-fields').style.display = checked ? 'block' : 'none';
 }
 
+function getDeliveryInfo(country, cartItems) {
+  const allInStock = cartItems.every(p => {
+    const prod = products.find(pr => pr.name === p.name);
+    return prod ? prod.stock !== false : true;
+  });
+  const intl = ['US','CA','AU'].includes(country.toUpperCase()) || 
+               ['united states','usa','canada','australia'].includes(country.toLowerCase());
+
+  if (!allInStock) {
+    return {
+      nl: 'Een of meerdere producten zijn momenteel niet op voorraad. Verwachte beschikbaarheid: binnen 1 week.',
+      fr: 'Un ou plusieurs produits sont actuellement en rupture de stock. Disponibilité prévue : dans 1 semaine.',
+      en: 'One or more products are currently out of stock. Expected availability: within 1 week.'
+    };
+  }
+  if (intl) {
+    return {
+      nl: 'Alle producten zijn op voorraad. Verwachte levertijd: 3 weken.',
+      fr: 'Tous les produits sont en stock. Délai de livraison prévu : 3 semaines.',
+      en: 'All products are in stock. Expected delivery time: 3 weeks.'
+    };
+  }
+  return {
+    nl: 'Alle producten zijn op voorraad. Verwachte levertijd: 1 week.',
+    fr: 'Tous les produits sont en stock. Délai de livraison prévu : 1 semaine.',
+    en: 'All products are in stock. Expected delivery time: 1 week.'
+  };
+}
+
 function sendOrderEmails(orderData) {
   const ibanClean = BANK_IBAN;
   const bicClean  = BANK_BIC;
@@ -5350,7 +5380,8 @@ function sendOrderEmails(orderData) {
     total:        orderData.grandTotal,
     iban:         ibanClean,
     bic:          bicClean,
-    invoice_info: orderData.invoiceLine || ''
+    invoice_info: orderData.invoiceLine || '',
+    delivery_info: orderData.deliveryInfo || ''
   }).then(function() {
     console.log('Klant mail verzonden');
   }).catch(function(err) { console.warn('Klant mail fout:', err); });
@@ -5390,10 +5421,12 @@ function confirmTransfer() {
   const body = `Nieuwe bestelling via overschrijving\nRef: ${d.ref}\n\nKlant: ${d.fn} ${d.ln}\nE-mail: ${d.email}\nTelefoon: ${d.phone}\nAdres: ${d.addr}, ${d.zip} ${d.city}, ${d.country}${invoiceLine}\n\nProducten:\n${cart.map(p=>`- ${p.name}: €${p.price}`).join('\n')}\n\nTransport: ${d.shippingLabel} — €${d.shippingCost}\nTotaal: €${d.grandTotal}\n\nMededeling: ${d.ref}`;
 
   // EmailJS bevestigingsmails
+  const di = getDeliveryInfo(d.country, (d.orderLinesSnapshot || '').split('\n').map(l => ({name: l.replace(/:.*/,'')})));
   sendOrderEmails({
     fn: d.fn, ln: d.ln, email: d.email, phone: d.phone,
     ref: d.ref, addr: d.addr, zip: d.zip, city: d.city, country: d.country,
     shippingLabel: d.shippingLabel, shippingCost: d.shippingCost, grandTotal: d.grandTotal,
+    deliveryInfo: di.nl + '\n' + di.fr + '\n' + di.en,
     products: d.orderLinesSnapshot || cart.map(p => p.name + ': €' + p.price).join('\n'),
     invoiceLine: wantsInvoice ? 'Factuur: ' + company + ' | BTW: ' + vat : ''
   });
