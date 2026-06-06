@@ -5153,6 +5153,12 @@ function doCheckout() {
   emailjs.send("service_k0kokxl", "template_uca8a7a", {
     to_email: email,
     firstname: fn,
+    lastname: ln,
+    phone: phone,
+    address: addr,
+    zip: zip,
+    city: city,
+    country: country,
     ref: paypalRef,
     order_lines: paypalCartSnapshot,
     shipping_label: shippingLabel,
