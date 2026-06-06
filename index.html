@@ -5217,7 +5217,8 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
   try {
     const ref = generateOrderRef(fn, ln);
     const orderLinesSnapshot = cart.map(p => p.name + ': €' + p.price).join('\n');
-    _qrOrderData = { fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal, ref, orderLinesSnapshot };
+    const diSnap = getDeliveryInfo(country, cart);
+    _qrOrderData = { fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal, ref, orderLinesSnapshot, deliveryInfo: diSnap.nl + '<br>' + diSnap.fr + '<br>' + diSnap.en };
 
     // 1. Fill in IBAN details immediately
     document.getElementById('qr-name').textContent   = BANK_NAME;
