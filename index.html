@@ -5379,6 +5379,12 @@ function sendOrderEmails(orderData) {
   emailjs.send("service_k0kokxl", "template_uca8a7a", {
     to_email:     orderData.email,
     firstname:    orderData.fn,
+    lastname:     orderData.ln,
+    phone:        orderData.phone,
+    address:      orderData.addr,
+    zip:          orderData.zip,
+    city:         orderData.city,
+    country:      orderData.country,
     ref:          orderData.ref,
     order_lines:  orderData.products,
     shipping_label: orderData.shippingLabel,
