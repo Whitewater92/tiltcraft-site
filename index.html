@@ -474,6 +474,11 @@ footer a:hover { color: var(--gold); }
           Alle betalingsgegevens worden automatisch ingevuld.<br>
           Vermeld de mededeling als je manueel overschrijft.
         </div>
+        <div style="margin-top:14px; padding:10px 14px; background:rgba(240,180,41,0.1); border-left:3px solid var(--gold); border-radius:2px; font-size:12px; color:#e8e8e8; text-align:left; line-height:1.7;">
+          🔔 <strong>NL:</strong> Klik na betaling op de knop hieronder zodat uw bestelling correct verwerkt wordt en u een bevestigingsmail ontvangt.<br>
+          🔔 <strong>FR:</strong> Après le paiement, cliquez sur le bouton ci-dessous pour que votre commande soit traitée et recevoir un e-mail de confirmation.<br>
+          🔔 <strong>EN:</strong> After payment, click the button below so your order is processed correctly and you receive a confirmation email.
+        </div>
         <button class="co-pay-btn" style="margin-top:16px;" onclick="confirmTransfer()">✓ Bestelling bevestigen</button>
       </div>
     </div>
@@ -613,19 +618,7 @@ const products = [
       fr: "Dr Who avec plateau en bon état, couleurs caisse ok .\n- DMD blanc (au lieu d'orange) - Pin2DMD Serum RPI kleur verkrijgbaar (extra € 220,-)\n- GI in LED, front en lampes incadescentes afin de garder l'ambiance du translite"
     },
     images: [
-      "images/w1.jpeg",
-      "images/w2.JPG",
-      "images/w3.JPG",
-      "images/w4.JPG",
-      "images/w5.jpeg",
-      "images/w6.jpeg",
-      "images/w7.jpeg",
-      "images/w8.jpeg",
-      "images/w10.JPG",
-      "images/w11.jpeg",
-      "images/w12.jpeg",
-      "images/w13.jpeg",
-      "images/w14.jpeg"
+      "images/doctor-who.jpg"
     ]
   },
   {
@@ -5153,12 +5146,6 @@ function doCheckout() {
   emailjs.send("service_k0kokxl", "template_uca8a7a", {
     to_email: email,
     firstname: fn,
-    lastname: ln,
-    phone: phone,
-    address: addr,
-    zip: zip,
-    city: city,
-    country: country,
     ref: paypalRef,
     order_lines: paypalCartSnapshot,
     shipping_label: shippingLabel,
@@ -5167,7 +5154,7 @@ function doCheckout() {
     iban: BANK_IBAN,
     bic: BANK_BIC,
     invoice_info: '',
-    delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '<br>' + di.fr + '<br>' + di.en; })()
+    delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '\n' + di.fr + '\n' + di.en; })()
   }).catch(function(err) { console.warn('Klant mail fout:', err); });
 
   emailjs.send("service_k0kokxl", "template_ce6ypur", {
@@ -5217,8 +5204,7 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
   try {
     const ref = generateOrderRef(fn, ln);
     const orderLinesSnapshot = cart.map(p => p.name + ': €' + p.price).join('\n');
-    const diSnap = getDeliveryInfo(country, cart);
-    _qrOrderData = { fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal, ref, orderLinesSnapshot, deliveryInfo: diSnap.nl + '<br>' + diSnap.fr + '<br>' + diSnap.en };
+    _qrOrderData = { fn, ln, email, phone, addr, zip, city, country, grandTotal, shippingLabel, shippingCost, productsTotal, ref, orderLinesSnapshot };
 
     // 1. Fill in IBAN details immediately
     document.getElementById('qr-name').textContent   = BANK_NAME;
@@ -5273,7 +5259,7 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
       total: grandTotal.toFixed(2),
       payment_method: 'Overschrijving/QR (betaling verwacht)',
       ref: ref,
-      delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '<br>' + di.fr + '<br>' + di.en; })()
+      delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '\n' + di.fr + '\n' + di.en; })()
     }).catch(function(err) {
       console.warn('EmailJS merchant notify failed:', err);
     });
@@ -5393,12 +5379,6 @@ function sendOrderEmails(orderData) {
   emailjs.send("service_k0kokxl", "template_uca8a7a", {
     to_email:     orderData.email,
     firstname:    orderData.fn,
-    lastname:     orderData.ln,
-    phone:        orderData.phone,
-    address:      orderData.addr,
-    zip:          orderData.zip,
-    city:         orderData.city,
-    country:      orderData.country,
     ref:          orderData.ref,
     order_lines:  orderData.products,
     shipping_label: orderData.shippingLabel,
@@ -5452,7 +5432,7 @@ function confirmTransfer() {
     fn: d.fn, ln: d.ln, email: d.email, phone: d.phone,
     ref: d.ref, addr: d.addr, zip: d.zip, city: d.city, country: d.country,
     shippingLabel: d.shippingLabel, shippingCost: d.shippingCost, grandTotal: d.grandTotal,
-    deliveryInfo: di.nl + '<br>' + di.fr + '<br>' + di.en,
+    deliveryInfo: di.nl + '\n' + di.fr + '\n' + di.en,
     products: d.orderLinesSnapshot || cart.map(p => p.name + ': €' + p.price).join('\n'),
     invoiceLine: wantsInvoice ? 'Factuur: ' + company + ' | BTW: ' + vat : ''
   });
