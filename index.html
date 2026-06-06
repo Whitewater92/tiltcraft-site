@@ -5452,7 +5452,7 @@ function confirmTransfer() {
     fn: d.fn, ln: d.ln, email: d.email, phone: d.phone,
     ref: d.ref, addr: d.addr, zip: d.zip, city: d.city, country: d.country,
     shippingLabel: d.shippingLabel, shippingCost: d.shippingCost, grandTotal: d.grandTotal,
-    deliveryInfo: di.nl + '\n' + di.fr + '\n' + di.en,
+    deliveryInfo: di.nl + '<br>' + di.fr + '<br>' + di.en,
     products: d.orderLinesSnapshot || cart.map(p => p.name + ': €' + p.price).join('\n'),
     invoiceLine: wantsInvoice ? 'Factuur: ' + company + ' | BTW: ' + vat : ''
   });
