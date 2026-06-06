@@ -5167,7 +5167,7 @@ function doCheckout() {
     iban: BANK_IBAN,
     bic: BANK_BIC,
     invoice_info: '',
-    delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '\n' + di.fr + '\n' + di.en; })()
+    delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '<br>' + di.fr + '<br>' + di.en; })()
   }).catch(function(err) { console.warn('Klant mail fout:', err); });
 
   emailjs.send("service_k0kokxl", "template_ce6ypur", {
@@ -5272,7 +5272,7 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
       total: grandTotal.toFixed(2),
       payment_method: 'Overschrijving/QR (betaling verwacht)',
       ref: ref,
-      delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '\n' + di.fr + '\n' + di.en; })()
+      delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '<br>' + di.fr + '<br>' + di.en; })()
     }).catch(function(err) {
       console.warn('EmailJS merchant notify failed:', err);
     });
