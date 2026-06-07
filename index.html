@@ -4977,10 +4977,10 @@ function showCartPopup(productName) {
   popup.id = 'cart-popup';
   popup.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1a1a1a;border:1px solid var(--gold);border-radius:6px;padding:16px 20px;z-index:998;text-align:center;min-width:280px;box-shadow:0 4px 20px rgba(0,0,0,0.6);';
   popup.innerHTML = `
-    <div style="font-size:12px;color:var(--muted);letter-spacing:1px;margin-bottom:10px;">✓ <strong style="color:var(--white);">${productName}</strong> toegevoegd</div>
+    <div style="font-size:12px;color:var(--muted);letter-spacing:1px;margin-bottom:10px;">✓ <strong style="color:var(--white);">${productName}</strong> ${currentLang === 'fr' ? 'ajouté' : currentLang === 'en' ? 'added' : 'toegevoegd'}</div>
     <div style="display:flex;gap:10px;">
-      <button onclick="document.getElementById('cart-popup').remove()" style="flex:1;padding:10px;background:none;border:1px solid var(--border);color:var(--white);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;">Verder shoppen</button>
-      <button onclick="document.getElementById('cart-popup').remove();openCheckout();" style="flex:1;padding:10px;background:var(--gold);border:none;color:var(--black);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;font-weight:600;">Afrekenen</button>
+      <button onclick="document.getElementById('cart-popup').remove()" style="flex:1;padding:10px;background:none;border:1px solid var(--border);color:var(--white);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;">${currentLang === 'fr' ? 'Continuer les achats' : currentLang === 'en' ? 'Keep shopping' : 'Verder shoppen'}</button>
+      <button onclick="document.getElementById('cart-popup').remove();openCheckout();" style="flex:1;padding:10px;background:var(--gold);border:none;color:var(--black);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;font-weight:600;">${currentLang === 'fr' ? 'Commander' : currentLang === 'en' ? 'Checkout' : 'Afrekenen'}</button>
     </div>`;
   document.body.appendChild(popup);
   setTimeout(function() { const p = document.getElementById('cart-popup'); if(p) p.remove(); }, 6000);
