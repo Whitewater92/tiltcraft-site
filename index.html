@@ -5406,6 +5406,11 @@ function copyToClipboard(elementId, btnId) {
 function toggleInvoice() {
   const checked = document.getElementById('co-invoice-check').checked;
   document.getElementById('co-invoice-fields').style.display = checked ? 'block' : 'none';
+  // Translate labels when shown
+  const lblCompany = document.getElementById('co-lbl-company');
+  if (lblCompany) lblCompany.textContent = currentLang === 'fr' ? 'Nom de l'entreprise' : currentLang === 'en' ? 'Company name' : 'Bedrijfsnaam';
+  const lblVat = document.getElementById('co-lbl-vat');
+  if (lblVat) lblVat.textContent = currentLang === 'fr' ? 'Numéro de TVA' : currentLang === 'en' ? 'VAT number' : 'BTW-nummer';
 }
 
 function getDeliveryInfo(country, cartItems) {
