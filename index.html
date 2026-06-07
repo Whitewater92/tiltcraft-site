@@ -4738,6 +4738,19 @@ function applyTranslations() {
   document.getElementById('co-lbl-ship').textContent = t('coLblShip');
   document.getElementById('co-lbl-total').textContent = t('coLblTotal');
   document.getElementById('co-pay-btn').textContent = t('coPayBtn');
+  // Translate invoice label
+  document.getElementById('co-invoice-label').textContent = t('coInvoiceLabel');
+  // Translate country placeholder
+  const landEl = document.getElementById('co-land-placeholder');
+  if (landEl) landEl.textContent = t('coLandPlaceholder');
+  // Translate transfer button
+  const pmTransfer = document.getElementById('pm-transfer');
+  if (pmTransfer) pmTransfer.innerHTML = currentLang === 'fr' ? '🏦 Virement' : currentLang === 'en' ? '🏦 Bank transfer' : '🏦 Overschrijving';
+  // Re-apply active payment method button text
+  const activeMethod = pmTransfer && pmTransfer.classList.contains('active') ? 'transfer'
+    : (document.getElementById('pm-bancontact') && document.getElementById('pm-bancontact').classList.contains('active')) ? 'bancontact'
+    : 'paypal';
+  setPayMethod(activeMethod);
 }
 
 function setCategory(cat) {
