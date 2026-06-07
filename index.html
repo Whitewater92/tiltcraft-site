@@ -5408,7 +5408,7 @@ function toggleInvoice() {
   document.getElementById('co-invoice-fields').style.display = checked ? 'block' : 'none';
   // Translate labels when shown
   const lblCompany = document.getElementById('co-lbl-company');
-  if (lblCompany) lblCompany.textContent = currentLang === 'fr' ? 'Nom de l'entreprise' : currentLang === 'en' ? 'Company name' : 'Bedrijfsnaam';
+  if (lblCompany) lblCompany.textContent = currentLang === "fr" ? "Nom de l'entreprise" : currentLang === "en" ? "Company name" : "Bedrijfsnaam";
   const lblVat = document.getElementById('co-lbl-vat');
   if (lblVat) lblVat.textContent = currentLang === 'fr' ? 'Numéro de TVA' : currentLang === 'en' ? 'VAT number' : 'BTW-nummer';
 }
