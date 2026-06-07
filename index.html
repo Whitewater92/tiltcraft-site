@@ -426,8 +426,8 @@ footer a:hover { color: var(--gold); }
         </label>
       </div>
       <div id="co-invoice-fields" style="display:none;background:rgba(240,180,41,0.05);border:1px solid var(--border);border-radius:4px;padding:14px;margin-bottom:14px;">
-        <div class="co-field" style="margin-bottom:10px;"><label>Bedrijfsnaam</label><input type="text" id="co-company" placeholder="Bedrijfsnaam" autocomplete="organization"></div>
-        <div class="co-field" style="margin-bottom:0;"><label>BTW-nummer</label><input type="text" id="co-vat" placeholder="BE 0123.456.789" autocomplete="off"></div>
+        <div class="co-field" style="margin-bottom:10px;"><label id="co-lbl-company">Bedrijfsnaam</label><input type="text" id="co-company" placeholder="Bedrijfsnaam" autocomplete="organization"></div>
+        <div class="co-field" style="margin-bottom:0;"><label id="co-lbl-vat">BTW-nummer</label><input type="text" id="co-vat" placeholder="BE 0123.456.789" autocomplete="off"></div>
       </div>
       <!-- EINDE FACTUUR OPTIE -->
       <div class="co-shipping-line" id="co-shipping-line" style="display:none">
@@ -4575,7 +4575,11 @@ const i18n = {
     coInvoiceLabel: "Ik wil een factuur",
     coLandPlaceholder: "— Selecteer land —",
     coConfirmBtn: "✓ Bestelling bevestigen",
+    coLblCompany: "Bedrijfsnaam",
+    coLblVat: "BTW-nummer",
     coConfirmBtn: "✓ Bestelling bevestigen",
+    coLblCompany: "Bedrijfsnaam",
+    coLblVat: "BTW-nummer",
     contactQ: "Vragen over een product? Neem contact op.",
     addBtn: "Toevoegen",
     noProducts: "Geen producten in deze categorie.",
@@ -4621,6 +4625,8 @@ const i18n = {
     coInvoiceLabel: "I want an invoice",
     coLandPlaceholder: "— Select country —",
     coConfirmBtn: "✓ Confirm order",
+    coLblCompany: "Company name",
+    coLblVat: "VAT number",
     contactQ: "Questions about a product? Get in touch.",
     addBtn: "Add",
     noProducts: "No products in this category.",
@@ -4641,6 +4647,8 @@ const i18n = {
     coInvoiceLabel: "I want an invoice",
     coLandPlaceholder: "— Select country —",
     coConfirmBtn: "✓ Confirm order",
+    coLblCompany: "Company name",
+    coLblVat: "VAT number",
   },
   fr: {
     searchPlaceholder: "Rechercher un produit…",
@@ -4670,6 +4678,8 @@ const i18n = {
     coInvoiceLabel: "Je veux une facture",
     coLandPlaceholder: "— Sélectionner le pays —",
     coConfirmBtn: "✓ Confirmer la commande",
+    coLblCompany: "Nom de l'entreprise",
+    coLblVat: "Numéro de TVA",
     contactQ: "Des questions sur un produit ? Contactez-nous.",
     addBtn: "Ajouter",
     noProducts: "Aucun produit dans cette catégorie.",
@@ -4690,6 +4700,8 @@ const i18n = {
     coInvoiceLabel: "Je veux une facture",
     coLandPlaceholder: "— Sélectionner le pays —",
     coConfirmBtn: "✓ Confirmer la commande",
+    coLblCompany: "Nom de l'entreprise",
+    coLblVat: "Numéro de TVA",
   }
 };
 
