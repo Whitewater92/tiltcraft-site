@@ -5398,7 +5398,8 @@ function toggleInvoice() {
 
 function getDeliveryInfo(country, cartItems) {
   const allInStock = cartItems.every(p => {
-    const prod = products.find(pr => pr.name === p.name);
+    const itemName = typeof p === 'string' ? p.replace(/:.*/, '').trim() : p.name;
+    const prod = products.find(pr => pr.name === itemName);
     return prod ? prod.stock !== false : true;
   });
   const intl = ['US','CA','AU'].includes(country.toUpperCase()) || 
