@@ -451,18 +451,18 @@ footer a:hover { color: var(--gold); }
       <div class="qr-screen" id="qr-screen">
         <div id="qr-canvas"></div>
         <div class="qr-iban-box">
-          <div class="qr-iban-row"><span class="qr-iban-label">Begunstigde</span><span class="qr-iban-value" id="qr-name"></span></div>
+          <div class="qr-iban-row"><span class="qr-iban-label" id="qr-lbl-name">Begunstigde</span><span class="qr-iban-value" id="qr-name"></span></div>
           <div class="qr-iban-row">
-            <span class="qr-iban-label">IBAN</span>
+            <span class="qr-iban-label" id="qr-lbl-iban">IBAN</span>
             <span style="display:flex;align-items:center;gap:8px;">
               <span class="qr-iban-value" id="qr-iban"></span>
               <button onclick="copyToClipboard('qr-iban','copy-iban-btn')" id="copy-iban-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;padding:3px 8px;border-radius:3px;cursor:pointer;letter-spacing:1px;white-space:nowrap;">kopieer</button>
             </span>
           </div>
-          <div class="qr-iban-row"><span class="qr-iban-label">BIC</span><span class="qr-iban-value" id="qr-bic"></span></div>
-          <div class="qr-iban-row"><span class="qr-iban-label">Bedrag</span><span class="qr-iban-value" id="qr-amount"></span></div>
+          <div class="qr-iban-row"><span class="qr-iban-label" id="qr-lbl-bic">BIC</span><span class="qr-iban-value" id="qr-bic"></span></div>
+          <div class="qr-iban-row"><span class="qr-iban-label" id="qr-lbl-amount">Bedrag</span><span class="qr-iban-value" id="qr-amount"></span></div>
           <div class="qr-iban-row">
-            <span class="qr-iban-label">Mededeling</span>
+            <span class="qr-iban-label" id="qr-lbl-ref">Mededeling</span>
             <span style="display:flex;align-items:center;gap:8px;">
               <span class="qr-iban-value qr-ref" id="qr-ref"></span>
               <button onclick="copyToClipboard('qr-ref','copy-ref-btn')" id="copy-ref-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;padding:3px 8px;border-radius:3px;cursor:pointer;letter-spacing:1px;white-space:nowrap;">kopieer</button>
@@ -5278,6 +5278,17 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
     // Translate confirm button
     const confirmBtn = document.getElementById('co-confirm-btn');
     if (confirmBtn) confirmBtn.textContent = currentLang === 'fr' ? '✓ Confirmer la commande' : currentLang === 'en' ? '✓ Confirm order' : '✓ Bestelling bevestigen';
+    // Translate QR labels
+    const qrLabels = {
+      nl: { name: 'Begunstigde', iban: 'IBAN', bic: 'BIC', amount: 'Bedrag', ref: 'Mededeling' },
+      en: { name: 'Beneficiary', iban: 'IBAN', bic: 'BIC', amount: 'Amount', ref: 'Reference' },
+      fr: { name: 'Bénéficiaire', iban: 'IBAN', bic: 'BIC', amount: 'Montant', ref: 'Communication' }
+    };
+    const ql = qrLabels[currentLang] || qrLabels.nl;
+    ['name','iban','bic','amount','ref'].forEach(k => {
+      const el = document.getElementById('qr-lbl-' + k);
+      if (el) el.textContent = ql[k];
+    });
 
     // 4b. Save cart contents before clearing
     const cartSnapshot = cart.map(p => `- ${p.name}: €${p.price}`).join('\n');
