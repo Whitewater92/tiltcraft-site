@@ -5405,24 +5405,32 @@ function getDeliveryInfo(country, cartItems) {
   const intl = ['US','CA','AU'].includes(country.toUpperCase()) || 
                ['united states','usa','canada','australia'].includes(country.toLowerCase());
 
-  if (!allInStock) {
-    return {
+  const msgs = {
+    outOfStock: {
       nl: 'Een of meerdere producten zijn momenteel niet op voorraad. Verwachte beschikbaarheid: binnen 1 week.',
       fr: 'Un ou plusieurs produits sont actuellement en rupture de stock. Disponibilité prévue : dans 1 semaine.',
       en: 'One or more products are currently out of stock. Expected availability: within 1 week.'
-    };
-  }
-  if (intl) {
-    return {
+    },
+    inStockIntl: {
       nl: 'Alle producten zijn op voorraad. Verwachte levertijd: 3 weken.',
       fr: 'Tous les produits sont en stock. Délai de livraison prévu : 3 semaines.',
       en: 'All products are in stock. Expected delivery time: 3 weeks.'
-    };
-  }
+    },
+    inStockEU: {
+      nl: 'Alle producten zijn op voorraad. Verwachte levertijd: 1 week.',
+      fr: 'Tous les produits sont en stock. Délai de livraison prévu : 1 semaine.',
+      en: 'All products are in stock. Expected delivery time: 1 week.'
+    }
+  };
+
+  const type = !allInStock ? 'outOfStock' : intl ? 'inStockIntl' : 'inStockEU';
+  const all = msgs[type];
+  // Return single language for email, all 3 for on-screen
   return {
-    nl: 'Alle producten zijn op voorraad. Verwachte levertijd: 1 week.',
-    fr: 'Tous les produits sont en stock. Délai de livraison prévu : 1 semaine.',
-    en: 'All products are in stock. Expected delivery time: 1 week.'
+    nl: all.nl,
+    fr: all.fr,
+    en: all.en,
+    forEmail: function(lang) { return all[lang] || all.nl; }
   };
 }
 
