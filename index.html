@@ -5183,7 +5183,7 @@ function doCheckout() {
     iban: BANK_IBAN,
     bic: BANK_BIC,
     invoice_info: '',
-    delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '\n' + di.fr + '\n' + di.en; })()
+    delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.forEmail(currentLang); })()
   }).catch(function(err) { console.warn('Klant mail fout:', err); });
 
   emailjs.send("service_k0kokxl", "template_ce6ypur", {
@@ -5313,7 +5313,7 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
       total: grandTotal.toFixed(2),
       payment_method: 'Overschrijving/QR (betaling verwacht)',
       ref: ref,
-      delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '\n' + di.fr + '\n' + di.en; })()
+      delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.forEmail(currentLang); })()
     }).catch(function(err) {
       console.warn('EmailJS merchant notify failed:', err);
     });
@@ -5501,7 +5501,7 @@ function confirmTransfer() {
     fn: d.fn, ln: d.ln, email: d.email, phone: d.phone,
     ref: d.ref, addr: d.addr, zip: d.zip, city: d.city, country: d.country,
     shippingLabel: d.shippingLabel, shippingCost: d.shippingCost, grandTotal: d.grandTotal,
-    deliveryInfo: di.nl + '\n' + di.fr + '\n' + di.en,
+    deliveryInfo: di.forEmail(currentLang),
     products: d.orderLinesSnapshot || cart.map(p => p.name + ': €' + p.price).join('\n'),
     invoiceLine: wantsInvoice ? 'Factuur: ' + company + ' | BTW: ' + vat : ''
   });
