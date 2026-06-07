@@ -5400,7 +5400,7 @@ function getDeliveryInfo(country, cartItems) {
   const allInStock = cartItems.every(p => {
     const itemName = typeof p === 'string' ? p.replace(/:.*/, '').trim() : p.name;
     const prod = products.find(pr => pr.name === itemName);
-    return prod ? prod.stock !== false : true;
+    return prod ? (prod.stock !== false && prod.inStock !== false) : true;
   });
   const intl = ['US','CA','AU'].includes(country.toUpperCase()) || 
                ['united states','usa','canada','australia'].includes(country.toLowerCase());
