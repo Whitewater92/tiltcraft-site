@@ -5185,13 +5185,24 @@ let _qrOrderData = null;
 function setPayMethod(method) {
   document.getElementById('pm-paypal').classList.toggle('active', method === 'paypal');
   document.getElementById('pm-transfer').classList.toggle('active', method === 'transfer');
-  // Update main pay button label
+  if (document.getElementById('pm-bancontact')) {
+    document.getElementById('pm-bancontact').classList.toggle('active', method === 'bancontact');
+  }
   const btn = document.getElementById('co-pay-btn');
+  const isMobile = window.innerWidth <= 800;
   if (method === 'transfer') {
-    btn.textContent = currentLang === 'fr' ? 'Générer QR & confirmer' : currentLang === 'en' ? 'Generate QR & confirm' : 'QR genereren & bevestigen';
+    if (isMobile) {
+      btn.textContent = currentLang === 'fr' ? 'Payer par virement bancaire' : currentLang === 'en' ? 'Pay by bank transfer' : 'Betalen via overschrijving';
+    } else {
+      btn.textContent = currentLang === 'fr' ? 'Générer QR & confirmer' : currentLang === 'en' ? 'Generate QR & confirm' : 'QR genereren & bevestigen';
+    }
+  } else if (method === 'bancontact') {
+    btn.textContent = currentLang === 'fr' ? 'Payer via Bancontact' : currentLang === 'en' ? 'Pay via Bancontact' : 'Betalen via Bancontact';
   } else {
     btn.textContent = currentLang === 'fr' ? 'Payer via PayPal' : currentLang === 'en' ? 'Pay with PayPal' : 'Betalen via PayPal';
   }
+  // Translate payment method buttons
+  document.getElementById('pm-transfer').innerHTML = currentLang === 'fr' ? '🏦 Virement' : currentLang === 'en' ? '🏦 Bank transfer' : '🏦 Overschrijving';
 }
 
 function generateOrderRef(fn, ln) {
