@@ -5275,6 +5275,9 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
     document.getElementById('co-pay-btn').style.display      = 'none';
     document.getElementById('pay-method-row').style.display  = 'none';
     document.getElementById('qr-screen').classList.add('visible');
+    // Translate confirm button
+    const confirmBtn = document.getElementById('co-confirm-btn');
+    if (confirmBtn) confirmBtn.textContent = currentLang === 'fr' ? '✓ Confirmer la commande' : currentLang === 'en' ? '✓ Confirm order' : '✓ Bestelling bevestigen';
 
     // 4b. Save cart contents before clearing
     const cartSnapshot = cart.map(p => `- ${p.name}: €${p.price}`).join('\n');
