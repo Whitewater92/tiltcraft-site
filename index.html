@@ -4904,7 +4904,7 @@ function renderProducts() {
           ${p.videoUrl ? `<button class="video-play-btn" onclick="event.stopPropagation();openVideoModal('${p.videoUrl}')" title="Bekijk video">▶</button>` : ''}
         </div>
         <div class="card-body">
-          <div class="card-title" style="display:flex;align-items:center;gap:8px;">${p.name}<span title="${p.inStock !== false ? 'Op voorraad' : 'Niet op voorraad'}" style="display:inline-block;flex-shrink:0;width:10px;height:10px;border-radius:50%;background:${p.inStock !== false ? '#27ae60' : '#e74c3c'};box-shadow:0 0 5px ${p.inStock !== false ? '#27ae6099' : '#e74c3c99'};"></span></div>
+          <div class="card-title" style="display:flex;align-items:center;gap:8px;">${p.name}<span title="${p.stock !== false ? 'Op voorraad' : 'Niet op voorraad'}" style="display:inline-block;flex-shrink:0;width:10px;height:10px;border-radius:50%;background:${p.stock !== false ? '#27ae60' : '#e74c3c'};box-shadow:0 0 5px ${p.stock !== false ? '#27ae6099' : '#e74c3c99'};"></span></div>
           <div class="card-desc">${getDesc(p, currentLang)}</div>
           ${getShippingLabel(p)}
           <div class="card-footer">
