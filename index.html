@@ -298,6 +298,10 @@ footer a:hover { color: var(--gold); }
   <button class="cat-btn" onclick="setCategory('mods')" id="nav-mods">Mods &amp; Extras</button>
 </nav>
 
+<div id="stock-info-bar" style="text-align:center; padding:8px 16px; font-size:11px; color:var(--muted); letter-spacing:0.5px; border-bottom:1px solid var(--border);">
+  <span id="stock-info-text"></span>
+</div>
+
 <main class="page" id="main-page">
 
   <!-- LEFT SUBMENU (desktop only) -->
@@ -4574,9 +4578,11 @@ const i18n = {
     coInvoiceLabel: "Ik wil een factuur",
     coLandPlaceholder: "— Selecteer land —",
     coConfirmBtn: "✓ Bestelling bevestigen",
+    stockInfo: "🟢 Groen: product op voorraad. Levering 1 week in Europa, 2–3 weken voor USA/Canada/Australië. 🔴 Rood: niet op voorraad, 1 week productie + leveringstermijn.",
     coLblCompany: "Bedrijfsnaam",
     coLblVat: "BTW-nummer",
     coConfirmBtn: "✓ Bestelling bevestigen",
+    stockInfo: "🟢 Groen: product op voorraad. Levering 1 week in Europa, 2–3 weken voor USA/Canada/Australië. 🔴 Rood: niet op voorraad, 1 week productie + leveringstermijn.",
     coLblCompany: "Bedrijfsnaam",
     coLblVat: "BTW-nummer",
     contactQ: "Vragen over een product? Neem contact op.",
@@ -4624,6 +4630,7 @@ const i18n = {
     coInvoiceLabel: "I want an invoice",
     coLandPlaceholder: "— Select country —",
     coConfirmBtn: "✓ Confirm order",
+    stockInfo: "🟢 Green: product in stock. Delivery within 1 week in Europe. USA/Canada/Australia: 2–3 weeks. 🔴 Red: not in stock. Production lead time 1 week + delivery as above.",
     coLblCompany: "Company name",
     coLblVat: "VAT number",
     contactQ: "Questions about a product? Get in touch.",
@@ -4646,6 +4653,7 @@ const i18n = {
     coInvoiceLabel: "I want an invoice",
     coLandPlaceholder: "— Select country —",
     coConfirmBtn: "✓ Confirm order",
+    stockInfo: "🟢 Green: product in stock. Delivery within 1 week in Europe. USA/Canada/Australia: 2–3 weeks. 🔴 Red: not in stock. Production lead time 1 week + delivery as above.",
     coLblCompany: "Company name",
     coLblVat: "VAT number",
   },
@@ -4677,6 +4685,7 @@ const i18n = {
     coInvoiceLabel: "Je veux une facture",
     coLandPlaceholder: "— Sélectionner le pays —",
     coConfirmBtn: "✓ Confirmer la commande",
+    stockInfo: "🟢 Vert: produit en stock. Livraison sous 1 semaine en Europe. USA/Canada/Australie: 2–3 semaines. 🔴 Rouge: non disponible. Délai de production 1 semaine + livraison comme ci-dessus.",
     coLblCompany: "Nom de l'entreprise",
     coLblVat: "Numéro de TVA",
     contactQ: "Des questions sur un produit ? Contactez-nous.",
@@ -4699,6 +4708,7 @@ const i18n = {
     coInvoiceLabel: "Je veux une facture",
     coLandPlaceholder: "— Sélectionner le pays —",
     coConfirmBtn: "✓ Confirmer la commande",
+    stockInfo: "🟢 Vert: produit en stock. Livraison sous 1 semaine en Europe. USA/Canada/Australie: 2–3 semaines. 🔴 Rouge: non disponible. Délai de production 1 semaine + livraison comme ci-dessus.",
     coLblCompany: "Nom de l'entreprise",
     coLblVat: "Numéro de TVA",
   }
@@ -5406,6 +5416,8 @@ function toggleInvoice() {
   const checked = document.getElementById('co-invoice-check').checked;
   document.getElementById('co-invoice-fields').style.display = checked ? 'block' : 'none';
   // Translate labels when shown
+  const stockInfoEl = document.getElementById('stock-info-text');
+  if (stockInfoEl) stockInfoEl.textContent = t('stockInfo');
   const lblCompany = document.getElementById('co-lbl-company');
   if (lblCompany) lblCompany.textContent = currentLang === "fr" ? "Nom de l'entreprise" : currentLang === "en" ? "Company name" : "Bedrijfsnaam";
   const lblVat = document.getElementById('co-lbl-vat');
