@@ -298,8 +298,8 @@ footer a:hover { color: var(--gold); }
   <button class="cat-btn" onclick="setCategory('mods')" id="nav-mods">Mods &amp; Extras</button>
 </nav>
 
-<div id="stock-info-bar" style="text-align:center; padding:8px 16px; font-size:11px; color:var(--muted); letter-spacing:0.5px; border-bottom:1px solid var(--border);">
-  <span id="stock-info-text"></span>
+<div id="stock-info-bar" style="text-align:center; padding:7px 16px; font-size:11px; color:var(--muted); letter-spacing:0.3px; border-bottom:1px solid var(--border); line-height:1.6;">
+  <span id="stock-info-text">🟢 Groen: op voorraad — levering 1 week Europa, 2–3 weken USA/CA/AU &nbsp;|&nbsp; 🔴 Rood: niet op voorraad — 1 week productie + leveringstermijn</span>
 </div>
 
 <main class="page" id="main-page">
@@ -5417,7 +5417,14 @@ function toggleInvoice() {
   document.getElementById('co-invoice-fields').style.display = checked ? 'block' : 'none';
   // Translate labels when shown
   const stockInfoEl = document.getElementById('stock-info-text');
-  if (stockInfoEl) stockInfoEl.textContent = t('stockInfo');
+  if (stockInfoEl) {
+    const stockTexts = {
+      nl: '🟢 Groen: op voorraad — levering 1 week Europa, 2–3 weken USA/CA/AU  |  🔴 Rood: niet op voorraad — 1 week productie + leveringstermijn',
+      fr: '🟢 Vert: en stock — livraison sous 1 semaine en Europe, 2–3 semaines USA/CA/AU  |  🔴 Rouge: non disponible — 1 semaine production + délai livraison',
+      en: '🟢 Green: in stock — delivery 1 week Europe, 2–3 weeks USA/CA/AU  |  🔴 Red: not in stock — 1 week production + delivery time'
+    };
+    stockInfoEl.textContent = stockTexts[currentLang] || stockTexts.nl;
+  }
   const lblCompany = document.getElementById('co-lbl-company');
   if (lblCompany) lblCompany.textContent = currentLang === "fr" ? "Nom de l'entreprise" : currentLang === "en" ? "Company name" : "Bedrijfsnaam";
   const lblVat = document.getElementById('co-lbl-vat');
