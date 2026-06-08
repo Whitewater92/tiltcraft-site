@@ -298,6 +298,10 @@ footer a:hover { color: var(--gold); }
   <button class="cat-btn" onclick="setCategory('mods')" id="nav-mods">Mods &amp; Extras</button>
 </nav>
 
+<div id="stock-info-bar" style="text-align:center; padding:7px 16px; font-size:11px; color:var(--muted); letter-spacing:0.3px; border-bottom:1px solid var(--border); line-height:1.6;">
+  <span id="stock-info-text">🟢 Groen: op voorraad — levering 1 week Europa, 2–3 weken USA/CA/AU &nbsp;|&nbsp; 🔴 Rood: niet op voorraad — 1 week productie + leveringstermijn</span>
+</div>
+
 <main class="page" id="main-page">
 
   <!-- LEFT SUBMENU (desktop only) -->
@@ -400,7 +404,7 @@ footer a:hover { color: var(--gold); }
       <div class="co-field">
         <label id="co-lbl-country">Land</label>
         <select id="co-country" onchange="updateShippingCost()" autocomplete="country">
-          <option value="">— Selecteer land —</option>
+          <option value="" id="co-land-placeholder">— Selecteer land —</option>
           <option value="BE">België / Belgium</option>
           <option value="FR">France</option>
           <option value="NL">Nederland</option>
@@ -426,8 +430,8 @@ footer a:hover { color: var(--gold); }
         </label>
       </div>
       <div id="co-invoice-fields" style="display:none;background:rgba(240,180,41,0.05);border:1px solid var(--border);border-radius:4px;padding:14px;margin-bottom:14px;">
-        <div class="co-field" style="margin-bottom:10px;"><label>Bedrijfsnaam</label><input type="text" id="co-company" placeholder="Bedrijfsnaam" autocomplete="organization"></div>
-        <div class="co-field" style="margin-bottom:0;"><label>BTW-nummer</label><input type="text" id="co-vat" placeholder="BE 0123.456.789" autocomplete="off"></div>
+        <div class="co-field" style="margin-bottom:10px;"><label id="co-lbl-company">Bedrijfsnaam</label><input type="text" id="co-company" placeholder="Bedrijfsnaam" autocomplete="organization"></div>
+        <div class="co-field" style="margin-bottom:0;"><label id="co-lbl-vat">BTW-nummer</label><input type="text" id="co-vat" placeholder="BE 0123.456.789" autocomplete="off"></div>
       </div>
       <!-- EINDE FACTUUR OPTIE -->
       <div class="co-shipping-line" id="co-shipping-line" style="display:none">
@@ -451,18 +455,18 @@ footer a:hover { color: var(--gold); }
       <div class="qr-screen" id="qr-screen">
         <div id="qr-canvas"></div>
         <div class="qr-iban-box">
-          <div class="qr-iban-row"><span class="qr-iban-label">Begunstigde</span><span class="qr-iban-value" id="qr-name"></span></div>
+          <div class="qr-iban-row"><span class="qr-iban-label" id="qr-lbl-name">Begunstigde</span><span class="qr-iban-value" id="qr-name"></span></div>
           <div class="qr-iban-row">
-            <span class="qr-iban-label">IBAN</span>
+            <span class="qr-iban-label" id="qr-lbl-iban">IBAN</span>
             <span style="display:flex;align-items:center;gap:8px;">
               <span class="qr-iban-value" id="qr-iban"></span>
               <button onclick="copyToClipboard('qr-iban','copy-iban-btn')" id="copy-iban-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;padding:3px 8px;border-radius:3px;cursor:pointer;letter-spacing:1px;white-space:nowrap;">kopieer</button>
             </span>
           </div>
-          <div class="qr-iban-row"><span class="qr-iban-label">BIC</span><span class="qr-iban-value" id="qr-bic"></span></div>
-          <div class="qr-iban-row"><span class="qr-iban-label">Bedrag</span><span class="qr-iban-value" id="qr-amount"></span></div>
+          <div class="qr-iban-row"><span class="qr-iban-label" id="qr-lbl-bic">BIC</span><span class="qr-iban-value" id="qr-bic"></span></div>
+          <div class="qr-iban-row"><span class="qr-iban-label" id="qr-lbl-amount">Bedrag</span><span class="qr-iban-value" id="qr-amount"></span></div>
           <div class="qr-iban-row">
-            <span class="qr-iban-label">Mededeling</span>
+            <span class="qr-iban-label" id="qr-lbl-ref">Mededeling</span>
             <span style="display:flex;align-items:center;gap:8px;">
               <span class="qr-iban-value qr-ref" id="qr-ref"></span>
               <button onclick="copyToClipboard('qr-ref','copy-ref-btn')" id="copy-ref-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;padding:3px 8px;border-radius:3px;cursor:pointer;letter-spacing:1px;white-space:nowrap;">kopieer</button>
@@ -474,7 +478,12 @@ footer a:hover { color: var(--gold); }
           Alle betalingsgegevens worden automatisch ingevuld.<br>
           Vermeld de mededeling als je manueel overschrijft.
         </div>
-        <button class="co-pay-btn" style="margin-top:16px;" onclick="confirmTransfer()">✓ Bestelling bevestigen</button>
+        <div style="margin-top:14px; padding:10px 14px; background:rgba(240,180,41,0.1); border-left:3px solid var(--gold); border-radius:2px; font-size:12px; color:#e8e8e8; text-align:left; line-height:1.7;">
+          🔔 <strong>NL:</strong> Klik na betaling op de knop hieronder zodat uw bestelling correct verwerkt wordt en u een bevestigingsmail ontvangt.<br>
+          🔔 <strong>FR:</strong> Après le paiement, cliquez sur le bouton ci-dessous pour que votre commande soit traitée et recevoir un e-mail de confirmation.<br>
+          🔔 <strong>EN:</strong> After payment, click the button below so your order is processed correctly and you receive a confirmation email.
+        </div>
+        <button class="co-pay-btn" style="margin-top:16px;" id="co-confirm-btn" onclick="confirmTransfer()">✓ Bestelling bevestigen</button>
       </div>
     </div>
   </div>
@@ -3553,174 +3562,174 @@ const products = [
   // Nieuwe producten worden hieronder toegevoegd via admin.html
 
   // === FLIPPER BAT DECALS ===
-  { name: "Flipper bat decal Avatar", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Avatar", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Avatar", en: "Flipper bat decals for Avatar", fr: "Flipper bat decals for Avatar" },
     images: ["images/batava.jpg"] },
-  { name: "Flipper bat decal Back to the Future", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Back to the Future", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Back to the Future", en: "Flipper bat decals for Back to the Future", fr: "Flipper bat decals for Back to the Future" },
     images: ["images/batbttf.jpg"] },
-  { name: "Flipper bat decal Bride of Pinbot", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Bride of Pinbot", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Bride of Pinbot", en: "Flipper bat decals for Bride of Pinbot", fr: "Flipper bat decals for Bride of Pinbot" },
     images: ["images/batbop.jpg"] },
-  { name: "Flipper bat decal Congo", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Congo", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Congo", en: "Flipper bat decals for Congo", fr: "Flipper bat decals for Congo" },
-    images: ["images/batcongo.jpg"] },  { name: "Flipper bat decal Flintstones", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+    images: ["images/batcongo.jpg"] },  { name: "Flipper bat decal Flintstones", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Flintstones", en: "Flipper bat decals for Flintstones", fr: "Flipper bat decals for Flintstones" },
     images: ["images/batflint.jpg"] },
-  { name: "Flipper bat decal Ghostbusters", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Ghostbusters", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Ghostbusters", en: "Flipper bat decals for Ghostbusters", fr: "Flipper bat decals for Ghostbusters" },
     images: ["images/batgb.jpg"] },
-  { name: "Flipper bat decal Ghostbusters (v2)", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Ghostbusters (v2)", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Ghostbusters (v2)", en: "Flipper bat decals for Ghostbusters (v2)", fr: "Flipper bat decals for Ghostbusters (v2)" },
     images: ["images/batgb1.jpg"] },
-  { name: "Flipper bat decal Guns N' Roses", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Guns N' Roses", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Guns N' Roses", en: "Flipper bat decals for Guns N' Roses", fr: "Flipper bat decals for Guns N' Roses" },
     images: ["images/batgnr4.jpg"] },
-  { name: "Flipper bat decal Godzilla", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Godzilla", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Godzilla", en: "Flipper bat decals for Godzilla", fr: "Flipper bat decals for Godzilla" },
     images: ["images/batgz1.jpg"] },
-  { name: "Flipper bat decal Judge Dredd", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Judge Dredd", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Judge Dredd", en: "Flipper bat decals for Judge Dredd", fr: "Flipper bat decals for Judge Dredd" },
     images: ["images/batjd.jpg"] },
-  { name: "Flipper bat decal Junkyard", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Junkyard", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Junkyard", en: "Flipper bat decals for Junkyard", fr: "Flipper bat decals for Junkyard" },
     images: ["images/batjy.jpg"] },
-  { name: "Flipper bat decal Lord of the Rings", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Lord of the Rings", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Lord of the Rings", en: "Flipper bat decals for Lord of the Rings", fr: "Flipper bat decals for Lord of the Rings" },
     images: ["images/batlotr1.jpg"] },
-  { name: "Flipper bat decal Pirates of the Caribbean", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Pirates of the Caribbean", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Pirates of the Caribbean", en: "Flipper bat decals for Pirates of the Caribbean", fr: "Flipper bat decals for Pirates of the Caribbean" },
     images: ["images/batpotc.jpg"] },
-  { name: "Flipper bat decal Pirates of the Caribbean (v2)", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Pirates of the Caribbean (v2)", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Pirates of the Caribbean (v2)", en: "Flipper bat decals for Pirates of the Caribbean (v2)", fr: "Flipper bat decals for Pirates of the Caribbean (v2)" },
     images: ["images/batpotc.jpg"] },
-  { name: "Flipper bat decal Rollergames", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Rollergames", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Rollergames", en: "Flipper bat decals for Rollergames", fr: "Flipper bat decals for Rollergames" },
     images: ["images/batrg.jpg"] },
-  { name: "Flipper bat decal Safe Cracker", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Safe Cracker", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Safe Cracker", en: "Flipper bat decals for Safe Cracker", fr: "Flipper bat decals for Safe Cracker" },
     images: ["images/batsc.jpg"] },
-  { name: "Flipper bat decal Star Trek 25th Anniversary", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Star Trek 25th Anniversary", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Star Trek 25th Anniversary", en: "Flipper bat decals for Star Trek 25th Anniversary", fr: "Flipper bat decals for Star Trek 25th Anniversary" },
     images: ["images/batst25th.jpg"] },
-  { name: "Flipper bat decal World Cup Soccer '94", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal World Cup Soccer '94", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor World Cup Soccer '94", en: "Flipper bat decals for World Cup Soccer '94", fr: "Flipper bat decals for World Cup Soccer '94" },
     images: ["images/batwcs94.jpg"] },
 
-  { name: "Flipper bat decal Dungeons & Dragons", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal Dungeons & Dragons", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor Dungeons & Dragons", en: "Flipper bat decals for Dungeons & Dragons", fr: "Flipper bat decals pour Dungeons & Dragons" },
     images: ["images/batdd.jpg"] },
-  { name: "Flipper bat decal The Godfather", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", inStock: false,
+  { name: "Flipper bat decal The Godfather", category: "decals", subcat: "flipper bat", price: 7.5, tptCode: "TPT1", stock: false,
     desc: { nl: "Flipper bat decals voor The Godfather", en: "Flipper bat decals for The Godfather", fr: "Flipper bat decals pour The Godfather" },
     images: ["images/batgf.jpg"] },
   // === SHOOTER DECALS ===
-  { name: "Shooter decal Avatar", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Avatar", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Avatar", en: "Shooter decal for Avatar", fr: "Shooter decal for Avatar" },
     images: ["images/shooteravatar.png"] },
-  { name: "Shooter decal Champion Pub", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Champion Pub", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Champion Pub", en: "Shooter decal for Champion Pub", fr: "Shooter decal for Champion Pub" },
     images: ["images/shootercp.png"] },
-  { name: "Shooter decal Black Knight 2000", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Black Knight 2000", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Black Knight 2000", en: "Shooter decal for Black Knight 2000", fr: "Shooter decal for Black Knight 2000" },
     images: ["images/shooterbk2000.png"] },
-  { name: "Shooter decal Black Knight", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Black Knight", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Black Knight", en: "Shooter decal for Black Knight", fr: "Shooter decal for Black Knight" },
     images: ["images/shooterbk.png"] },
-  { name: "Shooter decal Cactus Canyon", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Cactus Canyon", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Cactus Canyon", en: "Shooter decal for Cactus Canyon", fr: "Shooter decal for Cactus Canyon" },
     images: ["images/shootercactusc.jpeg"] },
-  { name: "Shooter decal Indianapolis 500", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Indianapolis 500", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Indianapolis 500", en: "Shooter decal for Indianapolis 500", fr: "Shooter decal for Indianapolis 500" },
     images: ["images/shooteri500.png"] },
-  { name: "Shooter decal Jaws", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Jaws", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Jaws", en: "Shooter decal for Jaws", fr: "Shooter decal for Jaws" },
     images: ["images/shooterjaws.png"] },
-  { name: "Shooter decal James Bond Dr. No", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal James Bond Dr. No", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor James Bond Dr. No", en: "Shooter decal for James Bond Dr. No", fr: "Shooter decal for James Bond Dr. No" },
     images: ["images/shooterDrNO.png"] },
-  { name: "Shooter decal Fish Tales (v2)", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Fish Tales (v2)", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Fish Tales (v2)", en: "Shooter decal for Fish Tales (v2)", fr: "Shooter decal for Fish Tales (v2)" },
     images: ["images/shootfish2.png"] },
-  { name: "Shooter decal Addams Family", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Addams Family", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Addams Family", en: "Shooter decal for Addams Family", fr: "Shooter decal for Addams Family" },
     images: ["images/shootaddams1.png"] },
-  { name: "Shooter decal Attack from Mars", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Attack from Mars", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Attack from Mars", en: "Shooter decal for Attack from Mars", fr: "Shooter decal for Attack from Mars" },
     images: ["images/shootafm2.png"] },
-  { name: "Shooter decal Congo", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Congo", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Congo", en: "Shooter decal for Congo", fr: "Shooter decal for Congo" },
     images: ["images/shootcongo1.png"] },
-  { name: "Shooter decal Corvette", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Corvette", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Corvette", en: "Shooter decal for Corvette", fr: "Shooter decal for Corvette" },
     images: ["images/shootcorvette.png"] },
-  { name: "Shooter decal Winchester House", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Winchester House", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Winchester House", en: "Shooter decal for Winchester House", fr: "Shooter decal for Winchester House" },
     images: ["images/shootwinch.png"] },
-  { name: "Shooter decal Monster Bash", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Monster Bash", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Monster Bash", en: "Shooter decal for Monster Bash", fr: "Shooter decal for Monster Bash" },
     images: ["images/shootermb.png"] },
-  { name: "Shooter decal Creature from the Black Lagoon", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Creature from the Black Lagoon", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Creature from the Black Lagoon", en: "Shooter decal for Creature from the Black Lagoon", fr: "Shooter decal for Creature from the Black Lagoon" },
     images: ["images/shootcftbl.png"] },
-  { name: "Shooter decal Twilight Zone", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Twilight Zone", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Twilight Zone", en: "Shooter decal for Twilight Zone", fr: "Shooter decal for Twilight Zone" },
     images: ["images/shootertz.png"] },
-  { name: "Shooter decal Lord of the Rings", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Lord of the Rings", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Lord of the Rings", en: "Shooter decal for Lord of the Rings", fr: "Shooter decal for Lord of the Rings" },
     images: ["images/shooterlotr.png"] },
-  { name: "Shooter decal Xenon", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Xenon", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Xenon", en: "Shooter decal for Xenon", fr: "Shooter decal for Xenon" },
     images: ["images/shooterxenon.png"] },
-  { name: "Shooter decal X-Files", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal X-Files", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor X-Files", en: "Shooter decal for X-Files", fr: "Shooter decal for X-Files" },
     images: ["images/shooterxfiles.png"] },
-  { name: "Shooter decal Theatre of Magic", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Theatre of Magic", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Theatre of Magic", en: "Shooter decal for Theatre of Magic", fr: "Shooter decal for Theatre of Magic" },
     images: ["images/shootertom.png"] },
-  { name: "Shooter decal Theatre of Magic (v2)", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Theatre of Magic (v2)", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Theatre of Magic (v2)", en: "Shooter decal for Theatre of Magic (v2)", fr: "Shooter decal for Theatre of Magic (v2)" },
     images: ["images/shootertom2.png"] },
-  { name: "Shooter decal Whirlwind", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Whirlwind", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Whirlwind", en: "Shooter decal for Whirlwind", fr: "Shooter decal for Whirlwind" },
     images: ["images/shooterww.png"] },
-  { name: "Shooter decal World Cup Soccer '94", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal World Cup Soccer '94", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor World Cup Soccer '94", en: "Shooter decal for World Cup Soccer '94", fr: "Shooter decal for World Cup Soccer '94" },
     images: ["images/shooterwcs94.png"] },
-  { name: "Shooter decal Who Dunnit", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Who Dunnit", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Winchester House (v2)", en: "Shooter decal for Winchester House (v2)", fr: "Shooter decal for Winchester House (v2)" },
     images: ["images/shooterwhd.png"] },
-  { name: "Shooter decal The Shadow", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal The Shadow", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor The Shadow", en: "Shooter decal for The Shadow", fr: "Shooter decal for The Shadow" },
     images: ["images/shootershadow.png"] },
-  { name: "Shooter decal Tommy", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Tommy", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Tommy", en: "Shooter decal for Tommy", fr: "Shooter decal for Tommy" },
     images: ["images/shootertommy.png"] },
-  { name: "Shooter decal Cirqus Voltaire", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Cirqus Voltaire", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Cirqus Voltaire", en: "Shooter decal for Cirqus Voltaire", fr: "Shooter decal for Cirqus Voltaire" },
     images: ["images/shootercv.png"] },
-  { name: "Shooter decal Road Show", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Road Show", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Road Show", en: "Shooter decal for Road Show", fr: "Shooter decal for Road Show" },
-    images: ["images/shooterrs1.png"] },  { name: "Shooter decal Medieval Madness", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    images: ["images/shooterrs1.png"] },  { name: "Shooter decal Medieval Madness", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Medieval Madness", en: "Shooter decal for Medieval Madness", fr: "Shooter decal for Medieval Madness" },
     images: ["images/shootermm.png"] },
-  { name: "Shooter decal Funhouse", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Funhouse", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Funhouse", en: "Shooter decal for Funhouse", fr: "Shooter decal for Funhouse" },
     images: ["images/shooterfh.png"] },
-  { name: "Shooter decal Back to the Future", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Back to the Future", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Back to the Future", en: "Shooter decal for Back to the Future", fr: "Shooter decal for Back to the Future" },
     images: ["images/shooterbttf.png"] },
-  { name: "Shooter decal Scared Stiff", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Scared Stiff", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Scared Stiff", en: "Shooter decal for Scared Stiff", fr: "Shooter decal for Scared Stiff" },
     images: ["images/shooterss.png"] },
-  { name: "Shooter decal John Wick", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal John Wick", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor John Wick", en: "Shooter decal for John Wick", fr: "Shooter decal for John Wick" },
     images: ["images/shooterjw.png"] },
-  { name: "Shooter decal White Water", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal White Water", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor White Water", en: "Shooter decal for White Water", fr: "Shooter decal for White Water" },
     images: ["images/shooterwh2o.png"] },
-  { name: "Shooter decal Rush", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+  { name: "Shooter decal Rush", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Rush", en: "Shooter decal for Rush", fr: "Shooter decal for Rush" },
-    images: ["images/shooterrush.png"] },  { name: "Shooter decal Diner", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", inStock: false,
+    images: ["images/shooterrush.png"] },  { name: "Shooter decal Diner", category: "decals", subcat: "shooter", price: 7, tptCode: "TPT1", stock: false,
     desc: { nl: "Shooter decal voor Diner", en: "Shooter decal for Diner", fr: "Shooter decal for Diner" },
     images: ["images/shooterdiner.png"] },
 
@@ -3731,7 +3740,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batacdcv3.png"],
     desc: { nl: "Flipper bat decals for AC/DC", en: "Flipper bat decals for AC/DC", fr: "Flipper bat decals for AC/DC" }
   },
@@ -3741,7 +3750,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batapollo13.png"],
     desc: { nl: "Flipper bat decals for Apollo 13", en: "Flipper bat decals for Apollo 13", fr: "Flipper bat decals for Apollo 13" }
   },
@@ -3751,7 +3760,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batattackfrommars.png"],
     desc: { nl: "Flipper bat decals for Attack from Mars", en: "Flipper bat decals for Attack from Mars", fr: "Flipper bat decals for Attack from Mars" }
   },
@@ -3761,7 +3770,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batava.jpg"],
     desc: { nl: "Flipper bat decals for Avatar", en: "Flipper bat decals for Avatar", fr: "Flipper bat decals for Avatar" }
   },
@@ -3771,7 +3780,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batbop.jpg"],
     desc: { nl: "Flipper bat decals for Bop It Extreme", en: "Flipper bat decals for Bop It Extreme", fr: "Flipper bat decals for Bop It Extreme" }
   },
@@ -3781,7 +3790,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batbttf.jpg"],
     desc: { nl: "Flipper bat decals for Back to the Future", en: "Flipper bat decals for Back to the Future", fr: "Flipper bat decals for Back to the Future" }
   },
@@ -3791,7 +3800,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batcongo.jpg"],
     desc: { nl: "Flipper bat decals for Congo", en: "Flipper bat decals for Congo", fr: "Flipper bat decals for Congo" }
   },
@@ -3801,7 +3810,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batcreaturefromv2.png"],
     desc: { nl: "Flipper bat decals for Creature from the Black Lagoon v2", en: "Flipper bat decals for Creature from the Black Lagoon v2", fr: "Flipper bat decals for Creature from the Black Lagoon v2" }
   },
@@ -3811,7 +3820,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batcreaturefromv3.png"],
     desc: { nl: "Flipper bat decals for Creature from the Black Lagoon v3", en: "Flipper bat decals for Creature from the Black Lagoon v3", fr: "Flipper bat decals for Creature from the Black Lagoon v3" }
   },
@@ -3821,7 +3830,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batdd.jpg"],
     desc: { nl: "Flipper bat decals for Dungeons & Dragons", en: "Flipper bat decals for Dungeons & Dragons", fr: "Flipper bat decals for Dungeons & Dragons" }
   },
@@ -3831,7 +3840,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batdeadpool.png"],
     desc: { nl: "Flipper bat decals for Deadpool", en: "Flipper bat decals for Deadpool", fr: "Flipper bat decals for Deadpool" }
   },
@@ -3841,7 +3850,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batdune.png"],
     desc: { nl: "Flipper bat decals for Dune", en: "Flipper bat decals for Dune", fr: "Flipper bat decals for Dune" }
   },
@@ -3851,7 +3860,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batelvira.png"],
     desc: { nl: "Flipper bat decals for Elvira", en: "Flipper bat decals for Elvira", fr: "Flipper bat decals for Elvira" }
   },
@@ -3861,7 +3870,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batevildead.png"],
     desc: { nl: "Flipper bat decals for Evil Dead", en: "Flipper bat decals for Evil Dead", fr: "Flipper bat decals for Evil Dead" }
   },
@@ -3871,7 +3880,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batfish.jpg"],
     desc: { nl: "Flipper bat decals for Fish Tales", en: "Flipper bat decals for Fish Tales", fr: "Flipper bat decals for Fish Tales" }
   },
@@ -3881,7 +3890,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batflint.jpg"],
     desc: { nl: "Flipper bat decals for Flintstones", en: "Flipper bat decals for Flintstones", fr: "Flipper bat decals for Flintstones" }
   },
@@ -3891,7 +3900,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batfrankenstein.png"],
     desc: { nl: "Flipper bat decals for Frankenstein", en: "Flipper bat decals for Frankenstein", fr: "Flipper bat decals for Frankenstein" }
   },
@@ -3901,7 +3910,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batgameofthrones.png"],
     desc: { nl: "Flipper bat decals for Game of Thrones", en: "Flipper bat decals for Game of Thrones", fr: "Flipper bat decals for Game of Thrones" }
   },
@@ -3911,7 +3920,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batgb.jpg"],
     desc: { nl: "Flipper bat decals for Ghostbusters", en: "Flipper bat decals for Ghostbusters", fr: "Flipper bat decals for Ghostbusters" }
   },
@@ -3921,7 +3930,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batgb2.jpg"],
     desc: { nl: "Flipper bat decals for Ghostbusters v2", en: "Flipper bat decals for Ghostbusters v2", fr: "Flipper bat decals for Ghostbusters v2" }
   },
@@ -3931,7 +3940,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batgetaway.png"],
     desc: { nl: "Flipper bat decals for The Getaway", en: "Flipper bat decals for The Getaway", fr: "Flipper bat decals for The Getaway" }
   },
@@ -3941,7 +3950,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batgf.jpg"],
     desc: { nl: "Flipper bat decals for Goldeneye", en: "Flipper bat decals for Goldeneye", fr: "Flipper bat decals for Goldeneye" }
   },
@@ -3951,7 +3960,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batgnr4.jpg"],
     desc: { nl: "Flipper bat decals for Guns N Roses", en: "Flipper bat decals for Guns N Roses", fr: "Flipper bat decals for Guns N Roses" }
   },
@@ -3961,7 +3970,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batgodzilla.png"],
     desc: { nl: "Flipper bat decals for Godzilla", en: "Flipper bat decals for Godzilla", fr: "Flipper bat decals for Godzilla" }
   },
@@ -3971,7 +3980,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batgz3.jpg"],
     desc: { nl: "Flipper bat decals for Guns N Roses v3", en: "Flipper bat decals for Guns N Roses v3", fr: "Flipper bat decals for Guns N Roses v3" }
   },
@@ -3981,7 +3990,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batharrypotter.png"],
     desc: { nl: "Flipper bat decals for Harry Potter", en: "Flipper bat decals for Harry Potter", fr: "Flipper bat decals for Harry Potter" }
   },
@@ -3991,7 +4000,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batjaws.png"],
     desc: { nl: "Flipper bat decals for Jaws", en: "Flipper bat decals for Jaws", fr: "Flipper bat decals for Jaws" }
   },
@@ -4001,7 +4010,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batjd.jpg"],
     desc: { nl: "Flipper bat decals for Judge Dredd", en: "Flipper bat decals for Judge Dredd", fr: "Flipper bat decals for Judge Dredd" }
   },
@@ -4011,7 +4020,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batjurassicpark.png"],
     desc: { nl: "Flipper bat decals for Jurassic Park", en: "Flipper bat decals for Jurassic Park", fr: "Flipper bat decals for Jurassic Park" }
   },
@@ -4021,7 +4030,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batjy.jpg"],
     desc: { nl: "Flipper bat decals for Johnny Mnemonic", en: "Flipper bat decals for Johnny Mnemonic", fr: "Flipper bat decals for Johnny Mnemonic" }
   },
@@ -4031,7 +4040,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batkingkong.png"],
     desc: { nl: "Flipper bat decals for King Kong", en: "Flipper bat decals for King Kong", fr: "Flipper bat decals for King Kong" }
   },
@@ -4041,7 +4050,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batlabyrinth.png"],
     desc: { nl: "Flipper bat decals for Labyrinth", en: "Flipper bat decals for Labyrinth", fr: "Flipper bat decals for Labyrinth" }
   },
@@ -4051,7 +4060,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batlotr.jpg"],
     desc: { nl: "Flipper bat decals for Lord of the Rings", en: "Flipper bat decals for Lord of the Rings", fr: "Flipper bat decals for Lord of the Rings" }
   },
@@ -4061,7 +4070,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batmonsterbash.png"],
     desc: { nl: "Flipper bat decals for Monster Bash", en: "Flipper bat decals for Monster Bash", fr: "Flipper bat decals for Monster Bash" }
   },
@@ -4071,7 +4080,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batninjaturtles.png"],
     desc: { nl: "Flipper bat decals for Teenage Mutant Ninja Turtles", en: "Flipper bat decals for Teenage Mutant Ninja Turtles", fr: "Flipper bat decals for Teenage Mutant Ninja Turtles" }
   },
@@ -4081,7 +4090,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batpotc1.jpg"],
     desc: { nl: "Flipper bat decals for Pirates of the Caribbean v1", en: "Flipper bat decals for Pirates of the Caribbean v1", fr: "Flipper bat decals for Pirates of the Caribbean v1" }
   },
@@ -4091,7 +4100,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batpotc2.jpg"],
     desc: { nl: "Flipper bat decals for Pirates of the Caribbean v2", en: "Flipper bat decals for Pirates of the Caribbean v2", fr: "Flipper bat decals for Pirates of the Caribbean v2" }
   },
@@ -4101,7 +4110,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batreturnfrommars.png"],
     desc: { nl: "Flipper bat decals for Return from Mars", en: "Flipper bat decals for Return from Mars", fr: "Flipper bat decals for Return from Mars" }
   },
@@ -4111,7 +4120,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batrg.jpg"],
     desc: { nl: "Flipper bat decals for Road Gear", en: "Flipper bat decals for Road Gear", fr: "Flipper bat decals for Road Gear" }
   },
@@ -4121,7 +4130,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batsc.jpg"],
     desc: { nl: "Flipper bat decals for Star Wars Classics", en: "Flipper bat decals for Star Wars Classics", fr: "Flipper bat decals for Star Wars Classics" }
   },
@@ -4131,7 +4140,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batst25th.jpg"],
     desc: { nl: "Flipper bat decals for Star Trek 25th Anniversary", en: "Flipper bat decals for Star Trek 25th Anniversary", fr: "Flipper bat decals for Star Trek 25th Anniversary" }
   },
@@ -4141,7 +4150,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batstartrek.png"],
     desc: { nl: "Flipper bat decals for Star Trek", en: "Flipper bat decals for Star Trek", fr: "Flipper bat decals for Star Trek" }
   },
@@ -4151,7 +4160,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batstrangerthings.png"],
     desc: { nl: "Flipper bat decals for Stranger Things", en: "Flipper bat decals for Stranger Things", fr: "Flipper bat decals for Stranger Things" }
   },
@@ -4161,7 +4170,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/battheatreofmagic.png"],
     desc: { nl: "Flipper bat decals for Theatre of Magic", en: "Flipper bat decals for Theatre of Magic", fr: "Flipper bat decals for Theatre of Magic" }
   },
@@ -4171,7 +4180,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/battheshadowv3.png"],
     desc: { nl: "Flipper bat decals for The Shadow v3", en: "Flipper bat decals for The Shadow v3", fr: "Flipper bat decals for The Shadow v3" }
   },
@@ -4181,7 +4190,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/battwilightzone.png"],
     desc: { nl: "Flipper bat decals for The Twilight Zone", en: "Flipper bat decals for The Twilight Zone", fr: "Flipper bat decals for The Twilight Zone" }
   },
@@ -4191,7 +4200,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batwcs94.jpg"],
     desc: { nl: "Flipper bat decals for World Cup Soccer 94", en: "Flipper bat decals for World Cup Soccer 94", fr: "Flipper bat decals for World Cup Soccer 94" }
   },
@@ -4201,7 +4210,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batwhirlwindv4.png"],
     desc: { nl: "Flipper bat decals for Whirlwind v4", en: "Flipper bat decals for Whirlwind v4", fr: "Flipper bat decals for Whirlwind v4" }
   },
@@ -4211,7 +4220,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batwhitewater.png"],
     desc: { nl: "Flipper bat decals for White Water", en: "Flipper bat decals for White Water", fr: "Flipper bat decals for White Water" }
   },
@@ -4221,7 +4230,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batwhitewaterv2.png"],
     desc: { nl: "Flipper bat decals for White Water v2", en: "Flipper bat decals for White Water v2", fr: "Flipper bat decals for White Water v2" }
   },
@@ -4231,7 +4240,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: true,
+    stock: false,
     images: ["images/batwinchesterhouse.png"],
     desc: { nl: "Flipper bat decals for Winchester House", en: "Flipper bat decals for Winchester House", fr: "Flipper bat decals for Winchester House" }
   },
@@ -4332,8 +4341,7 @@ const products = [
     subcat: "flipper bat",
     price: 9.0,
     tpt: "TPT1",
-    stock: false,
-    images: ["images/batripleysbelieveitornot.png"],
+    stock: false,  images: ["images/batripleysbelieveitornot.png"],
     desc: { nl: "Flipper bat decals for Ripley's Believe It or Not", en: "Flipper bat decals for Ripley's Believe It or Not", fr: "Flipper bat decals for Ripley's Believe It or Not" }
   },
   {
@@ -4511,7 +4519,7 @@ const products = [
     category: "mods",
     price: 75,
     tptCode: "TPT3",
-    inStock: true,
+    stock: false,
     desc: {
       nl: "Side art blades for Cirqus Voltaire",
       en: "Side art blades for Cirqus Voltaire",
@@ -4567,6 +4575,16 @@ const i18n = {
     coLblAddr: "Straat + nr", coLblZip: "Postcode", coLblCity: "Stad", coLblCountry: "Land",
     coLblProducts: "Producten", coLblShip: "Transport", coLblTotal: "Totaal",
     coPayBtn: "Betalen via PayPal",
+    coInvoiceLabel: "Ik wil een factuur",
+    coLandPlaceholder: "— Selecteer land —",
+    coConfirmBtn: "✓ Bestelling bevestigen",
+    stockInfo: "🟢 Groen: product op voorraad. Levering 1 week in Europa, 2–3 weken voor USA/Canada/Australië. 🔴 Rood: niet op voorraad, 1 week productie + leveringstermijn.",
+    coLblCompany: "Bedrijfsnaam",
+    coLblVat: "BTW-nummer",
+    coConfirmBtn: "✓ Bestelling bevestigen",
+    stockInfo: "🟢 Groen: product op voorraad. Levering 1 week in Europa, 2–3 weken voor USA/Canada/Australië. 🔴 Rood: niet op voorraad, 1 week productie + leveringstermijn.",
+    coLblCompany: "Bedrijfsnaam",
+    coLblVat: "BTW-nummer",
     contactQ: "Vragen over een product? Neem contact op.",
     addBtn: "Toevoegen",
     noProducts: "Geen producten in deze categorie.",
@@ -4609,6 +4627,12 @@ const i18n = {
     coLblAddr: "Street + number", coLblZip: "Postal code", coLblCity: "City", coLblCountry: "Country",
     coLblProducts: "Products", coLblShip: "Shipping", coLblTotal: "Total",
     coPayBtn: "Pay with PayPal",
+    coInvoiceLabel: "I want an invoice",
+    coLandPlaceholder: "— Select country —",
+    coConfirmBtn: "✓ Confirm order",
+    stockInfo: "🟢 Green: product in stock. Delivery within 1 week in Europe. USA/Canada/Australia: 2–3 weeks. 🔴 Red: not in stock. Production lead time 1 week + delivery as above.",
+    coLblCompany: "Company name",
+    coLblVat: "VAT number",
     contactQ: "Questions about a product? Get in touch.",
     addBtn: "Add",
     noProducts: "No products in this category.",
@@ -4626,6 +4650,12 @@ const i18n = {
     cmSuccess: "✓ Message sent! We'll be in touch soon.",
     onDemandText: "Looking for a 3D item to enhance your pinball machine? Whether it's a topper, in-game gadget, hinge logos, 3D flipper bats, coin door plates, or speaker inserts — let us know what you have in mind.\n\nWe'll explore the possibilities and provide a cost estimate. Custom 3D items beyond pinball are also possible, of course. Just tell us your idea. Just keep in mind that the items you would find on printables, thingiverse or makerworld need to be licensefree !\n\nAnd if you're looking for an in game decal like flipperbats, targets or other we might be able to help as well.\n\nKeep track on the site as we will be adding any more decals in the future",
     onDemandBtn: "Send us your idea",
+    coInvoiceLabel: "I want an invoice",
+    coLandPlaceholder: "— Select country —",
+    coConfirmBtn: "✓ Confirm order",
+    stockInfo: "🟢 Green: product in stock. Delivery within 1 week in Europe. USA/Canada/Australia: 2–3 weeks. 🔴 Red: not in stock. Production lead time 1 week + delivery as above.",
+    coLblCompany: "Company name",
+    coLblVat: "VAT number",
   },
   fr: {
     searchPlaceholder: "Rechercher un produit…",
@@ -4652,6 +4682,12 @@ const i18n = {
     coLblAddr: "Rue + numéro", coLblZip: "Code postal", coLblCity: "Ville", coLblCountry: "Pays",
     coLblProducts: "Produits", coLblShip: "Livraison", coLblTotal: "Total",
     coPayBtn: "Payer via PayPal",
+    coInvoiceLabel: "Je veux une facture",
+    coLandPlaceholder: "— Sélectionner le pays —",
+    coConfirmBtn: "✓ Confirmer la commande",
+    stockInfo: "🟢 Vert: produit en stock. Livraison sous 1 semaine en Europe. USA/Canada/Australie: 2–3 semaines. 🔴 Rouge: non disponible. Délai de production 1 semaine + livraison comme ci-dessus.",
+    coLblCompany: "Nom de l'entreprise",
+    coLblVat: "Numéro de TVA",
     contactQ: "Des questions sur un produit ? Contactez-nous.",
     addBtn: "Ajouter",
     noProducts: "Aucun produit dans cette catégorie.",
@@ -4669,6 +4705,12 @@ const i18n = {
     cmSuccess: "✓ Message envoyé ! Nous vous contacterons bientôt.",
     onDemandText: "Vous recherchez un élément 3D pour améliorer votre flipper ? Qu'il s'agisse d'un topper, d'un gadget in-game, de logos de charnières, de batteurs 3D, de plaques pour coin door ou d'inserts pour haut-parleurs — dites-nous ce que vous souhaitez.\n\nNous étudierons les possibilités et vous fournirons une estimation du coût. La création d'objets 3D personnalisés en dehors du flipper est également possible.\n\nN'hésitez pas à partager votre idée. Mais regardez bien que les articles que vous trouveriez sur makerworld, printables ou thingiverse soient libre de license.\n\nEt si vous cherchez des decals batteurs, targets ou autre n'hesitez pas !\n\nGarder l'œil sur le site car nous ajouterons régulièrement des nouvelles decals dans le future proche.",
     onDemandBtn: "Envoyez-nous votre idée",
+    coInvoiceLabel: "Je veux une facture",
+    coLandPlaceholder: "— Sélectionner le pays —",
+    coConfirmBtn: "✓ Confirmer la commande",
+    stockInfo: "🟢 Vert: produit en stock. Livraison sous 1 semaine en Europe. USA/Canada/Australie: 2–3 semaines. 🔴 Rouge: non disponible. Délai de production 1 semaine + livraison comme ci-dessus.",
+    coLblCompany: "Nom de l'entreprise",
+    coLblVat: "Numéro de TVA",
   }
 };
 
@@ -4733,6 +4775,29 @@ function applyTranslations() {
   document.getElementById('co-lbl-ship').textContent = t('coLblShip');
   document.getElementById('co-lbl-total').textContent = t('coLblTotal');
   document.getElementById('co-pay-btn').textContent = t('coPayBtn');
+  // Update stock info bar
+  const stockInfoEl = document.getElementById('stock-info-text');
+  if (stockInfoEl) {
+    const stockTexts = {
+      nl: "🟢 Groen: op voorraad — levering 1 week Europa, 2–3 weken USA/CA/AU  |  🔴 Rood: niet op voorraad — 1 week productie + leveringstermijn",
+      fr: "🟢 Vert: en stock — livraison sous 1 semaine en Europe, 2–3 semaines USA/CA/AU  |  🔴 Rouge: non disponible — 1 semaine production + délai livraison",
+      en: "🟢 Green: in stock — delivery 1 week Europe, 2–3 weeks USA/CA/AU  |  🔴 Red: not in stock — 1 week production + delivery time"
+    };
+    stockInfoEl.textContent = stockTexts[currentLang] || stockTexts.nl;
+  }
+  // Translate invoice label
+  document.getElementById('co-invoice-label').textContent = t('coInvoiceLabel');
+  // Translate country placeholder
+  const landEl = document.getElementById('co-land-placeholder');
+  if (landEl) landEl.textContent = t('coLandPlaceholder');
+  // Translate transfer button
+  const pmTransfer = document.getElementById('pm-transfer');
+  if (pmTransfer) pmTransfer.innerHTML = currentLang === 'fr' ? '🏦 Virement' : currentLang === 'en' ? '🏦 Bank transfer' : '🏦 Overschrijving';
+  // Re-apply active payment method button text
+  const activeMethod = pmTransfer && pmTransfer.classList.contains('active') ? 'transfer'
+    : (document.getElementById('pm-bancontact') && document.getElementById('pm-bancontact').classList.contains('active')) ? 'bancontact'
+    : 'paypal';
+  setPayMethod(activeMethod);
 }
 
 function setCategory(cat) {
@@ -4858,7 +4923,7 @@ function renderProducts() {
           ${p.videoUrl ? `<button class="video-play-btn" onclick="event.stopPropagation();openVideoModal('${p.videoUrl}')" title="Bekijk video">▶</button>` : ''}
         </div>
         <div class="card-body">
-          <div class="card-title" style="display:flex;align-items:center;gap:8px;">${p.name}<span title="${p.inStock !== false ? 'Op voorraad' : 'Niet op voorraad'}" style="display:inline-block;flex-shrink:0;width:10px;height:10px;border-radius:50%;background:${p.inStock !== false ? '#27ae60' : '#e74c3c'};box-shadow:0 0 5px ${p.inStock !== false ? '#27ae6099' : '#e74c3c99'};"></span></div>
+          <div class="card-title" style="display:flex;align-items:center;gap:8px;">${p.name}<span title="${p.stock !== false ? 'Op voorraad' : 'Niet op voorraad'}" style="display:inline-block;flex-shrink:0;width:10px;height:10px;border-radius:50%;background:${p.stock !== false ? '#27ae60' : '#e74c3c'};box-shadow:0 0 5px ${p.stock !== false ? '#27ae6099' : '#e74c3c99'};"></span></div>
           <div class="card-desc">${getDesc(p, currentLang)}</div>
           ${getShippingLabel(p)}
           <div class="card-footer">
@@ -4972,10 +5037,10 @@ function showCartPopup(productName) {
   popup.id = 'cart-popup';
   popup.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1a1a1a;border:1px solid var(--gold);border-radius:6px;padding:16px 20px;z-index:998;text-align:center;min-width:280px;box-shadow:0 4px 20px rgba(0,0,0,0.6);';
   popup.innerHTML = `
-    <div style="font-size:12px;color:var(--muted);letter-spacing:1px;margin-bottom:10px;">✓ <strong style="color:var(--white);">${productName}</strong> toegevoegd</div>
+    <div style="font-size:12px;color:var(--muted);letter-spacing:1px;margin-bottom:10px;">✓ <strong style="color:var(--white);">${productName}</strong> ${currentLang === 'fr' ? 'ajouté' : currentLang === 'en' ? 'added' : 'toegevoegd'}</div>
     <div style="display:flex;gap:10px;">
-      <button onclick="document.getElementById('cart-popup').remove()" style="flex:1;padding:10px;background:none;border:1px solid var(--border);color:var(--white);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;">Verder shoppen</button>
-      <button onclick="document.getElementById('cart-popup').remove();openCheckout();" style="flex:1;padding:10px;background:var(--gold);border:none;color:var(--black);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;font-weight:600;">Afrekenen</button>
+      <button onclick="document.getElementById('cart-popup').remove()" style="flex:1;padding:10px;background:none;border:1px solid var(--border);color:var(--white);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;">${currentLang === 'fr' ? 'Continuer les achats' : currentLang === 'en' ? 'Keep shopping' : 'Verder shoppen'}</button>
+      <button onclick="document.getElementById('cart-popup').remove();openCheckout();" style="flex:1;padding:10px;background:var(--gold);border:none;color:var(--black);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;font-weight:600;">${currentLang === 'fr' ? 'Commander' : currentLang === 'en' ? 'Checkout' : 'Afrekenen'}</button>
     </div>`;
   document.body.appendChild(popup);
   setTimeout(function() { const p = document.getElementById('cart-popup'); if(p) p.remove(); }, 6000);
@@ -5149,7 +5214,7 @@ function doCheckout() {
     iban: BANK_IBAN,
     bic: BANK_BIC,
     invoice_info: '',
-    delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '\n' + di.fr + '\n' + di.en; })()
+    delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.forEmail(currentLang); })()
   }).catch(function(err) { console.warn('Klant mail fout:', err); });
 
   emailjs.send("service_k0kokxl", "template_ce6ypur", {
@@ -5180,13 +5245,24 @@ let _qrOrderData = null;
 function setPayMethod(method) {
   document.getElementById('pm-paypal').classList.toggle('active', method === 'paypal');
   document.getElementById('pm-transfer').classList.toggle('active', method === 'transfer');
-  // Update main pay button label
+  if (document.getElementById('pm-bancontact')) {
+    document.getElementById('pm-bancontact').classList.toggle('active', method === 'bancontact');
+  }
   const btn = document.getElementById('co-pay-btn');
+  const isMobile = window.innerWidth <= 800;
   if (method === 'transfer') {
-    btn.textContent = currentLang === 'fr' ? 'Générer QR & confirmer' : currentLang === 'en' ? 'Generate QR & confirm' : 'QR genereren & bevestigen';
+    if (isMobile) {
+      btn.textContent = currentLang === 'fr' ? 'Payer par virement bancaire' : currentLang === 'en' ? 'Pay by bank transfer' : 'Betalen via overschrijving';
+    } else {
+      btn.textContent = currentLang === 'fr' ? 'Générer QR & confirmer' : currentLang === 'en' ? 'Generate QR & confirm' : 'QR genereren & bevestigen';
+    }
+  } else if (method === 'bancontact') {
+    btn.textContent = currentLang === 'fr' ? 'Payer via Bancontact' : currentLang === 'en' ? 'Pay via Bancontact' : 'Betalen via Bancontact';
   } else {
     btn.textContent = currentLang === 'fr' ? 'Payer via PayPal' : currentLang === 'en' ? 'Pay with PayPal' : 'Betalen via PayPal';
   }
+  // Translate payment method buttons
+  document.getElementById('pm-transfer').innerHTML = currentLang === 'fr' ? '🏦 Virement' : currentLang === 'en' ? '🏦 Bank transfer' : '🏦 Overschrijving';
 }
 
 function generateOrderRef(fn, ln) {
@@ -5230,6 +5306,20 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
     document.getElementById('co-pay-btn').style.display      = 'none';
     document.getElementById('pay-method-row').style.display  = 'none';
     document.getElementById('qr-screen').classList.add('visible');
+    // Translate confirm button
+    const confirmBtn = document.getElementById('co-confirm-btn');
+    if (confirmBtn) confirmBtn.textContent = currentLang === 'fr' ? '✓ Confirmer la commande' : currentLang === 'en' ? '✓ Confirm order' : '✓ Bestelling bevestigen';
+    // Translate QR labels
+    const qrLabels = {
+      nl: { name: 'Begunstigde', iban: 'IBAN', bic: 'BIC', amount: 'Bedrag', ref: 'Mededeling' },
+      en: { name: 'Beneficiary', iban: 'IBAN', bic: 'BIC', amount: 'Amount', ref: 'Reference' },
+      fr: { name: 'Bénéficiaire', iban: 'IBAN', bic: 'BIC', amount: 'Montant', ref: 'Communication' }
+    };
+    const ql = qrLabels[currentLang] || qrLabels.nl;
+    ['name','iban','bic','amount','ref'].forEach(k => {
+      const el = document.getElementById('qr-lbl-' + k);
+      if (el) el.textContent = ql[k];
+    });
 
     // 4b. Save cart contents before clearing
     const cartSnapshot = cart.map(p => `- ${p.name}: €${p.price}`).join('\n');
@@ -5254,7 +5344,7 @@ function showQRScreen(fn, ln, email, phone, addr, zip, city, country, grandTotal
       total: grandTotal.toFixed(2),
       payment_method: 'Overschrijving/QR (betaling verwacht)',
       ref: ref,
-      delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.nl + '\n' + di.fr + '\n' + di.en; })()
+      delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.forEmail(currentLang); })()
     }).catch(function(err) {
       console.warn('EmailJS merchant notify failed:', err);
     });
@@ -5335,34 +5425,48 @@ function copyToClipboard(elementId, btnId) {
 function toggleInvoice() {
   const checked = document.getElementById('co-invoice-check').checked;
   document.getElementById('co-invoice-fields').style.display = checked ? 'block' : 'none';
+  // Translate labels when shown
+  const lblCompany = document.getElementById('co-lbl-company');
+  if (lblCompany) lblCompany.textContent = currentLang === "fr" ? "Nom de l'entreprise" : currentLang === "en" ? "Company name" : "Bedrijfsnaam";
+  const lblVat = document.getElementById('co-lbl-vat');
+  if (lblVat) lblVat.textContent = currentLang === 'fr' ? 'Numéro de TVA' : currentLang === 'en' ? 'VAT number' : 'BTW-nummer';
 }
 
 function getDeliveryInfo(country, cartItems) {
   const allInStock = cartItems.every(p => {
-    const prod = products.find(pr => pr.name === p.name);
+    const itemName = typeof p === 'string' ? p.replace(/:.*/, '').trim() : p.name;
+    const prod = products.find(pr => pr.name === itemName);
     return prod ? prod.stock !== false : true;
   });
   const intl = ['US','CA','AU'].includes(country.toUpperCase()) || 
                ['united states','usa','canada','australia'].includes(country.toLowerCase());
 
-  if (!allInStock) {
-    return {
+  const msgs = {
+    outOfStock: {
       nl: 'Een of meerdere producten zijn momenteel niet op voorraad. Verwachte beschikbaarheid: binnen 1 week.',
       fr: 'Un ou plusieurs produits sont actuellement en rupture de stock. Disponibilité prévue : dans 1 semaine.',
       en: 'One or more products are currently out of stock. Expected availability: within 1 week.'
-    };
-  }
-  if (intl) {
-    return {
+    },
+    inStockIntl: {
       nl: 'Alle producten zijn op voorraad. Verwachte levertijd: 3 weken.',
       fr: 'Tous les produits sont en stock. Délai de livraison prévu : 3 semaines.',
       en: 'All products are in stock. Expected delivery time: 3 weeks.'
-    };
-  }
+    },
+    inStockEU: {
+      nl: 'Alle producten zijn op voorraad. Verwachte levertijd: 1 week.',
+      fr: 'Tous les produits sont en stock. Délai de livraison prévu : 1 semaine.',
+      en: 'All products are in stock. Expected delivery time: 1 week.'
+    }
+  };
+
+  const type = !allInStock ? 'outOfStock' : intl ? 'inStockIntl' : 'inStockEU';
+  const all = msgs[type];
+  // Return single language for email, all 3 for on-screen
   return {
-    nl: 'Alle producten zijn op voorraad. Verwachte levertijd: 1 week.',
-    fr: 'Tous les produits sont en stock. Délai de livraison prévu : 1 semaine.',
-    en: 'All products are in stock. Expected delivery time: 1 week.'
+    nl: all.nl,
+    fr: all.fr,
+    en: all.en,
+    forEmail: function(lang) { return all[lang] || all.nl; }
   };
 }
 
@@ -5374,6 +5478,12 @@ function sendOrderEmails(orderData) {
   emailjs.send("service_k0kokxl", "template_uca8a7a", {
     to_email:     orderData.email,
     firstname:    orderData.fn,
+    lastname:     orderData.ln,
+    phone:        orderData.phone,
+    address:      orderData.addr,
+    zip:          orderData.zip,
+    city:         orderData.city,
+    country:      orderData.country,
     ref:          orderData.ref,
     order_lines:  orderData.products,
     shipping_label: orderData.shippingLabel,
@@ -5427,7 +5537,7 @@ function confirmTransfer() {
     fn: d.fn, ln: d.ln, email: d.email, phone: d.phone,
     ref: d.ref, addr: d.addr, zip: d.zip, city: d.city, country: d.country,
     shippingLabel: d.shippingLabel, shippingCost: d.shippingCost, grandTotal: d.grandTotal,
-    deliveryInfo: di.nl + '\n' + di.fr + '\n' + di.en,
+    deliveryInfo: di.forEmail(currentLang),
     products: d.orderLinesSnapshot || cart.map(p => p.name + ': €' + p.price).join('\n'),
     invoiceLine: wantsInvoice ? 'Factuur: ' + company + ' | BTW: ' + vat : ''
   });
