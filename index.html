@@ -4775,6 +4775,16 @@ function applyTranslations() {
   document.getElementById('co-lbl-ship').textContent = t('coLblShip');
   document.getElementById('co-lbl-total').textContent = t('coLblTotal');
   document.getElementById('co-pay-btn').textContent = t('coPayBtn');
+  // Update stock info bar
+  const stockInfoEl = document.getElementById('stock-info-text');
+  if (stockInfoEl) {
+    const stockTexts = {
+      nl: "🟢 Groen: op voorraad — levering 1 week Europa, 2–3 weken USA/CA/AU  |  🔴 Rood: niet op voorraad — 1 week productie + leveringstermijn",
+      fr: "🟢 Vert: en stock — livraison sous 1 semaine en Europe, 2–3 semaines USA/CA/AU  |  🔴 Rouge: non disponible — 1 semaine production + délai livraison",
+      en: "🟢 Green: in stock — delivery 1 week Europe, 2–3 weeks USA/CA/AU  |  🔴 Red: not in stock — 1 week production + delivery time"
+    };
+    stockInfoEl.textContent = stockTexts[currentLang] || stockTexts.nl;
+  }
   // Translate invoice label
   document.getElementById('co-invoice-label').textContent = t('coInvoiceLabel');
   // Translate country placeholder
@@ -5416,15 +5426,6 @@ function toggleInvoice() {
   const checked = document.getElementById('co-invoice-check').checked;
   document.getElementById('co-invoice-fields').style.display = checked ? 'block' : 'none';
   // Translate labels when shown
-  const stockInfoEl = document.getElementById('stock-info-text');
-  if (stockInfoEl) {
-    const stockTexts = {
-      nl: "🟢 Groen: op voorraad — levering 1 week Europa, 2–3 weken USA/CA/AU  |  🔴 Rood: niet op voorraad — 1 week productie + leveringstermijn",
-      fr: "🟢 Vert: en stock — livraison sous 1 semaine en Europe, 2–3 semaines USA/CA/AU  |  🔴 Rouge: non disponible — 1 semaine production + delai livraison",
-      en: "🟢 Green: in stock — delivery 1 week Europe, 2–3 weeks USA/CA/AU  |  🔴 Red: not in stock — 1 week production + delivery time"
-    };
-    stockInfoEl.textContent = stockTexts[currentLang] || stockTexts.nl;
-  }
   const lblCompany = document.getElementById('co-lbl-company');
   if (lblCompany) lblCompany.textContent = currentLang === "fr" ? "Nom de l'entreprise" : currentLang === "en" ? "Company name" : "Bedrijfsnaam";
   const lblVat = document.getElementById('co-lbl-vat');
