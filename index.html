@@ -5206,6 +5206,12 @@ function doCheckout() {
   emailjs.send("service_k0kokxl", "template_uca8a7a", {
     to_email: email,
     firstname: fn,
+    lastname: ln,
+    phone: phone,
+    address: addr,
+    zip: zip,
+    city: city,
+    country: country,
     ref: paypalRef,
     order_lines: paypalCartSnapshot,
     shipping_label: shippingLabel,
@@ -5231,12 +5237,20 @@ function doCheckout() {
     shipping_cost: shippingCost,
     total: grandTotal,
     payment_method: 'PayPal',
-    ref: paypalRef
+    ref: paypalRef,
+    delivery_info: (function(){ const di = getDeliveryInfo(country, cart); return di.forEmail(currentLang); })()
   }).catch(function(err) { console.warn('Merchant mail fout:', err); });
 
+  saveOrder({
+    ref: paypalRef, fn: fn, ln: ln, email: email, phone: phone,
+    addr: addr, zip: zip, city: city, country: country,
+    products: paypalCartSnapshot, shippingLabel: shippingLabel,
+    shippingCost: shippingCost, grandTotal: grandTotal,
+    paymentMethod: 'PayPal'
+  });
   clearCart();
   closeCheckout();
-  setTimeout(() => { window.location.href = url; }, 800);
+  setTimeout(() => { window.location.href = url; }, 1500);
 }
 
 // ── PAYMENT METHOD ───────────────────────────────────────────────
@@ -5470,6 +5484,26 @@ function getDeliveryInfo(country, cartItems) {
   };
 }
 
+function saveOrder(orderData) {
+  fetch('/.netlify/functions/save-order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      ref: orderData.ref || orderData.paypalRef,
+      date: new Date().toISOString().split('T')[0],
+      customer: (orderData.fn || '') + ' ' + (orderData.ln || ''),
+      email: orderData.email,
+      phone: orderData.phone,
+      address: (orderData.addr || '') + ', ' + (orderData.zip || '') + ' ' + (orderData.city || '') + ', ' + (orderData.country || ''),
+      products: orderData.products || orderData.paypalCartSnapshot || '',
+      shipping: orderData.shippingLabel,
+      shippingCost: orderData.shippingCost,
+      total: orderData.grandTotal,
+      paymentMethod: orderData.paymentMethod || 'PayPal'
+    })
+  }).catch(err => console.warn('Order save failed:', err));
+}
+
 function sendOrderEmails(orderData) {
   const ibanClean = BANK_IBAN;
   const bicClean  = BANK_BIC;
@@ -5542,6 +5576,13 @@ function confirmTransfer() {
     invoiceLine: wantsInvoice ? 'Factuur: ' + company + ' | BTW: ' + vat : ''
   });
 
+  saveOrder({
+    ref: d.ref, fn: d.fn, ln: d.ln, email: d.email, phone: d.phone,
+    addr: d.addr, zip: d.zip, city: d.city, country: d.country,
+    products: d.orderLinesSnapshot, shippingLabel: d.shippingLabel,
+    shippingCost: d.shippingCost, grandTotal: d.grandTotal,
+    paymentMethod: 'Overschrijving'
+  });
   clearCart();
   closeCheckout();
   showToast(currentLang === 'fr' ? 'Commande confirmée !' : currentLang === 'en' ? 'Order confirmed!' : 'Bestelling bevestigd!');
