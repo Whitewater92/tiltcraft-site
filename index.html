@@ -5485,6 +5485,7 @@ function getDeliveryInfo(country, cartItems) {
 }
 
 function saveOrder(orderData) {
+  return; // Temporarily disabled
   fetch('/.netlify/functions/save-order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
