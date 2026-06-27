@@ -111,6 +111,7 @@ header { position: relative; text-align: center; padding: 70px 20px 50px; border
 .gallery-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.35); transition: background 0.2s; cursor: pointer; }
 .gallery-dot.active { background: var(--gold); }
 .gallery-count { position: absolute; top: 6px; right: 8px; font-size: 10px; letter-spacing: 1px; color: var(--white); background: rgba(0,0,0,0.6); padding: 2px 7px; border-radius: 10px; z-index: 2; }
+.sold-badge { position: absolute; top: 14px; left: 14px; color: #e10600; font-family: 'Bebas Neue', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: 2px; text-shadow: 0 0 6px rgba(0,0,0,0.85), 0 2px 4px rgba(0,0,0,0.6); z-index: 11; pointer-events: none; transform: rotate(-6deg); }
 
 .card-body { padding: 14px 16px 16px; }
 .card-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--white); margin-bottom: 4px; }
@@ -560,6 +561,7 @@ const products = [
     name: "Tales from the Crypt",
     category: "machines",
     price: 3950,
+    sold: true,
     desc: {
       nl: "Mooie klassieker van Data East : Tales from the Crypt\nDesign John Borg (gekend van : Star Wars, Jurassic Park, Guns n Roses, Metallica,….)\n\nSpeelveld perfect en kast in mooie staat\nPoten en glasplaat krasvrij\nShooterlane netjes, Translite goede staat \nGeen corrosie op CPU, nieuwe batterijen\n\nOpties :\n- Pin2dmd (meerprijs : € 200,-)\n- Scoop Cliffy protector\n- 3D topper\n- 3D gate to the crypt\n- Sleutelhanger\n- Laatste game rom sept 2025 pinballcode : v4.0\n- Perfecte handleiding !\n\nIPDB score : 7.9/10",
       en: "Classic from Data East : Tales from the Crypt\nDesign John Borg (known from : Star Wars, Jurassic Park, Guns n Roses, Metallica,….)\n\nPerfect playfield and cabinet in good condition\nLegs and glass without scratches\nShooterlane clean, Translite very good\n No corrosion on CPU board, new batteries \n\nOptions :\n- Pin2dmd (extra on top : € 200,-)\n- Scoop Cliffy protector\n- 3D topper\n- 3D gate to the crypt\n- Keyhanger skull\n- Latest game rom sept 2025 pinballcode : v4.0\n- Perfect manual !\n\nIPDB score : 7.9/10",
@@ -669,6 +671,19 @@ const products = [
       fr: "Dr Who avec plateau en bon état, couleurs caisse ok .\n- DMD blanc (au lieu d'orange) - Pin2DMD Serum RPI kleur verkrijgbaar (extra € 220,-)\n- GI in LED, front en lampes incadescentes afin de garder l'ambiance du translite"
     },
     images: [
+      "images/w1.jpeg",
+      "images/w2.JPG",
+      "images/w3.JPG",
+      "images/w4.JPG",
+      "images/w5.jpeg",
+      "images/w6.jpeg",
+      "images/w7.jpeg",
+      "images/w8.jpeg",
+      "images/w10.JPG",
+      "images/w11.jpeg",
+      "images/w12.jpeg",
+      "images/w13.jpeg",
+      "images/w14.jpeg",
       "images/doctor-who.jpg"
     ]
   },
@@ -4769,6 +4784,7 @@ function renderProducts() {
       <div class="card">
         <div class="card-gallery" onclick="openLightbox(${pi})">
           ${imgs.length ? imgs.map((s,i) => `<img src="${s}" class="${i===0?'active':''}" alt="" onerror="this.style.display='none'">`).join('') : '<div class="card-gallery-placeholder">🎰</div>'}
+          ${p.sold ? `<div class="sold-badge">SOLD</div>` : ''}
           ${imgs.length > 1 ? `
             <button class="gallery-nav gallery-prev" onclick="event.stopPropagation();cardNav(${pi},-1)">‹</button>
             <button class="gallery-nav gallery-next" onclick="event.stopPropagation();cardNav(${pi},1)">›</button>
