@@ -296,6 +296,7 @@ footer a:hover { color: var(--gold); }
   <button class="cat-btn" onclick="setCategory('parts')" id="nav-parts">3D Pinball Parts</button>
   <button class="cat-btn" onclick="setCategory('decals')" id="nav-decals">In-Game Decals</button>
   <button class="cat-btn" onclick="setCategory('originals')" id="nav-originals">Original Parts</button>
+  <button class="cat-btn" onclick="setCategory('glass')" id="nav-glass">Playfield Glass</button>
   <button class="cat-btn" onclick="setCategory('displays')" id="nav-displays">Displays</button>
   <button class="cat-btn" onclick="setCategory('3dondemand')" id="nav-3dondemand">On demand</button>
   <button class="cat-btn" onclick="setCategory('mods')" id="nav-mods">Mods &amp; Extras</button>
@@ -559,40 +560,33 @@ const BANK_NAME    = "V&R Consultancy bv";
 // ================================================================
 const products = [
   {
-    name: "Data East Super Hook",
+    name: "Guns n Roses LE – Jersey Jack Pinball",
     category: "machines",
-    price: 3850,
+    price: 0,
     desc: {
-      nl: "Super Hook van Data East\nGedemonteerd in april dit jaar en grondig gereinigd (gewaxed)\nSpeelveld en kast in super staat\nPoten, schermen, bouten: nieuw\n\nOpties :\n- Pin2DMD kleurenscherm\n- Full LED\n- Upgrade luidsprekers\n- Nieuwe rubbers\n- Nieuwe ballen\n- NVRAM (geen batterijen meer)\n- Bescherming poten/kast",
-      en: "Super Hook by Data East\nDismantled in April this year and thoroughly cleaned (waxed)\nPlayfield and cabinet in superb condition\nLegs, screens, bolts: new\n\nOptions :\n- Pin2DMD colour display\n- Full LED\n- Speaker upgrade\n- New rubbers\n- New balls\n- NVRAM (no more batteries)\n- Leg/cabinet protectors",
-      fr: "Super Hook de Data East\nA été démonté en avril cette année et nettoyer à fond (wax)\nPlateau et caisse en super état\nPieds, écreins, boulons: neufs\n\nOptions :\n- Ecran couleurs Pin2DMD\n- Full LED\n- Upgrade haut parleurs\n- Nouveaux caouthoucs\n- Nouvelles billes\n- Nvram (fini les batteries)\n- Protection pieds/caisse"
+      nl: "Jersey Jack Pinball\nGuns n Roses LE\nNew in Box (ongeopend)\n\nStuur bericht voor prijs inclusief verzendkosten, vermeld je locatie.",
+      en: "Jersey Jack Pinball\nGuns n Roses LE\nNew in Box (unopened)\n\nSend a message for price including shipping costs, mention your location.",
+      fr: "Jersey Jack Pinball\nGuns n Roses LE\nNew in Box (non ouvert)\n\nEnvoyez un message pour le prix frais de port inclus, indiquez votre localisation."
     },
     images: [
-      "images/IMG_6998.jpeg",
-      "images/IMG_6999.jpeg",
-      "images/IMG_7001.jpeg",
-      "images/IMG_7002.jpeg",
-      "images/IMG_7003.jpeg",
-      "images/IMG_7004.jpeg",
-      "images/IMG_7005.jpeg",
-      "images/IMG_7006.jpeg",
-      "images/IMG_7007.jpeg",
-      "images/IMG_7008.jpeg",
-      "images/IMG_7009.jpeg",
-      "images/IMG_7010.jpeg",
-      "images/IMG_7011.jpeg",
-      "images/IMG_7012.jpeg",
-      "images/IMG_7013.jpeg",
-      "images/IMG_7015.jpeg",
-      "images/IMG_7016.jpeg",
-      "images/IMG_7018.jpeg",
-      "images/IMG_7019.jpeg",
-      "images/IMG_7021.jpeg",
-      "images/j1.JPG",
-      "images/j2.JPG",
-      "images/j3.JPG",
-      "images/j4.JPG",
-      "images/j5.JPG"
+      "images/GNRLENIB1.JPG",
+      "images/GNRLENIB2.jpg",
+      "images/GNRLENIB3.jpg"
+    ]
+  },
+  {
+    name: "Godfather LE – Jersey Jack Pinball",
+    category: "machines",
+    price: 0,
+    desc: {
+      nl: "Jersey Jack Pinball\nGodfather LE\nNew in Box (ongeopend)\n\nStuur bericht voor prijs inclusief verzendkosten, vermeld je locatie.",
+      en: "Jersey Jack Pinball\nGodfather LE\nNew in Box (unopened)\n\nSend a message for price including shipping costs, mention your location.",
+      fr: "Jersey Jack Pinball\nGodfather LE\nNew in Box (non ouvert)\n\nEnvoyez un message pour le prix frais de port inclus, indiquez votre localisation."
+    },
+    images: [
+      "images/GFLENIB1.JPG",
+      "images/GFLENIB2.jpg",
+      "images/GFLENIB3.jpg"
     ]
   },
   {
@@ -651,32 +645,6 @@ const products = [
       "images/got18.jpg",
       "images/got19.jpg",
       "images/got20.jpg"
-    ]
-  },
-  {
-    name: "Bally Dr Who",
-    category: "machines",
-    price: 3350,
-    desc: {
-      nl: "Onverkleurde Dr Who met mooi speelveld.\n- Wit DMD scherm (ipv oranje) - Pin2DMD Serum RPI kleur verkrijgbaar (extra € 220,-)\n- GI in LED, front in incadescent lampjes voor behoud ambiance translite",
-      en: "Dr Who with nice looking playfield, cabinet colors ok.\n- White DMD display (instead of orange) - Pin2DMD Serum RPI available as an option (extra € 220,-)\n- GI in LED, front in incadescent lamps to keep translite atmosphere",
-      fr: "Dr Who avec plateau en bon état, couleurs caisse ok .\n- DMD blanc (au lieu d'orange) - Pin2DMD Serum RPI kleur verkrijgbaar (extra € 220,-)\n- GI in LED, front en lampes incadescentes afin de garder l'ambiance du translite"
-    },
-    images: [
-      "images/w1.jpeg",
-      "images/w2.JPG",
-      "images/w3.JPG",
-      "images/w4.JPG",
-      "images/w5.jpeg",
-      "images/w6.jpeg",
-      "images/w7.jpeg",
-      "images/w8.jpeg",
-      "images/w10.JPG",
-      "images/w11.jpeg",
-      "images/w12.jpeg",
-      "images/w13.jpeg",
-      "images/w14.jpeg",
-      "images/doctor-who.jpg"
     ]
   },
   {
@@ -4392,8 +4360,56 @@ const products = [
       "images/sides3.jpeg"
     ]
   },
-
-
+  {
+    name: "AR Playfield Glass — Standard",
+    category: "glass",
+    price: 175,
+    desc: {
+      nl: "Op zoek naar de echte speelervaring?\n\nUpdate je speelveldglas naar AR-glas :\n- Anti-reflectie : -95% (max 5-10% reflectie)\n- Anti-glare\n- IJzervrij glas\n- Geen gele, groene of paarse gloed zoals bij concurrenten, volledig transparant\n- Gehard glas op 630° - 650°C (maakt het veel sterker)\n- Geen kleurvertekening\n\nStandaardmaat past op alle flippers (behalve widebody)",
+      en: "Looking for the real playing experience?\n\nUpdate your playfield glass to AR glass :\n- Anti Reflective : -95% (5-10% reflection max)\n- Anti-glare\n- Ironfree glass\n- No yellow, green purple shine as competitors, full transparant\n- Tempered glass at 630° - 650°C degrees (makes it much stronger)\n- No color distortion\n\nStandard size fits all pinballs (except wide body)",
+      fr: "À la recherche de la vraie expérience de jeu ?\n\nMettez à niveau votre vitre de plateau en verre AR :\n- Anti-reflet : -95% (max 5-10% de reflet)\n- Anti-éblouissement\n- Verre sans fer\n- Pas de reflet jaune, vert ou violet comme chez les concurrents, totalement transparent\n- Verre trempé à 630° - 650°C (beaucoup plus solide)\n- Aucune distorsion des couleurs\n\nTaille standard compatible avec tous les flippers (sauf widebody)"
+    },
+    images: [
+      "images/gl1.jpeg",
+      "images/gl2.jpeg",
+      "images/gl3.jpeg",
+      "images/gl4.jpeg",
+      "images/gl5.jpeg",
+      "images/gl6.jpeg"
+    ]
+  },
+  {
+    name: "AR Playfield Glass — Wide Body",
+    category: "glass",
+    price: 229.5,
+    desc: {
+      nl: "Op zoek naar de echte speelervaring?\n\nUpdate je speelveldglas naar AR-glas :\n- Anti-reflectie : -95% (max 5-10% reflectie)\n- Anti-glare\n- IJzervrij glas\n- Geen gele, groene of paarse gloed zoals bij concurrenten, volledig transparant\n- Gehard glas op 630° - 650°C (maakt het veel sterker)\n- Geen kleurvertekening\n\nVoor widebody flippers zoals Star Trek, Indiana Jones,…",
+      en: "Looking for the real playing experience?\n\nUpdate your playfield glass to AR glass :\n- Anti Reflective : -95% (5-10% reflection max)\n- Anti-glare\n- Ironfree glass\n- No yellow, green purple shine as competitors, full transparant\n- Tempered glass at 630° - 650°C degrees (makes it much stronger)\n- No color distortion\n\nFor widebody pinballs such as Star trek, Indiana jones,…",
+      fr: "À la recherche de la vraie expérience de jeu ?\n\nMettez à niveau votre vitre de plateau en verre AR :\n- Anti-reflet : -95% (max 5-10% de reflet)\n- Anti-éblouissement\n- Verre sans fer\n- Pas de reflet jaune, vert ou violet comme chez les concurrents, totalement transparent\n- Verre trempé à 630° - 650°C (beaucoup plus solide)\n- Aucune distorsion des couleurs\n\nPour les flippers widebody comme Star Trek, Indiana Jones,…"
+    },
+    images: [
+      "images/gl1.jpeg",
+      "images/gl2.jpeg",
+      "images/gl3.jpeg",
+      "images/gl4.jpeg",
+      "images/gl5.jpeg",
+      "images/gl6.jpeg"
+    ]
+  },
+  {
+    name: "Wooden Carrying Box — 4 Playfield Glasses",
+    category: "glass",
+    price: 25,
+    desc: {
+      nl: "Houten draagdoos voor 4 speelveldglazen",
+      en: "Wooden box to carry 4 playfield glasses",
+      fr: "Boîte en bois pour transporter 4 vitres de plateau"
+    },
+    images: [
+      "images/gl7.jpeg",
+      "images/gl8.jpeg"
+    ]
+  }
 
 ];
 // ================================================================
